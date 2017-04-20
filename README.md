@@ -1,2 +1,2 @@
 # test.rockitizer
-Easy to use blaxbox based test suite for complex integration enviroments.
+Easy to use blackbox based test suite for complex integration enviroments.
