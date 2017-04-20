@@ -5,7 +5,8 @@
 Easy to Use test framework for complex integration environemnts which saves you time and money up to 30% and improves the quality of development.
 
 ```sh
-Originaly developed for ESB especially for IBM Message Broker/IBM Integration Bus, but can be used for any integration platform. 
+Originaly developed for ESB especially for IBM Message Broker/IBM Integration Bus, 
+but can be used for any integration platform. 
 ```
 ## Core features: 
   - Java, JUnit based framework
