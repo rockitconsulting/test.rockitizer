@@ -91,6 +91,23 @@
 			<version>1.10</version>
 		</dependency>
 		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>2.4.7</version>
+		</dependency>
+
+<!-- Non-free libs start  -->
+		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>mq</artifactId>
 			<version>7.5</version>
@@ -125,22 +142,8 @@
 			<artifactId>db2jcc4</artifactId>
 			<version>11.1</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20160810</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.jcraft</groupId>
-			<artifactId>jsch</artifactId>
-			<version>0.1.54</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy</artifactId>
-			<version>2.4.7</version>
-		</dependency>
+<!-- Non-free libs end  -->
+		
+		
 	</dependencies>
 </project>
