@@ -24,12 +24,12 @@ Easy-to-Use test framework for complex integration environemnts which saves you 
 
 
 ## How it works?
-![Lifecycle test.rockitizer](https://rockit.atlassian.net/wiki/download/thumbnails/5439549/image2017-4-21_12-51-58.png?width=961&height=250 "Lifecycle test.rockitizer")
+![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
-![Test Data separation](https://rockit.atlassian.net/wiki/download/thumbnails/5439549/image2017-4-21_12-40-16.png?width=515&height=250 "Test Data separation")
+![Test Data separation](http://www.rockit.consulting/images/github/test_rockitizer_process.PNG "Test Data separation;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 ### Sample test project
-![Sample test project](https://rockit.atlassian.net/wiki/download/attachments/5439549/image2017-4-21_12-44-43.png?version=1&modificationDate=1492771485552&cacheVersion=1&api=v2 "Sample test project")
+![Sample test project](http://www.rockit.consulting/images/github/test_rockitizer_project.PNG "Sample test project; IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 
 
