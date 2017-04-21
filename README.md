@@ -1,4 +1,4 @@
-# test.rockitizer
+# test.rockitizer - keep your integration tested!
 ---
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
