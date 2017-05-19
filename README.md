@@ -1,6 +1,4 @@
 # test.rockitizer - keep your integration tested!
----
-[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
 Easy-to-Use test framework for complex integration environemnts. It saves your time and an up to 30% of your project budget.  Allows you to test the complex business cases in the huge integration environments.  
 
@@ -43,7 +41,6 @@ Easy-to-Use test framework for complex integration environemnts. It saves your t
 5. Whrite the JUnit to make it fly
 
 ## Examples
-----
 [Examples Readme](examples/README.md)
 
 
