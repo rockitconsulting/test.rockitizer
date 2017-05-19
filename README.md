@@ -44,7 +44,7 @@ Easy-to-Use test framework for complex integration environemnts. It saves your t
 
 ## Examples
 ----
-[Examples Readme](https://github.com/rockitconsulting/test.rockitizer/edit/master/examples/README.md)
+[Examples Readme](examples/README.md)
 
 
 
