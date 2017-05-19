@@ -1,8 +1,10 @@
-# test.rockitizer
+# test.rockitizer - keep your integration tested!
 ---
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
-Easy-to-Use test framework for complex integration environemnts which saves you time and money up to 30% and improves the quality of development. You can write the regression suites for huge integration environments and **you will enjoy doing it**. 
+Easy-to-Use test framework for complex integration environemnts. It saves your time and an up to 30% of your project budget.  Allows you to test the complex business cases in the huge integration environments.  
+
+**And you will enjoy of using it!**. 
 
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus, but can be used for any integration platform.* **Has been succesfully proved in numerous EAI projects**.
 
