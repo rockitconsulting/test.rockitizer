@@ -1,0 +1,1 @@
+<NS1:customer xmlns:NS1="rockit.customerBatch.simpleCustomer"><person><name>Lisa</name><surname>Wilke</surname><addresses><address>Stuttgart</address></addresses></person></NS1:customer>

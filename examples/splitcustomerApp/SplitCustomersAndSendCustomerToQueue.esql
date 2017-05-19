@@ -1,0 +1,72 @@
+DECLARE ns NAMESPACE 'rockit.customerBatch.simpleCustomer';
+CREATE COMPUTE MODULE SplitCustomersAndSendCustomerToQueue
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET Environment.Monitoring.EventCorrelation.parentTransactionId = 'test';
+		
+		
+		CALL SplitMessageAndPropargate();
+		
+		-- We have to Return False so no empty Message is added to the queue
+		RETURN FALSE;
+    	
+	END;
+
+	CREATE PROCEDURE SplitMessageAndPropargate() BEGIN
+		
+		DECLARE customer REFERENCE TO InputRoot.XMLNSC.ns:customers;
+		
+		
+		-- Declare a variable which relates to the number of the Customer 
+		-- we are currently processing. This is useful for reporting 
+		-- the number of customer we have processed.
+		DECLARE customerNo INTEGER 0;
+	
+		-- Move onto the first customer ready to begin processing them
+		MOVE customer FIRSTCHILD NAME 'customer';
+
+		-- Check if we are at the root or at the end of the customers
+		WHILE LASTMOVE(customer)
+		DO
+		CASE FIELDNAME(customer)
+		-- If we're on a Customer element copy it to the 
+		-- output and propagate it
+			WHEN 'customer' THEN
+			-- Delete previously processed customer block -- if there is one
+				IF customerNo>=1 THEN
+					DELETE PREVIOUSSIBLING OF customer;
+				END IF;
+
+			-- Increment the Customer counter
+			SET customerNo = customerNo + 1;
+
+			-- Create output message headers using 
+			-- the original message headers
+			CALL CopyMessageHeaders();
+
+			-- Copy the customer to the OutputRoot
+			SET OutputRoot.XMLNSC.ns:customer = customer;
+		
+			-- Propagate the customer
+			PROPAGATE;
+		END CASE;
+		
+		-- Move to the next customer
+		MOVE customer NEXTSIBLING;
+		END WHILE;
+		
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+	
+END MODULE;
