@@ -1,8 +1,12 @@
 # test.rockitizer - keep your integration tested!
----
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
-Easy-to-Use test framework for complex integration environemnts. It saves your time and an up to 30% of your project budget.  Allows you to test the complex business cases in the huge integration environments.  
+
+Easy-to-Use test framework for complex integration environemnts. It treats the ESB as a blackbox, knowing the IN/OUT connectors and the payloads provided by test plan. The JUnit triggers the test execution which has basically the following steps: submit the payloads to IN connectors, get the payloads/states from OUT connectors, finally compares the results with recorded "master". This gives you basically the "total-control" on your integration environment and keeps you informed about all relevant interface changes.
+
+![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
+
+Furthermore, the framework enables the "test first" approach, thus developing against pre-defined "target" interface until the replay snapshot matches.
 
 **And you will enjoy of using it!**. 
 
@@ -26,7 +30,6 @@ Easy-to-Use test framework for complex integration environemnts. It saves your t
 
 
 ## How it works?
-![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 ![Test Data separation](http://www.rockit.consulting/images/github/test_rockitizer_process.PNG "Test Data separation;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
@@ -42,6 +45,8 @@ Easy-to-Use test framework for complex integration environemnts. It saves your t
 4. Write your test scenario using the step/connector/payload convention
 5. Whrite the JUnit to make it fly
 
+## Examples
+[Examples Readme](examples/README.md)
 
 
 
