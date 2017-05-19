@@ -2,7 +2,6 @@ package com.rockit.common.blackboxtester.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import org.apache.log4j.Logger;
 
@@ -36,11 +35,11 @@ public class FileUtils {
 		
 	}
 			
-	public static String getContents(File file)  {
-		String content;
+	public static byte[] getContents(File file)  {
+		byte[] content;
 		try {
 			
-			content =  Files.toString(file, StandardCharsets.UTF_8);
+			content =  Files.toByteArray(file);
 		} catch (IOException e) {
 			LOGGER.error(e);
 			throw new GenericException(e);
