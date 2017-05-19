@@ -42,6 +42,9 @@ Easy-to-Use test framework for complex integration environemnts. It saves your t
 4. Write your test scenario using the step/connector/payload convention
 5. Whrite the JUnit to make it fly
 
+## Examples
+----
+[Examples Readme](https://github.com/rockitconsulting/test.rockitizer/edit/master/examples/README.md)
 
 
 
