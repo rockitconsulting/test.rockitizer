@@ -107,6 +107,8 @@
 		</dependency>
 
 <!-- Non-free libs start  -->
+
+	<!-- Non-free MQ start -->
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>mq</artifactId>
@@ -133,6 +135,14 @@
 			<version>7.5</version>
 		</dependency>
 		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>pcf</artifactId>
+			<version>7.5</version>
+		</dependency>
+	<!-- Non-free MQ end -->	
+	
+	<!-- Non-free DB start -->	
+		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.0</version>
@@ -142,6 +152,8 @@
 			<artifactId>db2jcc4</artifactId>
 			<version>11.1</version>
 		</dependency>
+	<!-- Non-free MQ end -->	
+	
 <!-- Non-free libs end  -->
 		
 		

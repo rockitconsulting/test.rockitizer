@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.13" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="com.rockit.common.blackboxtester.suite.structures.AbstractTestFolder" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/structures/AbstractTestFolder.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="457" y="65"/>    
+    <position height="-1" width="-1" x="833" y="148"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -16,7 +16,7 @@
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/structures/ConnectorFolder.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="458" y="500"/>    
+    <position height="-1" width="-1" x="329" y="276"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -27,7 +27,7 @@
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/structures/TestBuilder.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="125" y="66"/>    
+    <position height="-1" width="-1" x="323" y="44"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -38,7 +38,7 @@
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/structures/TestStepBuilder.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="877" y="65"/>    
+    <position height="-1" width="-1" x="331" y="479"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -46,7 +46,7 @@
     </display>  
   </class>  
   <generalization id="5">    
-    <end type="SOURCE" refId="3"/>    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="6">    
@@ -54,7 +54,7 @@
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="7">    
-    <end type="SOURCE" refId="4"/>    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
