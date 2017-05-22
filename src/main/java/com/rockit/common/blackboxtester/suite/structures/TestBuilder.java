@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.rockit.common.blackboxtester.assertions.Assertions;
 import com.rockit.common.blackboxtester.assertions.FileAssertion;
@@ -49,6 +50,7 @@ public class TestBuilder extends AbstractTestFolder {
 		for (Assertions assertion : assertions) {
 			assertion.proceed();
 		}
+		LOGGER.info(  " Number of assertions processed successfully: "+assertions.size()+ " [\n\t" + Joiner.on(",\n\t").join(assertions)+ "\n      ]");
 	}
 	
 
