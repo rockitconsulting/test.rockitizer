@@ -24,7 +24,7 @@ public class SplitCustomerTestErrorHandling extends AbstractTestWrapper {
                     ).execute();
 		
 		testBuilder.addStep("a002getCustomerBatch")
-		           .sleep(5000)
+		           .sleep(1000)
 		           .execute();
 
 		testBuilder.addAssertion(
