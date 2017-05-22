@@ -50,6 +50,7 @@ public class TestBuilder extends AbstractTestFolder {
 		for (Assertions assertion : assertions) {
 			assertion.proceed();
 		}
+		
 		LOGGER.info(  " Number of assertions processed successfully: "+assertions.size()+ " [\n\t" + Joiner.on(",\n\t").join(assertions)+ "\n      ]");
 	}
 	
