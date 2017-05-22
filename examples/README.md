@@ -1,11 +1,9 @@
 ## Examples
----
 - mqsc.scripts - queue creation scripts
 - splicustomerApp - broker application which splits the batch messages in single customers.
 - splitcustomer.rockitizer - the junit rockitizer project 
 
 ## Configuration
----
 1. **environment**: mqsc.scripts - create the queues using the mo72 or runmqsc.
 2. **broker**:import splitcustomerApp in your toolkit, build it and deploy to your local broker
 3. **junit test**:import splitcustomer.rockitizer as maven into java eclipse or toolkit for IIB 10 with maven plugin installed
@@ -16,8 +14,9 @@
 1. go to splitcustomer.rockitizer\src\test\java\com\rockit\customer\SplitCustomerTestOK.java
 2. run it as the junit
 3. check the generated console report or log in ./target folder
-   ```
-  INFO #############################################################################
+
+```
+ INFO #############################################################################
  INFO # 		 <SplitCustomerTestOK>: Configuration
  INFO #############################################################################
  INFO TESTNAME: SplitCustomerTestOK
@@ -60,8 +59,8 @@
 	com.rockit.common.blackboxtester.assertions.FileAssertion@1700915,
 	com.rockit.common.blackboxtester.assertions.FileAssertion@1de60b4
       ]
-
-   ```
+```
+ 
 
 
 ### <a name="confimqproperties"></a> config.mq.properties - MQ Configuration
