@@ -84,6 +84,55 @@ All the environment dependent properties belong to the test.project configuratio
 
 
 
+## Report sample
+
+```
+ INFO #############################################################################
+ INFO # 		 <SplitCustomerTestOK>: Configuration
+ INFO #############################################################################
+ INFO TESTNAME: SplitCustomerTestOK
+ INFO RECORD FOLDER: C:/rockit/github/test.rockitizer/examples/splitcustomer.rockitizer/src/test/resources/SplitCustomerTestOK/
+ INFO REPLAY FOLDER: C:/rockit/github/test.rockitizer/examples/splitcustomer.rockitizer/target/replay/SplitCustomerTestOK/
+ INFO MODE: replay
+ INFO #############################################################################
+ INFO # 		 <SplitCustomerTestOK>: Executing  [replay]
+ INFO #############################################################################
+ INFO 0BEFORE	 Copying /src/test/resources/0BEFORE to /target/replay/0BEFORE
+ INFO 
+ INFO *****************************************************************************
+ INFO 0BEFORE	 Step Added. Executing... 
+ INFO Connecting MQQueueManager IB9QMGR
+ INFO 0BEFORE	 Deleting replay  folder C:/rockit/github/test.rockitizer/examples/splitcustomer.rockitizer/src/test/resources/SplitCustomerTestOK/output
+ INFO a001putCustomerBatch	 Copying /src/test/resources/a001putCustomerBatch to /target/replay/a001putCustomerBatch
+ INFO 
+ INFO *****************************************************************************
+ INFO a001putCustomerBatch	 Step Added. Executing... 
+ INFO a001putCustomerBatch	 [Connector:MQPUT@SPLITCUSTOMER.BATCH.IN] - Writing ...
+ INFO Message successfully written to SPLITCUSTOMER.BATCH.IN                          
+ INFO a002getCustomerBatch	 Copying /src/test/resources/a002getCustomerBatch to /target/replay/a002getCustomerBatch
+ INFO 
+ INFO *****************************************************************************
+ INFO a002getCustomerBatch	 Step Added. Executing... 
+ INFO  Waiting 1000ms for results
+ INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 186
+ INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 213
+ INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 188
+ INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 247
+ INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO #############################################################################
+ INFO # 		 <SplitCustomerTestOK>: Assertion
+ INFO #############################################################################
+ INFO  Number of assertions processed successfully: 3 [
+	com.rockit.common.blackboxtester.assertions.XMLFileAssertion@ae9b55,
+	com.rockit.common.blackboxtester.assertions.FileAssertion@1700915,
+	com.rockit.common.blackboxtester.assertions.FileAssertion@1de60b4
+      ]
+```
+
+
 License
 ----
 
