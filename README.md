@@ -34,16 +34,19 @@ According to the maven conventions the following folders of  your test.project a
 
 Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
 
-### <a name="declarativetestplan"></a> Concept of declarative test plan
-
-1. each step of the test is the folder which is executed via `testBuilder.addStep("foldername").execute()` command. *During execution all connectors within the folder are processed automatically according to the connector type `PUT/GET`*. The `PUT` connectors write the payload files stored as folder content.  
-2. The results, if any `GET` connectors executed, are kept in the `output` within the step and corresponding connector folder.  
-3. The `record` mode puts the output data inside `src/test/resources/<testname>/output/<teststep>/<connector>`, the `replay` stores the temporary data within the `target/replay/<testname>/output/<teststep>/<connector>`
-4. Within the last step of `replay` mode the configured assertions `testBuilder.addAssertion(<AssertionImpl>(<fodername>)` being processed.
-
-
 For the complete understanding including junit starter and project layout, please refer to  [basic execution flow](docs/USAGE.md#basicexecutionflow)
 
+### <a name="declarativetestplan"></a> Concept of declarative test plan
+
+<img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="400"  width="250" align="right"/> 
+ 	
+1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter
+2. Each test plan has one or more steps (subfolders) with arbitrary names. The `0BEFORE` is an optional and will be automatically executed as first in order to prepare the environment for the test, i.e. clean the DB. 
+3. Each step has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>@<ID>`. The `ID` will be looked up in configuration. All connectors are processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
+    - MQGET@ - reads all messages in Queue with `<ID>`
+    - MQPUT@ - submits the payload in connector folder into Queue with `<ID>` 
+
+For the complete connector reference check [connectors docu](docs/CONNECTORS.md)
 
 
 ### <a name="testdataseparation"></a> Test data separation from environment configuration
