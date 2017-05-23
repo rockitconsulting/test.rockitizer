@@ -16,7 +16,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - `Record`/`Replay with post Assertion` Modes
   - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `HTTPGET`, `SCPPUT` connectors available
   - `DB`, `File`, `XMLUnit` assertion plugins
-  - regression testing and continuous integration
+  - regression testing and continuous integration, including surefire reports
   
 ## Skill level
   Basic understanding of following Java frameworks: 
