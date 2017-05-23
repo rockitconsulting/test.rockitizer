@@ -14,7 +14,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
   - extendable connector/plugin architecture
   - `Record`/`Replay with post Assertion` Modes
-  - `MQ`, `DB`, `HTTP`, `SCP` connectors available
+  - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `HTTPGET`, `SCPPUT` connectors available
   - `DB`, `File`, `XMLUnit` assertion plugins
   - regression testing and continuous integration
   
@@ -45,7 +45,7 @@ For the complete understanding including junit starter and project layout, pleas
 3. Each *test step* has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>@<ID>`. The `ID` will be looked up in configuration. 
 4. All *connectors* processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
     - MQGET@ - reads all messages in Queue with `<ID>`
-    - MQPUT@ - submits the payload in connector folder into Queue with `<ID>` 
+    - MQPUT@ - submits the payloads from connector folder into Queue with `<ID>` 
 
 For the complete connector reference check [connectors docu](docs/CONNECTORS.md)
 
