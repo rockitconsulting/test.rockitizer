@@ -11,6 +11,7 @@ In order to build the runtime please execute the following steps:
 ## Non-free libs
 
 ```xml
+	<!-- Non-free MQ start -->
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>mq</artifactId>
