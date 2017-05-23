@@ -1,17 +1,22 @@
+[Back to Readme](../README.md)
+---
 ## Examples
-- mqsc.scripts - queue creation scripts
-- splicustomerApp - broker application which splits the batch messages in single customers.
-- splitcustomer.rockitizer - the junit rockitizer project 
+- examples/mqsc.scripts - queue creation scripts
+- examples/splicustomerApp - broker application which splits the batch messages in single customers.
+- examples/splitcustomer.rockitizer - the junit rockitizer project 
 
 ## Configuration
-1. **environment**: mqsc.scripts - create the queues using the mo72 or runmqsc.
-2. **broker**:import splitcustomerApp in your toolkit, build it and deploy to your local broker
-3. **junit test**:import splitcustomer.rockitizer as maven into java eclipse or toolkit for IIB 10 with maven plugin installed
-   3.1  Configure mqmanager, (see mq manager configuration)[#confimqproperties] 
-   3.2  Configure record/replay mode (default replay), (see test project configuration)[#testprojectconfiguration]    
+### runtime environment
+mqsc.scripts - prepare mq infrastructure: create the queues using the mo72 or runmqsc.
+### install you broker application 
+import splitcustomerApp in your toolkit, create the bar file it and deploy to your local broker using the drag & drop deployment provided by the toolkit.
+### junit test
+import splitcustomer.rockitizer as maven into java eclipse or toolkit for IIB 10 with maven plugin installed
+   1. Configure mqmanager connection settings, (see mq manager configuration)[#confimqproperties] 
+   2. Configure record/replay mode (default replay), (see test project configuration)[#testprojectconfiguration]    
 
 ## Run and Report
-1. go to splitcustomer.rockitizer\src\test\java\com\rockit\customer\SplitCustomerTestOK.java
+1. locate within your jee ide the imported splitcustomer.rockitizer\src\test\java\com\rockit\customer\SplitCustomerTestOK.java
 2. run it as the junit
 3. check the generated console report or log in ./target folder
 
@@ -64,6 +69,8 @@
 
 
 ### <a name="confimqproperties"></a> config.mq.properties - MQ Configuration
+Configure the mq connection settings
+
    ```
 	########################################################################
 	#  Environment Index (IDX Variable) 
@@ -73,8 +80,8 @@
 	#  MQ Manager Connection  
 	########################################################################
 	MQ@MQMANAGER.NAME=IB9QMGR
-	MQ@MQMANAGER.PORT=2414
-	MQ@MQMANAGER.HOST=192.168.92.1
+	MQ@MQMANAGER.PORT=1414
+	MQ@MQMANAGER.HOST=localhost
 	MQ@MQMANAGER.CHANNEL=SYSTEM.BKR.CONFIG
 	
 	########################################################################
@@ -91,17 +98,8 @@
     #   Test Mode
     ###############################
     suite.mode = replay
-    ###############################
-    #   DB Connection
-    ###############################
-    #dataSource.username= ${dataSource.username}
-    #dataSource.password= ${dataSource.password}
-    #dataSource.url= ${dataSource.url}
-    #DBGET@CUSTOMERS = SELECT NAME FROM ROCKIT.CUSTOMER ORDER BY NAME DESC
    ```
    
    
-
-Main Readme
-----
-[Readme](../README.md)
+---
+[Back to Readme](../README.md)
