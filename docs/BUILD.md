@@ -11,8 +11,6 @@ In order to build the runtime please execute the following steps:
 
 
 
-## Examples
-[Examples Readme](examples/README.md)
 
 
 
