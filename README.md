@@ -10,7 +10,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
 ## Core features: 
-  - declarative `test-plan` concept,[see details](#declarativetestplan)
+  - declarative `test-plan` concept, [see details](#declarativetestplan)
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
   - extendable connector/plugin architecture
   - `Record`/`Replay with post Assertion` Modes
@@ -28,11 +28,11 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 
 
 ## Main Concepts
-According to the maven conventions the following folders are important:
+According to the maven conventions the following folders of  your test.project are important:
 - `src/test/resources/` - location of the test plans
 - `src/test/java/` - location of the junit test runner
 
-Junit serves as glue and looks for the test plan with the same name starting the execution from the root folder of the corresponding test plan.
+Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
 
 ### <a name="declarativetestplan"></a> Concept of declarative test plan
 
@@ -42,7 +42,7 @@ Junit serves as glue and looks for the test plan with the same name starting the
 4. Within the last step of `replay` mode the configured assertions `testBuilder.addAssertion(<AssertionImpl>(<fodername>)` being processed.
 
 
-For the complete understanding including junit starter, please refer to  [basic execution flow](doc/USAGE.md#basicexecutionflow)
+For the complete understanding including junit starter and project layout, please refer to  [basic execution flow](docs/USAGE.md#basicexecutionflow)
 
 
 
