@@ -47,7 +47,7 @@ For the complete understanding including junit starter and project layout, pleas
     - MQGET@ - reads all messages in Queue with `<ID>`
     - MQPUT@ - submits the payloads from connector folder into Queue with `<ID>` 
 
-For the complete connector reference check [connectors docu](docs/CONNECTORS.md)
+For the test plan reference check [docu](docs/USAGE.md#testplan)
 
 
 ### <a name="testdataseparation"></a> Test data separation from environment configuration
