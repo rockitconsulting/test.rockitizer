@@ -15,13 +15,14 @@ Junit serves as glue and looks for the test plan with the same name starting its
 For the fast and easy start with the `test.project` use the provided [example](../examples/README.md)
 
 
-## <a name="configuration"></a> Connector configuration
-The following configuration is available for your test project: 
+# <a name="configuration"></a> Test project configuration
+The following configuration files are available for your test project: 
 1. `config.mq.properties` - MQ Configuration
 2. `config.properties` - all other connectors
-3. `xyz.properties` - optional maven profile to support multiple environments 
+3. `env_xyz.properties` - optional maven profile to support multiple environments 
+4. `pom.xml` - maven project file maintains the profiles like `env_xyz.properties`
 
-According to placeholders pattern the `config.properties` are allowed to store the placeholders `${propertyName}` which will be replaces with the value of the same key in `xyz.properties`.
+According to placeholders pattern the `config.properties` are allowed to store the placeholders `${propertyName}` which will be replaces with the value of the same key in `env_xyz.properties`.
 
 Basically it allows to make all connector settings in main files environment independent, providing the exact values using maven profiles. 
 
