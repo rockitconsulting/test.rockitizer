@@ -1,7 +1,5 @@
 [Back to Main](../README.md)
 
-
-
 <img alt="test rockitizer architecture" src="img/architecture_with_dependency.png" width="200" height="200" align="right"/>
 ## Build test.rockitizer
 In order to build the runtime please execute the following steps: 
