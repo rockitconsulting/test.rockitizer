@@ -9,9 +9,10 @@ Junit serves as glue and looks for the test plan with the same name starting the
 3. The `record` mode puts the output data inside `src/test/resources/<testname>/output/<teststep>/<connector>`, the `replay` stores the temporary data within the `target/replay/<testname>/output/<teststep>/<connector>`
 4. Within the last step of `replay` mode the configured assertions `testBuilder.addAssertion(<AssertionImpl>(<fodername>)` being processed.
 
+## Sample project layout
 ![Sample test project](http://www.rockit.consulting/images/github/test_rockitizer_project.PNG "Sample test project; IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
-For the fast and easy start with the `test.project` use the provided [example](examples/README.md)
+For the fast and easy start with the `test.project` use the provided [example](../examples/README.md)
 
 
 ## <a name="configuration"></a> Connector configuration
