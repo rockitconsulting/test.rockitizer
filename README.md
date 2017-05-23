@@ -41,9 +41,9 @@ For the complete understanding including junit starter and project layout, pleas
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="400"  width="250" align="right"/> 
  	
-1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter
-2. Each **test plan** has one or more test steps (subfolders) with arbitrary names. Junit starter adds step to execution.  
-3. Each **test step** has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>@<ID>`. The `ID` will be looked up in configuration. 
+1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter, i.e. `SplitCustomerTest`.
+2. Each **test plan** has one or more test steps (subfolders) with arbitrary names, i.e. `a001putCustomerBatch`,`a002getCustomerBatch`.  Junit starter adds step to execution.  
+3. Each **test step** has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>@<ID>`. The `ID` will be looked up in configuration, i.e. `DBGET@CUSTOMERS`,`MQPUT@CUSTOMERBATCH.IN.@ENV@` 
 4. All **connectors** processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
     - MQGET@ - reads all messages in Queue with `<ID>`
     - MQPUT@ - submits the payloads from connector folder into Queue with `<ID>` 
