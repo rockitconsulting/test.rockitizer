@@ -27,7 +27,6 @@ According to placeholders pattern the `config.properties` are allowed to store t
 Basically it allows to make all connector settings in main files environment independent, providing the exact values using maven profiles. 
 
 
-
 ### <a name="confimqproperties"></a> config.mq.properties - MQ Configuration
 Configure the mq connection settings
 
@@ -83,6 +82,16 @@ suite.mode = replay
   
 
 ### <a name="testplan"></a> Creating the testplan
+
+#### Supported connectors
+- `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `HTTPGET`, `SCPPUT` connectors available
+ 	
+1. **Location**: The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter
+2. **Test plan**: has one or more test steps (subfolders) with arbitrary names. The `0BEFORE` is an optional and will be automatically executed as first in order to prepare the environment for the test, i.e. clean the DB. JUnit starter submits the step to execution. 
+3. **Test step**:  has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>@<ID>`. The `ID` will be looked up in configuration. 
+4. **connectors**: All connectors within the step folder processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
+    - `MQGET@` - reads all messages in Queue with `<ID>`
+    - `MQPUT@` - submits the payloads from connector folder into Queue with `<ID>` 
 
 
 ### <a name="junit"></a> Write the JUnit to make it fly
