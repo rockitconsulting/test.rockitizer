@@ -85,6 +85,12 @@ suite.mode = replay
 
 
 ### <a name="junit"></a> Write the JUnit to make it fly
+
+1. Use the same name for Junit starter as the underlying test plan
+2. Each step has to be added and executed via `testBuilder.addStep("foldername").execute()` command. 
+3. The custom assertions has to be configured separately and will be used during the `replay` cycle. 
+
+
 ```java
 public class SplitCustomerTest extends AbstractTestWrapper {
 	public TestBuilder testBuilder = newTestBuilderFor(SplitCustomerTest.class);
