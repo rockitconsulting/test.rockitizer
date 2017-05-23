@@ -10,6 +10,8 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus, but can be used for any integration platform.* 
 
 ## Core features: 
+  - Declarative test-plan concept
+  - Test data/Environment configuration separation concept
   - Java, JUnit based framework
   - extendable connector/plugin architecture
   - Record/Replay with post Assertion
@@ -17,11 +19,12 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - MQ, DB, HTTP, SCP connectors available
   - DB, File, XMLUnit assertion plugins
   - regression testing and continuous integration
-  - Complex testcases are built up within the minutes
+  
 
 
-## Getting started?
+## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
+
 1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
 2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
 3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
@@ -32,7 +35,8 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 ## Concepts
 ### Concept of test separation from environment configuration
 
-![Test Data separation](http://www.rockit.consulting/images/github/test_rockitizer_process.PNG "Test Data separation;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
+<img alt="Concept of test data separation from environment configuration" src="docs/img/tes_data_separation.png" width="300" height="200" align="right"/>
+
 
 ### Concept of daclarative test plan
 
