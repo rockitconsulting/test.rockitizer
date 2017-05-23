@@ -23,16 +23,8 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - Maven - used for build and configuration of runtime and used in example for test project. 
   - Junit - used as test starter
   - XMLUnit - used for assertions
-  To run the sample ESB project you will need the basic IBM Integration Bus know-how for import and deployment.
-
-## Getting started
-<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
-
-1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
-2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
-3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
-4. Whrite the JUnit and create the record "master" output [see junit manual](docs/USAGE.md#junit)
-5. Reconfigure the test project to replay mode and execute replay with following asssertion
+  
+  *To run the sample ESB project you will need the basic IBM Integration Bus know-how for import and deployment.
 
 
 ## Main Concepts
@@ -53,6 +45,17 @@ The following parts of the test.rpoject  supposed to be not environment dependen
 That's why they shall be committed in the source repository (except replay output).  
 
 All the environment dependent properties belong to the test.project configuration files and basically contain the connector configurations.
+
+
+## Getting started
+<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
+
+1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
+2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
+3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
+4. Whrite the JUnit and create the record "master" output [see junit manual](docs/USAGE.md#junit)
+5. Reconfigure the test project to replay mode and execute replay with following asssertion
+
 
 
 ## Examples
