@@ -6,7 +6,7 @@ According to the maven conventions the following folders are important:
 Junit serves as glue and looks for the test plan with the same name starting the execution from the root folder of the corresponding test plan:
 1. each step of the test is the folder which is executed via `testBuilder.addStep("foldername").execute()` command. During execution all connectors within the folder are processed automatically according to the connector type PUT/GET.
 2. The results, if any, are kept in the `output` within the step and corresponding connector folder.  
-3. The `record` mode puts the output data inside `src/test/resources/<testname>/output/<teststep>/<connector>`, the `replay` stores the temporary data within the `target/<testname>/output/<teststep>/<connector>`
+3. The `record` mode puts the output data inside `src/test/resources/<testname>/output/<teststep>/<connector>`, the `replay` stores the temporary data within the `target/replay/<testname>/output/<teststep>/<connector>`
 4. Within the last step of `replay` mode the configured assertions `testBuilder.addAssertion(<AssertionImpl>(<fodername>)` being processed.
 
 ![Sample test project](http://www.rockit.consulting/images/github/test_rockitizer_project.PNG "Sample test project; IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
