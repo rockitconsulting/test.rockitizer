@@ -1,7 +1,7 @@
 # test.rockitizer - keep your integration tested!  
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
-Easy-to-use java framework for the integration testing of any complexity. It is based on record/reply/assert logic and basically compares the current system/interface snapshot with the recorded master results using the numerous predefined or user-defined assertions. Therefore it keeps you informed on any suspicious change of system behavior.
+Easy-to-use junit based framework for the integration testing of any complexity. It is based on record/reply/assert logic and basically compares the current system/interface snapshot with the recorded master results using the numerous predefined or user-defined assertions. Therefore it keeps you informed on any suspicious change of system behavior.
 
 ![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
@@ -10,17 +10,14 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus, but can be used for any integration platform.* 
 
 ## Core features: 
-  - Declarative test-plan concept,[see](#declarativetestplan)
-  - Separation of Test data and Connector configuration concept, [see](#testdataseparation)
-  - Java, JUnit based framework
+  - declarative test-plan concept,[see details](#declarativetestplan)
+  - separation of Test data and Connector configuration concept, [see details](#testdataseparation)
   - extendable connector/plugin architecture
   - Record/Replay with post Assertion
-  - Separation of Testdata from Connectors
   - MQ, DB, HTTP, SCP connectors available
   - DB, File, XMLUnit assertion plugins
   - regression testing and continuous integration
   
-
 
 ## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
@@ -33,7 +30,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 
 
 ## Main Concepts
-### <a name="declarativetestplan"></a> Concept of daclarative test plan
+### <a name="declarativetestplan"></a> Concept of declarative test plan
 
 
 
@@ -42,11 +39,12 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="400"  align="right"/>
 
 The following parts of the test.rpoject  supposed to be not environment dependent:
-- junit starter
-- test-plan 
-- record output 
+- junit starter with assertions
+- test-plan with payloads 
+- recorded test output (master record)
+- replay output 
 
-That's why they shall be committed in the source repository.  
+That's why they shall be committed in the source repository (except replay output).  
 
 All the environment dependent properties belong to the test.project configuration files and basically contain the connector configurations.
 
