@@ -17,29 +17,25 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - MQ, DB, HTTP, SCP connectors available
   - DB, File, XMLUnit assertion plugins
   - regression testing and continuous integration
-
-## Money saving factors:
   - Complex testcases are built up within the minutes
-  - One tool for everything, no need in db- ,mq- ,scp-, http-, soap- tools
-  - faster delivery 
-  - better quality of the product 
 
-## Main concepts
-<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency.png" width="200" height="200" align="right"/>
+
+## Main architecture
+<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
+
+## Getting started?
+1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
+2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
+3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
+4. Whrite the JUnit and create the record "master" output [see junit manual](docs/USAGE.md#junit)
+5. Reconfigure the test project to replay mode and execute replay with following asssertion
+
 
 ## How it works?
 
 ![Test Data separation](http://www.rockit.consulting/images/github/test_rockitizer_process.PNG "Test Data separation;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 
-
-
-## How to get it running?
-1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
-2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
-3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
-4. Whrite the JUnit and create the record "master" output [see junit manual](docs/USAGE.md#junit)
-5. Reconfigure the test project to replay mode and execute replay with following asssertion
 
 
 ## Examples
