@@ -20,10 +20,8 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - Complex testcases are built up within the minutes
 
 
-
-<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
-
 ## Getting started?
+<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
 1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
 2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
 3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
@@ -31,17 +29,16 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 5. Reconfigure the test project to replay mode and execute replay with following asssertion
 
 
-## How it works?
+## Concepts
+### Concept of test separation from environment configuration
 
 ![Test Data separation](http://www.rockit.consulting/images/github/test_rockitizer_process.PNG "Test Data separation;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
-
+### Concept of daclarative test plan
 
 
 ## Examples
 [Examples Readme](examples/README.md)
-
-
 
 
 
