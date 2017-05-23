@@ -39,17 +39,16 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 
 ### <a name="testdataseparation"></a> Test data separation from environment configuration
 
-<img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="350"  align="right"/>
+<img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="400"  align="right"/>
 
-The following parts of the test.rpoject are suppoed to be not environement dependent:
+The following parts of the test.rpoject  supposed to be not environment dependent:
 - junit starter
 - test-plan 
 - record output 
+
 That's why they shall be committed in the source repository.  
-All the environment dependent properties belong to the test.rpject configuration files and basically contain the connector configurations.
 
-
-
+All the environment dependent properties belong to the test.project configuration files and basically contain the connector configurations.
 
 
 ## Examples
