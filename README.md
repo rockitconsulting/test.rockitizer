@@ -1,7 +1,7 @@
 # test.rockitizer - keep your integration tested!  
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
-Easy-to-use junit based framework for the integration testing of any complexity. It is based on record/reply/assert logic and basically compares the current system/interface snapshot with the recorded master results using the numerous predefined or user-defined assertions. Therefore it keeps you informed on any suspicious change of system behavior.
+Easy-to-use junit based framework for the integration testing of any complexity. It is based on record/reply/assert algorithm and basically compares the current system/interface snapshot with the recorded master-test results using the numerous predefined or user-defined assertions. Therefore it keeps you informed on any suspicious change of system behavior.
 
 ![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
