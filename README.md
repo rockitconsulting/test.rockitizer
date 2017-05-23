@@ -28,7 +28,21 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 
 
 ## Main Concepts
+According to the maven conventions the following folders are important:
+- `src/test/resources/` - location of the test plans
+- `src/test/java/` - location of the junit test runner
+
+Junit serves as glue and looks for the test plan with the same name starting the execution from the root folder of the corresponding test plan.
+
 ### <a name="declarativetestplan"></a> Concept of declarative test plan
+
+1. each step of the test is the folder which is executed via `testBuilder.addStep("foldername").execute()` command. *During execution all connectors within the folder are processed automatically according to the connector type `PUT/GET`*. The `PUT` connectors write the payload files stored as folder content.  
+2. The results, if any `GET` connectors executed, are kept in the `output` within the step and corresponding connector folder.  
+3. The `record` mode puts the output data inside `src/test/resources/<testname>/output/<teststep>/<connector>`, the `replay` stores the temporary data within the `target/replay/<testname>/output/<teststep>/<connector>`
+4. Within the last step of `replay` mode the configured assertions `testBuilder.addAssertion(<AssertionImpl>(<fodername>)` being processed.
+
+
+For the complete understanding including junit starter, please refer to  [basic execution flow](doc/USAGE.md#basicexecutionflow)
 
 
 
