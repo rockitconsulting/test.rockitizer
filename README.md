@@ -25,7 +25,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - better quality of the product 
 
 ## Main concepts
-<img alt="test rockitizer architecture" src="img/architecture_with_dependency.png" width="200" height="200" align="right"/>
+<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency.png" width="200" height="200" align="right"/>
 
 ## How it works?
 
