@@ -10,8 +10,8 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus, but can be used for any integration platform.* 
 
 ## Core features: 
-  - Declarative test-plan concept
-  - Test data/Environment configuration separation concept
+  - Declarative test-plan concept,[see](#declarativetestplan)
+  - Separation of Test data and Connector configuration concept, [see](#testdataseparation)
   - Java, JUnit based framework
   - extendable connector/plugin architecture
   - Record/Replay with post Assertion
@@ -32,13 +32,16 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 5. Reconfigure the test project to replay mode and execute replay with following asssertion
 
 
-## Concepts
-### Concept of test separation from environment configuration
-
-<img alt="Concept of test data separation from environment configuration" src="docs/img/tes_data_separation.png" width="300" height="200" align="right"/>
+## Main Concepts
+### <a name="declarativetestplan"></a> Concept of daclarative test plan
 
 
-### Concept of daclarative test plan
+
+### <a name="testdataseparation"></a> Test data separation from environment configuration
+
+<img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="300" height="200" align="right"/>
+
+
 
 
 ## Examples
