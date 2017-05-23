@@ -1,17 +1,17 @@
 [Back to Readme](../README.md)
----
-## Examples
-- examples/mqsc.scripts - queue creation scripts
-- examples/splicustomerApp - broker application which splits the batch messages in single customers.
-- examples/splitcustomer.rockitizer - the junit rockitizer project 
+
+## Examples contents
+-  `mqsc.scripts` - queue creation scripts
+-  `splicustomerApp` - broker application which splits the batch messages in single customers.
+-  `splitcustomer.rockitizer` - the junit rockitizer project 
 
 ## Configuration
 ### runtime environment
-mqsc.scripts - prepare mq infrastructure: create the queues using the mo72 or runmqsc.
+`examples/mqsc.scripts` - prepare mq infrastructure: create the queues using the mo72 or runmqsc.
 ### install you broker application 
-import splitcustomerApp in your toolkit, create the bar file it and deploy to your local broker using the drag & drop deployment provided by the toolkit.
+import `examples/splicustomerApp` in your toolkit, create the bar file it and deploy to your local broker using the drag & drop deployment provided by the toolkit.
 ### junit test
-import splitcustomer.rockitizer as maven into java eclipse or toolkit for IIB 10 with maven plugin installed
+import `examples/splitcustomer.rockitizer` as maven into java eclipse or toolkit for IIB 10 with maven plugin installed
    1. Configure mqmanager connection settings, (see mq manager configuration)[#confimqproperties] 
    2. Configure record/replay mode (default replay), (see test project configuration)[#testprojectconfiguration]    
 
