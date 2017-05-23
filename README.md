@@ -33,6 +33,7 @@ According to the maven conventions the following folders of  your test.project a
 - `src/test/java/` - location of the junit test runner
 
 Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
+Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol to the console. 
 
 For the complete understanding including junit starter and project layout, please refer to  [basic execution flow](docs/USAGE.md#basicexecutionflow)
 
