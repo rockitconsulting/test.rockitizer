@@ -7,17 +7,23 @@ Easy-to-use junit based framework for the integration testing of any complexity.
 
 Furthermore, the framework enables the "test first" approach, thus developing against pre-defined "target" interface until the replay snapshot matches.
 
-*Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus, but can be used for any integration platform.* 
+*Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
 ## Core features: 
-  - declarative test-plan concept,[see details](#declarativetestplan)
-  - separation of Test data and Connector configuration concept, [see details](#testdataseparation)
+  - declarative `test-plan` concept,[see details](#declarativetestplan)
+  - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
   - extendable connector/plugin architecture
-  - Record/Replay with post Assertion
-  - MQ, DB, HTTP, SCP connectors available
-  - DB, File, XMLUnit assertion plugins
+  - `Record`/`Replay with post Assertion` Modes
+  - `MQ`, `DB`, `HTTP`, `SCP` connectors available
+  - `DB`, `File`, `XMLUnit` assertion plugins
   - regression testing and continuous integration
   
+## Skill level
+  Basic understanding of following Java frameworks: 
+  - Maven - used for build and configuration of runtime and used in example for test project. 
+  - Junit - used as test starter
+  - XMLUnit - used for assertions
+  To run the sample ESB project you will need the basic IBM Integration Bus know-how for import and deployment.
 
 ## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
@@ -36,7 +42,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 
 ### <a name="testdataseparation"></a> Test data separation from environment configuration
 
-<img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="400"  align="right"/>
+<img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="450"  width="250" align="right"/> 
 
 The following parts of the test.rpoject  supposed to be not environment dependent:
 - junit starter with assertions
