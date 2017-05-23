@@ -55,15 +55,17 @@ For the test plan reference check [docu](docs/USAGE.md#testplan)
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="450"  width="250" align="right"/> 
 
-The following parts of the test.rpoject  supposed to be not environment dependent:
+The following parts of the test.project supposed to be  environment independent:
 - junit starter with assertions
 - test-plan with payloads 
 - recorded test output (master record)
-- replay output 
 
-That's why they shall be committed in the source repository (except replay output).  
 
-All the environment dependent properties belong to the test.project configuration files and basically contain the connector configurations.
+**That's why they shall be committed in the source repository** and will be shared across users and environments. Write test onces and start it anywhere.  
+
+* replay output is also environment neutral but generated during the test execution, thus not checked in.
+
+All the environment dependent properties belong to the test.project configuration files and basically contain the connector configurations, [see configuration](docs/USAGE.md#configuration).
 
 
 ## Getting started
