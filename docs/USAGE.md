@@ -20,33 +20,53 @@ Basically it allows to make all connector settings in main files environment ind
 Configure the mq connection settings
 
    ```
-	########################################################################
-	#  Environment Index (IDX Variable) 
-	########################################################################
-	MQENV = 
-	########################################################################
-	#  MQ Manager Connection  
-	########################################################################
-	MQ@MQMANAGER.NAME=IB9QMGR
-	MQ@MQMANAGER.PORT=1414
-	MQ@MQMANAGER.HOST=localhost
-	MQ@MQMANAGER.CHANNEL=SYSTEM.BKR.CONFIG
-	
-	########################################################################
-	#  MQ OUT Queue List generated from IIB Project  
-	########################################################################
-	MQGET@ = SPLITCUSTOMER.CUSTOMER.OUT, SPLITCUSTOMER.ERROR.OUT
+
+########################################################################
+#  Environment Index (IDX Variable), can be used to provide 
+#  the environment dependent queues, case the nameing convention allows.
+#  i.e. MQENV = TEST 
+#  Test-plan connector: MQGET@SPLITCUSTOMER.ERROR.OUT.@ENV@
+#  Configuration: MQGET@ = SPLITCUSTOMER.CUSTOMER.OUT.@ENV@, SPLITCUSTOMER.ERROR.OUT.@ENV@
+########################################################################
+MQENV = 
+########################################################################
+#  MQ Manager Connection  
+########################################################################
+MQ@MQMANAGER.NAME=IB9QMGR
+MQ@MQMANAGER.PORT=1414
+MQ@MQMANAGER.HOST=localhost
+MQ@MQMANAGER.CHANNEL=SYSTEM.BKR.CONFIG
+
+########################################################################
+#  MQ OUT Queue List generated from IIB Project  
+########################################################################
+MQGET@ = SPLITCUSTOMER.CUSTOMER.OUT, SPLITCUSTOMER.ERROR.OUT
    ```
 
 
 ### <a name="testprojectconfiguration"></a> config.properties - project configuration
-*For the test there is no db connection required*
-   ```
-    ###############################
-    #   Test Mode
-    ###############################
-    suite.mode = replay
-   ```
+
+ ```
+###############################
+#   Test Mode [record/replay] 
+#   replay mode captures output and executes  assertions against recorded "master" results
+###############################
+suite.mode = replay
+
+###############################
+#   DB Connection
+###############################
+#dataSource.username= ${dataSource.username}
+#dataSource.password= ${dataSource.password}
+#dataSource.url= ${dataSource.url}
+
+#DBGET@CUSTOMERS = SELECT NAME FROM ROCKIT.CUSTOMER ORDER BY NAME DESC
+
+###############################
+#   HTTP Connection
+###############################
+#HTTPGET@MYHTTPCONNECTOR=http://google.com/getz
+```
    
    
 ---
