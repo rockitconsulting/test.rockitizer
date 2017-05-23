@@ -50,6 +50,8 @@ For the complete understanding including junit starter and project layout, pleas
 
 For the test plan reference check [docu](docs/USAGE.md#testplan)
 
+**The declarative test-plan approach reduces the maintanence costs of the test-suite**.  
+
 
 ### <a name="testdataseparation"></a> Test data separation from environment configuration
 
@@ -61,7 +63,7 @@ The following parts of the test.project supposed to be  environment independent:
 - recorded test output (master record)
 
 
-**That's why they shall be committed in the source repository** and will be shared across users and environments. Write test onces and start it anywhere.  
+That's why they shall be committed in the source repository and will be shared across users and environments. **Write test onces and start it anywhere**.  
 
 * replay output is also environment neutral but generated during the test execution, thus not checked in.
 
