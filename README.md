@@ -20,7 +20,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - Complex testcases are built up within the minutes
 
 
-## Main architecture
+
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
 
 ## Getting started?
