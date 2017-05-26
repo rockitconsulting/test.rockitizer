@@ -30,10 +30,10 @@ Basically it allows to make all connector settings in main files environment ind
 ### MQGet
 Description: reads all messages from queue as xmls
 
-Testplan: 
+Testplan folder: 
         
-	-MQGET@MY.QUEUE.NAME
-	-MQGET@MY.QUEUE.NAME.@ENV@
+	MQGET@MY.QUEUE.NAME
+	MQGET@MY.QUEUE.NAME.@ENV@
 	
 	
 config.mq.properties or config.properties:
@@ -47,10 +47,11 @@ config.mq.properties or config.properties:
 
 ### MQPut
 Description: puts all messages from connector folder into queue 
-Testplan: 
+
+Testplan folder: 
         
-	-MQPUT@MY.QUEUE.NAME
-	-MQGET@MY.QUEUE.NAME.@ENV@
+	MQPUT@MY.QUEUE.NAME
+	MQGET@MY.QUEUE.NAME.@ENV@
 	
 	
 config.mq.properties or config.properties:
@@ -63,6 +64,7 @@ config.mq.properties or config.properties:
 
 ### HTTPGet
 Description: gets http/https response as xml
+
 Testplan: 
          
 	 HTTPGET@<MYHTTPCONNECTOR>
@@ -73,7 +75,8 @@ config.properties:
 
 ### SCPPut
 Description: writes the connector payload to configured destination
-Testplan: 
+
+Testplan folder: 
         
 	SCPPUT@<YOURNAME> 
 config.properties:
@@ -85,7 +88,8 @@ config.properties:
 
 ### DBGet
 Description: executes the configured SQL and stores it as xml 
-Testplan: 
+
+Testplan folder: 
         
 	DBGET@<YOURNAME> 
 config.properties:
@@ -99,7 +103,8 @@ config.properties:
 ### DBPut
 
 Description: executes the connector payloads against configured db
-Testplan: 
+
+Testplan folder: 
         
 	DBPUT@<YOURNAME> 
 config.properties:
