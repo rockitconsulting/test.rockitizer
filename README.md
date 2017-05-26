@@ -9,7 +9,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
-## Core features: 
+## <a name="corefeatures"></a> Core features: 
   - declarative `test-plan` concept, [see details](#declarativetestplan)
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
   - extendable connector/plugin architecture
@@ -27,7 +27,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   *To run the sample ESB project you will need the basic IBM Integration Bus know-how for import and deployment.
 
 
-## Main Concepts
+## <a name="mainconcepts"></a> Main Concepts
 According to the maven conventions the following folders of  your test.project are important:
 - `src/test/resources/` - location of the test plans
 - `src/test/java/` - location of the junit test runner
