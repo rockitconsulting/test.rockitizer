@@ -83,6 +83,8 @@ Configure the mq connection settings
 	MQ@MQMANAGER.PORT=1414
 	MQ@MQMANAGER.HOST=localhost
 	MQ@MQMANAGER.CHANNEL=SYSTEM.BKR.CONFIG
+	MQ@MQMANAGER.USR=
+	MQ@MQMANAGER.PWD=
 	
 	########################################################################
 	#  MQ OUT Queue List generated from IIB Project  
