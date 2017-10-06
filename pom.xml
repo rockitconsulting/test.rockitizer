@@ -112,32 +112,32 @@
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>mq</artifactId>
-			<version>7.5</version>
+			<version>9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
-			<artifactId>connector</artifactId>
-			<version>7.5</version>
+			<artifactId>allclient</artifactId>
+			<version>9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>jmqi</artifactId>
-			<version>7.5</version>
+			<version>9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>commonservices</artifactId>
-			<version>7.5</version>
+			<version>9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>headers</artifactId>
-			<version>7.5</version>
+			<version>9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>pcf</artifactId>
-			<version>7.5</version>
+			<version>9.3</version>
 		</dependency>
 	<!-- Non-free MQ end -->	
 	
