@@ -26,6 +26,95 @@ According to placeholders pattern the `config.properties` are allowed to store t
 
 Basically it allows to make all connector settings in main files environment independent, providing the exact values using maven profiles. 
 
+## Connectors
+### MQGet
+Description: reads all messages from queue as xmls
+
+Testplan folder: 
+        
+	MQGET@MY.QUEUE.NAME
+	MQGET@MY.QUEUE.NAME.@ENV@
+	
+	
+config.mq.properties or config.properties:
+        
+	MQENV=ENV #support for environment dependent queues
+	MQ@MQMANAGER.NAME=<IB9QMGR>
+	MQ@MQMANAGER.PORT=<1414>
+	MQ@MQMANAGER.HOST=<localhost>
+	MQ@MQMANAGER.CHANNEL=<SYSTEM.BKR.CONFIG>
+
+
+### MQPut
+Description: puts all messages from connector folder into queue 
+
+Testplan folder: 
+        
+	MQPUT@MY.QUEUE.NAME
+	MQGET@MY.QUEUE.NAME.@ENV@
+	
+	
+config.mq.properties or config.properties:
+        
+	MQENV=ENV #support for environment dependent queues
+	MQ@MQMANAGER.NAME=<IB9QMGR>
+	MQ@MQMANAGER.PORT=<1414>
+	MQ@MQMANAGER.HOST=<localhost>
+	MQ@MQMANAGER.CHANNEL=<SYSTEM.BKR.CONFIG>
+
+### HTTPGet
+Description: gets http/https response as xml
+
+Testplan: 
+         
+	 HTTPGET@<MYHTTPCONNECTOR>
+config.properties:
+         
+	 HTTPGET@MYHTTPCONNECTOR=http://google.com/get
+
+
+### SCPPut
+Description: writes the connector payload to configured destination
+
+Testplan folder: 
+        
+	SCPPUT@<YOURNAME> 
+config.properties:
+	
+	SCPPUT@<YOURNAME>.HOST=
+	SCPPUT@<YOURNAME>.USR=
+	SCPPUT@<YOURNAME>.PWD=
+	SCPPUT@<YOURNAME>.PATH=
+
+### DBGet
+Description: executes the configured SQL and stores it as xml 
+
+Testplan folder: 
+        
+	DBGET@<YOURNAME> 
+config.properties:
+        
+	DBGET@<YOURNAME> = SELECT * FROM TABLE
+        dataSource.username= 
+	dataSource.password= 
+	dataSource.url= 
+
+
+### DBPut
+
+Description: executes the connector payloads against configured db
+
+Testplan folder: 
+        
+	DBPUT@<YOURNAME> 
+config.properties:
+
+        dataSource.username= 
+	dataSource.password= 
+	dataSource.url= 
+	
+
+
 
 ### <a name="confimqproperties"></a> config.mq.properties - MQ Configuration
 Configure the mq connection settings
