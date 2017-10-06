@@ -140,3 +140,6 @@ License
 
 MIT
 
+Publications
+----
+[IBM Integration Community: junit based integration testing](https://developer.ibm.com/integration/blog/2017/08/29/junit-based-integration-testing-ibm-integration-bus/).
