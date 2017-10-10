@@ -92,13 +92,12 @@ public class AbstractTestFolderTest {
 	public void testGetBasePath()  {
 		AbstractTestFolder asf =  new AbstractTestFolder(TEST_FOLDER);
 		String path = asf.getBasePath();
-		LOGGER.info(path.substring(path.indexOf("test.rockitizer")+15));
 		
 		if(asf.isReplayMode()){
-			assertTrue("/target/replay/", path.substring(path.indexOf("test.rockitizer")+15).equals(Constants.REPLAY_PATH));
+			assertTrue("/target/replay/", path.endsWith(Constants.REPLAY_PATH) );
 			
 		}else {
-			assertTrue("/src/test/resources/", path.substring(path.indexOf("test.rockitizer")+15).equals(Constants.RECORD_PATH));
+			assertTrue("/src/test/resources/", path.endsWith(Constants.RECORD_PATH));
 		}
 	}	
 }
