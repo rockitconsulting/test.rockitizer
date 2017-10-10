@@ -34,7 +34,6 @@ public class HTTPGetConnector implements ReadConnector {
 	@Override
 	public void proceed() {
 
-		InputStream in = null;
 
 		try {
 
@@ -63,10 +62,6 @@ public class HTTPGetConnector implements ReadConnector {
 			LOGGER.error("can not open connection: " + url, e);
 			throw new ConnectorException(e);
 
-		}  finally {
-			if (in != null) {
-				IOUtils.closeQuietly(in);
-			}
 		}
 	}
 

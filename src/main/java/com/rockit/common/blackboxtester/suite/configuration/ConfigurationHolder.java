@@ -58,7 +58,7 @@ public class ConfigurationHolder extends PropertiesConfiguration {
 			configuration.append(configmq);
 						
 		} catch (final ConfigurationException e) {
-			LOGGER.warn("No generated mq.properties found ");
+			LOGGER.info("No generated mq.properties found ");
 		}
 	}
 	

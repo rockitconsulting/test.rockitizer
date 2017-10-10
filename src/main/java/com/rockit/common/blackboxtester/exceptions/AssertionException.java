@@ -11,8 +11,8 @@ public class AssertionException extends AssertionError {
 
 	private static final long serialVersionUID = 1L;
 
-	private String reason;
-	private AssertionError error;
+	private final String reason;
+	private final AssertionError error;
 
 	public AssertionException(final String reason, final AssertionError e) {
 		this.reason = reason;
