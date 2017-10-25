@@ -8,6 +8,14 @@ import com.google.common.collect.ImmutableList;
 
 public class ConfigurationHolderTest {
 
+	
+	@Test
+	public void testConfigEmptyValues() {
+		assertTrue(ConfigurationHolder.configuration().getString(Constants.MQMANAGER_USR_KEY),
+				ConfigurationHolder.configuration().getString(Constants.MQMANAGER_USR_KEY).isEmpty());
+	}
+
+	
 	@Test
 	public void testGeneratedMqGetNonEmpty() {
 
