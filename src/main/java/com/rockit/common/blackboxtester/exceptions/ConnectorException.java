@@ -5,11 +5,11 @@ public class ConnectorException extends RuntimeException {
 	
 
 	public ConnectorException(Exception e) {
-		throw new RuntimeException(e);
+		throw this;
 	}
 
 	public ConnectorException(String msg) {
-		throw new RuntimeException(msg);
+		throw this;
 	}
 
 	private static final long serialVersionUID = 1L;

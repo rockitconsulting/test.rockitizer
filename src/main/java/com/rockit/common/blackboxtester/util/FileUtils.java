@@ -79,7 +79,9 @@ public class FileUtils {
 				deleteFilesRecursive(ff);
 			}
 		} else if(f.exists()) {
-		   f.delete();	
+		   if(!f.delete()) {
+			   LOGGER.warn("cannot delete " + f.getAbsolutePath());
+		   }	
 		}
 	}
 	
