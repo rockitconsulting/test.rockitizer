@@ -24,7 +24,7 @@ public final class Constants {
 	public static final String MQMANAGER_CHANNEL_KEY = "MQ@MQMANAGER.CHANNEL";
 	public static final String MQMANAGER_HOST_KEY = "MQ@MQMANAGER.HOST";
 	public static final String MQMANAGER_USR_KEY = "MQ@MQMANAGER.USR";
-	public static final String MQMANAGER_PWD_KEY = "MQ@MQMANAGER.PWD";
+	public static final String MQMANAGER_PWD_KEY = "MQ@MQMANAGER.PWD";//NOSONAR
 	
 	public static final String DATASOURCE_URL_KEY = "dataSource.url";
 	public static final String DATASOURCE_USERNAME_KEY = "dataSource.username";
