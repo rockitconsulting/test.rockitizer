@@ -34,14 +34,10 @@ public class SCPPutConnector implements WriteConnector {
 
 	private String password;
 
-//	public SCPPutConnector(final String host, final String user, final String password, String destination) {
-//
-//		this.destPath = destination;
-//		this.host = host;
-//		this.user = user;
-//		this.password = password;
-//	}
 
+	/**
+	 * @param name "SCPPUT@CONN1" - connector and key 
+	 */
 	public SCPPutConnector(String name){
 		this.name = name;
 		this.host = configuration().getString(this.name + Constants.SCP_HOST_KEY);

@@ -1,7 +1,5 @@
 package com.rockit.common.blackboxtester.connector;
 
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -14,8 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.junit.Test;
-
-import com.rockit.common.blackboxtester.connector.impl.HTTPGetConnector;
 
 public class HTTPGetConnectorIntegration {
 	public static final Logger LOGGER = Logger.getLogger(HTTPGetConnectorIntegration.class.getName());

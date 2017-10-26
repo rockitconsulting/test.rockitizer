@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>com.rockit</groupId>
 			<artifactId>test.rockitizer</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>0.0.4-mq9-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

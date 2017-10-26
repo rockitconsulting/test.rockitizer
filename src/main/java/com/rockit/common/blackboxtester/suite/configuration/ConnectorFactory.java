@@ -11,12 +11,19 @@ import com.google.common.collect.ImmutableList;
 import com.rockit.common.blackboxtester.connector.Connector;
 import com.rockit.common.blackboxtester.connector.impl.DBGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.DBPutConnector;
+import com.rockit.common.blackboxtester.connector.impl.FileDelConnector;
+import com.rockit.common.blackboxtester.connector.impl.FileGetConnector;
+import com.rockit.common.blackboxtester.connector.impl.FilePutConnector;
 import com.rockit.common.blackboxtester.connector.impl.HTTPGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.MQGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.MQPutConnector;
 import com.rockit.common.blackboxtester.connector.impl.SCPPutConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 
+/**
+ * Mapping for the folder structure to the connector implementation
+ *
+ */
 public class ConnectorFactory {
 	public static final Logger LOGGER = Logger.getLogger(ConnectorFactory.class.getName());
 
@@ -61,6 +68,16 @@ public class ConnectorFactory {
 	
 			case "SCPPUT":
 				return  ImmutableList.of( (Connector) new SCPPutConnector(name) ) ;
+				
+			case "FILEGET":
+				return  ImmutableList.of( (Connector) new FileGetConnector(name) ) ;
+
+			case "FILEPUT":
+				return  ImmutableList.of( (Connector) new FilePutConnector(name) ) ;
+
+			case "FILEDEL":
+				return  ImmutableList.of( (Connector) new FileDelConnector(name) ) ;
+				
 	
 			default:
 				LOGGER.error("No Connector found for [" + name + "]");

@@ -3,6 +3,7 @@ package com.rockit.common.blackboxtester.util;
 import java.io.File;
 import java.io.IOException;
 
+
 import org.apache.log4j.Logger;
 
 import com.google.common.base.Predicate;
@@ -48,6 +49,20 @@ public class FileUtils {
 		
 	}
 
+	public static void copy(File from, File to) throws IOException  {
+		if( from.isDirectory() ) {
+			org.apache.commons.io.FileUtils.copyDirectory(from, to);			
+		} else if (from.isFile() && to.isDirectory()){
+			org.apache.commons.io.FileUtils.copyFileToDirectory(from, to);
+		} else {
+			Files.copy(from, to);
+		}
+		
+	}
+	
+	
+
+	
 	public static void deleteDirectory(File file)  {
 		try {
 			org.apache.commons.io.FileUtils.deleteDirectory(file);
@@ -56,5 +71,17 @@ public class FileUtils {
 		} 
 	}
 
+	public static void deleteFilesRecursive(File f) {
+		
+		if(f.exists() && f.isDirectory()) {
+			File[] files = f.listFiles();
+			for (File ff: files ) {
+				deleteFilesRecursive(ff);
+			}
+		} else if(f.exists()) {
+		   f.delete();	
+		}
+	}
+	
 }
 
