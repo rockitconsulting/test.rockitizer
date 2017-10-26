@@ -51,7 +51,7 @@ public class SCPConnectorTest {
 	  Path SRC = Paths.get(ClassLoader.getSystemResource("scp/TestOutput.trans").toURI());
 	  assertNotNull(SRC);
 	  scpConnector.setRequest( new File(SRC.toString()) );
-	   assertTrue(scpConnector.copy());
+	  assertTrue(scpConnector.copy());
 	}	
 
 }

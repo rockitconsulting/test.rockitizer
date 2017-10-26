@@ -8,6 +8,9 @@ import com.google.common.collect.ImmutableList;
 
 public class ConfigurationHolderTest {
 
+
+	
+
 	
 	@Test
 	public void testConfigEmptyValues() {

@@ -37,12 +37,14 @@ public final class Constants {
 	public static final String REPLAY_PATH = "/target/replay/";
 	public static final String RECORD_PATH = "/src/test/resources/";
 	public static final String MODE_KEY = "suite.mode";
+	public static final String FILE_PATH_KEY = ".PATH";
 	
 
 
 	public static  enum Connectors {
 		MQGET("MQGET@"), MQPUT("MQPUT@"), 
 		SCPPUT("SCPPUT@"), SCPGET("SCPGET@"),
+		FILEPUT("FILEPUT@"),FILEGET("FILEGET@"),FILEDEL("FILEDEL@"),
 		DBPUT("DBPUT@"), DBGET("DBGET@"), 
 		HTTPGET("HTTPGET@");
 

@@ -50,6 +50,9 @@ public class ConnectorFolder extends AbstractTestFolder {
 			}
 		} else if (connector instanceof ReadConnector){
 			saveResponse(connector);
+		} else if (connector instanceof Connector){
+			LOGGER.info( getTestStepName() + "\t [Connector:"+ connector.getName() +"] - Proceed ...");
+			connector.proceed();
 		}
 		
 	}
