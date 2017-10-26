@@ -14,9 +14,9 @@ import org.junit.Test;
 import com.rockit.common.blackboxtester.connector.impl.SCPPutConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 
-public class SCPPuTConnectorTest {
+public class SCPPutConnectorTest {
 	
-	public static final Logger LOGGER = Logger.getLogger(SCPPuTConnectorTest.class.getName());
+	public static final Logger LOGGER = Logger.getLogger(SCPPutConnectorTest.class.getName());
 	
 //	private static final String USER = configuration().getString("SCPPUT@CONN1"+Constants.SCP_USR_KEY);
 //	private static final String PASSWORD = configuration().getString("SCPPUT@CONN1"+Constants.SCP_PWD_KEY);
