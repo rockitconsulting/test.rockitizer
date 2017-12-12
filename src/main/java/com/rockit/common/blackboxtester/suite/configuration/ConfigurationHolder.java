@@ -67,10 +67,17 @@ public class ConfigurationHolder extends PropertiesConfiguration {
 	}
 
 
+	@Override
+	public String getString(String key) {
+		
+		return super.getString(key.replace('@', '.'));
+		
+	}
+
 	
 	@Override
 	public List<Object> getList(String key) {
-		super.getString(key);//to get Exception if not exists
-		return super.getList(key);
+		super.getString(key.replace('@', '.'));//to get Exception if not exists
+		return super.getList(key.replace('@', '.'));
 	}
 }
