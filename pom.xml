@@ -3,15 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.rockit</groupId>
 	<artifactId>test.rockitizer</artifactId>
-	<version>0.0.4-mq9-SNAPSHOT</version>
+	<version>0.0.5-mq9-SNAPSHOT</version>
 	<distributionManagement>
 		<repository>
 			<id>rockit-release</id>
-			<url>http://linux-wmnh:8081/artifactory/libs-release-local</url>
+			<url>http://jenkins:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>rockit-snapshot</id>
-			<url>http://linux-wmnh:8081/artifactory/libs-snapshot-local</url>
+			<url>http://jenkins:8081/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 
 	</distributionManagement>

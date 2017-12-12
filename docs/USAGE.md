@@ -22,7 +22,7 @@ The following configuration files are available for your test project:
 3. `env_xyz.properties` - optional maven profile to support multiple environments 
 4. `pom.xml` - maven project file maintains the profiles like `env_xyz.properties`
 
-According to placeholders pattern the `config.properties` are allowed to store the placeholders `${propertyName}` which will be replaces with the value of the same key in `env_xyz.properties`.
+According to placeholders pattern the `config.properties` are allowed to store the placeholders `${propertyName}` which will be replaced with the value of the same key in `env_xyz.properties`.
 
 Basically it allows to make all connector settings in main files environment independent, providing the exact values using maven profiles. 
 
@@ -67,9 +67,9 @@ Description: gets http/https response as xml
 
 Testplan: 
          
-	 HTTPGET@<MYHTTPCONNECTOR>
-config.properties:
-         
+	 HTTPGET@<MYHTTPCONNECTOR>	 
+config.properties:         
+
 	 HTTPGET@MYHTTPCONNECTOR=http://google.com/get
 
 
@@ -78,7 +78,7 @@ Description: writes the connector payload to configured destination
 
 Testplan folder: 
         
-	SCPPUT@<YOURKEY>
+	SCPPUT@<YOURKEY>	
 config.properties:
 	
 	SCPPUT@<YOURKEY>.HOST=
