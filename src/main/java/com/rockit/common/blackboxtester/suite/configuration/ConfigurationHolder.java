@@ -68,8 +68,22 @@ public class ConfigurationHolder extends PropertiesConfiguration {
 
 
 	@Override
-	public String getString(String key) {
+	public int getInt(String key) {
+		return super.getInt(key.replace('@', '.'));
 		
+	}
+
+
+	
+	@Override
+	public String getString(String key, String defValue) {
+		return super.getString(key.replace('@', '.'), defValue);
+		
+	}
+	
+	
+	@Override
+	public String getString(String key) {
 		return super.getString(key.replace('@', '.'));
 		
 	}
