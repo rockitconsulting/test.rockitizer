@@ -78,23 +78,23 @@ Description: writes the connector payload to configured destination
 
 Testplan folder: 
         
-	SCPPUT@<YOURNAME> 
+	SCPPUT@<YOURKEY>
 config.properties:
 	
-	SCPPUT@<YOURNAME>.HOST=
-	SCPPUT@<YOURNAME>.USR=
-	SCPPUT@<YOURNAME>.PWD=
-	SCPPUT@<YOURNAME>.PATH=
+	SCPPUT@<YOURKEY>.HOST=
+	SCPPUT@<YOURKEY>.USR=
+	SCPPUT@<YOURKEY>.PWD=
+	SCPPUT@<YOURKEY>.PATH=
 
 ### DBGet
 Description: executes the configured SQL and stores it as xml 
 
 Testplan folder: 
         
-	DBGET@<YOURNAME> 
+	DBGET@<YOURKEY>
 config.properties:
         
-	DBGET@<YOURNAME> = SELECT * FROM TABLE
+	DBGET@<YOURKEY> = SELECT * FROM TABLE
         dataSource.username= 
 	dataSource.password= 
 	dataSource.url= 
@@ -106,13 +106,50 @@ Description: executes the connector payloads against configured db
 
 Testplan folder: 
         
-	DBPUT@<YOURNAME> 
+	DBPUT@<YOURKEY>
 config.properties:
 
         dataSource.username= 
 	dataSource.password= 
 	dataSource.url= 
 	
+	
+### FILEPut
+
+Description: writes files from test folder to the specified location. Used to integrate file connectors.
+
+Testplan folder: 
+        
+	FILEPUT@<YOURKEY> 
+config.properties:
+	
+	FILEPUT@<YOURKEY>.PATH=C:\\temp\\test.rockitizer\\FileConnectorUsage
+
+
+### FILEGet
+
+Description: takes specific file and copies it to the output folder. Used to integrate file connectors.
+
+Testplan folder: 
+        
+	FILEGET@<YOURKEY> 
+config.properties:
+	
+	FILEGET@<YOURKEY>.PATH=C:\\temp\\test.rockitizer\\FileConnectorUsage	
+
+
+### FILEDel
+
+Description: Cleans the target folder, used for 0BEFORE preclean before testing the file connectors.
+
+Testplan folder: 
+	
+	FILEDEL@<YOURKEY> 
+config.properties:
+	
+	FILEDEL@<YOURKEY>.PATH=C:\\temp\\test.rockitizer\\FileConnectorUsage
+
+
 
 
 
