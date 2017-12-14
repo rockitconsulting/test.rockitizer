@@ -26,9 +26,9 @@ public final class Constants {
 	public static final String MQMANAGER_USR_KEY = "MQ@MQMANAGER.USR";
 	public static final String MQMANAGER_PWD_KEY = "MQ@MQMANAGER.PWD";//NOSONAR
 	
-	public static final String DATASOURCE_URL_KEY = "dataSource.url";
-	public static final String DATASOURCE_USERNAME_KEY = "dataSource.username";
-	public static final String DATASOURCE_PASSWORD_KEY = "dataSource.password";//NOSONAR
+	public static final String DATASOURCE_URL_KEY = "DATASOURCE.URL";
+	public static final String DATASOURCE_USERNAME_KEY = "DATASOURCE.USERNAME";
+	public static final String DATASOURCE_PASSWORD_KEY = "DATASOURCE.PASSWORD";//NOSONAR
 	public static final String MQOUT_KEY = "MQGET@";
 	public static final String SCP_HOST_KEY = ".HOST";
 	public static final String SCP_USR_KEY = ".USR";
