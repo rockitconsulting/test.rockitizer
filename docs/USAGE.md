@@ -26,6 +26,18 @@ According to placeholders pattern the `config.properties` are allowed to store t
 
 Basically it allows to make all connector settings in main files environment independent, providing the exact values using maven profiles. 
 
+## Configurable payloads
+
+All Put connectors submiting the payloads may have the placeholders within. Please use the standard markup `${PLACEHOLDER}` and the corresponing entry in the `config.properties`: `PLACEHOLDER=Value`. 
+
+### Supported connectors
+
+	- FILEPUT
+	- MQPUT
+	- DBPUT
+	- SCPPUT
+
+
 ## Connectors
 ### MQGet
 Description: reads all messages from queue as xmls

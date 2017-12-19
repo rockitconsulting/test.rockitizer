@@ -14,6 +14,7 @@ import com.jcraft.jsch.Session;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
+import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 public class SCPPutConnector implements WriteConnector {
@@ -120,6 +121,7 @@ public class SCPPutConnector implements WriteConnector {
 
 	@Override
 	public void setRequest(File requestFile)  {
+		PayloadReplacer.interpolate(requestFile);
 		contentFile = requestFile;
 
 	}
