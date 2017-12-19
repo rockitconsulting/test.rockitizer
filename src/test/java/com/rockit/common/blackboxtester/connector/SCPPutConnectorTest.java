@@ -31,28 +31,8 @@ public class SCPPutConnectorTest {
 
 	}
 	
-	
-	@Test
-	public void testCopy(){
-	  Path SRC = null;
-	try {
-		SRC = Paths.get(ClassLoader.getSystemResource("scp/TestOutput.xml").toURI());
-	} catch (URISyntaxException e) {
-		LOGGER.error(" string could not be parsed as a URI: " , e);
-		throw new GenericException(e);		
-	}
-	  assertNotNull(SRC);
-	  scpConnector.setRequest( new File(SRC.toString()) );
-	   assertTrue(scpConnector.copy());
-	}	
 
-	@Test
-	public void testCopyTransRename() throws Exception{
-	  Path SRC = Paths.get(ClassLoader.getSystemResource("scp/TestOutput.trans").toURI());
-	  assertNotNull(SRC);
-	  scpConnector.setRequest( new File(SRC.toString()) );
-	   assertTrue(scpConnector.copy());
-	}
+
 	
 	@Test
 	public void testType(){
