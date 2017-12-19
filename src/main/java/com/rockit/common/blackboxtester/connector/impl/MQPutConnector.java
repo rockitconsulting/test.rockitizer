@@ -7,6 +7,7 @@ import java.io.File;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
+import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.util.FileUtils;
 
 public class MQPutConnector extends MQAccessor implements WriteConnector {
@@ -50,6 +51,7 @@ public class MQPutConnector extends MQAccessor implements WriteConnector {
 
 	@Override
 	public void setRequest(File file) {
+		PayloadReplacer.interpolate(file);
 		this.message = FileUtils.getContents(file);
 
 	}
