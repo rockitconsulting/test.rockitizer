@@ -1,0 +1,34 @@
+
+CREATE COMPUTE MODULE SplitCustomerJSON_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		CREATE LASTCHILD OF OutputRoot DOMAIN('JSON');
+		
+		SET OutputRoot.JSON.Data.Name = 'Response';
+		CREATE FIELD OutputRoot.JSON.Data.Content IDENTITY (JSON.Array)Content;
+		SET OutputRoot.JSON.Data.Content.Item[1].PartnerId1 = 'id1';
+		SET OutputRoot.JSON.Data.Content.Item[1].PartnerNr1 = 1;
+		SET OutputRoot.JSON.Data.Content.Item[2].PartnerId2 = 'id2';
+		SET OutputRoot.JSON.Data.Content.Item[2].PartnerNr2 = 2;		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

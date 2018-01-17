@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>rockit</groupId>
 	<artifactId>splitcustomer.rockitizer</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	
 	<profiles>
 		<profile>
@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>com.rockit</groupId>
 			<artifactId>test.rockitizer</artifactId>
-			<version>0.0.4-mq9-SNAPSHOT</version>
+			<version>0.0.5-mq9-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
