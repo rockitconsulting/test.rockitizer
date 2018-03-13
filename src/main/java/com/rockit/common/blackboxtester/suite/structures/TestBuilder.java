@@ -60,8 +60,8 @@ public class TestBuilder extends AbstractTestFolder {
 			TestProtocol.write( getTestStepName() + "\t Deleting record output folder " + getRecordOutputFolder());
 			FileUtils.deleteDirectory( new File(getRecordOutputFolder()) );
 		}else {
-			TestProtocol.write( getTestStepName() + "\t Deleting replay  folder " + getRecordOutputFolder());
-			FileUtils.deleteDirectory(new  File( getReplayRootPath() ));
+			TestProtocol.write( getTestStepName() + "\t Deleting replay  folder " + getReplayFolder());
+			FileUtils.deleteDirectory(new  File( getReplayFolder() ));
 		}
 	}
 	
