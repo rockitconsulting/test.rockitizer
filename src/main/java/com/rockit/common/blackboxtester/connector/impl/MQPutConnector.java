@@ -51,8 +51,7 @@ public class MQPutConnector extends MQAccessor implements WriteConnector {
 
 	@Override
 	public void setRequest(File file) {
-		PayloadReplacer.interpolate(file);
-		this.message = FileUtils.getContents(file);
+		this.message = FileUtils.getContents(PayloadReplacer.interpolate(file));
 
 	}
 	public String getId() {

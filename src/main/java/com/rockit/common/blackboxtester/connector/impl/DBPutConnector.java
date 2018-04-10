@@ -96,8 +96,7 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 
 	@Override
 	public void setRequest(final File requestFile) {
-		PayloadReplacer.interpolate(requestFile);
-		file = requestFile;
+		file = PayloadReplacer.interpolate(requestFile);
 	}
 
 	@Override

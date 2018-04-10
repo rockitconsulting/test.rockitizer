@@ -11,10 +11,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Test;
 
+import com.rockit.common.blackboxtester.assertions.FileAssertion;
+
 public class PayloadReplacerTest {
+	public static final Logger log = Logger.getLogger(PayloadReplacerTest.class.getName());
 
 //	@Test
 //	public void replace() throws URISyntaxException, IOException {
@@ -36,11 +40,14 @@ public class PayloadReplacerTest {
 	public void interpolate() throws URISyntaxException, IOException {
 		Path SRC = Paths.get(ClassLoader.getSystemResource("PayloadReplacement/test.xml").toURI());
 		File srcFile = new File(SRC.toString());
+		log.info("replacement for " + srcFile.getAbsolutePath());
 		assertTrue(srcFile.exists());
 		String content = new String(Files.readAllBytes(SRC));
+		log.info("content:  " + content);
+
 		assertFalse("PAYLOAD.DATEPLACEHOLDER not yet replaced (maybe already replaced by prevous test, need status quo rollback to init )" , content.contains(configuration().getString("PAYLOAD.DATEPLACEHOLDER")));
-		PayloadReplacer.interpolate(srcFile);
-		String replace = new String(Files.readAllBytes(SRC));
+		File interpolate = PayloadReplacer.interpolate(srcFile);
+		String replace = new String(Files.readAllBytes(interpolate.toPath()));
 		assertTrue("PAYLOAD.DATEPLACEHOLDER replaced ",replace.contains(configuration().getString("PAYLOAD.DATEPLACEHOLDER")));
 
 	}
