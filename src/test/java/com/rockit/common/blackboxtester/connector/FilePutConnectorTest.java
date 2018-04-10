@@ -40,7 +40,7 @@ public class FilePutConnectorTest {
 	@Test
 	public void testPut() throws URISyntaxException, IOException  {
 
-		Path SRC = Paths.get(ClassLoader.getSystemResource("TestFileConnectors/test.xml").toURI());
+		Path SRC = Paths.get(ClassLoader.getSystemResource("TestFileConnectors/test1.xml").toURI());
 		File srcFile = new File(SRC.toString());
 		assertTrue(srcFile.exists());
 		filePutConnector.setRequest(srcFile);
