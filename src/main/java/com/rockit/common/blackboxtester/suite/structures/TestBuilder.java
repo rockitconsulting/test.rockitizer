@@ -114,7 +114,7 @@ public class TestBuilder extends AbstractTestFolder {
 			throw new GenericException(e);
 		}
 		
-		LOGGER.info(getTestStepName() + "\t Copying " + Constants.RECORD_PATH +  stepName + " to " + Constants.REPLAY_PATH +  stepName);
+		LOGGER.info(getTestStepName() + "\t Copying " + Constants.RECORD_PATH +  getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH +  getTestName() + "/" + getTestStepName() );
 	}
 
 	
