@@ -1,0 +1,1 @@
+<root><Name>Response</Name><Content><PartnerNr1>1</PartnerNr1><PartnerId1>id1</PartnerId1></Content><Content><PartnerNr2>2</PartnerNr2><PartnerId2>id2</PartnerId2></Content></root>

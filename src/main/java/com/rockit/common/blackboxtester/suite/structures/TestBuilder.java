@@ -98,6 +98,9 @@ public class TestBuilder extends AbstractTestFolder {
 
 	private void copyRecordToReplayTarget(String stepName) {
 		
+		if (new File(getRecordFolder() + "/" + stepName).exists() == false) {
+			new File(getRecordFolder() + "/" + stepName).mkdirs();
+		}
 		new File(getReplayFolder() + "/" + stepName).mkdirs();
 		
 		try {
