@@ -23,7 +23,7 @@ public class PayloadReplacer {
 			String replace = StrSubstitutor.replace(content, new ConfigurationMap( configuration()));
 			tmpFile = new File(TEMP + File.separator + System.nanoTime() + File.separator + file.getName());
 			tmpFile.getParentFile().mkdirs();
-			LOGGER.debug("interpolate " + file.toPath() + " to temp " + tmpFile.toPath());
+			LOGGER.info("interpolate " + file.toPath() + " to temp " + tmpFile.toPath());
 			Files.write(tmpFile.toPath(), replace.getBytes());
 			
 
