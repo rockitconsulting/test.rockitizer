@@ -21,6 +21,11 @@ import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 
+/**
+ * Submitting of payload stored in the DBPUT@KEY folder. 
+ * @author rockit2lp
+ *
+ */
 public class DBPutConnector extends DatabaseConnection implements WriteConnector {
 
 	public static final Logger LOGGER = Logger.getLogger(DBPutConnector.class.getName());
