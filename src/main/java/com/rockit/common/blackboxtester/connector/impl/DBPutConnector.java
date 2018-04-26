@@ -22,7 +22,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 
 /**
- * Submitting of payload stored in the DBPUT@KEY folder. 
+ * Submitting of payload stored in the DBPUT@KEY folder.  
  * @author rockit2lp
  *
  */
