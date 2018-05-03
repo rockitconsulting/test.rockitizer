@@ -105,6 +105,7 @@ public class ConfigurationHolder extends PropertiesConfiguration {
 		try {
 			custom= super.getString(name + '.'+ key);
 		} catch (NoSuchElementException nse) {
+			LOGGER.debug("getPrefixedString(" + name + '.'+ key + ") goes to fallback configuration "  );
 			custom = super.getString(key.replace('@', '.'));
 		}
 		return custom;
