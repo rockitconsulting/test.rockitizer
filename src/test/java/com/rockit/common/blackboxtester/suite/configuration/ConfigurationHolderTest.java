@@ -71,7 +71,7 @@ public class ConfigurationHolderTest {
 		final String CONNECTOR_NAME = "DBGET@MYSELECTWITHFALLBACK";
 		assertEquals(
 				ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_URL_KEY),
-				"jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = ABZDD032S12)(PORT = 1521))) (CONNECT_DATA =  (SERVICE_NAME = kölölkölköl)(SERVER = DEDICATED) (FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=30)(DELAY=30)(BACKUP=jjkjk)) ) )");
+				"jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(dummy) )");
 		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_USERNAME_KEY),
 				"APP");
 		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_PASSWORD_KEY),
