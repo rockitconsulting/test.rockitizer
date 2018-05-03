@@ -10,6 +10,11 @@ import org.apache.commons.configuration.ConfigurationMap;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.apache.log4j.Logger;
 
+/**
+ * @author rockit2lp
+ * Implements the environment dependent configuration of payload. 
+ * No modification of test sources takes place, the whole interpolation takes place in temp folder
+ */
 public class PayloadReplacer {
 
 	public static final Logger LOGGER = Logger.getLogger(PayloadReplacer.class.getName());

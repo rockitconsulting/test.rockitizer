@@ -1,5 +1,7 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -8,17 +10,12 @@ import com.google.common.collect.ImmutableList;
 
 public class ConfigurationHolderTest {
 
-
-	
-
-	
 	@Test
 	public void testConfigEmptyValues() {
 		assertTrue(ConfigurationHolder.configuration().getString(Constants.MQMANAGER_USR_KEY),
 				ConfigurationHolder.configuration().getString(Constants.MQMANAGER_USR_KEY).isEmpty());
 	}
 
-	
 	@Test
 	public void testGeneratedMqGetNonEmpty() {
 
@@ -49,12 +46,37 @@ public class ConfigurationHolderTest {
 				ConfigurationHolder.configuration().getList(CUSTOM_KEY_EMPTY).equals(ImmutableList.of("")));
 
 	}
-	
-	
+
 	@Test(expected = Exception.class)
 	public void testCustomMqGetNotExist() {
 		final String CUSTOM_KEY_NOT_EXISTS = "MQGET.NOT.EXISTS";
 		ConfigurationHolder.configuration().getList(CUSTOM_KEY_NOT_EXISTS);
 	}
 
+	@Test
+	public void testGetCustomDbConnector() {
+		final String CONNECTOR_NAME = "DBGET@MYSELECT";
+		assertEquals(
+				ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_URL_KEY),
+				"jdbc:oracle:thin:@()");
+		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_USERNAME_KEY),
+				"USR");
+		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_PASSWORD_KEY),
+				"PWD");
+
+	}
+
+	@Test
+	public void testGetCustomDbConnectorWithFallback() {
+		final String CONNECTOR_NAME = "DBGET@MYSELECTWITHFALLBACK";
+		assertEquals(
+				ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_URL_KEY),
+				"jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = D032S120.epu.emea.bg.corpintra.net)(PORT = 1521))) (CONNECT_DATA =  (SERVICE_NAME = D032MB12.EPU.EMEA.BG.CORPINTRA.NET)(SERVER = DEDICATED) (FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=30)(DELAY=30)(BACKUP=D032MB12.epu.emea.bg.corpintra.net)) ) )");
+		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_USERNAME_KEY),
+				"APP_WPPS2");
+		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_PASSWORD_KEY),
+				"APP_WPPS#02");
+	}
+
+	
 }

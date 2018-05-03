@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -85,6 +86,28 @@ public class ConfigurationHolder extends PropertiesConfiguration {
 	@Override
 	public String getString(String key) {
 		return super.getString(key.replace('@', '.'));
+		
+	}
+
+	
+	/**
+	 * connector with fallback to default configuration.
+	 * uses the connector name to lookup for the connector specific configuration
+	 * if it not exists, it takes the default one for the connector of exists
+	 * if no configuration available the NoSuchElementException is thrown if enabled
+	 * 
+	 * @param name
+	 * @param key
+	 * @return
+	 */
+	public String getPrefixedString(String name, String key) {
+		String custom = null;
+		try {
+			custom= super.getString(name + '.'+ key);
+		} catch (NoSuchElementException nse) {
+			custom = super.getString(key.replace('@', '.'));
+		}
+		return custom;
 		
 	}
 
