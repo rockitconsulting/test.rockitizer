@@ -71,11 +71,11 @@ public class ConfigurationHolderTest {
 		final String CONNECTOR_NAME = "DBGET@MYSELECTWITHFALLBACK";
 		assertEquals(
 				ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_URL_KEY),
-				"jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = D032S120.epu.emea.bg.corpintra.net)(PORT = 1521))) (CONNECT_DATA =  (SERVICE_NAME = D032MB12.EPU.EMEA.BG.CORPINTRA.NET)(SERVER = DEDICATED) (FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=30)(DELAY=30)(BACKUP=D032MB12.epu.emea.bg.corpintra.net)) ) )");
+				"jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = ABZDD032S12)(PORT = 1521))) (CONNECT_DATA =  (SERVICE_NAME = kölölkölköl)(SERVER = DEDICATED) (FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=30)(DELAY=30)(BACKUP=jjkjk)) ) )");
 		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_USERNAME_KEY),
-				"APP_WPPS2");
+				"APP");
 		assertEquals(ConfigurationHolder.configuration().getPrefixedString(CONNECTOR_NAME, Constants.DATASOURCE_PASSWORD_KEY),
-				"APP_WPPS#02");
+				"APP02");
 	}
 
 	
