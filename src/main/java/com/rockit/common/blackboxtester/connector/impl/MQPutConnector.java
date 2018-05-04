@@ -19,16 +19,16 @@ public class MQPutConnector extends MQAccessor implements WriteConnector {
 //		this.name = name;
 //	}
 	
-	public MQPutConnector(String qName, String name) {
+	public MQPutConnector( String name) {
 		
 		super(  
-				configuration().getString(Constants.MQMANAGER_NAME_KEY),
-				qName, 
-				configuration().getInt(Constants.MQMANAGER_PORT_KEY),
-				configuration().getString(Constants.MQMANAGER_CHANNEL_KEY),
-				configuration().getString(Constants.MQMANAGER_HOST_KEY), 
-				configuration().getString(Constants.MQMANAGER_USR_KEY),
-				configuration().getString(Constants.MQMANAGER_PWD_KEY)
+				configuration().getPrefixedString(name, Constants.MQMANAGER_NAME_KEY),
+				configuration().getString(name), 
+				configuration().getPrefixedInt(name, Constants.MQMANAGER_PORT_KEY),
+				configuration().getPrefixedString(name,Constants.MQMANAGER_CHANNEL_KEY),
+				configuration().getPrefixedString(name,Constants.MQMANAGER_HOST_KEY), 
+				configuration().getPrefixedString(name,Constants.MQMANAGER_USR_KEY),
+				configuration().getPrefixedString(name,Constants.MQMANAGER_PWD_KEY)
 				);
 
 		this.name = name;

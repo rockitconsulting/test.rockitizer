@@ -17,7 +17,7 @@ public class SettingsHolderTest {
 	@Before
 	public void setUp() {
 		
-		cache().put("MQPUT@TEST.TRIGGER.@ENV@",SettingsBuilder.addMQHeader().
+		cache().put("MQPUT.TEST.TRIGGER.YD1",SettingsBuilder.addMQHeader().
 				setExpiry(1).
 				setMsgType(0).
 				setCodedCharSetId(819).

@@ -16,34 +16,14 @@ public class ConfigurationHolderTest {
 				ConfigurationHolder.configuration().getString(Constants.MQMANAGER_USR_KEY).isEmpty());
 	}
 
-	@Test
-	public void testGeneratedMqGetNonEmpty() {
 
-		assertTrue(ConfigurationHolder.configuration().getString(Constants.ENV_IDX_KEY),
-				ConfigurationHolder.configuration().getString(Constants.ENV_IDX_KEY).equals("YD1"));
-
-		assertTrue(ConfigurationHolder.configuration().getString(Constants.MQOUT_KEY),
-				ConfigurationHolder.configuration().getList(Constants.MQOUT_KEY)
-						.equals(ImmutableList.of("SPLITCUSTOMER.INOUT.@ENV@", "CUSTOMERCONTRACT.INOUT.@ENV@",
-								"CUSTOMERCONTRACT.ERROR.@ENV@", "SINGLE.CUSTOMER.OUT.@ENV@")));
-	}
 
 	@Test
-	public void testCustomMqGetnonEmpty() {
+	public void testMqGetConnector() {
 
-		final String CUSTOM_KEY = "MQGET.TEST.LIST";
+		final String CUSTOM_KEY = "MQGET.MYSPLITCUSTOMER";
 		assertTrue(ConfigurationHolder.configuration().getString(CUSTOM_KEY),
-				ConfigurationHolder.configuration().getList(CUSTOM_KEY)
-						.equals(ImmutableList.of("SPLITCUSTOMER.INOUT.@ENV@", "CUSTOMERCONTRACT.INOUT.@ENV@",
-								"CUSTOMERCONTRACT.ERROR.@ENV@", "SINGLE.CUSTOMER.OUT.@ENV@")));
-	}
-
-	@Test
-	public void testCustomMqGetEmpty() {
-
-		final String CUSTOM_KEY_EMPTY = "MQGET.TEST.EMPTY.LIST";
-		assertTrue(ConfigurationHolder.configuration().getString(CUSTOM_KEY_EMPTY),
-				ConfigurationHolder.configuration().getList(CUSTOM_KEY_EMPTY).equals(ImmutableList.of("")));
+				ConfigurationHolder.configuration().getList(CUSTOM_KEY).equals(ImmutableList.of("SPLITCUSTOMER.INOUT.01")));
 
 	}
 
