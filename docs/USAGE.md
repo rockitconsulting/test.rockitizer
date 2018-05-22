@@ -22,17 +22,18 @@ According to the maven conventions the following folders are important:
 		- CONFIGURATION_ALIAS - binding between folder and environment dependent value (configuration system), e.g. Queue Name, SQL Select, etc. 
 
 
-		Sample connector: 
-			- <testname>\<stepname>\DBGET.SELECTCUSTOMER  
-			- <testname>\<stepname>\DBPUT.MYDATABASE
+Sample connector: 
+	- <testname>\<stepname>\DBGET.SELECTCUSTOMER  
+	- <testname>\<stepname>\DBPUT.MYDATABASE
 	 
 
 ## Test runner
 
 - Located under: `src/test/java/<package>/<testname>Test.java`
-- `<testname>` shall be used analog to the test plan
+- `<testname>Test` shall have the same name to the test plan folder
   
-		Sample connector:
+ Sample connector:
+ - SplitCustomertTest.java
 
 ## Execution flow 
 
