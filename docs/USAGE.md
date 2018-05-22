@@ -93,8 +93,8 @@ Common property:
 					DBGET.DRIVER.DATASOURCE.PASSWORD=${SECONDARY.DATASOURCE.PASSWORD}
 					DBGET.DRIVER.DATASOURCE.URL=${SECONDARY.DATASOURCE.URL}
 					
-      3.2 if not declared the fall back to generic factory takes place:	
-      		<FACTORY_NAME>.<FACTORY_PROPERTY>=				
+      		3.2 if not declared the fall back to generic factory takes place:	
+      					<FACTORY_NAME>.<FACTORY_PROPERTY>=				
 					e.g.
 					MQMANAGER.NAME=${MQMANAGER.NAME}
 					MQMANAGER.PORT=${MQMANAGER.PORT}
