@@ -1,13 +1,16 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.rockit.common.blackboxtester.connector.settings.MQHeader;
 import com.rockit.common.blackboxtester.connector.settings.Settings;
 
+/**
+ * keeps settings in cache for the runtime specific connectors like queue
+ * @author rockit2lp
+ *
+ */
 public class SettingsHolder {
 
 	private SettingsHolder() {
@@ -24,13 +27,7 @@ public class SettingsHolder {
 		return cache;
 	}
 
-	public static Settings cacheByConnector(String type, String connector) {
-		String connectorName = connector;
-		String env = configuration().getString(Constants.ENV_IDX_KEY);
-
-		if (null != connectorName) {
-			connectorName = connectorName.replaceAll(env, Constants.ENV);
-		}
-		return cache.get(type + connectorName) !=null ? cache.get(type + connectorName): cache.get(Constants.DEFAULT_CONNECTOR_NAME + type);
+	public static Settings cacheByConnector(String type, String name) {
+		return cache.get(type + name) !=null ? cache.get(type + name): cache.get(Constants.DEFAULT_CONNECTOR_NAME + type);
 	}
 }

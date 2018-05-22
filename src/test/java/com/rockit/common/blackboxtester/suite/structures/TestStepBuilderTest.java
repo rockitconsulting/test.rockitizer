@@ -18,7 +18,7 @@ public class TestStepBuilderTest {
 	public void setUp() {
 		testStepBuilder = new TestStepBuilder("TestRockitzerTest", "addMQ001");
 				
-		testStepBuilder.addSettings("MQPUT@TEST.TRIGGER.@ENV@", SettingsBuilder.addMQHeader().
+		testStepBuilder.addSettings("MQPUT.TEST.TRIGGER.01", SettingsBuilder.addMQHeader().
 				setExpiry(1).
 				setMsgType(0).
 				setCodedCharSetId(819).
@@ -41,7 +41,7 @@ public class TestStepBuilderTest {
 	@Test
 	public void testAddSettings(){
 		
-		MQHeader settings = (MQHeader) cacheByConnector(Connectors.MQPUT.toString(), "TEST.TRIGGER.YD1");
+		MQHeader settings = (MQHeader) cacheByConnector(Connectors.MQPUT.toString(), "TEST.TRIGGER.01");
 		
 		assertTrue(settings.getType().equals(Connectors.MQPUT.toString()));
 		

@@ -27,7 +27,7 @@ public class SCPPutConnectorTest {
 	
 	@Before
 	public  void setUp() {
-	 scpConnector = new SCPPutConnector("SCPPUT@CONN1");
+	 scpConnector = new SCPPutConnector("SCPPUT.CONN1");
 
 	}
 	
@@ -36,17 +36,17 @@ public class SCPPutConnectorTest {
 	
 	@Test
 	public void testType(){
-		assertTrue(scpConnector.getType(), scpConnector.getType().equals("SCPPUT@"));
+		assertTrue(scpConnector.getType(), scpConnector.getType().equals("SCPPUT."));
 	}
 	
 	@Test
 	public void testName(){
-		assertTrue(scpConnector.getName(), scpConnector.getName().equals("SCPPUT@CONN1"));
+		assertTrue(scpConnector.getName(), scpConnector.getName().equals("SCPPUT.CONN1"));
 	}
 	
 	@Test
 	public void testId(){
-		assertTrue(scpConnector.getId(), scpConnector.getId().equals("SCPPUT@CONN1"));
+		assertTrue(scpConnector.getId(), scpConnector.getId().equals("SCPPUT.CONN1"));
 	}
 
 }

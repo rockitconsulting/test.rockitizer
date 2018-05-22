@@ -37,9 +37,9 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 
 	public DBPutConnector(final String name) {
 	
-		super(configuration().getString(Constants.DATASOURCE_URL_KEY),
-				configuration().getString(Constants.DATASOURCE_USERNAME_KEY),
-				configuration().getString(Constants.DATASOURCE_PASSWORD_KEY));
+		super(configuration().getPrefixedString(name, Constants.DATASOURCE_URL_KEY),
+				configuration().getPrefixedString(name, Constants.DATASOURCE_USERNAME_KEY),
+				configuration().getPrefixedString(name, Constants.DATASOURCE_PASSWORD_KEY));
 		this.name = name;
 	}
 

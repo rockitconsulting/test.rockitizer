@@ -26,9 +26,9 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 
 
 	public DBGetConnector(String name) {
-		super(configuration().getString(Constants.DATASOURCE_URL_KEY),
-				configuration().getString(Constants.DATASOURCE_USERNAME_KEY),
-				configuration().getString(Constants.DATASOURCE_PASSWORD_KEY));
+		super(configuration().getPrefixedString(name, Constants.DATASOURCE_URL_KEY),
+				configuration().getPrefixedString(name, Constants.DATASOURCE_USERNAME_KEY),
+				configuration().getPrefixedString(name, Constants.DATASOURCE_PASSWORD_KEY));
 
 		this.name = name;
 		this.sqlQuery = configuration().getString(this.name);

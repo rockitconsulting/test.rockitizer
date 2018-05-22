@@ -12,10 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
 import org.junit.Test;
-
-import com.rockit.common.blackboxtester.assertions.FileAssertion;
 
 public class PayloadReplacerTest {
 	public static final Logger log = Logger.getLogger(PayloadReplacerTest.class.getName());

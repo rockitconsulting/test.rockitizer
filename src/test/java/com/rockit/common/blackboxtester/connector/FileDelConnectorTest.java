@@ -26,7 +26,7 @@ public class FileDelConnectorTest {
 
 	@Before
 	public void setUp() {
-		fileDelConnector = new FileDelConnector("FILEDEL@FileDelConnectorTest");
+		fileDelConnector = new FileDelConnector("FILEDEL.FileDelConnectorTest");
 
 	}
 
@@ -63,17 +63,17 @@ public class FileDelConnectorTest {
 
 	@Test
 	public void testType() {
-		assertTrue(fileDelConnector.getType(), fileDelConnector.getType().equals("FILEDEL@"));
+		assertTrue(fileDelConnector.getType(), fileDelConnector.getType().equals("FILEDEL."));
 	}
 
 	@Test
 	public void testName() {
-		assertTrue(fileDelConnector.getName(), fileDelConnector.getName().equals("FILEDEL@FileDelConnectorTest"));
+		assertTrue(fileDelConnector.getName(), fileDelConnector.getName().equals("FILEDEL.FileDelConnectorTest"));
 	}
 
 	@Test
 	public void testId() {
-		assertTrue(fileDelConnector.getId(), fileDelConnector.getId().equals("FILEDEL@FileDelConnectorTest"));
+		assertTrue(fileDelConnector.getId(), fileDelConnector.getId().equals("FILEDEL.FileDelConnectorTest"));
 	}
 
 }

@@ -25,7 +25,7 @@ public class FilePutConnectorTest {
 
 	@Before
 	public void setUp() {
-		filePutConnector = new FilePutConnector("FILEPUT@FilePutConnectorTest");
+		filePutConnector = new FilePutConnector("FILEPUT.FilePutConnectorTest");
 
 	}
 
@@ -58,17 +58,17 @@ public class FilePutConnectorTest {
 
 	@Test
 	public void testType() {
-		assertTrue(filePutConnector.getType(), filePutConnector.getType().equals("FILEPUT@"));
+		assertTrue(filePutConnector.getType(), filePutConnector.getType().equals(Constants.Connectors.FILEPUT.toString()));
 	}
 
 	@Test
 	public void testName() {
-		assertTrue(filePutConnector.getName(), filePutConnector.getName().equals("FILEPUT@FilePutConnectorTest"));
+		assertTrue(filePutConnector.getName(), filePutConnector.getName().equals("FILEPUT.FilePutConnectorTest"));
 	}
 
 	@Test
 	public void testId() {
-		assertTrue(filePutConnector.getId(), filePutConnector.getId().equals("FILEPUT@FilePutConnectorTest"));
+		assertTrue(filePutConnector.getId(), filePutConnector.getId().equals("FILEPUT.FilePutConnectorTest"));
 	}
 
 }

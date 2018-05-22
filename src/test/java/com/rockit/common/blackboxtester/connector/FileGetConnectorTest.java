@@ -28,7 +28,7 @@ public class FileGetConnectorTest {
 
 	@Before
 	public void setUp() {
-		fileGetConnector = new FileGetConnector("FILEGET@FileGetConnectorTest");
+		fileGetConnector = new FileGetConnector("FILEGET.FileGetConnectorTest");
 		tesfilePath = ConfigurationHolder.configuration()
 				.getString(fileGetConnector.getName() + Constants.FILE_PATH_KEY);
 	}
@@ -75,17 +75,17 @@ public class FileGetConnectorTest {
 
 	@Test
 	public void testType() {
-		assertTrue(fileGetConnector.getType(), fileGetConnector.getType().equals("FILEGET@"));
+		assertTrue(fileGetConnector.getType(), fileGetConnector.getType().equals("FILEGET."));
 	}
 
 	@Test
 	public void testName() {
-		assertTrue(fileGetConnector.getName(), fileGetConnector.getName().equals("FILEGET@FileGetConnectorTest"));
+		assertTrue(fileGetConnector.getName(), fileGetConnector.getName().equals("FILEGET.FileGetConnectorTest"));
 	}
 
 	@Test
 	public void testId() {
-		assertTrue(fileGetConnector.getId(), fileGetConnector.getId().equals("FILEGET@FileGetConnectorTest"));
+		assertTrue(fileGetConnector.getId(), fileGetConnector.getId().equals("FILEGET.FileGetConnectorTest"));
 	}
 
 }

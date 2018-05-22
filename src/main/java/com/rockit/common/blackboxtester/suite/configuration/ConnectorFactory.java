@@ -1,8 +1,5 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -31,31 +28,23 @@ public class ConnectorFactory {
 		throw new IllegalAccessError("ConnectorFactory class");
 	}
 
-	public static List<Connector> connectorByFolder(String connectorName) {
+	public static List<Connector> connectorByFolder(String name) {
 
-		String name = connectorNameByFolder(connectorName);
+		if(name.indexOf('@')!=-1) {
+			throw new RuntimeException("@ are no longer supported since version 0.6. Please use the pattern {Connector}.{Variable}");
+		}
+		
 
-		String type = name.split("@")[0];
+		String type = name.split("\\.")[0];
 		
 		
 		switch (type) {
 
 			case "MQPUT":
-				String putQueue = connectorNameByFolder(name.split("@")[1]);
-				return  ImmutableList.of( (Connector)new MQPutConnector(putQueue, name)) ;
+				return  ImmutableList.of( (Connector)new MQPutConnector(name)) ;
 				
 			case "MQGET":
-				List<Connector> mqout = new ArrayList<Connector>();
-				if( "NotConfiguredProceedAsSingleQueue".equals( configuration().getString(name, "NotConfiguredProceedAsSingleQueue")  ) ) {
-					mqout.add(  new MQGetConnector( connectorNameByFolder(name.split("@")[1]) , name ) );
-				} else {
-					for ( Object queue : configuration().getList(name) ) {
-						if( String.valueOf(queue).trim().isEmpty()) { continue; }
-						mqout.add(  new MQGetConnector( connectorNameByFolder( String.valueOf(queue) ) , name ) );
-					 }
-				}
-				 
-    			return mqout;
+				return  ImmutableList.of( (Connector)new MQGetConnector( name)) ;
 	
 			case "DBPUT":
 				return  ImmutableList.of( (Connector)new DBPutConnector(name)) ;
@@ -84,13 +73,4 @@ public class ConnectorFactory {
 				throw new GenericException("No Connector found for [" + name + "]");
 		}
 	}
-
-	public static String connectorNameByFolder(String name) {
-		return name.replaceFirst( Constants.ENV, configuration().getString(Constants.ENV_IDX_KEY) );
-	}
-
-	public static String folderNameByConnector(String name) {
-		return name.replaceFirst( configuration().getString(Constants.ENV_IDX_KEY), Constants.ENV );
-	}
-
 }
