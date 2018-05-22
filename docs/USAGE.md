@@ -44,7 +44,7 @@ Junit serves as glue and looks for the test plan with the same name starting its
 4. Within the last step of `replay` mode the configured assertions `testBuilder.addAssertion(<AssertionImpl>(<fodername>)` being processed.
 
 ## Sample project layout
-<img alt="Concept of test data separation from environment configuration" src="img/test_rockitizer_project.PNG"  />
+<img alt="Concept of test data separation from environment configuration" src="img/test_rockitizer_project.png"  />
 
 For the fast and easy start with the `test.project` use the provided [example](../examples/README.md)
 
