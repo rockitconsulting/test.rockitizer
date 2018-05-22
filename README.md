@@ -43,10 +43,10 @@ For the complete understanding including junit starter and project layout, pleas
  	
 1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter, i.e. `SplitCustomerTest`.
 2. Each **test plan** has one or more test steps (subfolders) with arbitrary names, i.e. `a001putCustomerBatch`,`a002getCustomerBatch`.  Junit starter adds step to execution.  
-3. Each **test step** has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>@<ID>`. The `ID` will be looked up in configuration, i.e. `DBGET@CUSTOMERS`,`MQPUT@CUSTOMERBATCH.IN.@ENV@` 
+3. Each **test step** has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>.<ID>`. The `ID` will be looked up in configuration, i.e. `DBGET.CUSTOMERS`,`MQPUT.CUSTOMERBATCH` 
 4. All **connectors** processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
-    - MQGET@ - reads all messages in Queue with `<ID>`
-    - MQPUT@ - submits the payloads from connector folder into Queue with `<ID>` 
+    - MQGET. - reads all messages in Queue with `<ID>`
+    - MQPUT. - submits the payloads from connector folder into Queue with `<ID>` 
 
 For the test plan reference check [docu](docs/USAGE.md#testplan)
 
@@ -109,7 +109,7 @@ All the environment dependent properties belong to the test.project configuratio
  INFO 
  INFO *****************************************************************************
  INFO a001putCustomerBatch	 Step Added. Executing... 
- INFO a001putCustomerBatch	 [Connector:MQPUT@SPLITCUSTOMER.BATCH.IN] - Writing ...
+ INFO a001putCustomerBatch	 [Connector:MQPUT.SPLITCUSTOMER.BATCH.IN] - Writing ...
  INFO Message successfully written to SPLITCUSTOMER.BATCH.IN                          
  INFO a002getCustomerBatch	 Copying /src/test/resources/a002getCustomerBatch to /target/replay/a002getCustomerBatch
  INFO 
@@ -117,13 +117,13 @@ All the environment dependent properties belong to the test.project configuratio
  INFO a002getCustomerBatch	 Step Added. Executing... 
  INFO  Waiting 1000ms for results
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 186
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 213
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 188
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 247
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO #############################################################################
  INFO # 		 <SplitCustomerTestOK>: Assertion
  INFO #############################################################################
@@ -134,6 +134,12 @@ All the environment dependent properties belong to the test.project configuratio
       ]
 ```
 
+Known issues
+----
+	Issue: 
+		Base64.class from java 8 package
+	Solution:
+		Java 1.8 recommended. Use the code compatibility option to Java 1.7 for all IIB versions prior 10.0.0.12
 
 License
 ----

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:customers xmlns:p="rockit.customerBatch.simpleCustomer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="rockit.customerBatch.simpleCustomer CustomerBatchSchema.xsd ">
+    <customer>
+        <person>
+            <name>Lisa</name>
+            <surname>Wilke</surname>
+            <addresses>
+                <address>Stuttgart</address>
+            </addresses>
+        </person>
+    </customer>
+    <customer>
+        <person>
+            <name>Martin</name>
+            <surname>Test</surname>
+            <addresses>
+                <address>Mannheim</address>
+                <address>Konstanz</address>
+            </addresses>
+        </person>
+    </customer>
+    <customer>
+        <person>
+            <name>Max</name>
+            <surname>Mustermann</surname>
+            <addresses>
+                <address>München</address>
+            </addresses>
+        </person>
+    </customer>
+    <customer>
+        <person>
+            <name>Inga</name>
+            <surname>Mustermann</surname>
+            <addresses>
+                <address>Stockach</address>
+                <address>Ueberlingen</address>
+                <address>Konstanz</address>
+            </addresses>
+        </person>
+    </customer>
+</p:customers>

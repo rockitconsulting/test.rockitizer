@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers>
+    <customer>
+        <person>
+            <name>Lisa</name>
+            <surname>Wilke</surname>
+            <addresses>
+                <address>Stuttgart</address>
+                <address>Berlin</address>
+            </addresses>
+        </person>
+    </customer>
+    <customer>
+        <person>
+            <surname>Test</surname>
+            <addresses>
+                <address>Mannheim</address>
+                <address>Konstanz</address>
+            </addresses>
+        </person>
+    </customer>
+    <customer>
+        <person>
+            <name>Max</name>
+            <surname>Mustermann</surname>
+            <addresses>
+                <address>Hamburg</address>
+            </addresses>
+        </person>
+    </customer>
+    <customer>
+        <person>
+            <name>Inga</name>
+            <surname>Mustermann</surname>
+            <addresses>
+                <address>Stockach</address>
+                <address>Stuttgart</address>
+                <address>Konstanz</address>
+            </addresses>
+        </person>
+    </customer>
+</customers>

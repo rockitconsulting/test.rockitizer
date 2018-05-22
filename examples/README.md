@@ -41,7 +41,7 @@ import `examples/splitcustomer.rockitizer` as maven into java eclipse or toolkit
  INFO 
  INFO *****************************************************************************
  INFO a001putCustomerBatch	 Step Added. Executing... 
- INFO a001putCustomerBatch	 [Connector:MQPUT@SPLITCUSTOMER.BATCH.IN] - Writing ...
+ INFO a001putCustomerBatch	 [Connector:MQPUT.SPLITCUSTOMER.BATCH.IN] - Writing ...
  INFO Message successfully written to SPLITCUSTOMER.BATCH.IN                          
  INFO a002getCustomerBatch	 Copying /src/test/resources/a002getCustomerBatch to /target/replay/a002getCustomerBatch
  INFO 
@@ -49,13 +49,13 @@ import `examples/splitcustomer.rockitizer` as maven into java eclipse or toolkit
  INFO a002getCustomerBatch	 Step Added. Executing... 
  INFO  Waiting 1000ms for results
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 186
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 213
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 188
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 247
- INFO a002getCustomerBatch	 [Connector:MQGET@SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
+ INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
  INFO #############################################################################
  INFO # 		 <SplitCustomerTestOK>: Assertion
  INFO #############################################################################
@@ -68,39 +68,33 @@ import `examples/splitcustomer.rockitizer` as maven into java eclipse or toolkit
  
 
 
-### <a name="confimqproperties"></a> config.mq.properties - MQ Configuration
-Configure the mq connection settings
+### <a name="confimqproperties"></a> config.properties - Configuration
 
-   ```
-	########################################################################
-	#  Environment Index (IDX Variable) 
-	########################################################################
-	MQENV = 
-	########################################################################
-	#  MQ Manager Connection  
-	########################################################################
-	MQ@MQMANAGER.NAME=IB9QMGR
-	MQ@MQMANAGER.PORT=1414
-	MQ@MQMANAGER.HOST=localhost
-	MQ@MQMANAGER.CHANNEL=SYSTEM.BKR.CONFIG
-	MQ@MQMANAGER.USR=
-	MQ@MQMANAGER.PWD=
-	
-	########################################################################
-	#  MQ OUT Queue List generated from IIB Project  
-	########################################################################
-	MQGET@ = SPLITCUSTOMER.CUSTOMER.OUT, SPLITCUSTOMER.ERROR.OUT
-   ```
-
-
-### <a name="testprojectconfiguration"></a> config.properties - project configuration
 *For the test there is no db connection required*
+
    ```
     ###############################
     #   Test Mode
     ###############################
     suite.mode = replay
+   
+	########################################################################
+	#  MQ Manager Connection  
+	########################################################################
+	MQMANAGER.NAME=IB9QMGR
+	MQMANAGER.PORT=1414
+	MQMANAGER.HOST=localhost
+	MQMANAGER.CHANNEL=SYSTEM.BKR.CONFIG
+	MQMANAGER.USR=
+	MQMANAGER.PWD=
+	
+	########################################################################
+	#  MQ OUT Queue List generated from IIB Project  
+	########################################################################
+	MQGET.SPLITCUSTOMER.CUSTOMER = SPLITCUSTOMER.CUSTOMER.OUT, SPLITCUSTOMER.ERROR.OUT
    ```
+
+
    
    
 ---
