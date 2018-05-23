@@ -12,19 +12,19 @@ According to the maven conventions the following folders are important:
 - Located under: `src/test/resources/<testname>`
 - Test plan has custom folders which are step containers, e.g.:     
   
-	- <testname>\01addTrigger  
-	- <testname>\02readResults 
+	- `<testname>\01addTrigger`  
+	- `<testname>\02readResults` 
 
 - Each step contains folders which serve as connectors and have following naming convention:
  
-	- <CONNECTOR>.<CONFIGURATION_ALIAS>  
-		- CONNECTOR - MQPUT, DBGET, etc. See supported connectors for the whole list
-		- CONFIGURATION_ALIAS - binding between folder and environment dependent value (configuration system), e.g. Queue Name, SQL Select, etc. 
+	- <`CONNECTOR>.<CONFIGURATION_ALIAS>`  
+		- `CONNECTOR - MQPUT, DBGET, etc.` See supported connectors for the whole list
+		- `CONFIGURATION_ALIAS` - binding between folder and environment dependent value (configuration system), e.g. Queue Name, SQL Select, etc. 
 
 
 Sample connector: 
-	- <testname>\<stepname>\DBGET.SELECTCUSTOMER  
-	- <testname>\<stepname>\DBPUT.MYDATABASE
+	- `<testname>\<stepname>\DBGET.SELECTCUSTOMER`  
+	- `<testname>\<stepname>\DBPUT.MYDATABASE`
 	 
 
 ## Test runner
