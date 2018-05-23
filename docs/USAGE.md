@@ -23,8 +23,8 @@ According to the maven conventions the following folders are important:
 
 
 Sample connector: 
-	- `<testname>\<stepname>\DBGET.SELECTCUSTOMER`  
-	- `<testname>\<stepname>\DBPUT.MYDATABASE`
+	- `<testname>\<stepname>\DBGET.SELECTCUSTOMER
+	- <testname>\<stepname>\DBPUT.MYDATABASE`
 	 
 
 ## Test runner
