@@ -1,3 +1,6 @@
+# 0.0.7 Release
+	- The HTTPGetConnector now also supports JSONArray
+	
 # 0.0.6 Release  
 	- The keys @ between the connectors and the configuration_alias was passed through "." replaced
 	- MQ configuration from this version in the CONFIG.PROPERTIES (CONFIG.MQ.PROPERTIES no longer supported)

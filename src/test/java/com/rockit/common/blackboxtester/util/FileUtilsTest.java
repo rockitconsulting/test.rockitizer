@@ -14,8 +14,8 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 public class FileUtilsTest {
 	public static final Logger LOGGER = Logger.getLogger(FileUtilsTest.class.getName());
 	
-	List<String> connectorFolders = ImmutableList.of("a001TestMQ", "a002ElasticGet");
-	List<String> connectorFiles = ImmutableList.of("CustomerBatch.xml", "CustomerBatch2.xml");
+	final List<String> connectorFolders = ImmutableList.of("a001TestMQ", "a002ElasticGet");
+	final List<String> connectorFiles = ImmutableList.of("CustomerBatch.xml", "CustomerBatch2.xml");
 	
 
 	@Test

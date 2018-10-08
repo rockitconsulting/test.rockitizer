@@ -25,7 +25,7 @@ public class FileAssertion extends AbstractAssertion  {
 		File recordFolder = new File( recordPath );
 		File replayFolder = new File( replayPath );
 		
-		for (File recordFile : Files.fileTreeTraverser().preOrderTraversal(recordFolder)) {
+		for (File recordFile : Files.fileTraverser().depthFirstPreOrder(recordFolder)) {
 			
 			String relativePath = recordFolder.toURI().relativize(recordFile.toURI()).getPath();
 			File replayFile = new File(replayFolder + "/" + relativePath );

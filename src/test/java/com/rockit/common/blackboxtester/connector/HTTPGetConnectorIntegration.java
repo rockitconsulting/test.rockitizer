@@ -19,9 +19,9 @@ public class HTTPGetConnectorIntegration {
 	@Test
 	public void test() throws JSONException, IOException {
 		
-		String requestUrl  = "http://elastic:changeme@linux-wmnh:9200/log_idx/_search?sort=dateTime:desc&size=1";
+//		String requestUrl  = "http://elastic:changeme@linux-wmnh:9200/log_idx/_search?sort=dateTime:desc&size=1";
 		
-		
+		String requestUrl  = "HTTPGET.JSON.GET";
 
 
 

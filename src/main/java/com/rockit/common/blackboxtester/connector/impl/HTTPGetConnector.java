@@ -10,6 +10,8 @@ import java.util.Base64;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -26,11 +28,9 @@ public class HTTPGetConnector implements ReadConnector {
 
 	public HTTPGetConnector(String name) {
 		this.name = name;
-		this.urlStr =  configuration().getString(this.name);
+		this.urlStr = configuration().getString(this.name);
 	}
 
-
-	
 	@Override
 	public void proceed() {
 
@@ -48,20 +48,34 @@ public class HTTPGetConnector implements ReadConnector {
 		        byte[] authEncBytes = Base64.getEncoder().encode( (name + ":" + password).getBytes() );
 		        urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
 			} 
-	        
-	        InputStream is = urlConnection.getInputStream();
 			
-			String xmlResp = XML.toString(new JSONObject(IOUtils.toString(is)));
-	        
-			StringBuilder response = new StringBuilder().append("<root>").append(xmlResp).append("</root>");
+	        InputStream is = urlConnection.getInputStream();
+	        String result = IOUtils.toString(is);
 
-			setReponse(response.toString());
-
+			setReponse(new StringBuilder().append("<root>").append(parseJSON(result)).append("</root>").toString());
+	         
 		} catch (IOException e) {
 
 			LOGGER.error("can not open connection: " + url, e);
 			throw new ConnectorException(e);
 
+		} catch (JSONException je) {
+			//( [TODO] eigene Exception werfen!!!!!!!!!
+			LOGGER.error("JSON deserialization Exception", je);
+			throw new ConnectorException(je);
+
+		}
+
+	
+		}
+	//( [TODO] eigene Exception werfen!!!!!!!!!
+	public String parseJSON(String result) throws JSONException{
+		try {
+			return XML.toString(new JSONObject(result));
+//			new JSONObject();
+		} catch (JSONException ex) {
+			// e.g. in case JSONArray is valid as well...
+			return XML.toString(new JSONArray(result));
 		}
 	}
 

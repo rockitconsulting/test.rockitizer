@@ -15,22 +15,22 @@ public class FileUtils {
 	
 	public static final Logger LOGGER = Logger.getLogger(FileUtils.class.getName());
 	
-	public static Iterable<File> listFolders(File root) { 
+	public static Iterable<File> listFolders(final File root) { 
 		return Iterables.filter(
-				Files.fileTreeTraverser().children( root ), new Predicate<File>() {
+				Files.fileTraverser().breadthFirst( root ), new Predicate<File>() {
 						@Override
 						public boolean apply(File input) {
-							return input.isDirectory();
+							return input.isDirectory() && input.getParentFile().equals(root);
 						}
 				});	
 	}
 
-	public static Iterable<File> listFiles(File root) { 
+	public static Iterable<File> listFiles(final File root) { 
 		return Iterables.filter(
-				Files.fileTreeTraverser().children( root ), new Predicate<File>() {
+				Files.fileTraverser().breadthFirst( root ), new Predicate<File>() {
 						@Override
 						public boolean apply(File input) {
-							return input.isFile();
+							return input.isFile() && input.getParentFile().equals(root);
 						}
 				});
 		
