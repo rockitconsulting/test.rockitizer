@@ -30,7 +30,6 @@ public class HTTPGetConnector implements ReadConnector {
 		this.name = name;
 		this.urlStr = configuration().getString(this.name);
 	}
-
 	@Override
 	public void proceed() {
 

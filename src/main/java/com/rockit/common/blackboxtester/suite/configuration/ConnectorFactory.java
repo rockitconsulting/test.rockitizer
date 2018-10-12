@@ -11,6 +11,7 @@ import com.rockit.common.blackboxtester.connector.impl.DBPutConnector;
 import com.rockit.common.blackboxtester.connector.impl.FileDelConnector;
 import com.rockit.common.blackboxtester.connector.impl.FileGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.FilePutConnector;
+import com.rockit.common.blackboxtester.connector.impl.HTTPConnector;
 import com.rockit.common.blackboxtester.connector.impl.HTTPGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.MQGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.MQPutConnector;
@@ -51,6 +52,9 @@ public class ConnectorFactory {
 	
 			case "HTTPGET":
 				return  ImmutableList.of( (Connector) new HTTPGetConnector(name) ) ;
+	
+			case "HTTP":
+				return  ImmutableList.of( (Connector) new HTTPConnector(name) ) ;
 	
 			case "DBGET":
 				return  ImmutableList.of( (Connector)  new DBGetConnector(name) ) ;
