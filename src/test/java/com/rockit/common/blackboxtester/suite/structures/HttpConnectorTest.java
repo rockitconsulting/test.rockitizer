@@ -54,34 +54,6 @@ public class HttpConnectorTest {
 		testStepBuilder.execute();
 		
 	}	
-
-//	@Test
-//	public void testAddAssertion() throws Exception {
-//		throw new RuntimeException("not yet implemented");
-//	}
-//
-//	@Test
-//	public void testProceedAssertions() throws Exception {
-//		throw new RuntimeException("not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetMasterRecordFolder() throws Exception {
-//		throw new RuntimeException("not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetTestFolder() throws Exception {
-//		throw new RuntimeException("not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetReplayFolder() throws Exception {
-//		throw new RuntimeException("not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetReplayRecordFolder() throws Exception {
-//		throw new RuntimeException("not yet implemented");
-//	}
+	
+	
 }

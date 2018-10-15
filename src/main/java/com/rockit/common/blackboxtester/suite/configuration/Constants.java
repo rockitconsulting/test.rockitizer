@@ -29,8 +29,9 @@ public final class Constants {
 	public static final String DATASOURCE_PASSWORD_KEY = "DATASOURCE.PASSWORD";//NOSONAR
 	
 	public static final String URL = 			        "URL";
+	public static final String METHOD = 			    "METHOD";
+	public static final String CONTENTTYPE = 			"CONTENTTYPE";
 
-	
 	public static final String SCP_HOST_KEY = 			".HOST";
 	public static final String SCP_USR_KEY = 			".USR";
 	public static final String SCP_PWD_KEY = 			".PWD";//NOSONAR
@@ -49,7 +50,9 @@ public final class Constants {
 		SCPPUT("SCPPUT."), SCPGET("SCPGET."),
 		FILEPUT("FILEPUT."),FILEGET("FILEGET."),FILEDEL("FILEDEL."),
 		DBPUT("DBPUT."), DBGET("DBGET."), 
-		HTTPGET("HTTPGET.");
+		HTTPGET("HTTPGET."),
+		HTTP("HTTP");
+	
 
 		private final String value;
 
