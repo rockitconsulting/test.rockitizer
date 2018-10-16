@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 public class HTTPConnectorTest {
 	
 	HTTPConnector c = new HTTPConnector("HTTP.TESTPOST");
@@ -15,20 +17,16 @@ public class HTTPConnectorTest {
 		
 	}
 
-	@Test
-	public void testHttpPOST() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testProceed() {
-		fail("Not yet implemented");
+		fail("Not yet implemented"); 
 	}
 
 	@Test
 	public void testParseJSON() {
 		//TODO junit
-		fail("Not yet implemented");
+//		assertEquals("", "");
 	}
 
 	@Test
@@ -38,12 +36,12 @@ public class HTTPConnectorTest {
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");
+		assertEquals(c.getId(), c.getType()  + c.getName());
 	}
 
 	@Test
 	public void testGetType() {
-		fail("Not yet implemented");
+		assertEquals(c.getType(), Constants.Connectors.HTTP.toString());
 	}
 
 	@Test

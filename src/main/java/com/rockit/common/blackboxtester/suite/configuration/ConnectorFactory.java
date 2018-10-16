@@ -74,7 +74,7 @@ public class ConnectorFactory {
 	
 			default:
 				LOGGER.error("No Connector found for [" + name + "]");
-				throw new GenericException("No Connector found for [" + name + "]");
+				throw new GenericException("Unsuppored connector for [" + name + "]");
 		}
 	}
 }

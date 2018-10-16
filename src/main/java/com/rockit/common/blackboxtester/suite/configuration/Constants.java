@@ -51,7 +51,7 @@ public final class Constants {
 		FILEPUT("FILEPUT."),FILEGET("FILEGET."),FILEDEL("FILEDEL."),
 		DBPUT("DBPUT."), DBGET("DBGET."), 
 		HTTPGET("HTTPGET."),
-		HTTP("HTTP");
+		HTTP("HTTP.");
 	
 
 		private final String value;

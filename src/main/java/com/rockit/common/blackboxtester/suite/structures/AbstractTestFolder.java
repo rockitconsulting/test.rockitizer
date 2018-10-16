@@ -43,7 +43,7 @@ public class AbstractTestFolder {
 		this.connectorName = connectorName;
 		this.inFolderName = testName + "/"+ testStepName + "/" + connectorName + "/";
 		this.outFolderName = testName + "/" + Constants.OUTPUT_FOLDER + "/" + testStepName + "/" + connectorName + "/";
-		this.connectorType = connectorName.split("@")[0] + "@";
+		this.connectorType = connectorName.split("\\.")[0] + ".";
 		
 	}
 
@@ -75,6 +75,8 @@ public class AbstractTestFolder {
 
 
 	public File getInFolder() {
+		File inFoler = new File(getBasePath() + inFolderName);
+		if (!inFoler.exists()) throw new GenericException("Folder " + inFoler + " doesn't exist!");
 		return new File(getBasePath() + inFolderName);
 	}
 

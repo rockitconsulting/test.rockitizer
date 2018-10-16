@@ -11,10 +11,10 @@ public class HTTPConnectorIntegrationTest {
 	@Test
 	public void testPutProceed() {
 		assertNotNull(c);
-		c.setUrlStr("http://localhost:8080/putjson");
-		
-		c.setMethod("PUT");
-		c.setRequest("<xml/>");
+//		c.setUrlStr("http://localhost:8080/putjson");
+//		
+//		c.setMethod("PUT");
+//		c.setRequest("<xml/>");
 		c.proceed();
 		
 	}

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Base64;
 
 import org.apache.commons.io.IOUtils;
@@ -48,20 +47,17 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		try {
 
 			
-			URL url = new URL(urlStr);
+			this.url = new URL(urlStr);
 			HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 			urlConnection.setRequestMethod(this.method);
-			//urlConnection.setPayload(this.file);
-			urlConnection.setRequestProperty("Content-Type", this.contentType);
-			if(  url.getUserInfo() != null && url.getUserInfo().split(":").length==2 ) {
-				LOGGER.debug("Basic authentication usr/pwd >   " + url.getUserInfo());
-				String name = url.getUserInfo().split(":")[0];
-				String password = url.getUserInfo().split(":")[1];
-		        byte[] authEncBytes = Base64.getEncoder().encode( (name + ":" + password).getBytes() );
-		        urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
+			if(this.file!=null) {
+//			  urlConnection.setPayload(this.file);
+			
 			}
 			
-			
+			urlConnection.setRequestProperty("Content-Type", this.contentType);
+			enhanceBasicAuthentication(urlConnection);
+
 			
 	        InputStream is = urlConnection.getInputStream();
 	        String result = IOUtils.toString(is);
@@ -82,8 +78,20 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 	
 		}
+
+
+	private void enhanceBasicAuthentication(HttpURLConnection urlConnection) {
+		
+		if(  url.getUserInfo() != null && url.getUserInfo().split(":").length==2 ) {
+			LOGGER.debug("Basic authentication usr/pwd >   " + url.getUserInfo());
+			String name = url.getUserInfo().split(":")[0];
+			String password = url.getUserInfo().split(":")[1];
+		    byte[] authEncBytes = Base64.getEncoder().encode( (name + ":" + password).getBytes() );
+		    urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
+		}
+	}
 	//( [TODO] eigene Exception werfen!!!!!!!!!
-	public String parseJSON(String result) throws JSONException{
+	protected String parseJSON(String result) throws JSONException{
 		try {
 			return XML.toString(new JSONObject(result));
 //			new JSONObject();
@@ -99,7 +107,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 	@Override
 	public String getId() {
-		return getType() + Constants.FLOW_NAME_SEPARATOR + getName();
+		return getType()  + getName();
 	}
 
 	@Override
@@ -128,16 +136,16 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		throw new GenericException("not yet supported");
 
 	}
-	
-	public void setUrlStr(String urlStr) {
-		this.urlStr = urlStr;
-	}
-	public void setMethod(String method) {
-		this.method = method;
-	}
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
+//	
+//	public void setUrlStr(String urlStr) {
+//		this.urlStr = urlStr;
+//	}
+//	public void setMethod(String method) {
+//		this.method = method;
+//	}
+//	public void setContentType(String contentType) {
+//		this.contentType = contentType;
+//	}
 
 
 }

@@ -84,7 +84,7 @@ public class HTTPGetConnector implements ReadConnector {
 
 	@Override
 	public String getId() {
-		return getType() + Constants.FLOW_NAME_SEPARATOR + getName();
+		return getType() + getName();
 	}
 
 	@Override
