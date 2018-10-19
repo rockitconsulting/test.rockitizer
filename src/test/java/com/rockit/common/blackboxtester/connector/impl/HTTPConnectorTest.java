@@ -2,31 +2,36 @@ package com.rockit.common.blackboxtester.connector.impl;
 
 import static org.junit.Assert.*;
 
+import org.json.JSONException;
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class HTTPConnectorTest {
-	
+
 	HTTPConnector c = new HTTPConnector("HTTP.TESTPOST");
 
 	@Test
 	public void testHTTPConnector() {
 		assertNotNull(c);
 		c.getId();
-		
-	}
 
+	}
 
 	@Test
 	public void testProceed() {
-		fail("Not yet implemented"); 
+		c.proceed();
+		String response = c.getResponse();
+		assertNotNull(response);
 	}
 
 	@Test
 	public void testParseJSON() {
-		//TODO junit
-//		assertEquals("", "");
+		String myJson = "{\"widget\": \"center\"}";
+		String expected = "<widget>center</widget>";
+
+		assertEquals(expected, c.parseJSON(myJson));
+
 	}
 
 	@Test
@@ -36,7 +41,7 @@ public class HTTPConnectorTest {
 
 	@Test
 	public void testGetId() {
-		assertEquals(c.getId(), c.getType()  + c.getName());
+		assertEquals(c.getId(), c.getType() + c.getName());
 	}
 
 	@Test

@@ -5,9 +5,14 @@ import static com.rockit.common.blackboxtester.suite.configuration.Configuration
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -16,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
+import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
@@ -38,60 +44,76 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		this.method = configuration().getPrefixedString(name, Constants.METHOD);
 		this.contentType = configuration().getPrefixedString(name, Constants.CONTENTTYPE);
 	}
-	
-	
+
 	@Override
 	public void proceed() {
 
-
 		try {
 
-			
 			this.url = new URL(urlStr);
-			HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
 			urlConnection.setRequestMethod(this.method);
-			if(this.file!=null) {
-//			  urlConnection.setPayload(this.file);
-			
-			}
-			
 			urlConnection.setRequestProperty("Content-Type", this.contentType);
-			enhanceBasicAuthentication(urlConnection);
-
 			
-	        InputStream is = urlConnection.getInputStream();
-	        String result = IOUtils.toString(is);
+			enhanceBasicAuthentication(urlConnection);
+			enhancePayload(urlConnection);
 
-			setReponse(new StringBuilder().append("<root>").append(parseJSON(result)).append("</root>").toString());
-	         
+			InputStream is = urlConnection.getInputStream();
+			
+//			String mimeType = urlConnection.getContentType();
+			// HTTP Header
+//			urlConnection.getResponseCode();
+//			urlConnection.getContentType();
+			Map<String, List<String>> map = urlConnection.getHeaderFields();
+			
+			for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+//				System.out.println(entry.getKey() + " : " + entry.getValue());
+			}
+
+			String result = IOUtils.toString(is);
+
+			setReponse(new StringBuilder().append(parseJSON(result)).toString());
+
 		} catch (IOException e) {
 
 			LOGGER.error("can not open connection: " + url, e);
 			throw new ConnectorException(e);
 
 		} catch (JSONException je) {
-			//( [TODO] eigene Exception werfen!!!!!!!!!
+			// ( [TODO] eigene Exception werfen!!!!!!!!!
 			LOGGER.error("JSON deserialization Exception", je);
 			throw new ConnectorException(je);
 
 		}
 
-	
+	}
+
+	private void enhancePayload(HttpURLConnection urlConnection) throws UnsupportedEncodingException, IOException {
+		if (this.file != null) {
+			OutputStreamWriter writer = new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8");
+				writer.write(
+						Files.asCharSource(this.file, Charset.defaultCharset()).read()
+		                );
+		    writer.close();
 		}
+	}
+
 
 
 	private void enhanceBasicAuthentication(HttpURLConnection urlConnection) {
-		
-		if(  url.getUserInfo() != null && url.getUserInfo().split(":").length==2 ) {
+
+		if (url.getUserInfo() != null && url.getUserInfo().split(":").length == 2) {
 			LOGGER.debug("Basic authentication usr/pwd >   " + url.getUserInfo());
 			String name = url.getUserInfo().split(":")[0];
 			String password = url.getUserInfo().split(":")[1];
-		    byte[] authEncBytes = Base64.getEncoder().encode( (name + ":" + password).getBytes() );
-		    urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
+			byte[] authEncBytes = Base64.getEncoder().encode((name + ":" + password).getBytes());
+			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
 		}
 	}
-	//( [TODO] eigene Exception werfen!!!!!!!!!
-	protected String parseJSON(String result) throws JSONException{
+
+	// ( [TODO] eigene Exception werfen!!!!!!!!!
+	protected String parseJSON(String result) throws JSONException {
 		try {
 			return XML.toString(new JSONObject(result));
 //			new JSONObject();
@@ -107,7 +129,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 	@Override
 	public String getId() {
-		return getType()  + getName();
+		return getType() + getName();
 	}
 
 	@Override
@@ -146,6 +168,5 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 //	public void setContentType(String contentType) {
 //		this.contentType = contentType;
 //	}
-
 
 }
