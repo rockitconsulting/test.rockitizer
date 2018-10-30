@@ -28,10 +28,11 @@ public final class Constants {
 	public static final String DATASOURCE_USERNAME_KEY = "DATASOURCE.USERNAME";
 	public static final String DATASOURCE_PASSWORD_KEY = "DATASOURCE.PASSWORD";//NOSONAR
 	
-	public static final String URL = 			        "URL";
-	public static final String METHOD = 			    "METHOD";
-	public static final String CONTENTTYPE = 			"CONTENTTYPE";
-	public static final String USERAGENT = 				"USERAGENT";
+	public static final String URL = 			            "URL";
+	public static final String METHOD = 			        "METHOD";
+	public static final String CONTENTTYPE = 			    "CONTENTTYPE";
+	public static final String USERAGENT = 				    "USERAGENT";
+	public static final String SECURITY_TRUSTSTORE_KEY = 	"SECURITY.TRUSTSTORE";
 
 	public static final String SCP_HOST_KEY = 			".HOST";
 	public static final String SCP_USR_KEY = 			".USR";

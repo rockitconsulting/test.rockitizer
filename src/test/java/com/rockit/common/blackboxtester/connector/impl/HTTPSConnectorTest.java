@@ -8,7 +8,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class HTTPSConnectorTest {
 
-	HTTPSConnector c = new HTTPSConnector("HTTPS.TESTPOST");
+	HTTPSConnector c = new HTTPSConnector("HTTPS");
 //	private StringBuilder resultBuilder;
 
 	@Test
@@ -27,7 +27,7 @@ public class HTTPSConnectorTest {
 
 	@Test
 	public void testGetName() {
-		assertEquals("HTTPS.TESTPOST", c.getName());
+		assertEquals("HTTPS", c.getName());
 	}
 
 	@Test
