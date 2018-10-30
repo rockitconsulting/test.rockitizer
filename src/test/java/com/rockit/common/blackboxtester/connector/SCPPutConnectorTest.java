@@ -1,18 +1,14 @@
 package com.rockit.common.blackboxtester.connector;
-import static org.junit.Assert.assertNotNull;
+
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.connector.impl.SCPPutConnector;
-import com.rockit.common.blackboxtester.exceptions.GenericException;
+
 
 public class SCPPutConnectorTest {
 	

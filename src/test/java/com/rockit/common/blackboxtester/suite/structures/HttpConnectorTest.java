@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
+//import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class HttpConnectorTest {
 	

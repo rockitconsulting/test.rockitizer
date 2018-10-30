@@ -44,7 +44,8 @@ public class FileGetConnectorTest {
 		Path SRC = Paths.get(ClassLoader.getSystemResource(tesfilePath).toURI());
 		File srcFile = new File(SRC.toString());
 		assertTrue(srcFile.exists());
-		String remote = Files.toString(srcFile, Charset.defaultCharset());
+//		String remote = Files.toString(srcFile, Charset.defaultCharset());
+		String remote = Files.asCharSource(srcFile, Charset.defaultCharset()).read();
 
 		fileGetConnector.setSrcPath(SRC.toString());
 		fileGetConnector.proceed();
@@ -65,7 +66,8 @@ public class FileGetConnectorTest {
 		}
 
 		
-		String remote = Files.toString(srcFile, Charset.defaultCharset());
+//		String remote = Files.toString(srcFile, Charset.defaultCharset());
+		String remote = Files.asCharSource(srcFile, Charset.defaultCharset()).read();
 
 		fileGetConnector.setSrcPath(SRC.toString());
 		fileGetConnector.proceed();

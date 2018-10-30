@@ -51,7 +51,8 @@ public class FileGetConnector implements ReadConnector {
 					f = FileUtils.listFiles(f).iterator().next();
 				}
 			}
-			response = Files.toString(f, Charset.defaultCharset());
+//			response = Files.toString(f, Charset.defaultCharset());
+			response = Files.asCharSource(f, Charset.defaultCharset()).read();
 			
 		} catch (Exception e) {
 			LOGGER.error("[Connector:"+getName()+"] \t Connector error: " + getType(), e);

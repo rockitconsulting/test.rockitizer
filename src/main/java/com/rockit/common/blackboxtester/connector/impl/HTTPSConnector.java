@@ -14,6 +14,10 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -29,25 +33,32 @@ import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 
-/**
- * @author admin
- *
- */
-public class HTTPConnector implements ReadConnector, WriteConnector {
-	public static final Logger LOGGER = Logger.getLogger(HTTPConnector.class.getName());
+public class HTTPSConnector implements ReadConnector, WriteConnector {
+
+	public static final Logger LOGGER = Logger.getLogger(HTTPSConnector.class.getName());
 
 	private StringBuilder resultBuilder;
-	private String name, urlStr, method, contentType;
+	private String name, urlStr, method, contentType, userAgent;
 
 	private URL url;
 	private File file;
 
-	public HTTPConnector(String name) {
+	public HTTPSConnector(String name) {
 		this.name = name;
 		this.urlStr = configuration().getPrefixedString(name, Constants.URL);
 		this.method = configuration().getPrefixedString(name, Constants.METHOD);
 		this.contentType = configuration().getPrefixedString(name, Constants.CONTENTTYPE);
+		this.userAgent = configuration().getPrefixedString(name, Constants.USERAGENT);
 	}
+	
+	static {
+        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String s, SSLSession sslSession) {
+                return true;
+            }
+        });
+    }
 
 	/* (non-Javadoc)
 	 * 
@@ -59,18 +70,20 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		try {
 
 			this.url = new URL(urlStr);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
+			//System.setProperty("javax.net.ssl.trustStore", "c:\\PROGRA~2\\Java\\jre1.8.0_144\\lib\\security\\mockservice.jks");
+		    System.setProperty("javax.net.ssl.trustStoreType", "jks");
+		    
+			HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection(); 
+			urlConnection.addRequestProperty("User-Agent",this.userAgent);
 			urlConnection.setRequestMethod(this.method);
 			urlConnection.setRequestProperty("Content-Type", this.contentType);
-
+				
 			enhanceBasicAuthentication(urlConnection);
 			enhancePayload(urlConnection);
 
 			InputStream is = urlConnection.getInputStream();
 			String result = IOUtils.toString(is);
 			JSONObject response = new JSONObject();
-			
 			
 			// Header & Body
 			Map<String, List<String>> map = urlConnection.getHeaderFields();
@@ -93,7 +106,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		}
 
 	}
-
+	
 	private JSONArray getJsonArrayBody(String result) throws IOException {
 
 		JSONObject jsonObject = null;
@@ -122,7 +135,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		}
 	}
 
-	private void enhancePayload(HttpURLConnection urlConnection) throws UnsupportedEncodingException, IOException {
+	private void enhancePayload(HttpsURLConnection urlConnection) throws UnsupportedEncodingException, IOException {
 		if (this.file != null) {
 			OutputStreamWriter writer = new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8");
 			writer.write(Files.asCharSource(this.file, Charset.defaultCharset()).read());
@@ -154,7 +167,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 	@Override
 	public String getType() {
-		return Constants.Connectors.HTTP.toString();
+		return Constants.Connectors.HTTPS.toString();
 	}
 
 	@Override

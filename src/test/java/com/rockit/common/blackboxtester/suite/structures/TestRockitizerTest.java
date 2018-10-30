@@ -51,7 +51,7 @@ public class TestRockitizerTest {
 		
 		
 		for (ConnectorFolder connectorFolder: testStepBuilder.getConnectorFolders() ) {
-//			assertTrue(connectors.contains(connectorFolder.getConnectorName()) );
+			assertTrue(connectors.contains(connectorFolder.getConnectorName()) );
 		}
 		
 		//testStepBuilder.writeToConnectors(); //TODO write test
