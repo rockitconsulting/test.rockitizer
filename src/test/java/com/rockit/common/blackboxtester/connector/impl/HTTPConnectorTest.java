@@ -9,7 +9,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class HTTPConnectorTest {
 
-	HTTPConnector c = new HTTPConnector("HTTP.TESTPOST");
+	HTTPConnector_old c = new HTTPConnector_old("HTTP.TESTPOST");
 //	private StringBuilder resultBuilder;
 
 	@Test

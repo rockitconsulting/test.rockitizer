@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class HTTPConnectorIntegrationTest {
 	
-	HTTPConnector c = new HTTPConnector("HTTP.TESTPOST");
+	HTTPConnector_old c = new HTTPConnector_old("HTTP.TESTPOST");
 
 	@Test
 	public void testPutProceed() {

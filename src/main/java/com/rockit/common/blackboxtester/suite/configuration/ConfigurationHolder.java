@@ -105,6 +105,28 @@ public class ConfigurationHolder extends PropertiesConfiguration {
 		
 	}
 	
+	/**
+	 * connector with fallback to default configuration.
+	 * uses the connector name to lookup for the connector specific configuration
+	 * if it not exists, it takes the default one for the connector of exists
+	 * if no configuration available the NoSuchElementException is thrown if enabled
+	 * 
+	 * @param name
+	 * @param key
+	 * @return
+	 */
+	public boolean getPrefixedBoolean(String name, String key) {
+		boolean custom = false;
+		try {
+			custom = super.getBoolean(name + '.'+ key);
+		} catch (NoSuchElementException nse) {
+			LOGGER.trace("getPrefixedBoolean(" + name + '.'+ key + ") goes to fallback configuration ", nse  );
+			custom = super.getBoolean(key);
+		}
+		return custom;
+		
+	}
+	
 	
 	
 	@Override

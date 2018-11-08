@@ -1,6 +1,6 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
-import java.util.List;
+import java.util.List;	
 
 import org.apache.log4j.Logger;
 

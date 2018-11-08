@@ -60,7 +60,7 @@ public class XMLFileAssertion extends AbstractAssertion {
 			File replayFile = new File(replayFolder + File.separator + relativePath);
 
 			if (recordFile.isFile() && replayFile.isFile()) {
-				LOGGER.debug("xmlasserting " + recordFile.getPath()  + " with "+ replayFile.getPath() );
+				LOGGER.debug("xmlasserting " + recordFile.getPath()  + " with " + replayFile.getPath() );
 
 				
 				try { 

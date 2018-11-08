@@ -14,6 +14,10 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -29,16 +33,14 @@ import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 
-/**
- * @author admin
- *
- */
 public class HTTPConnector implements ReadConnector, WriteConnector {
+
 	public static final Logger LOGGER = Logger.getLogger(HTTPConnector.class.getName());
 
 	private StringBuilder resultBuilder;
-	private String name, urlStr, method, contentType;
+	private String name, urlStr, method, contentType, userAgent, trustStore;
 
+	private Integer connectTimeOut;
 	private URL url;
 	private File file;
 
@@ -47,37 +49,69 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		this.urlStr = configuration().getPrefixedString(name, Constants.URL);
 		this.method = configuration().getPrefixedString(name, Constants.METHOD);
 		this.contentType = configuration().getPrefixedString(name, Constants.CONTENTTYPE);
+		this.userAgent = configuration().getPrefixedString(name, Constants.USERAGENT);
+		this.trustStore = configuration().getPrefixedString(name, Constants.SECURITY_TRUSTSTORE_KEY);
+		this.connectTimeOut = configuration().getPrefixedInt(name, Constants.CONNECTTIMEOUT);
 	}
 
-	/* (non-Javadoc)
+	static {
+		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+			@Override
+			public boolean verify(String s, SSLSession sslSession) {
+				return true;
+			}
+		});
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * 
 	 * @see com.rockit.common.blackboxtester.connector.Connector#proceed()
 	 */
 	@Override
 	public void proceed() {
- 
+		HttpURLConnection urlConnection = null;
 		try {
 
 			this.url = new URL(urlStr);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
+			if (this.trustStore != null) {
+				System.setProperty("javax.net.ssl.trustStore", this.trustStore);
+			}
+			System.setProperty("javax.net.ssl.trustStoreType", "jks");
+
+			if (urlStr.startsWith("https://")) {
+				urlConnection = (HttpsURLConnection) url.openConnection();
+			} else {
+				urlConnection = (HttpURLConnection) url.openConnection();
+			}
+
+			urlConnection.setRequestProperty("User-Agent", this.userAgent);
 			urlConnection.setRequestMethod(this.method);
 			urlConnection.setRequestProperty("Content-Type", this.contentType);
+			if (!this.method.equalsIgnoreCase("GET")) {
+				urlConnection.setDoOutput(true);
+			}
+			if (this.connectTimeOut > 0) {
+				urlConnection.setConnectTimeout(this.connectTimeOut);
+			}
 
 			enhanceBasicAuthentication(urlConnection);
-			enhancePayload(urlConnection);
+			if (urlConnection.getDoOutput()) {
+				enhancePayload((HttpsURLConnection) urlConnection);
+			}
 
 			InputStream is = urlConnection.getInputStream();
 			String result = IOUtils.toString(is);
 			JSONObject response = new JSONObject();
-			
-			
+
 			// Header & Body
 			Map<String, List<String>> map = urlConnection.getHeaderFields();
 			ResponseHeader newResonseHeader = new ResponseHeader(map);
 			JSONObject responseHeader = newResonseHeader.getResponsHeader();
-			response.put("response", new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
-			
+			response.put("response",
+					new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
+
 			setReponse(XML.toString(response));
 
 		} catch (IOException e) {
@@ -90,6 +124,12 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			LOGGER.error("JSON deserialization Exception", je);
 			throw new ConnectorException(je);
 
+		} finally {
+			try {
+				urlConnection.disconnect();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 
 	}
@@ -112,7 +152,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 				return newJsonArray;
 
 			} catch (JSONException e) {
-				
+
 				jsonObject = XML.toJSONObject(result);
 				JSONArray newJsonArray = new JSONArray(jsonObject);
 				return newJsonArray;
@@ -140,8 +180,6 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
 		}
 	}
-
-	
 
 	public String getName() {
 		return name;
