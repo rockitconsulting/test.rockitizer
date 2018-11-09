@@ -5,10 +5,12 @@ public class GenericException extends RuntimeException {
 	private static final long serialVersionUID = 1L;	
 
 	public GenericException(Exception e) {
+		super(e);
 		throw this;
 	}
 
 	public GenericException(String msg) {
+	    super(msg);
 		throw this;
 	}
 	

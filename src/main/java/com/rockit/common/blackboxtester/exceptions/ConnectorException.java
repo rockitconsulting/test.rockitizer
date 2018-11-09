@@ -5,10 +5,13 @@ public class ConnectorException extends RuntimeException {
 	
 
 	public ConnectorException(Exception e) {
+		super(e);
+
 		throw this;
 	}
 
 	public ConnectorException(String msg) {
+		super(msg);
 		throw this;
 	}
 
