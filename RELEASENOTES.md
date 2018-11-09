@@ -1,5 +1,8 @@
 # 0.0.7 Release
 	- The HTTPGetConnector now also supports JSONArray
+	- The HTTPConnector has been extended to GET, PUT, POST and DELETE.
+	- The header is analyzed and set in response
+	- All methods can be used with https
 	
 # 0.0.6 Release  
 	- The keys @ between the connectors and the configuration_alias was passed through "." replaced

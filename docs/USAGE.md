@@ -73,6 +73,7 @@ All Put connectors submiting the payloads may have the placeholders within. Plea
 	- DBPUT
 	- DBGET
 	- SCPPUT
+	- HTTPConector (GET, PUT, POST and DELETE) also for https
 
 
 
@@ -177,6 +178,39 @@ config.properties:
 
     HTTPGET.<TESTSTEP.FOLDER>=http://google.com/get
 	  
+### HTTPConnector (new extended connector)
+Description: gets http/https response as xml
+
+	Testplan folder: 
+        
+	HTTP.GET
+	HTTP.PUT
+	HTTP.POST
+	HTTP.DELETE
+	
+config.properties:
+	
+	HTTP.GET.URL=https://reqres.in/api/users?page=2
+	HTTP.GET.METHOD=GET
+	HTTP.GET.CONTENTTYPE=application/json
+	HTTP.GET.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+	HTTP.GET.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+	HTTP.GET.CONNECTTIMEOUT=500000
+	
+	HTTP.POST.URL=https://reqres.in/api/users?page=2
+	HTTP.POST.METHOD=POST
+	HTTP.POST.CONTENTTYPE=application/json
+	HTTP.POST.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+	HTTP.POST.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+	HTTP.POST.CONNECTTIMEOUT=500000
+
+Important for https:
+The certificate must be saved and then loaded into the jre keystore
+```
+{jre folder}bin\keytool -importcert -file C:\{folder you have saved the cert}\sni96286cloudflaresslcom.crt -keystore  {filename}.jks -alias "{your alias}"
+```
+default password is "changeit"
+Then copy the path to the config.properties (see example)
 
 
 ### SCPPut
@@ -318,6 +352,27 @@ DBPUT.CRM.PREP.DATASOURCE.URL=${SECONDARY.DATASOURCE.URL}
 ###############################
 #HTTPGET@MYHTTPCONNECTOR=http://google.com/getz
 
+HTTP.GET.URL=https://reqres.in/api/users?page=2
+HTTP.GET.METHOD=GET
+HTTP.GET.CONTENTTYPE=application/json
+HTTP.GET.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+HTTP.GET.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+HTTP.GET.CONNECTTIMEOUT=500000
+
+HTTP.POST.URL=https://reqres.in/api/users?page=2
+HTTP.POST.METHOD=POST
+HTTP.POST.CONTENTTYPE=application/json
+HTTP.POST.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+HTTP.POST.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+HTTP.POST.CONNECTTIMEOUT=500000
+
+HTTP.GET2.URL=http://www.mocky.io/v2/5be42bf02f00006600d9f3a2
+HTTP.GET2.METHOD=GET
+HTTP.GET2.CONTENTTYPE=application/json
+HTTP.GET2.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+HTTP.GET2.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+HTTP.GET2.CONNECTTIMEOUT=500000
+
 FILEDEL.PRECLEANOUT.PATH=${FILEDEL.PRECLEANOUT.PATH}
 FILEGET.TARGETFOLDER.PATH=${FILEGET.TARGETFOLDER.PATH}
 
@@ -367,13 +422,39 @@ SECONDARY.DATASOURCE.URL=jdbc:db2://localhost:50000/db2crm
 FILEDEL.PRECLEANOUT.PATH=C:\\tmp\\testfolder\\testcase
 FILEGET.TARGETFOLDER.PATH=C:\\tmp\\testfolder\\testcase
 
+###############################
+#   HTTP Connections
+###############################
+
+HTTP.GET.URL=https://reqres.in/api/users?page=2
+HTTP.GET.METHOD=GET
+HTTP.GET.CONTENTTYPE=application/json
+HTTP.GET.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+HTTP.GET.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+HTTP.GET.CONNECTTIMEOUT=500000
+
+HTTP.POST.URL=https://reqres.in/api/users?page=2
+HTTP.POST.METHOD=POST
+HTTP.POST.CONTENTTYPE=application/json
+HTTP.POST.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+HTTP.POST.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+HTTP.POST.CONNECTTIMEOUT=500000
+
+HTTP.GET2.URL=http://www.mocky.io/v2/5be42bf02f00006600d9f3a2
+HTTP.GET2.METHOD=GET
+HTTP.GET2.CONTENTTYPE=application/json
+HTTP.GET2.USERAGENT= Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+HTTP.GET2.SECURITY.TRUSTSTORE=c:\\temp\\mockservice.jks
+HTTP.GET2.CONNECTTIMEOUT=500000
+
 ```
 
 ### <a name="testplan"></a> Creating the testplan
 
 #### Supported connectors
 - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `HTTPGET`, `SCPPUT` connectors available
- 	
+- `HTTP` - `GET` / `PUT` / `POST` / `DELETE` also for https
+  	
 1. **Location**: The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter
 2. **Test plan**: has one or more test steps (subfolders) with arbitrary names. The `0BEFORE` is an optional and will be automatically executed as first in order to prepare the environment for the test, i.e. clean the DB. JUnit starter submits the step to execution. 
 3. **Test step**:  has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>.<ID>`. The `ID` will be looked up in configuration. 
@@ -416,6 +497,29 @@ public class SplitCustomerTest extends AbstractTestWrapper {
 }
 ```
 
+Example testcase new HTTPConnector 
+
+```java
+public class HTTPRestClientTest extends AbstractTestWrapper {
+	public static Logger logger = Logger.getLogger(HTTPRestClientTest.class.getName());
+	public TestBuilder testBuilder = newTestBuilderFor(HTTPRestClientTest.class);
+
+	@Test
+	public void allInOneTest() throws Exception {
+
+		testBuilder.addStep("a001MakePost").execute();
+
+		testBuilder.addAssertion(
+
+				new XMLFileAssertion("a001MakePost").withNodeMatcher(ElementSelectors.byNameAndText)
+						.ignoreAttrs(ImmutableList.of("number"))
+						.ignore(ImmutableList.of("CF-RAY", "ETag", "Access-Control-Allow-Origin", "Connection",
+								"Set-Cookie", "Date", "Expect-CT", "X-Powered-By", "createdAt", "id"))
+						.checkForSimilar());
+
+	}
+}
+```
 ---
 [Back to Readme](../README.md)
 
