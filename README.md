@@ -15,6 +15,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - extendable connector/plugin architecture
   - `Record`/`Replay with post Assertion` Modes
   - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `HTTPGET`, `SCPPUT` connectors available
+  - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` also for HTTPS
   - `DB`, `File`, `XMLUnit` assertion plugins
   - regression testing and continuous integration, including surefire reports
   
