@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.rockit</groupId>
@@ -41,15 +42,24 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.8-SNAPSHOT</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
-	    <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5</version>
-            <type>jar</type>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+			<type>jar</type>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -71,9 +81,9 @@
 			<version>2.4</version>
 		</dependency>
 		<dependency>
-		    <groupId>commons-httpclient</groupId>
-		    <artifactId>commons-httpclient</artifactId>
-		    <version>3.1</version>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
 		</dependency>
 
 		<dependency>
@@ -127,9 +137,9 @@
 			<version>0.0.3</version>
 		</dependency>
 
-<!-- Non-free libs start  -->
+		<!-- Non-free libs start -->
 
-	<!-- Non-free MQ start -->
+		<!-- Non-free MQ start -->
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>mq</artifactId>
@@ -160,9 +170,9 @@
 			<artifactId>pcf</artifactId>
 			<version>9.3</version>
 		</dependency>
-	<!-- Non-free MQ end -->	
-	
-	<!-- Non-free DB start -->	
+		<!-- Non-free MQ end -->
+
+		<!-- Non-free DB start -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
@@ -173,10 +183,10 @@
 			<artifactId>db2jcc4</artifactId>
 			<version>11.1</version>
 		</dependency>
-	<!-- Non-free MQ end -->	
-	
-<!-- Non-free libs end  -->
-		
-		
+		<!-- Non-free MQ end -->
+
+		<!-- Non-free libs end -->
+
+
 	</dependencies>
 </project>
