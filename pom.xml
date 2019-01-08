@@ -7,11 +7,11 @@
 	<distributionManagement>
 		<repository>
 			<id>rockit-release</id>
-			<url>http://jenkins:8081/artifactory/libs-release-local</url>
+			<url>http://poiradar.rockit.local:8082/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>rockit-snapshot</id>
-			<url>http://jenkins:8081/artifactory/libs-snapshot-local</url>
+			<url>http://poiradar.rockit.local:8082/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 
 	</distributionManagement>
@@ -89,7 +89,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>26.0-jre</version>
+			<version>27.0-jre</version>
 		</dependency><!-- 19.0-rc2 -->
 		<dependency>
 			<groupId>log4j</groupId>

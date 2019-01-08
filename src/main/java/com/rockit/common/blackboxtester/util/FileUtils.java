@@ -22,6 +22,11 @@ public class FileUtils {
 						public boolean apply(File input) {
 							return input.isDirectory() && input.getParentFile().equals(root);
 						}
+						
+						@Override
+						public boolean test(File input) {
+							return apply(input);
+						}
 				});	
 	}
 
@@ -32,6 +37,11 @@ public class FileUtils {
 						public boolean apply(File input) {
 							return input.isFile() && input.getParentFile().equals(root);
 						}
+						@Override
+						public boolean test(File input) {
+							return apply(input);
+						}
+						
 				});
 		
 	}
