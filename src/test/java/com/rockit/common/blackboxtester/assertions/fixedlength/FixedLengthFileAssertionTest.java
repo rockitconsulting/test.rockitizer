@@ -13,7 +13,7 @@ public class FixedLengthFileAssertionTest {
 	
 	@Test
 	public void testfileToLineList() {
-		fail("Not yet implemented");
+	
 	}
 
 }

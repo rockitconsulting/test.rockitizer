@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class HTTPConnectorIntegrationTest {
+public class HTTPConnectorIntegration {
 	
 	HTTPConnector_old c = new HTTPConnector_old("HTTP.TESTPOST");
 
