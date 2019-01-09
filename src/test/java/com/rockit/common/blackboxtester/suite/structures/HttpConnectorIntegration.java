@@ -10,9 +10,9 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 //import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-public class HttpConnectorTest {
+public class HttpConnectorIntegration {
 	
-	public static final Logger LOGGER = Logger.getLogger(HttpConnectorTest.class.getName());
+	public static final Logger LOGGER = Logger.getLogger(HttpConnectorIntegration.class.getName());
 	
 	List<String> connectors = ImmutableList.of("HTTP.TESTPOST");
 	
@@ -21,7 +21,7 @@ public class HttpConnectorTest {
 	@Test
 	public void testAddStep(){
 		
-		TestBuilder testBuilder = new TestBuilder(HttpConnectorTest.class);
+		TestBuilder testBuilder = new TestBuilder(HttpConnectorIntegration.class);
 		testBuilder.addStep("a001DoHttpTests").execute();
 		//TestStepBuilder testStepBuilder = testBuilder.addStep("a001DoHttpTests");
 

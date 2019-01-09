@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class AbstractTestFolderTest {
@@ -60,7 +61,7 @@ public class AbstractTestFolderTest {
 		assertTrue("RuntimeMonitoringTest".equals( asf.getTestName() ));
 		assertTrue(Constants.BEFORE_FOLDER.equals( asf.getTestStepName() ));
 		assertTrue("MQPUT.OUTPUT.TEST".equals( asf.getConnectorName() ));
-		assertTrue("MQOUT.".equals( asf.getConnectorType() ));
+		assertTrue("MQPUT. equals " +  asf.getConnectorType() , "MQPUT.".equals( asf.getConnectorType() ));
 		
 		
 		
@@ -85,7 +86,14 @@ public class AbstractTestFolderTest {
 	public void testGetInFolder() {
 		
 		AbstractTestFolder asf =  new AbstractTestFolder(TEST_FOLDER);
-		assertTrue( asf.getInFolder().toString().endsWith(TEST_FOLDER));
+		try {
+			assertTrue( asf.getInFolder().toString().endsWith(TEST_FOLDER));
+		} catch (GenericException ge) {
+			assertTrue( ge.getMessage().contains((TEST_FOLDER)));
+			
+		}
+		
+
 	}
 
 	@Test
