@@ -9,9 +9,9 @@ import com.rockit.common.blackboxtester.assertions.XMLFileAssertion;
 import com.rockit.common.blackboxtester.suite.structures.TestBuilder;
 import com.rockit.common.blackboxtester.wrapper.AbstractTestWrapper;
 
-public class HTTPRestClientTest extends AbstractTestWrapper {
-	public static Logger logger = Logger.getLogger(HTTPRestClientTest.class.getName());
-	public TestBuilder testBuilder = newTestBuilderFor(HTTPRestClientTest.class);
+public class HTTPRestClientIntegration extends AbstractTestWrapper {
+	public static Logger logger = Logger.getLogger(HTTPRestClientIntegration.class.getName());
+	public TestBuilder testBuilder = newTestBuilderFor(HTTPRestClientIntegration.class);
 
 	@Test
 	public void allInOneTest() throws Exception {
