@@ -42,10 +42,12 @@ public class ConnectorFolder extends AbstractTestFolder {
 				((WriteConnector) connector).setRequest(input);
 				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getName() + "] - Writing ...");
 				connector.proceed();
-				saveResponse(connector, input.getName());
+				if (connector instanceof ReadConnector) {
+					saveResponse(connector, input.getName());
+				}
 			}
 
-		} else  {
+		} else {
 			connector.proceed();
 			saveResponse(connector, "0.txt");
 		}
