@@ -49,9 +49,10 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 		} else {
 			connector.proceed();
-			saveResponse(connector, "0.txt");
+			if (connector instanceof ReadConnector) {
+				saveResponse(connector, "0.txt");
+			}
 		}
-
 	}
 
 	private void saveResponses(Connector connector) {
