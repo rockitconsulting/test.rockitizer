@@ -97,22 +97,30 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			}
 
 			enhanceBasicAuthentication(urlConnection);
-			if (urlConnection.getDoOutput()) {
-				enhancePayload((HttpsURLConnection) urlConnection);
+			if ( urlConnection.getDoOutput()) {
+				enhancePayload(urlConnection);
 			}
 
 			InputStream is = urlConnection.getInputStream();
 			String result = IOUtils.toString(is);
-			JSONObject response = new JSONObject();
+			
+			if(this.contentType.equalsIgnoreCase(CONTENT_TYPE_XML)) {
+				setReponse(result);
+			} else {
+				
+				
+				JSONObject response = new JSONObject();
 
-			// Header & Body
-			Map<String, List<String>> map = urlConnection.getHeaderFields();
-			ResponseHeader newResonseHeader = new ResponseHeader(map);
-			JSONObject responseHeader = newResonseHeader.getResponsHeader();
-			response.put("response",
-					new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
+				// Header & Body
+				Map<String, List<String>> map = urlConnection.getHeaderFields();
+				ResponseHeader newResonseHeader = new ResponseHeader(map);
+				JSONObject responseHeader = newResonseHeader.getResponsHeader();
+				response.put("response",
+						new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
 
-			setReponse(XML.toString(response));
+				setReponse(XML.toString(response));
+				
+			}
 
 		} catch (IOException e) {
 
