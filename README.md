@@ -12,12 +12,13 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
 ## <a name="corefeatures"></a> Core features: 
   - declarative `test-plan` concept, [see details](#declarativetestplan)
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
+  - environment dependent configuration for connectors and payloads
   - extendable connector/plugin architecture
   - `Record`/`Replay with post Assertion` Modes
   - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `HTTPGET`, `SCPPUT` connectors available
-  - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` also for HTTPS
+  - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` enabled for HTTPS, SOAP, REST
   - `DB`, `File`, `XMLUnit` assertion plugins
-  - regression testing and continuous integration, including surefire reports
+  - regression testing and continuous integration enabled, including surefire reports
   
 ## Skill level
   Basic understanding of following Java frameworks: 
