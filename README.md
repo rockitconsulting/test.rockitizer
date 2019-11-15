@@ -17,7 +17,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   - `Record`/`Replay with post Assertion` Modes
   - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `FILEGET`/`FILEPUT`/`FILEDEL`, `SCPPUT`/`SCPGET` connectors available
   - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` connectors available and enabled for HTTPS, SOAP, REST
-  - `DB`, `File`, `XMLUnit` assertion plugins
+  - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
   - regression testing and continuous integration enabled, including surefire reports
   
 ## Skill level
