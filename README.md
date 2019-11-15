@@ -22,7 +22,7 @@ Furthermore, the framework enables the "test first" approach, thus developing ag
   
 ## Skill level
   Basic understanding of following Java frameworks: 
-  - Maven - used for build and configuration of runtime and used in example for test project. 
+  - Maven - used for test project build/configuration/packaging purposes 
   - Junit - used as test starter
   - XMLUnit - used for assertions
   
