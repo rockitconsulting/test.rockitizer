@@ -7,12 +7,14 @@ Easy-to-use junit based framework for the testing of complex integration scenari
 
 Furthermore, the framework enables the "test first" approach, thus developing against pre-defined "target" interface until the replay snapshot matches.
 
+Test.RockITizer covers with its connectors the majority of protocols in integration area, making obsolete the usage of external tools like soap-ui, db explorer, mq explorer, etc., thus improving productivity of overall development process.
+
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
 ## <a name="corefeatures"></a> Core features: 
+  - environment dependent configuration for connectors and payloads (once written runs everywhere: Local/DEV/INT)
   - declarative `test-plan` concept, [see details](#declarativetestplan)
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
-  - environment dependent configuration for connectors and payloads
   - extendable connector/plugin architecture
   - `Record`/`Replay with post Assertion` Modes
   - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `FILEGET`/`FILEPUT`/`FILEDEL`, `SCPPUT`/`SCPGET` connectors available
