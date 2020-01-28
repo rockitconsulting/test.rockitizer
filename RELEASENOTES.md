@@ -1,3 +1,6 @@
+# 0.0.8 Release
+	- migration to Gradle
+
 # 0.0.7 Release
 	- The HTTPGetConnector now also supports JSONArray
 	- The HTTPConnector has been extended to GET, PUT, POST and DELETE.
