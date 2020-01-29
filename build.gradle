@@ -4,7 +4,9 @@ plugins {
 }
 
 repositories {
+  	
     mavenLocal()
+    mavenCentral()
     maven {
         url = 'http://docker.rockit.local:8481/artifactory/libs-release'
     }
@@ -47,8 +49,16 @@ dependencies {
     compile 'com.ibm.db2:db2jcc4:11.1'
 }
 
-group = 'com.rockit'
+
+
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+
+archivesBaseName='test.rockitizer'
+group = 'io.github.rockitconsulting'
 version = '0.0.8-mq9-SNAPSHOT'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-
