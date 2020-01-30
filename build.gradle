@@ -49,6 +49,6 @@ dependencies {
 
 archivesBaseName='test.rockitizer'
 group = 'io.github.rockitconsulting'
-version = '0.0.8'
+version = '0.0.9-SNAPSHOT'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
