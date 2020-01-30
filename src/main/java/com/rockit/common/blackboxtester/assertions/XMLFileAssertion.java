@@ -41,8 +41,9 @@ public class XMLFileAssertion extends AbstractAssertion {
 	}
 	
 	/** 
-	 * @Deprecated use the XMLFileAssertion("step/connector")
+	 *  use the XMLFileAssertion("step/connector")
 	 */
+	@Deprecated
 	public XMLFileAssertion(String recordPath, String replayPath, String step) {
 		setRecordPath(replayPath);
 		setReplayPath(replayPath);

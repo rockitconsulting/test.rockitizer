@@ -2,7 +2,8 @@
 /bin/
 /build/
 /.gradle/
-
+gradle.properties
+yefym-sonartype-secret.asc
 *.classpath
 /.project
 *.prefs
@@ -11,3 +12,4 @@ examples/splitcustomer.rockitizer/.project
 .gradle/5.0/fileHashes/fileHashes.bin
 .gradle/5.0/fileHashes/fileHashes.bin
 .gradle/5.0/fileHashes/fileHashes.lock
+yefym-sonartype-secret.gpg
