@@ -15,8 +15,13 @@ repositories {
 }
 
 test {
-    exclude '**/*Integration.class'
-    exclude '**/*IT.class'
+      description = 'Run all SmallTests'
+      jvmArgs '-XX:MaxPermSize=256m'
+      minHeapSize = "512m" 
+      maxHeapSize = "512m"
+      include "**/*Test.class"
+      exclude '**/*Integration.class'
+      exclude '**/*IT.class'
 }
 
 dependencies {
