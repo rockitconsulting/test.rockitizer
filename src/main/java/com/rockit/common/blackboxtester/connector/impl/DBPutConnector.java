@@ -14,8 +14,8 @@ import org.apache.log4j.Logger;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
-import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
+import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 
 /**

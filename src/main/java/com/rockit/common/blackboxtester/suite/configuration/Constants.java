@@ -45,7 +45,7 @@ public final class Constants {
 	
 	public static final String REPLAY_PATH = "/target/replay/";
 	public static final String RECORD_PATH = "/src/test/resources/";
-	public static final String MODE_KEY = "SUITE.MODE";
+	public static final String MODE_KEY = "mode";
 
 
 	public static  enum Connectors {

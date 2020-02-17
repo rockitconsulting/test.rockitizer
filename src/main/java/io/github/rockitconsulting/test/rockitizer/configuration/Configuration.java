@@ -19,6 +19,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 /**
  * Configuration singleton accessable over primary
  * {@link Configuration#configuration()} and junit helper
@@ -37,7 +39,7 @@ public class Configuration {
 	static TestCasesHolderCLI tchCLI = new TestCasesHolderCLI();
 
 	
-	RunModeTypes runMode = RunModeTypes.RECORD;
+	RunModeTypes runMode = RunModeTypes.REPLAY;
 	
 	static ResourcesHolder rh;
 	static TestCasesHolder tch;
@@ -60,10 +62,28 @@ public class Configuration {
 			log.info("#######################################################################################################################");
 			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchCLI.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhCLI.contextAsString());
-			log.info("#######################################################################################################################");
 			rh = rhCLI.readResources();
 			tch = tchCLI.readResources();
+			
+			
+			if ( System.getProperty(Constants.MODE_KEY)!= null  && 
+					(System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.RECORD.name() ) ) )   {
+
+				if ( System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("replay") ) {
+					setRunMode(RunModeTypes.REPLAY);
+
+				} else  {
+					setRunMode(RunModeTypes.RECORD);
+				}
+				
+				log.info("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY) ); 
+				
+			} else {
+				log.warn("running in default " + runMode+ " mode, to override use the cmd: -D"+Constants.MODE_KEY+"=record " );
+			}
+			
 			//TODO add complete validation here
+			log.info("#######################################################################################################################");
 			
 		} catch (IOException e) {
 			log.fatal("configuration initialization exception", e);

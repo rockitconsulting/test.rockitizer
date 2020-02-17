@@ -3,6 +3,7 @@ package com.rockit.common.blackboxtester.connector.impl;
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
