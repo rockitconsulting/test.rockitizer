@@ -1,5 +1,9 @@
 package com.rockit.common.blackboxtester.util;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,6 +20,7 @@ public class DatabaseConnection {
 	
 	protected Connection connection;
 	
+	@Deprecated
 	public DatabaseConnection(final String dbUrl, final String dbUser, final String dbPwd) {
 		this.dbUrl = dbUrl;
 		this.dbUser = dbUser;
@@ -24,6 +29,16 @@ public class DatabaseConnection {
 	}
 	
 	
+	public DatabaseConnection(String id) {
+		DBConnector dbConCfg = (DBConnector) configuration().getConnectorById(id);
+		DBDataSource ds = configuration().getDBDataSourceByConnector(dbConCfg);
+		
+		this.dbUrl = ds.getUrl();
+		this.dbUser = ds.getUser();
+		this.dbPwd = ds.getPassword();
+	}
+
+
 	protected void createDatabaseConnection() {
 
 		try {

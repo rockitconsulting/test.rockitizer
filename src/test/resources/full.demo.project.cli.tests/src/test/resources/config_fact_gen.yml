@@ -1,0 +1,15 @@
+suiteMode: record
+dataSources:
+- id: oracleDB
+  url: jdbc:db2://localhost:50000/ROCKIT
+  type: DB
+  username: admin
+  password: admin
+- id: rockitMQ
+  name: QM1
+  type: MQ
+  port: 1414
+  host: localhost
+  channel: SYSTEM.BKR.CONFIG
+  username: admin
+  password: admin

@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:book="http://www.cleverbuilder.com/BookService/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <book:AddBook>
+         <Title>TestBook</Title>
+         <Author>Test Author</Author>
+      </book:AddBook>
+   </soapenv:Body>
+</soapenv:Envelope>

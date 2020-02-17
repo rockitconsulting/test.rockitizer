@@ -1,6 +1,11 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+
+
+
+
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 
 import java.io.StringWriter;
 import java.sql.SQLException;
@@ -16,22 +21,23 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 import com.sun.rowset.WebRowSetImpl;
 
-@SuppressWarnings("restriction")
+
 public class DBGetConnector extends DatabaseConnection implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(DBGetConnector.class.getName());
 
+	/**
+	 * Connector/Folder name/id 
+	 */
 	private String name;
 	private StringBuilder resultBuilder;
 	private String sqlQuery;
 
 
-	public DBGetConnector(String name) {
-		super(configuration().getPrefixedString(name, Constants.DATASOURCE_URL_KEY),
-				configuration().getPrefixedString(name, Constants.DATASOURCE_USERNAME_KEY),
-				configuration().getPrefixedString(name, Constants.DATASOURCE_PASSWORD_KEY));
-
-		this.name = name;
-		this.sqlQuery = configuration().getString(this.name);
+	public DBGetConnector(String id) {
+		super(id);
+		DBConnector dbConCfg = (DBConnector) configuration().getConnectorById(id);
+		this.name = id;
+		this.sqlQuery = dbConCfg.getQuery();
 
 	}
 
@@ -90,7 +96,7 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 
 		} catch (final SQLException e) {
 
-			LOGGER.error("Database access eerror or other errors. \n" + e);
+			LOGGER.error("Database access error or other errors. \n" + e);
 			throw new GenericException(e);
 		}
 

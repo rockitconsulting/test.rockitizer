@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -10,7 +11,6 @@ import org.apache.log4j.Logger;
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.util.FileUtils;
 
@@ -22,21 +22,16 @@ public class FileGetConnector implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(FileGetConnector.class.getName());
 
 	private String name;
-
-
 	private String srcPath;
-
 	private String response;
-
-
-
 
 	/**
 	 * @param name  - FILEPut and key (connectorFolder)
 	 */
-	public FileGetConnector(String name){
-		this.name = name;
-		this.srcPath = configuration().getString(this.name + Constants.FILE_PATH_KEY);
+	public FileGetConnector(String id){
+		this.name = id;
+		FileConnector cfg = (FileConnector) configuration().getConnectorById(id);
+		this.srcPath = cfg.getPath();
 	}
 	
 

@@ -1,0 +1,206 @@
+suiteMode: record
+testCases:
+- testCaseName: FILEinFILEOutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    fileConnectors:
+    - connectorName: FILEDEL.OUT.FILE2FILE
+      type: FILEDEL
+      path: '@path@'
+  - testStepName: a001FILEPutMessage
+    fileConnectors:
+    - connectorName: FILEPUT.IN.FILE2FILE
+      type: FILEPUT
+      path: '@path@'
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002FILEGetMessage
+    fileConnectors:
+    - connectorName: FILEGET.OUT.FILE2FILE
+      type: FILEGET
+      path: '@path@'
+- testCaseName: FILEinMQOutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    - connectorName: MQGET.OUT.FILE2MQ
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+  - testStepName: a001FILEPutMessage
+    fileConnectors:
+    - connectorName: FILEPUT.IN.FILE2MQ
+      type: FILEPUT
+      path: '@path@'
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002MQGetError
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+  - testStepName: a002MQGetMessage
+    mqConnectors:
+    - connectorName: MQGET.OUT.FILE2MQ
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+- testCaseName: JSONwithDatabaseTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    dbConnectors:
+    - connectorName: DBPUT.CLAEN
+      type: DBPUT
+      dsRefId: defaultDB
+      payloads:
+      - fileName: cleanBookStore.sql
+  - testStepName: a001JSONPutMessage
+    httpConnectors:
+    - connectorName: HTTP.JADDBOOK
+      url: '@https://default@'
+      type: HTTP
+      method: '@POST|GET|PUT@'
+      timeout: 500000
+      dsRefId: defaultKS
+      userAgent: '@GENERATED!!!! Mozilla/5.0@'
+      contentType: '@application/xml | | |@'
+      payloads:
+      - fileName: testinput.json
+  - testStepName: a002DBGetError
+  - testStepName: a002DBGETMessage
+    dbConnectors:
+    - connectorName: DBGET.GETBOOKS
+      type: DBGET
+      dsRefId: defaultDB
+- testCaseName: MQinDBOutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    - connectorName: MQGET.IN.MQ2DB
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    dbConnectors:
+    - connectorName: DBPUT.CLAEN
+      type: DBPUT
+      dsRefId: defaultDB
+      payloads:
+      - fileName: cleanBookStore.sql
+  - testStepName: a001MQPutMessage
+    mqConnectors:
+    - connectorName: MQPUT.IN.MQ2DB
+      dsRefId: defaultMQ
+      payloads:
+      - fileName: testinput.xml
+      queueName: '@defaultQueue@'
+      type: MQPUT
+  - testStepName: a002DBGETMessage
+    dbConnectors:
+    - connectorName: DBGET.GETBOOKS
+      type: DBGET
+      dsRefId: defaultDB
+  - testStepName: a002MQGetError
+  - testStepName: a003MQGetError
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+- testCaseName: MQinMQoutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    - connectorName: MQGET.IN.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    - connectorName: MQGET.OUT.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+  - testStepName: a001MQPutMessage
+    mqConnectors:
+    - connectorName: MQPUT.IN.MQ2MQ
+      dsRefId: defaultMQ
+      payloads:
+      - fileName: testinput.xml
+      queueName: '@defaultQueue@'
+      type: MQPUT
+  - testStepName: a002MQGetError
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+  - testStepName: a002MQGetMessage
+    mqConnectors:
+    - connectorName: MQGET.OUT.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+- testCaseName: WSwithDatabaseTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: '@defaultQueue@'
+      type: MQGET
+    dbConnectors:
+    - connectorName: DBPUT.CLAEN
+      type: DBPUT
+      dsRefId: defaultDB
+      payloads:
+      - fileName: cleanBookStore.sql
+  - testStepName: a001WSPutMessage
+    httpConnectors:
+    - connectorName: HTTP.ADDBOOK
+      url: '@https://default@'
+      type: HTTP
+      method: '@POST|GET|PUT@'
+      timeout: 500000
+      dsRefId: defaultKS
+      userAgent: '@GENERATED!!!! Mozilla/5.0@'
+      contentType: '@application/xml | | |@'
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002DBGetError
+  - testStepName: a002DBGETMessage
+    dbConnectors:
+    - connectorName: DBGET.GETBOOKS
+      type: DBGET
+      dsRefId: defaultDB
+keyStores:
+- id: defaultKS
+  type: TrustStore
+mqDataSources:
+- id: defaultMQ
+  name: '@QMGR@'
+  type: MQ
+  port: 0
+  host: '@localhost@'
+  channel: '@SYSTEM.BKR.CONFIG@'
+dbDataSources:
+- id: defaultDB
+  url: '@url@'
+  type: DB
+  username: '@usr@'
+  password: '@pwd@'

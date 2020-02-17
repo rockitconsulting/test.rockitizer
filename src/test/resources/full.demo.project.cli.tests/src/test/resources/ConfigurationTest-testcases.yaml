@@ -1,0 +1,108 @@
+#########################################################################################################################
+############### This file has been generated. Kindly consider to replace the @@ placeholders with your values ###########
+#########################################################################################################################
+testCases:
+- testCaseName: FILEinFILEOutTest
+  testSteps:
+  - connectorRefs:
+    - conRefId: FILEDEL.IN.FILE2FILE
+    - conRefId: FILEDEL.OUT.FILE2FILE
+    testStepName: 0BEFORE
+  - connectorRefs:
+    - conRefId: FILEPUT.IN.FILE2FILE
+      payloads:
+      - fileName: testinput.xml
+    testStepName: a001FILEPutMessage
+  - connectorRefs:
+    - conRefId: FILEGET.OUT.FILE2FILE
+    testStepName: a002FILEGetMessage
+- testCaseName: FILEinMQOutTest
+  testSteps:
+  - connectorRefs:
+    - conRefId: MQGET.ERROR
+    - conRefId: MQGET.OUT.FILE2MQ
+    testStepName: 0BEFORE
+  - connectorRefs:
+    - conRefId: FILEPUT.IN.FILE2MQ
+      payloads:
+      - fileName: testinput.xml
+    testStepName: a001FILEPutMessage
+  - connectorRefs:
+    - conRefId: MQGET.ERROR
+    testStepName: a002MQGetError
+  - connectorRefs:
+    - conRefId: MQGET.OUT.FILE2MQ
+    testStepName: a002MQGetMessage
+- testCaseName: JSONwithDatabaseTest
+  testSteps:
+  - connectorRefs:
+    - conRefId: DBPUT.CLAEN
+      payloads:
+      - fileName: cleanBookStore.sql
+    - conRefId: MQGET.ERROR
+    testStepName: 0BEFORE
+  - connectorRefs:
+    - conRefId: HTTP.JADDBOOK
+      payloads:
+      - fileName: testinput.json
+    testStepName: a001JSONPutMessage
+  - testStepName: a002DBGetError
+  - connectorRefs:
+    - conRefId: DBGET.GETBOOKS
+    testStepName: a002DBGETMessage
+- testCaseName: MQinDBOutTest
+  testSteps:
+  - connectorRefs:
+    - conRefId: DBPUT.CLAEN
+      payloads:
+      - fileName: cleanBookStore.sql
+    - conRefId: MQGET.ERROR
+    - conRefId: MQGET.IN.MQ2DB
+    testStepName: 0BEFORE
+  - connectorRefs:
+    - conRefId: MQPUT.IN.MQ2DB
+      payloads:
+      - fileName: testinput.xml
+    testStepName: a001MQPutMessage
+  - connectorRefs:
+    - conRefId: DBGET.GETBOOKS
+    testStepName: a002DBGETMessage
+  - testStepName: a002MQGetError
+  - connectorRefs:
+    - conRefId: MQGET.ERROR
+    testStepName: a003MQGetError
+- testCaseName: MQinMQoutTest
+  testSteps:
+  - connectorRefs:
+    - conRefId: MQGET.ERROR
+    - conRefId: MQGET.IN.MQ2MQ
+    - conRefId: MQGET.OUT.MQ2MQ
+    testStepName: 0BEFORE
+  - connectorRefs:
+    - conRefId: MQPUT.IN.MQ2MQ
+      payloads:
+      - fileName: testinput.xml
+    testStepName: a001MQPutMessage
+  - connectorRefs:
+    - conRefId: MQGET.ERROR
+    testStepName: a002MQGetError
+  - connectorRefs:
+    - conRefId: MQGET.OUT.MQ2MQ
+    testStepName: a002MQGetMessage
+- testCaseName: WSwithDatabaseTest
+  testSteps:
+  - connectorRefs:
+    - conRefId: DBPUT.CLAEN
+      payloads:
+      - fileName: cleanBookStore.sql
+    - conRefId: MQGET.ERROR
+    testStepName: 0BEFORE
+  - connectorRefs:
+    - conRefId: HTTP.ADDBOOK
+      payloads:
+      - fileName: testinput.xml
+    testStepName: a001WSPutMessage
+  - testStepName: a002DBGetError
+  - connectorRefs:
+    - conRefId: DBGET.GETBOOKS
+    testStepName: a002DBGETMessage

@@ -1,7 +1,8 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
-import static com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnector;
+
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -14,6 +15,7 @@ import com.jcraft.jsch.Session;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
+import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
@@ -37,14 +39,15 @@ public class SCPPutConnector implements WriteConnector {
 
 
 	/**
-	 * @param name "SCPPUT@CONN1" - connector and key 
+	 * @param name "SCPPUT.CONN1" - connector and key 
 	 */
-	public SCPPutConnector(String name){
-		this.name = name;
-		this.host = configuration().getString(this.name + Constants.SCP_HOST_KEY);
-		this.user = configuration().getString(this.name + Constants.SCP_USR_KEY);
-		this.password = configuration().getString(this.name + Constants.SCP_PWD_KEY); 
-		this.destPath = configuration().getString(this.name + Constants.SCP_DEST_PATH_KEY);
+	public SCPPutConnector(String id){
+		this.name = id;
+		SCPConnector cfg = (SCPConnector) configuration().getConnectorById(id);
+		this.host = cfg.getHost();
+		this.user = cfg.getUser();
+		this.password = cfg.getPassword(); 
+		this.destPath = cfg.getPath();
 	}
 	
 	public void connect(final String host, final String user, final String password) {

@@ -1,7 +1,9 @@
 package com.rockit.common.blackboxtester.assertions;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import static org.junit.Assert.assertTrue;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,13 +23,22 @@ public class DBAssertion extends AbstractAssertion {
 
 	public static final Logger LOGGER = Logger.getLogger(DBAssertion.class.getName());
 	private List<String> mustContainTokens;
+	private String refDsId;
 	private String sql;
 	private Connection connection;
 
 	public DBAssertion(String sql, List<String> mustContainTokens) {
+		this("defaultDB",sql, mustContainTokens);
+	}
+
+	
+	public DBAssertion(String dsId, String sql, List<String> mustContainTokens) {
+		this.refDsId = dsId;
 		this.mustContainTokens = mustContainTokens;
 		this.sql = sql;
 	}
+
+	
 
 	@Override
 	public void proceed() {
@@ -86,9 +97,14 @@ public class DBAssertion extends AbstractAssertion {
 
 	private void createDatabaseConnection(){
 		
-		String url = configuration().getString(Constants.DATASOURCE_URL_KEY);
-		String user = configuration().getString(Constants.DATASOURCE_USERNAME_KEY);
-		String password = configuration().getString(Constants.DATASOURCE_PASSWORD_KEY);
+		DBConnector dummy = new DBConnector();
+		dummy.setDsRefId(refDsId);
+		
+		DBDataSource ds = configuration().getDBDataSourceByConnector(dummy);
+		
+		String url = ds.getUrl();
+		String user = ds.getUser();
+		String password = ds.getPassword();
 		
 		try {
 			Class.forName(url.contains("db2") ? Constants.DB2_DRIVER : Constants.ORACLE_DRIVER).newInstance();

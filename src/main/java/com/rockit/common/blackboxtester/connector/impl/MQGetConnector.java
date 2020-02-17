@@ -1,7 +1,9 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+
+
 import com.rockit.common.blackboxtester.connector.ReadConnector;
+import com.rockit.common.blackboxtester.connector.impl.mq.MQAccessor;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
@@ -10,25 +12,11 @@ public class MQGetConnector extends MQAccessor implements ReadConnector {
 	private Object message;
 	private String name;
 
-	/*
-	@Deprecated
-	public MQGetConnector(String qManager, String qName, int port, String channelname, String hostname, String name, String usr, String pwd) {
-		super(qManager, qName, port, channelname, hostname, usr, pwd);
-		this.name = name;
-	}
-    */
-	
-	public MQGetConnector( String name) {
-		super(
-				configuration().getPrefixedString(name, Constants.MQMANAGER_NAME_KEY),
-				configuration().getString(name), 
-				configuration().getPrefixedInt(name, Constants.MQMANAGER_PORT_KEY),
-				configuration().getPrefixedString(name,Constants.MQMANAGER_CHANNEL_KEY),
-				configuration().getPrefixedString(name,Constants.MQMANAGER_HOST_KEY), 
-				configuration().getPrefixedString(name,Constants.MQMANAGER_USR_KEY),
-				configuration().getPrefixedString(name,Constants.MQMANAGER_PWD_KEY)
-			);
-		this.name = name;
+		
+	public MQGetConnector( String id) {
+		super(id);
+		
+		this.name = id;
 	}
 
 	@Override

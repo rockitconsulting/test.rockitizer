@@ -10,6 +10,8 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.rockit.common.blackboxtester.connector.impl.http.ResponseHeader;
+
 public class ResponseHeaderTest {
 
 	@Test

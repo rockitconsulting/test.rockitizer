@@ -1,7 +1,5 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -16,9 +14,8 @@ import org.apache.log4j.Logger;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
+import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 
 /**
@@ -35,12 +32,10 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 	private File file;
 
 
-	public DBPutConnector(final String name) {
-	
-		super(configuration().getPrefixedString(name, Constants.DATASOURCE_URL_KEY),
-				configuration().getPrefixedString(name, Constants.DATASOURCE_USERNAME_KEY),
-				configuration().getPrefixedString(name, Constants.DATASOURCE_PASSWORD_KEY));
-		this.name = name;
+	public DBPutConnector(final String id) {
+		super(id);
+		
+		this.name = id;
 	}
 
 	@Override

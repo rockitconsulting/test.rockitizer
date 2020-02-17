@@ -1,0 +1,189 @@
+suiteMode: record
+testCases:
+- testCaseName: FILEinFILEOutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    connectors:
+    - resId: FILEDEL.IN.FILE2FILE
+    - resId: FILEDEL.OUT.FILE2FILE
+  - testStepName: a001FILEPutMessage
+    connectors:
+    - resId: FILEPUT.IN.FILE2FILE
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002FILEGetMessage
+    connectors:
+    - resId: FILEGET.OUT.FILE2FILE
+- testCaseName: FILEinMQOutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    connectors:
+    - resId: MQGET.ERROR
+    - resId: MQGET.OUT.FILE2MQ
+  - testStepName: a001FILEPutMessage
+    connectors:
+    - resId: FILEPUT.IN.FILE2MQ
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002MQGetError
+    connectors:
+    - resId: MQGET.ERROR
+  - testStepName: a002MQGetMessage
+    connectors:
+    - resId: MQGET.OUT.FILE2MQ
+- testCaseName: JSONwithDatabaseTest
+  testSteps:
+  - testStepName: 0BEFORE
+    connectors:
+      - resId: MQGET.ERROR
+      - resId: DBPUT.CLAEN
+        payloads:
+        - fileName: cleanBookStore.sql
+    
+    dbConnectors:
+    - connectorName: DBPUT.CLAEN
+      type: DBPUT
+      dsRefId: defaultDB
+      payloads:
+      - fileName: cleanBookStore.sql
+  - testStepName: a001JSONPutMessage
+    httpConnectors:
+    - connectorName: HTTP.JADDBOOK
+      url: 'http://scharrdev01:7080/JSONBookService'
+      type: HTTP
+      method: 'POST'
+      timeout: 500000
+      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
+      contentType: 'application/json'
+      payloads:
+      - fileName: testinput.json
+  - testStepName: a002DBGetError
+  - testStepName: a002DBGETMessage
+    dbConnectors:
+    - connectorName: DBGET.GETBOOKS
+      type: DBGET
+      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
+      dsRefId: defaultDB
+- testCaseName: MQinDBOutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: 'MQ.ERROR'
+      type: MQGET
+    - connectorName: MQGET.IN.MQ2DB
+      dsRefId: defaultMQ
+      queueName: 'MQ.IN.MQ2DB'
+      type: MQGET
+    dbConnectors:
+    - connectorName: DBPUT.CLAEN
+      type: DBPUT
+      dsRefId: defaultDB
+      payloads:
+      - fileName: cleanBookStore.sql
+  - testStepName: a001MQPutMessage
+    mqConnectors:
+    - connectorName: MQPUT.IN.MQ2DB
+      dsRefId: defaultMQ
+      queueName: 'MQ.IN.MQ2DB'
+      type: MQPUT
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002DBGETMessage
+    dbConnectors:
+    - connectorName: DBGET.GETBOOKS
+      type: DBGET
+      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
+      dsRefId: defaultDB
+  - testStepName: a002MQGetError
+  - testStepName: a003MQGetError
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: 'MQ.ERROR'
+      type: MQGET
+- testCaseName: MQinMQoutTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: 'MQ.ERROR'
+      type: MQGET
+    - connectorName: MQGET.IN.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: 'MQ.IN.MQ2MQ'
+      type: MQGET
+    - connectorName: MQGET.OUT.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: 'MQ.OUT.MQ2MQ'
+      type: MQGET
+  - testStepName: a001MQPutMessage
+    mqConnectors:
+    - connectorName: MQPUT.IN.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: 'MQ.IN.MQ2MQ'
+      type: MQPUT
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002MQGetError
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: 'MQ.ERROR'
+      type: MQGET
+  - testStepName: a002MQGetMessage
+    mqConnectors:
+    - connectorName: MQGET.OUT.MQ2MQ
+      dsRefId: defaultMQ
+      queueName: 'MQ.OUT.MQ2MQ'
+      type: MQGET
+- testCaseName: WSwithDatabaseTest
+  testSteps:
+  - testStepName: 0BEFORE
+    mqConnectors:
+    - connectorName: MQGET.ERROR
+      dsRefId: defaultMQ
+      queueName: 'MQ.ERROR'
+      type: MQGET
+    dbConnectors:
+    - connectorName: DBPUT.CLAEN
+      type: DBPUT
+      dsRefId: defaultDB
+      payloads:
+      - fileName: cleanBookStore.sql
+  - testStepName: a001WSPutMessage
+    httpConnectors:
+    - connectorName: HTTP.ADDBOOK
+      url: 'http://scharrdev01:7800/BookService'
+      type: HTTP
+      method: 'POST'
+      timeout: 500000
+      dsRefId: defaultKS
+      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
+      payloads:
+      - fileName: testinput.xml
+  - testStepName: a002DBGetError
+  - testStepName: a002DBGETMessage
+    dbConnectors:
+    - connectorName: DBGET.GETBOOKS
+      type: DBGET
+      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
+      dsRefId: defaultDB
+      
+mqDataSources:
+- id: defaultMQ
+  name: QM1
+  type: MQ
+  port: 1414
+  host: localhost
+  channel: 'SYSTEM.BKR.CONFIG'
+  username: 'admin'
+  password: 'admin'
+dbDataSources:
+- id: defaultDB
+  url: 'jdbc:db2://localhost:50000/ROCKIT'
+  type: DB
+  username: 'admin'
+  password: 'admin'

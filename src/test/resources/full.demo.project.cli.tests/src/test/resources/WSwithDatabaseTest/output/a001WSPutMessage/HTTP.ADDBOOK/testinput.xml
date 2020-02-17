@@ -1,0 +1,1 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:book="http://www.cleverbuilder.com/BookService/"><soapenv:Body><book:AddBookResponse><ID>dac0ca3c-62a9-4558-bee2-7b16307990ab</ID></book:AddBookResponse></soapenv:Body></soapenv:Envelope>

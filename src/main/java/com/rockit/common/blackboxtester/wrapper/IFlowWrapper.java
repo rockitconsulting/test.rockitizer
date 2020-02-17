@@ -1,7 +1,7 @@
 package com.rockit.common.blackboxtester.wrapper;
 
 import com.rockit.common.blackboxtester.connector.Connector;
-import com.rockit.common.blackboxtester.connector.impl.MQManager;
+import com.rockit.common.blackboxtester.connector.impl.mq.MQManager;
 
 
 public interface IFlowWrapper {

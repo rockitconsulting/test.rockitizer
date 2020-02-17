@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.connector.impl.FileDelConnector;
-import com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.util.FileUtils;
 
@@ -31,12 +30,7 @@ public class FileDelConnectorTest {
 	}
 
 	
-	@Test
-	public void testConfig() {
-		assertTrue(ConfigurationHolder.configuration().getString(fileDelConnector.getName() + Constants.FILE_PATH_KEY),
-				!ConfigurationHolder.configuration().getString(fileDelConnector.getName() + Constants.FILE_PATH_KEY)
-						.isEmpty());
-	}	
+	
 	
 		
 	@Test

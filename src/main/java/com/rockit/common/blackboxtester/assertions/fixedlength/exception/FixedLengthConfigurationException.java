@@ -11,7 +11,12 @@ package com.rockit.common.blackboxtester.assertions.fixedlength.exception;
  */
 public class FixedLengthConfigurationException extends Exception {
 
-    public FixedLengthConfigurationException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7848498348965376077L;
+
+	public FixedLengthConfigurationException(String message) {
         super(message);
     }
     

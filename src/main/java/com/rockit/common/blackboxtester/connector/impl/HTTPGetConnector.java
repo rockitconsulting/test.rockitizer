@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +20,11 @@ import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
+/**
+ * @use {@link HTTPConnector}
+ *
+ */
+@Deprecated 
 public class HTTPGetConnector implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(HTTPGetConnector.class.getName());
 
@@ -26,9 +32,13 @@ public class HTTPGetConnector implements ReadConnector {
 	private String name, urlStr;
 	private URL url;
 
-	public HTTPGetConnector(String name) {
-		this.name = name;
-		this.urlStr = configuration().getString(this.name);
+	public HTTPGetConnector(String id) {
+		io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector cfg = 
+				(io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration().getConnectorById(id);
+
+		
+		this.name = id;
+		this.urlStr = cfg.getUrl();
 	}
 	@Override
 	public void proceed() {

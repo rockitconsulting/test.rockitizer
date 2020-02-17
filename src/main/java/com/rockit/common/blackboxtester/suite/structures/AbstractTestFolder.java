@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.suite.structures;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 
 import java.io.File;
 
@@ -15,39 +16,35 @@ public class AbstractTestFolder {
 	private String inFolderName;
 	private String outFolderName;
 
-
 	private String testName;
 	private String testStepName;
 	private String connectorName;
 	private String connectorType;
-	
-	
+
 	protected AbstractTestFolder(String testName) {
-		this.testName = testName; 
+		this.testName = testName;
 		this.inFolderName = testName + "/";
 		this.outFolderName = testName + "/" + Constants.OUTPUT_FOLDER + "/";
-		
+
 	}
-	
+
 	protected AbstractTestFolder(String testName, String testStepName) {
 		this.testName = testName;
 		this.testStepName = testStepName;
-		this.inFolderName = testName + "/"+ testStepName + "/";
+		this.inFolderName = testName + "/" + testStepName + "/";
 		this.outFolderName = testName + "/" + Constants.OUTPUT_FOLDER + "/" + testStepName + "/";
-		
+
 	}
-	
+
 	protected AbstractTestFolder(String testName, String testStepName, String connectorName) {
 		this.testName = testName;
 		this.testStepName = testStepName;
 		this.connectorName = connectorName;
-		this.inFolderName = testName + "/"+ testStepName + "/" + connectorName + "/";
+		this.inFolderName = testName + "/" + testStepName + "/" + connectorName + "/";
 		this.outFolderName = testName + "/" + Constants.OUTPUT_FOLDER + "/" + testStepName + "/" + connectorName + "/";
 		this.connectorType = connectorName.split("\\.")[0] + ".";
-		
-	}
 
-	
+	}
 
 	public String getTestName() {
 		return testName;
@@ -60,7 +57,7 @@ public class AbstractTestFolder {
 	public String getConnectorType() {
 		return connectorType;
 	}
-	
+
 	public String getOutFolderName() {
 		return outFolderName;
 	}
@@ -73,27 +70,27 @@ public class AbstractTestFolder {
 		return testStepName;
 	}
 
-
 	public File getInFolder() {
 		File inFoler = new File(getBasePath() + inFolderName);
-		if (!inFoler.exists()) throw new GenericException("Folder " + inFoler + " doesn't exist!");
+		if (!inFoler.exists())
+			throw new GenericException("Folder " + inFoler + " doesn't exist!");
 		return new File(getBasePath() + inFolderName);
 	}
 
 	protected File getOutFolder() {
-		return getOrCreateFolder( getBasePath() + File.separator + outFolderName);
+		return getOrCreateFolder(getBasePath() + File.separator + outFolderName);
 	}
-
 
 	protected String getBasePath() {
 		return isReplayMode() ? getReplayRootPath() : getRecordRootPath();
 	}
 
 	public boolean isReplayMode() {
-		return configuration().getString(Constants.MODE_KEY).contains("replay");
+		 return configuration().getRunMode()==Configuration.RunModeTypes.REPLAY;
+
 	}
 
-	protected String getRecordRootPath() {
+	public String getRecordRootPath() {
 		return new File("").getAbsolutePath().replace('\\', '/') + Constants.RECORD_PATH;
 	}
 
@@ -102,19 +99,18 @@ public class AbstractTestFolder {
 	}
 
 	private File getOrCreateFolder(String path) {
-			File file = new File(path);
-			if (!file.exists()) {
-				LOGGER.debug(" creating folder " + file);
-				file.mkdirs();
-			}
-			if (!file.isDirectory()) {
-				LOGGER.error("Folders only allowed");
-				throw new GenericException(new RuntimeException("Folders only allowed"));
-			}
-		
+		File file = new File(path);
+		if (!file.exists()) {
+			LOGGER.debug(" creating folder " + file);
+			file.mkdirs();
+		}
+		if (!file.isDirectory()) {
+			LOGGER.error("Folders only allowed");
+			throw new GenericException(new RuntimeException("Folders only allowed"));
+		}
+
 		return file;
 	}
-
 
 	public void setTestStepName(String testStepName) {
 		this.testStepName = testStepName;

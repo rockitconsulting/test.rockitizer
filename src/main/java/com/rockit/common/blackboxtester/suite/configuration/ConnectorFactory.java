@@ -1,5 +1,7 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+
 import java.util.List;	
 
 import org.apache.log4j.Logger;
@@ -35,8 +37,7 @@ public class ConnectorFactory {
 			throw new RuntimeException("@ are no longer supported since version 0.6. Please use the pattern {Connector}.{Variable}");
 		}
 		
-
-		String type = name.split("\\.")[0];
+		String type =  ConfigUtils.connectorTypeFromConnectorId(name);
 		
 		
 		switch (type) {

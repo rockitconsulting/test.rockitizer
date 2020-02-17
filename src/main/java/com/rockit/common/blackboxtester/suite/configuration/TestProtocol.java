@@ -1,7 +1,9 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+
 import org.apache.log4j.Logger;
+
 import com.rockit.common.blackboxtester.suite.structures.TestBuilder;
 
 public class TestProtocol {
@@ -35,7 +37,7 @@ public class TestProtocol {
 	    LOGGER.info("TESTNAME: " + testBuilder.getTestName());
 	    LOGGER.info("RECORD FOLDER: " + testBuilder.getRecordFolder());
 	    LOGGER.info("REPLAY FOLDER: " + testBuilder.getReplayFolder());
-	    LOGGER.info("MODE: " + configuration().getString(Constants.MODE_KEY));
+	    LOGGER.info("MODE: "+ configuration().getRunMode());
 		
 	}
 

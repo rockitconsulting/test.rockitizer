@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import org.json.XML;
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
+import com.rockit.common.blackboxtester.connector.impl.http.ResponseHeader;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
@@ -43,15 +45,25 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	private Integer connectTimeOut;
 	private URL url;
 	private File file;
-
-	public HTTPConnector(String name) {
-		this.name = name;
-		this.urlStr = configuration().getPrefixedString(name, Constants.URL);
-		this.method = configuration().getPrefixedString(name, Constants.METHOD);
-		this.contentType = configuration().getPrefixedString(name, Constants.CONTENTTYPE);
-		this.userAgent = configuration().getPrefixedString(name, Constants.USERAGENT);
-		this.trustStore = configuration().getPrefixedString(name, Constants.SECURITY_TRUSTSTORE_KEY);
-		this.connectTimeOut = configuration().getPrefixedInt(name, Constants.CONNECTTIMEOUT);
+	
+	
+	
+	public HTTPConnector(String id) {
+		io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector cfg = 
+				(io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration().getConnectorById(id);
+		
+		
+		this.name = id;
+		this.urlStr = cfg.getUrl();
+		this.method = cfg.getMethod();
+		this.contentType = cfg.getContentType();
+		this.userAgent = cfg.getUserAgent();
+		this.connectTimeOut = Integer.valueOf( cfg.getTimeout() );
+		
+		KeyStore ks = configuration().getKeyStoreByConnector(cfg);
+		if(ks!=null) {
+			this.trustStore = ks.getPath();
+		}
 	}
 
 	static {

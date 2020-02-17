@@ -1,13 +1,13 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
 
 import java.io.File;
 
 import org.apache.log4j.Logger;
 
 import com.rockit.common.blackboxtester.connector.Connector;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.util.FileUtils;
 
@@ -29,9 +29,10 @@ public class FileDelConnector implements Connector {
 	/**
 	 * @param name  - FILEPut and key (connectorFolder)
 	 */
-	public FileDelConnector(String name){
-		this.name = name;
-		this.srcPath = configuration().getString(this.name + Constants.FILE_PATH_KEY);
+	public FileDelConnector(String id){
+		this.name = id;
+		FileConnector cfg = (FileConnector) configuration().getConnectorById(id);
+		this.srcPath = cfg.getPath();
 	}
 	
 

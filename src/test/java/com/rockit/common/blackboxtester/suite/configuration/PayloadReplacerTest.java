@@ -1,6 +1,6 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
-import static com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder.configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -42,10 +42,10 @@ public class PayloadReplacerTest {
 		String content = new String(Files.readAllBytes(SRC));
 		log.info("content:  " + content);
 
-		assertFalse("PAYLOAD.DATEPLACEHOLDER not yet replaced (maybe already replaced by prevous test, need status quo rollback to init )" , content.contains(configuration().getString("PAYLOAD.DATEPLACEHOLDER")));
+		assertFalse("PAYLOAD.DATEPLACEHOLDER not yet replaced (maybe already replaced by prevous test, need status quo rollback to init )" , content.contains(configuration().getPayloadReplacements().get("PAYLOAD.DATEPLACEHOLDER")));
 		File interpolate = PayloadReplacer.interpolate(srcFile);
 		String replace = new String(Files.readAllBytes(interpolate.toPath()));
-		assertTrue("PAYLOAD.DATEPLACEHOLDER replaced ",replace.contains(configuration().getString("PAYLOAD.DATEPLACEHOLDER")));
+		assertTrue("PAYLOAD.DATEPLACEHOLDER replaced ",replace.contains(configuration().getPayloadReplacements().get("PAYLOAD.DATEPLACEHOLDER")));
 
 	}
 

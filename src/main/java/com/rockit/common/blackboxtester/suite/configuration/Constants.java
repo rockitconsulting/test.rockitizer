@@ -16,32 +16,32 @@ public final class Constants {
 	public static final String DB2_DRIVER = "com.ibm.db2.jcc.DB2Driver";
 	public static final String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 
-	
-	public static final String MQMANAGER_NAME_KEY    = "MQMANAGER.NAME";
-	public static final String MQMANAGER_PORT_KEY    = "MQMANAGER.PORT";
-	public static final String MQMANAGER_CHANNEL_KEY = "MQMANAGER.CHANNEL";
-	public static final String MQMANAGER_HOST_KEY    = "MQMANAGER.HOST";
-	public static final String MQMANAGER_USR_KEY     = "MQMANAGER.USR";
-	public static final String MQMANAGER_PWD_KEY     = "MQMANAGER.PWD";//NOSONAR
-	
-	public static final String DATASOURCE_URL_KEY    =   "DATASOURCE.URL";
-	public static final String DATASOURCE_USERNAME_KEY = "DATASOURCE.USERNAME";
-	public static final String DATASOURCE_PASSWORD_KEY = "DATASOURCE.PASSWORD";//NOSONAR
-	
-	public static final String URL = 			            "URL";
-	public static final String METHOD = 			        "METHOD";
-	public static final String CONTENTTYPE = 			    "CONTENTTYPE";
-	public static final String USERAGENT = 				    "USERAGENT";
-	public static final String SECURITY_TRUSTSTORE_KEY = 	"SECURITY.TRUSTSTORE";
-	public static final String CONNECTTIMEOUT = 			"CONNECTTIMEOUT";
-
-	public static final String SCP_HOST_KEY = 			".HOST";
-	public static final String SCP_USR_KEY = 			".USR";
-	public static final String SCP_PWD_KEY = 			".PWD";//NOSONAR
-	public static final String SCP_DEST_PATH_KEY = 		".PATH";
-	
-	public static final String MQOUT_KEY = "MQGET.";
-	public static final String FILE_PATH_KEY = ".PATH";
+//	
+//	public static final String MQMANAGER_NAME_KEY    = "MQMANAGER.NAME";
+//	public static final String MQMANAGER_PORT_KEY    = "MQMANAGER.PORT";
+//	public static final String MQMANAGER_CHANNEL_KEY = "MQMANAGER.CHANNEL";
+//	public static final String MQMANAGER_HOST_KEY    = "MQMANAGER.HOST";
+//	public static final String MQMANAGER_USR_KEY     = "MQMANAGER.USR";
+//	public static final String MQMANAGER_PWD_KEY     = "MQMANAGER.PWD";//NOSONAR
+//	
+//	public static final String DATASOURCE_URL_KEY    =   "DATASOURCE.URL";
+//	public static final String DATASOURCE_USERNAME_KEY = "DATASOURCE.USERNAME";
+//	public static final String DATASOURCE_PASSWORD_KEY = "DATASOURCE.PASSWORD";//NOSONAR
+//	
+//	public static final String URL = 			            "URL";
+//	public static final String METHOD = 			        "METHOD";
+//	public static final String CONTENTTYPE = 			    "CONTENTTYPE";
+//	public static final String USERAGENT = 				    "USERAGENT";
+//	public static final String SECURITY_TRUSTSTORE_KEY = 	"SECURITY.TRUSTSTORE";
+//	public static final String CONNECTTIMEOUT = 			"CONNECTTIMEOUT";
+//
+//	public static final String SCP_HOST_KEY = 			".HOST";
+//	public static final String SCP_USR_KEY = 			".USR";
+//	public static final String SCP_PWD_KEY = 			".PWD";//NOSONAR
+//	public static final String SCP_DEST_PATH_KEY = 		".PATH";
+//	
+//	public static final String MQOUT_KEY = "MQGET.";
+//	public static final String FILE_PATH_KEY = ".PATH";
 	
 	public static final String REPLAY_PATH = "/target/replay/";
 	public static final String RECORD_PATH = "/src/test/resources/";
