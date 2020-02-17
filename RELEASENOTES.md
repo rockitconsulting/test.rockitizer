@@ -1,3 +1,8 @@
+# 1.0.0 Release
+ 	 - gradle with maven central release
+	-  yaml configuration
+	-  statefull configuration management
+        - base for CLI
 # 0.0.8 Release
 	- migration to Gradle
 
