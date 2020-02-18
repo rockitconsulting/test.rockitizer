@@ -14,5 +14,4 @@ public interface Connector {
 
 	String getType();
 	
-	String getName();
 }

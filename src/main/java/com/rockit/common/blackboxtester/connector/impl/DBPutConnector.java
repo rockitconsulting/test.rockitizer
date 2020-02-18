@@ -28,23 +28,20 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 	public static final Logger LOGGER = Logger.getLogger(DBPutConnector.class.getName());
 	private static final String DELIMITER = ";";
 
-	private String name;
+	private String id;
 	private File file;
 
 
 	public DBPutConnector(final String id) {
 		super(id);
 		
-		this.name = id;
+		this.id = id;
 	}
+
 
 	@Override
 	public String getId() {
-		return getType() + getName();
-	}
-
-	public String getName() {
-		return this.name;
+		return this.id;
 	}
 
 	@Override

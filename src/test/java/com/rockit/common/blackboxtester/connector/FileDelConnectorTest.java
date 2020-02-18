@@ -2,6 +2,7 @@ package com.rockit.common.blackboxtester.connector;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.connector.impl.FileDelConnector;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.util.FileUtils;
 
 public class FileDelConnectorTest {
@@ -23,15 +23,13 @@ public class FileDelConnectorTest {
 
 	private FileDelConnector fileDelConnector;
 
+	
 	@Before
-	public void setUp() {
+	public void before() {
+		TestObjectFactory.resetConfigurationToDefault();
 		fileDelConnector = new FileDelConnector("FILEDEL.FileDelConnectorTest");
 
 	}
-
-	
-	
-	
 		
 	@Test
 	public void testDel() throws URISyntaxException, IOException  {
@@ -60,10 +58,6 @@ public class FileDelConnectorTest {
 		assertTrue(fileDelConnector.getType(), fileDelConnector.getType().equals("FILEDEL."));
 	}
 
-	@Test
-	public void testName() {
-		assertTrue(fileDelConnector.getName(), fileDelConnector.getName().equals("FILEDEL.FileDelConnectorTest"));
-	}
 
 	@Test
 	public void testId() {

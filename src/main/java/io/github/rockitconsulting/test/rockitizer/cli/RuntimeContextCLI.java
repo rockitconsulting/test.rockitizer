@@ -1,5 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 /**
@@ -9,7 +11,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtil
  */
 public class RuntimeContextCLI {
 
-	static final String OUTPUT = "output";
+	static final String OUTPUT = Constants.OUTPUT_FOLDER;
 
 	private String resourcesFileName = "resources.yaml";
 	private String testcasesFileName = "testcases.yaml";
@@ -17,11 +19,11 @@ public class RuntimeContextCLI {
 	private String absolutePath = ConfigUtils.getAbsoluteRootPath();
 	private String relativePath = "";
 
-	String getFullPath() {
+	public String getFullPath() {
 		return absolutePath + relativePath;
 	}
 
-	String getResourcesFileName() {
+	public String getResourcesFileName() {
 		return resourcesFileName;
 	}
 
@@ -29,7 +31,7 @@ public class RuntimeContextCLI {
 		this.resourcesFileName = resourcesFileName;
 	}
 
-	String getAbsolutePath() {
+	public String getAbsolutePath() {
 		return absolutePath;
 	}
 
@@ -49,7 +51,7 @@ public class RuntimeContextCLI {
 		return testcasesFileName;
 	}
 
-	public void setTestcasesFileName(String testcasesFileName) {
+	void setTestcasesFileName(String testcasesFileName) {
 		this.testcasesFileName = testcasesFileName;
 	}
 

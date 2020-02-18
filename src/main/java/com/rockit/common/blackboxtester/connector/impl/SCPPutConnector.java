@@ -22,7 +22,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors
 public class SCPPutConnector implements WriteConnector {
 	public static final Logger LOGGER = Logger.getLogger(SCPPutConnector.class.getName());
 
-	private String name;
+	private String id;
 
 	private Session session;
 	private ChannelSftp channel;
@@ -39,10 +39,10 @@ public class SCPPutConnector implements WriteConnector {
 
 
 	/**
-	 * @param name "SCPPUT.CONN1" - connector and key 
+	 * @param id "SCPPUT.CONN1" - connector and key 
 	 */
 	public SCPPutConnector(String id){
-		this.name = id;
+		this.id = id;
 		SCPConnector cfg = (SCPConnector) configuration().getConnectorById(id);
 		this.host = cfg.getHost();
 		this.user = cfg.getUser();
@@ -90,18 +90,18 @@ public class SCPPutConnector implements WriteConnector {
 
 			String targetFilename = contentFile.getName();
 			channel.cd(destPath);
-			TestProtocol.write("[Connector:"+getName()+"] \t Copying " + contentFile.getName() + " to " + destPath);
+			TestProtocol.write("[Connector:"+getId()+"] \t Copying " + contentFile.getName() + " to " + destPath);
 			channel.put(new FileInputStream(contentFile), targetFilename, ChannelSftp.OVERWRITE);
 
 			if (targetFilename.endsWith(".trans")) {
 				String targetFilenameRenamed = targetFilename.replaceAll(".trans", ".csv");
-				TestProtocol.write("[Connector:"+getName()+"] \t Renaming File  " + targetFilename + " to " + targetFilenameRenamed +" in " + destPath);
+				TestProtocol.write("[Connector:"+getId()+"] \t Renaming File  " + targetFilename + " to " + targetFilenameRenamed +" in " + destPath);
 				channel.rename(targetFilename, destPath + "/" + targetFilenameRenamed);
 			}
 
 
 		} catch (Exception e) {
-			LOGGER.error("[Connector:"+getName()+"] \t Connector error: " + getType(), e);
+			LOGGER.error("[Connector:"+getId()+"] \t Connector error: " + getType(), e);
 		} finally {
 			channel.exit();
 			session.disconnect();
@@ -115,11 +115,7 @@ public class SCPPutConnector implements WriteConnector {
 
 	@Override
 	public String getId() {
-		return getName();
-	}
-
-	public String getName() {
-		return name;
+		return id;
 	}
 
 	@Override
@@ -130,7 +126,7 @@ public class SCPPutConnector implements WriteConnector {
 	@Override
 	public void setRequest(String request)  {
 		LOGGER.error("set method is not allowed");
-		throw new ConnectorException(new RuntimeException("[Connector:"+getName()+"] \t Set method is not allowed"));
+		throw new ConnectorException(new RuntimeException("[Connector:"+getId()+"] \t Set method is not allowed"));
 
 	}
 

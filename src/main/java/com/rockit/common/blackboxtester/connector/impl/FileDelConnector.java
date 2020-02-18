@@ -18,7 +18,7 @@ import com.rockit.common.blackboxtester.util.FileUtils;
 public class FileDelConnector implements Connector {
 	public static final Logger LOGGER = Logger.getLogger(FileDelConnector.class.getName());
 
-	private String name;
+	private String id;
 
 	private String srcPath;
 
@@ -27,10 +27,10 @@ public class FileDelConnector implements Connector {
 
 
 	/**
-	 * @param name  - FILEPut and key (connectorFolder)
+	 * @param id  - FILEPut and key (connectorFolder)
 	 */
 	public FileDelConnector(String id){
-		this.name = id;
+		this.id = id;
 		FileConnector cfg = (FileConnector) configuration().getConnectorById(id);
 		this.srcPath = cfg.getPath();
 	}
@@ -45,7 +45,7 @@ public class FileDelConnector implements Connector {
 			FileUtils.deleteFilesRecursive(f);
 			
 		} catch (Exception e) {
-			LOGGER.error("[Connector:"+getName()+"] \t Connector error: " + getType(), e);
+			LOGGER.error("[Connector:"+getId()+"] \t Connector error: " + getType(), e);
 		} finally {
 		}
 
@@ -64,12 +64,10 @@ public class FileDelConnector implements Connector {
 
 	@Override
 	public String getId() {
-		return getName();
+		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
+	
 
 
 	

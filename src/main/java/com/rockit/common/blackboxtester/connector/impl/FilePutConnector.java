@@ -20,15 +20,15 @@ import com.rockit.common.blackboxtester.util.FileUtils;
 public class FilePutConnector implements WriteConnector {
 	public static final Logger LOGGER = Logger.getLogger(FilePutConnector.class.getName());
 
-	private String name;
+	private String id;
 	private String destPath;
 	private File contentFile;
 
 	/**
-	 * @param name  - FILEPut and key (connectorFolder)
+	 * @param id  - FILEPut and key (connectorFolder)
 	 */
 	public FilePutConnector(String id){
-		this.name = id;
+		this.id = id;
 		FileConnector cfg = (FileConnector) configuration().getConnectorById(id);
 		this.destPath = cfg.getPath();
 	}
@@ -47,7 +47,7 @@ public class FilePutConnector implements WriteConnector {
 
 			FileUtils.copy( contentFile, new File(destPath) );
 		} catch (Exception e) {
-			LOGGER.error("[Connector:"+getName()+"] \t Connector error: " + getType(), e);
+			LOGGER.error("[Connector:"+getId()+"] \t Connector error: " + getType(), e);
 		} finally {
 		}
 
@@ -59,12 +59,10 @@ public class FilePutConnector implements WriteConnector {
 
 	@Override
 	public String getId() {
-		return getName();
+		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
+	
 
 	@Override
 	public void setRequest(File requestFile)  {
@@ -74,7 +72,7 @@ public class FilePutConnector implements WriteConnector {
 	@Override
 	public void setRequest(String request)  {
 		LOGGER.error("set method is not allowed");
-		throw new ConnectorException(new RuntimeException("[Connector:"+getName()+"] \t Set method is not allowed"));
+		throw new ConnectorException(new RuntimeException("[Connector:"+getId()+"] \t Set method is not allowed"));
 
 	}
 

@@ -1,6 +1,5 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.Validatable;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.ValidationUtils;
 
 import java.io.File;
@@ -10,7 +9,7 @@ import java.util.Map;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
-public class HTTPConnector extends BaseConnector implements Validatable  {
+public class HTTPConnector extends BaseConnector   {
 
 	public enum Types {
 		HTTP

@@ -3,6 +3,7 @@ package com.rockit.common.blackboxtester.suite.configuration;
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,11 +13,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PayloadReplacerTest {
 	public static final Logger log = Logger.getLogger(PayloadReplacerTest.class.getName());
 
+
+
+	
 //	@Test
 //	public void replace() throws URISyntaxException, IOException {
 //		Path SRC = Paths.get(ClassLoader.getSystemResource("TestFileConnectors/test.xml").toURI());
@@ -33,6 +39,17 @@ public class PayloadReplacerTest {
 //
 //	}
 //	
+	
+	
+	@Before
+	public void before() {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName());
+		Assert.assertNotNull(configuration());
+		Assert.assertEquals(configuration().getTchCLI().getTestcasesFileName(), "PayloadReplacerTest-testcases.yaml");
+		Assert.assertEquals(configuration().getRhCLI().getResourcesFileName(), "PayloadReplacerTest-resources.yaml");
+	}
+
+	
 	@Test
 	public void interpolate() throws URISyntaxException, IOException {
 		Path SRC = Paths.get(ClassLoader.getSystemResource("PayloadReplacement/test.xml").toURI());
@@ -42,10 +59,10 @@ public class PayloadReplacerTest {
 		String content = new String(Files.readAllBytes(SRC));
 		log.info("content:  " + content);
 
-		assertFalse("PAYLOAD.DATEPLACEHOLDER not yet replaced (maybe already replaced by prevous test, need status quo rollback to init )" , content.contains(configuration().getPayloadReplacements().get("PAYLOAD.DATEPLACEHOLDER")));
+		assertFalse("DATEPLACEHOLDER not yet replaced (maybe already replaced by prevous test, need status quo rollback to init )" , content.contains(configuration().getPayloadReplacements().get("DATEPLACEHOLDER")));
 		File interpolate = PayloadReplacer.interpolate(srcFile);
 		String replace = new String(Files.readAllBytes(interpolate.toPath()));
-		assertTrue("PAYLOAD.DATEPLACEHOLDER replaced ",replace.contains(configuration().getPayloadReplacements().get("PAYLOAD.DATEPLACEHOLDER")));
+		assertTrue("DATEPLACEHOLDER replaced ",replace.contains(configuration().getPayloadReplacements().get("DATEPLACEHOLDER")));
 
 	}
 

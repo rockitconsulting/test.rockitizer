@@ -10,13 +10,13 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 public class MQGetConnector extends MQAccessor implements ReadConnector {
 
 	private Object message;
-	private String name;
+	private String id;
 
 		
 	public MQGetConnector( String id) {
 		super(id);
 		
-		this.name = id;
+		this.id = id;
 	}
 
 	@Override
@@ -29,10 +29,6 @@ public class MQGetConnector extends MQAccessor implements ReadConnector {
 
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
 
 	@Override
 	public String getResponse() {
@@ -45,8 +41,9 @@ public class MQGetConnector extends MQAccessor implements ReadConnector {
 		throw new ConnectorException(new RuntimeException("set method is not allowed"));
 	}
 
+	@Override
 	public String getId() {
-		return  getType()+getQName() ;
+		return  id ;
 	}
 	
 	public String getType() {

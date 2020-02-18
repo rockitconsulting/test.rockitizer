@@ -33,48 +33,33 @@ dbConnectors:
       dsRefId: defaultDB
     - id: DBGET.GETBOOKS
       type: DBGET
-      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
+      query: 'SELECT BOOK, AUTHOR FROM ROCKIT.BOOKSERVICE'
       dsRefId: defaultDB
 httpConnectors:
-    - id: HTTP.CONFIGTEST.WITH.KEYSTORE
-      contentType: 'application/xml'
-      url: 'http://scharrdev01:7800/BookService'
-      type: HTTP
-      method: 'POST'
-      timeout: 500000
-      dsRefId: notDefaultKS
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
-    - id: HTTP.CONFIGTEST.NO.KEYSTORE
-      contentType: 'application/xml'
-      url: 'http://scharrdev01:7800/BookService'
-      type: HTTP
-      method: 'POST'
-      timeout: 500000
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
-    - id: HTTP.CONFIGTEST.NO.CONTENTTYPE
-      url: 'http://scharrdev01:7800/BookService'
-      type: HTTP
-      method: 'POST'
-      timeout: 500000
-      dsRefId: defaultKS
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
     - id: HTTP.ADDBOOK
-      url: 'http://scharrdev01:7800/BookService'
+      url: 'http://SCHARRDEV01:7800/BookService'
       type: HTTP
       method: 'POST'
       timeout: 500000
-      dsRefId: defaultKS
+      contentType: 'application/xml'
       userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
     - id: HTTP.JADDBOOK
-      url: 'http://scharrdev01:7080/JSONBookService'
+      url: 'http://SCHARRDEV01:7080/JSONBookService'
       type: HTTP
       method: 'POST'
       timeout: 500000
       userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
       contentType: 'application/json'
 fileConnectors:
-    - id: FILEDEL.INVALID.NO.PATH
-      type: FILEDEL
+    - id: FILEGET.FileGetConnectorTest
+      type: FILEGET 
+      path: TestFileConnectors/test.xml
+    - id: FILEPUT.FilePutConnectorTest
+      type: FILEPUT 
+      path: 'TestFileConnectors/'
+    - id: FILEDEL.FileDelConnectorTest
+      type: FILEDEL 
+      path: 'TestFileConnectors/'
     - id: FILEDEL.IN.FILE2FILE
       type: FILEDEL
       path: 'C:/temp/FILE2FILE_IN'
@@ -112,7 +97,3 @@ dbDataSources:
   type: DB
   user: 'admin'
   password: 'admin'
-keyStores:
-- id: notDefaultKS
-  path: 'c:\temp\jks.jks'
-  

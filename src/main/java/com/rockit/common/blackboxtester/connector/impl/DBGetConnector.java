@@ -1,9 +1,5 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
-
-
-
-
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 
@@ -21,22 +17,20 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 import com.sun.rowset.WebRowSetImpl;
 
-
 public class DBGetConnector extends DatabaseConnection implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(DBGetConnector.class.getName());
 
 	/**
-	 * Connector/Folder name/id 
+	 * Connector/Folder name/id
 	 */
-	private String name;
+	private String id;
 	private StringBuilder resultBuilder;
 	private String sqlQuery;
-
 
 	public DBGetConnector(String id) {
 		super(id);
 		DBConnector dbConCfg = (DBConnector) configuration().getConnectorById(id);
-		this.name = id;
+		this.id = id;
 		this.sqlQuery = dbConCfg.getQuery();
 
 	}
@@ -67,11 +61,7 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 
 	@Override
 	public String getId() {
-		return getType()  + getName();
-	}
-
-	public String getName() {
-		return this.name;
+		return this.id;
 	}
 
 	@Override

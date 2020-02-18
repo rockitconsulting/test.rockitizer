@@ -21,15 +21,15 @@ import com.rockit.common.blackboxtester.util.FileUtils;
 public class FileGetConnector implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(FileGetConnector.class.getName());
 
-	private String name;
+	private String id;
 	private String srcPath;
 	private String response;
 
 	/**
-	 * @param name  - FILEPut and key (connectorFolder)
+	 * @param id  - FILEPut and key (connectorFolder)
 	 */
 	public FileGetConnector(String id){
-		this.name = id;
+		this.id = id;
 		FileConnector cfg = (FileConnector) configuration().getConnectorById(id);
 		this.srcPath = cfg.getPath();
 	}
@@ -50,7 +50,7 @@ public class FileGetConnector implements ReadConnector {
 			response = Files.asCharSource(f, Charset.defaultCharset()).read();
 			
 		} catch (Exception e) {
-			LOGGER.error("[Connector:"+getName()+"] \t Connector error: " + getType(), e);
+			LOGGER.error("[Connector:"+getId()+"] \t Connector error: " + getType(), e);
 		} finally {
 		}
 
@@ -62,18 +62,20 @@ public class FileGetConnector implements ReadConnector {
 	public void setSrcPath(String srcPath) {
 		this.srcPath = srcPath;
 	}
+	
+
+	public String getSrcPath() {
+		return srcPath;
+	}
 
 	public String getType() {
 		return  Connectors.FILEGET.toString();
 	}
 
+
 	@Override
 	public String getId() {
-		return getName();
-	}
-
-	public String getName() {
-		return name;
+		return id;
 	}
 
 
@@ -88,5 +90,9 @@ public class FileGetConnector implements ReadConnector {
 		LOGGER.error("set method is not allowed");
 		throw new ConnectorException(new RuntimeException("set method is not allowed"));
 	}
+
+
+
+
 
 }

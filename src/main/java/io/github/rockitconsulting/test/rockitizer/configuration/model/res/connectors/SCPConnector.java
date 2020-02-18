@@ -21,6 +21,9 @@ public class SCPConnector extends BaseConnector  {
 	private String password = "@pwd";
 	private Types type;
 
+	public SCPConnector() {
+		super();
+	}
 	
 	public SCPConnector(File location) {
 		super(location);

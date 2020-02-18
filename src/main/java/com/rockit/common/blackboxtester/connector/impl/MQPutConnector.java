@@ -11,11 +11,11 @@ import com.rockit.common.blackboxtester.util.FileUtils;
 
 public class MQPutConnector extends MQAccessor implements WriteConnector {
 
-	private final String name;
+	private final String id;
 	
 	public MQPutConnector( String id) {
 		super(id);
-		this.name = id;
+		this.id = id;
 
 	}	
 
@@ -28,9 +28,7 @@ public class MQPutConnector extends MQAccessor implements WriteConnector {
 		}
 	}
 
-	public String getName() {
-		return name;
-	}
+
 	
 
 
@@ -40,7 +38,7 @@ public class MQPutConnector extends MQAccessor implements WriteConnector {
 
 	}
 	public String getId() {
-		return  getType() + getQName() ;
+		return  id ;
 	}
 	
 	public String getType() {

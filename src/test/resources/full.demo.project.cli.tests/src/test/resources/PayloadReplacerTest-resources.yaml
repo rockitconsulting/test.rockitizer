@@ -90,13 +90,6 @@ fileConnectors:
     - id: FILEGET.OUT.FILE2FILE
       type: FILEGET
       path: 'C:/temp/FILE2FILE_OUT'
-scpConnectors:
-  - id: SCPPUT.FILE
-    type: SCPPUT
-    path: '/home/wbirun/'
-    host: host
-    user: u
-    password: p 
 mqDataSources:
 - id: defaultMQ
   qmgr: QM1
@@ -115,4 +108,7 @@ dbDataSources:
 keyStores:
 - id: notDefaultKS
   path: 'c:\temp\jks.jks'
+payloadReplacer:
+  DATEPLACEHOLDER: 2020/02/20
+  KEY1: VALUE1
   

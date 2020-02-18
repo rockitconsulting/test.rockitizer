@@ -30,7 +30,7 @@ public class HTTPGetConnector implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(HTTPGetConnector.class.getName());
 
 	private StringBuilder resultBuilder;
-	private String name, urlStr;
+	private String id, urlStr;
 	private URL url;
 
 	public HTTPGetConnector(String id) {
@@ -38,7 +38,7 @@ public class HTTPGetConnector implements ReadConnector {
 				(io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration().getConnectorById(id);
 
 		
-		this.name = id;
+		this.id = id;
 		this.urlStr = cfg.getUrl();
 	}
 	@Override
@@ -89,13 +89,11 @@ public class HTTPGetConnector implements ReadConnector {
 		}
 	}
 
-	public String getName() {
-		return name;
-	}
+
 
 	@Override
 	public String getId() {
-		return getType() + getName();
+		return id;
 	}
 
 	@Override

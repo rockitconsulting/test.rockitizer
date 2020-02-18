@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.connector;
 
 import static org.junit.Assert.assertTrue;
+import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,12 +16,9 @@ import org.junit.Test;
 
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.impl.FileGetConnector;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class FileGetConnectorTest {
 
-	//TODO re-implement
-/*	
 	private String tesfilePath;
 
 	public static final Logger LOGGER = Logger.getLogger(FileGetConnectorTest.class.getName());
@@ -28,11 +26,14 @@ public class FileGetConnectorTest {
 	private FileGetConnector fileGetConnector;
 
 	@Before
-	public void setUp() {
+	public void before() {
+		TestObjectFactory.resetConfigurationToDefault();
 		fileGetConnector = new FileGetConnector("FILEGET.FileGetConnectorTest");
-		tesfilePath = ConfigurationHolder.configuration()
-				.getString(fileGetConnector.getName() + Constants.FILE_PATH_KEY);
+		tesfilePath = fileGetConnector.getSrcPath();
+
 	}
+		
+	
 
 	@Test
 	public void testConfig() {
@@ -83,12 +84,12 @@ public class FileGetConnectorTest {
 
 	@Test
 	public void testName() {
-		assertTrue(fileGetConnector.getName(), fileGetConnector.getName().equals("FILEGET.FileGetConnectorTest"));
+		assertTrue(fileGetConnector.getId(), fileGetConnector.getId().equals("FILEGET.FileGetConnectorTest"));
 	}
 
 	@Test
 	public void testId() {
 		assertTrue(fileGetConnector.getId(), fileGetConnector.getId().equals("FILEGET.FileGetConnectorTest"));
 	}
-*/
+
 }

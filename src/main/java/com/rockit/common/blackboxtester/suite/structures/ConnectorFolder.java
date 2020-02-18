@@ -40,7 +40,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 			for (File input : FileUtils.listFiles(getInFolder())) {
 				((WriteConnector) connector).setRequest(input);
-				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getName() + "] - Writing ...");
+				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
 				connector.proceed();
 				if (connector instanceof ReadConnector) {
 					saveResponse(connector, input.getName());
@@ -65,7 +65,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 			if (null != response) {
 //				LOGGER.info(getTestStepName()+"\t [connector:"+ connector.getName() +"] - Saving connector "+ connector.getName() +" content to output folder "  + getOutFolder() );
 				try {
-					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getName() + "] - Reading ...");
+					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 					Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + idx + ".txt"));
 				} catch (IOException e) {
 					LOGGER.error("can not write output file " + idx, e);
@@ -83,7 +83,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 		if (null != response) {
 			try {
-				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getName() + "] - Reading ...");
+				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 				Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + fileName));
 			} catch (IOException e) {
 				LOGGER.error("can not write output file " + fileName, e);

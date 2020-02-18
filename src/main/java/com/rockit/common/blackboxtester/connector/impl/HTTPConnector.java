@@ -40,7 +40,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	public static final Logger LOGGER = Logger.getLogger(HTTPConnector.class.getName());
 
 	private StringBuilder resultBuilder;
-	private String name, urlStr, method, contentType, userAgent, trustStore;
+	private String id, urlStr, method, contentType, userAgent, trustStore;
 
 	private Integer connectTimeOut;
 	private URL url;
@@ -53,7 +53,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 				(io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration().getConnectorById(id);
 		
 		
-		this.name = id;
+		this.id = id;
 		this.urlStr = cfg.getUrl();
 		this.method = cfg.getMethod();
 		this.contentType = cfg.getContentType();
@@ -201,13 +201,11 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		}
 	}
 
-	public String getName() {
-		return name;
-	}
+
 
 	@Override
 	public String getId() {
-		return getType() + getName();
+		return id;
 	}
 
 	@Override
