@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.connector;
 
 import static org.junit.Assert.assertTrue;
+import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,34 +20,29 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 public class FilePutConnectorTest {
 
 	public static final Logger LOGGER = Logger.getLogger(FilePutConnectorTest.class.getName());
-//TODO re-implement
-/*	
 	private FilePutConnector filePutConnector;
 
 	@Before
-	public void setUp() {
+	public void before() {
+		TestObjectFactory.resetConfigurationToDefault();
 		filePutConnector = new FilePutConnector("FILEPUT.FilePutConnectorTest");
 
 	}
 
-	
-	
 	@Test
-	public void testPut() throws URISyntaxException, IOException  {
+	public void testPut() throws URISyntaxException, IOException {
 
 		Path SRC = Paths.get(ClassLoader.getSystemResource("TestFileConnectors/test1.xml").toURI());
 		File srcFile = new File(SRC.toString());
 		assertTrue(srcFile.exists());
 		filePutConnector.setRequest(srcFile);
-		
-		String destPath=System.getProperty("java.io.tmpdir")+File.separator+
-				ConfigurationHolder.configuration().getString(filePutConnector.getName() + Constants.FILE_PATH_KEY); 
+
+		String destPath = System.getProperty("java.io.tmpdir") + File.separator + filePutConnector.getDestPath();
 		filePutConnector.setDestPath(destPath);
 		filePutConnector.proceed();
 		File resFile = new File(destPath);
 		assertTrue(resFile.exists());
 		assertTrue(Files.equal(srcFile, resFile));
-		
 
 	}
 
@@ -57,13 +53,11 @@ public class FilePutConnectorTest {
 
 	@Test
 	public void testName() {
-		assertTrue(filePutConnector.getName(), filePutConnector.getName().equals("FILEPUT.FilePutConnectorTest"));
+		assertTrue(filePutConnector.getId(), filePutConnector.getId().equals("FILEPUT.FilePutConnectorTest"));
 	}
 
 	@Test
 	public void testId() {
 		assertTrue(filePutConnector.getId(), filePutConnector.getId().equals("FILEPUT.FilePutConnectorTest"));
 	}
-
-*/
 }

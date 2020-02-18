@@ -76,4 +76,8 @@ public class FilePutConnector implements WriteConnector {
 
 	}
 
+	public String getDestPath() {
+		return destPath;
+	}
+
 }
