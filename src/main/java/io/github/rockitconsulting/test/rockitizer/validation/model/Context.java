@@ -9,14 +9,22 @@ public class Context {
 	private String testStep;
 	private String connector;
 	
+	@SuppressWarnings("unused")
 	private Context() {}
 	
-
+	//	TODO separate DS and connector contexts, basically only the string representation is relevant, thus can be moved to common interfaces
 	public Context(File connectorFolder) {
 		connector = connectorFolder.getName();
 		testStep = connectorFolder.getParentFile().getName();
 		testCase  = connectorFolder.getParentFile().getParentFile().getName();
 		rootPath  = connectorFolder.getParentFile().getParentFile().getParentFile().getAbsolutePath();
+	}
+
+	public Context(String dataSourceId) {
+		connector = dataSourceId;
+		testStep = dataSourceId;
+		testCase  = dataSourceId;
+		rootPath  = dataSourceId;
 	}
 	
 	public String getRootPath() {

@@ -1,6 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors;
 
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.io.File;
 import java.util.List;
@@ -63,8 +65,8 @@ public class MQConnector extends BaseConnector  {
 
 
 	@Override
-	public Map<String, List<String>> validate() {
-		return ValidationUtils.checkValid(getValidationContext(), (Map<String, String>) ImmutableMap.of(
+	public Map<Context, List<Message>> validate() {
+		return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
 				"queue", queue, 
 				"dsRefId", dsRefId
 				));

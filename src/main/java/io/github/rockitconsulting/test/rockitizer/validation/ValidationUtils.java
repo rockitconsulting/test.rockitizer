@@ -16,11 +16,11 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class ValidationUtils {
 
-	private static void checkValid(String paramName, String paramValue, List<String> messages) {
+	private static void checkValid(String paramName, String paramValue, List<Message> messages) {
 		if (paramValue == null) {
-			messages.add(" mandatory param [" + paramName + "] cannot be 'null'");
+			messages.add(new Message( Message.LEVEL.ERROR, " mandatory param [" + paramName + "] cannot be 'null'") );
 		} else if (paramValue.startsWith("@") && paramValue.endsWith("@")) {
-			messages.add(" mandatory param [" + paramName + "] with value '" + paramValue + "' must exist and cannot contain @placeholders@");
+			messages.add( new Message( Message.LEVEL.ERROR, " mandatory param [" + paramName + "] with value '" + paramValue + "' must exist and cannot contain @placeholders@") );
 		}
 	}
 
@@ -32,15 +32,15 @@ public class ValidationUtils {
 	 * @param fields
 	 * @return
 	 */
-	public static Map<String, List<String>> checkValid(String context, Map<String, String> fields) {
+	public static Map<Context, List<Message>> checkValid(Context context, Map<String, String> fields) {
 
-		List<String> messages = new ArrayList<>();
+		List<Message> messages = new ArrayList<>();
 
 		fields.forEach((f, v) -> {
 			ValidationUtils.checkValid(f, v, messages);
 		});
 
-		Map<String, List<String>> res = new LinkedHashMap<String, List<String>>();
+		Map<Context, List<Message>> res = new LinkedHashMap<>();
 		if (!messages.isEmpty()) {
 			res.put(context, messages);
 		}

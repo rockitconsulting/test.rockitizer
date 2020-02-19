@@ -1,6 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors;
 
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.beans.Transient;
 import java.io.File;
@@ -27,13 +29,14 @@ public abstract class BaseConnector implements Validatable {
 	
 	private String id;
 	
-	private String context;
+	private Context context;
 	
 	public BaseConnector () {
 	}
 	
 	public BaseConnector (File location) {
 		this.id = location.getName();
+		context = new Context(location);
 	}
 
 	public String getId() {
@@ -52,20 +55,16 @@ public abstract class BaseConnector implements Validatable {
 	 * Custom validation logic
 	 * @return
 	 */
-	public abstract Map<String, List<String>> validate();
+	public abstract Map<Context, List<Message>> validate();
 	
 
-	public String getValidationContext() {
-		return getContext()!=null? getContext() + getId() : getId();
-	}
-
 	@Transient
-	public String getContext() {
+	public Context getContext() {
 		return context;
 	}
 
 	@Transient
-	public void setContext(String context) {
+	public void setContext(Context context) {
 		this.context = context;
 	}
 

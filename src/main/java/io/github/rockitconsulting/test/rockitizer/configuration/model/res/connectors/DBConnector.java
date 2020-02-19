@@ -1,6 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors;
 
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.io.File;
 import java.util.List;
@@ -60,15 +62,15 @@ public class DBConnector extends BaseConnector {
 	}
 
 	@Override
-	public Map<String, List<String>> validate() {
+	public Map<Context, List<Message>> validate() {
 		
 		if(type == Types.DBGET) {
-			return ValidationUtils.checkValid(getValidationContext(), (Map<String, String>) ImmutableMap.of(
+			return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
 					"query", query, 
 					"dsRefId", dsRefId
 					));
 		} else {
-			return ValidationUtils.checkValid(getValidationContext(), (Map<String, String>) ImmutableMap.of(
+			return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
 					"dsRefId", dsRefId
 					));
 			

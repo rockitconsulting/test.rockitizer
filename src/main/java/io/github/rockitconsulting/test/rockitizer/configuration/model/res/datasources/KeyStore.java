@@ -2,6 +2,8 @@ package io.github.rockitconsulting.test.rockitizer.configuration.model.res.datas
 
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.util.List;
 import java.util.Map;
@@ -47,10 +49,9 @@ public class KeyStore implements Validatable {
 	
 	
 	@Override
-	public String getValidationContext() {
-		return "KeyStore with ID:" + id;
-	}
-	
+	public Context getContext() {
+		return new Context(getId());
+	}	
 	@Override
 	public boolean isValid() {
 		return validate().size()==0;
@@ -58,8 +59,8 @@ public class KeyStore implements Validatable {
 	
 	
 	@Override
-	public Map<String, List<String>> validate() {
-		return ValidationUtils.checkValid(getValidationContext(), (Map<String, String>) ImmutableMap.of(
+	public Map<Context, List<Message>> validate() {
+		return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
 				"path", path, 
 				"id", id
 				));
