@@ -22,31 +22,30 @@ public class ResourcesHolderCLITest {
 	String rootPathTestSrc = rootPath + relPath;
 
 	ResourcesHolderCLI rhCLI = new ResourcesHolderCLI();
-	
+
 	@Before
 	public void before() {
 		rhCLI.setAbsolutePath(rootPath);
 		rhCLI.setRelativePath(relPath);
 		rhCLI.setResourcesFileName("resources-generated.yaml");
-		log.info ( rhCLI.contextAsString() );
+		log.info(rhCLI.contextAsString());
 
-		
-		
 	}
 
-	
-	
 	@Test
 	public void readResources() throws IOException {
 		ResourcesHolder rh1 = rhCLI.generateResources();
-		log.info ( " rh1 " + rh1.toString() );
-		
+		log.info(" rh1 " + rh1.toString());
+
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
-		log.info ( " rh2 " + rh1.toString() );
-		
-		Assert.assertTrue( "db:  " +  rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors().size());
-		Assert.assertTrue("http: " + rh1.getHttpConnectors().size() +"/"+ rh2.getHttpConnectors().size(), rh1.getHttpConnectors().size() == rh2.getHttpConnectors().size());
-		Assert.assertTrue("mq: " + rh1.getMqConnectors().size() +"/"+ rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2.getMqConnectors().size());
+		log.info(" rh2 " + rh2.toString());
+
+		Assert.assertTrue("db:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors()
+				.size());
+		Assert.assertTrue("http: " + rh1.getHttpConnectors().size() + "/" + rh2.getHttpConnectors().size(), rh1.getHttpConnectors().size() == rh2
+				.getHttpConnectors().size());
+		Assert.assertTrue("mq: " + rh1.getMqConnectors().size() + "/" + rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2.getMqConnectors()
+				.size());
 	}
 
 	@Test
@@ -54,27 +53,25 @@ public class ResourcesHolderCLITest {
 		rhCLI.setResourcesFileName("resources-generated-01.yaml");
 		ResourcesHolder rh1 = rhCLI.generateResources();
 		Assert.assertNotNull(rh1);
-		Assert.assertTrue( new File(rhCLI.getFullPath()+ rhCLI.getResourcesFileName()).exists());
-		
+		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());
+
 	}
 
-	
 	@Test
 	public void generateResourcesWithPlaceholders() throws IOException {
-		
-		Map<String, String > replacements = new HashMap<>();
+
+		Map<String, String> replacements = new HashMap<>();
 		replacements.put("KEY1", "VALUE1");
 		replacements.put("KEY2", "VALUE2");
-		
+
 		rhCLI.setResourcesFileName("resources-generated-with-payload-replacements-01.yaml");
 		ResourcesHolder rh1 = rhCLI.generateResources(replacements);
-		
+
 		Assert.assertNotNull(rh1);
-		Assert.assertTrue( new File(rhCLI.getFullPath()+ rhCLI.getResourcesFileName()).exists());
-		
+		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());
+
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated-with-payload-replacements-01.yaml");
 		Assert.assertTrue(rh1.getPayloadReplacer().size() == rh2.getPayloadReplacer().size());
 	}
-	
 
 }
