@@ -36,9 +36,12 @@ public class ResourcesHolderCLITest {
 	public void readResources() throws IOException {
 		ResourcesHolder rh1 = rhCLI.generateResources();
 		log.info(" rh1 " + rh1.toString());
-
+		log.info(" rh1 db " + rh1.getDbConnectors());
+		
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
 		log.info(" rh2 " + rh2.toString());
+		
+		log.info(" rh2 db " + rh2.getDbConnectors());
 
 		Assert.assertTrue("db:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors()
 				.size());
