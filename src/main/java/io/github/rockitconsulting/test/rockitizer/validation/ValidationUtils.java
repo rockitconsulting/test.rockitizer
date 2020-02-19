@@ -1,11 +1,13 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import static io.github.rockitconsulting.test.rockitizer.validation.model.ValidationHolder.validationHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
-import static io.github.rockitconsulting.test.rockitizer.validation.model.ValidationHolder.validationHolder;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,6 +50,28 @@ public class ValidationUtils {
 
 	}
 
+	
+	/**
+	 * Check if the testcases are synchron with resources description
+	 * @throws IOException
+	 */
+	public static void validateConnectorRefExists() throws IOException {
+		
+		configuration().getTestCasesHolder().getTestCases().forEach(tc -> tc.getTestSteps().forEach(ts -> ts.getConnectorRefs().forEach(conRef -> {
+			if (configuration().getResourcesHolder().findResourceByRef(conRef) == null) {
+				
+				validationHolder().add(
+						new Context(conRef.getConRefId()),
+						ImmutableList
+								.<Message> builder()
+								.add(new Message(Message.LEVEL.ERROR, "Connector " + conRef.getConRefId() + " exists in testcases but not in resources")).build());
+				
+			}
+		})));
+		
+	}
+
+	
 	/**
 	 * Git does not allow empty folders to be checked in. bugfixing it.
 	 */
