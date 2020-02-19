@@ -44,9 +44,9 @@ public class ResourcesHolderCLITest {
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
 		log.info ( " rh2 " + rh1.toString() );
 		
-		Assert.assertTrue(rh1.getDbConnectors().size() == rh2.getDbConnectors().size());
-		Assert.assertTrue(rh1.getHttpConnectors().size() == rh2.getHttpConnectors().size());
-		Assert.assertTrue(rh1.getMqConnectors().size() == rh2.getMqConnectors().size());
+		Assert.assertTrue( "db:  " +  rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors().size());
+		Assert.assertTrue("http: " + rh1.getHttpConnectors().size() +"/"+ rh2.getHttpConnectors().size(), rh1.getHttpConnectors().size() == rh2.getHttpConnectors().size());
+		Assert.assertTrue("mq: " + rh1.getMqConnectors().size() +"/"+ rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2.getMqConnectors().size());
 	}
 
 	@Test
