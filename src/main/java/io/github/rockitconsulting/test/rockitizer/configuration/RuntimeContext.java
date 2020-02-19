@@ -1,4 +1,4 @@
-package io.github.rockitconsulting.test.rockitizer.common;
+package io.github.rockitconsulting.test.rockitizer.configuration;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
@@ -13,24 +13,24 @@ public class RuntimeContext {
 	private String absolutePath = ConfigUtils.getAbsoluteRootPath();
 	private String relativePath = "";
 
-	public String getFullPath() {
+	String getFullPath() {
 		return absolutePath + relativePath;
 	}
 
 
-	public String getAbsolutePath() {
+	String getAbsolutePath() {
 		return absolutePath;
 	}
 
-	public void setAbsolutePath(String absolutePath) {
+	void setAbsolutePath(String absolutePath) {
 		this.absolutePath = absolutePath;
 	}
 
-	public String getRelativePath() {
+	String getRelativePath() {
 		return relativePath;
 	}
 
-	public void setRelativePath(String relativePath) {
+	void setRelativePath(String relativePath) {
 		this.relativePath = relativePath;
 	}
 

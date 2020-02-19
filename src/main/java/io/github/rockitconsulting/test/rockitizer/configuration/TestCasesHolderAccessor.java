@@ -1,6 +1,5 @@
-package io.github.rockitconsulting.test.rockitizer.api;
+package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.common.RuntimeContext;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.Payload;

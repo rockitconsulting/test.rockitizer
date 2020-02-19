@@ -1,6 +1,6 @@
-package io.github.rockitconsulting.test.rockitizer.api;
+package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.api.ResourcesHolderAccessor;
+import io.github.rockitconsulting.test.rockitizer.configuration.ResourcesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 

@@ -1,6 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
-import io.github.rockitconsulting.test.rockitizer.common.RuntimeContext;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
@@ -8,14 +8,14 @@ import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
 
-public class CommonCLI extends RuntimeContext {
+public class CommonCLI {
 	public static Logger log = Logger.getLogger(CommonCLI.class.getName());
 
 	/**
 	 * CLI relevant: print testsuite
 	 */
 	public void printAllTests() {
-		Iterable<File> testCases = FileUtils.listFolders(new File(getFullPath()));
+		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
 		testCases.forEach(tcase -> {
 			log.info("====================TC=======================================");
 			log.info(tcase.getName());

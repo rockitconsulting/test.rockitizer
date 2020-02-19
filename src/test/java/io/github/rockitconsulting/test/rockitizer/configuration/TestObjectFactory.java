@@ -1,8 +1,8 @@
-package io.github.rockitconsulting.test.rockitizer.cli;
+package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.api.ResourcesHolderAccessor;
-import io.github.rockitconsulting.test.rockitizer.api.TestCasesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.ResourcesHolderAccessor;
+import io.github.rockitconsulting.test.rockitizer.configuration.TestCasesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 
@@ -17,6 +17,13 @@ public class TestObjectFactory {
 	public static void resetConfigurationToDefault() {
 		ResourcesHolderAccessor rhCLI = new ResourcesHolderAccessor();
 		TestCasesHolderAccessor tcCLI = new TestCasesHolderAccessor();
+		Configuration.reset(rhCLI, tcCLI);
+	}
+
+
+	public static void resetConfigurationToContextDemoPrj() {
+		ResourcesHolderAccessor rhCLI = TestObjectFactory.createResourcesHolderCLI(rootPath, relPath, "resources.yaml");
+		TestCasesHolderAccessor tcCLI = TestObjectFactory.createTestCasesHolderCLI(rootPath, relPath, "testcases.yaml");
 		Configuration.reset(rhCLI, tcCLI);
 	}
 

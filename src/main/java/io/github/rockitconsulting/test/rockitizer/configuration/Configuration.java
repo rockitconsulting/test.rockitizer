@@ -1,7 +1,5 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.api.ResourcesHolderAccessor;
-import io.github.rockitconsulting.test.rockitizer.api.TestCasesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
@@ -175,6 +173,10 @@ public class Configuration {
 	public Map<String, String> getPayloadReplacements() {
 		return rh.getPayloadReplacer();
 
+	}
+	
+	public String getFullPath() {
+		return getRhApi().getFullPath();
 	}
 	
 }

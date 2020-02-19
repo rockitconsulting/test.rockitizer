@@ -1,26 +1,32 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class CommonCLITest {
 	public static Logger log = Logger.getLogger(CommonCLITest.class.getName());
 
-	final String rootPath  = ConfigUtils.getAbsoluteRootPath();
-	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
-	String rootPathTestSrc = rootPath + relPath;
-
 	CommonCLI commonCLI = new CommonCLI();
 	
+
 	@Before
 	public void before() {
-		commonCLI.setAbsolutePath(rootPath);
-		commonCLI.setRelativePath(relPath);
-	}
+		TestObjectFactory.resetConfigurationToContextDemoPrj();
+		Assert.assertNotNull(configuration());
+		
+		System.out.println(" --> "+ configuration().getFullPath() );
+		System.out.println(" --> "+ configuration().getRhApi().getResourcesFileName() );
+		
+		configuration().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
+		configuration().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
 
+		
+	}
 
 	@Test
 	public void testPrintTestSuite() {

@@ -2,7 +2,7 @@ package com.rockit.common.blackboxtester.connector;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
+import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import java.io.File;
 import java.io.IOException;

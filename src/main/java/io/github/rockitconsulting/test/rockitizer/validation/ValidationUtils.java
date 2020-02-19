@@ -55,7 +55,7 @@ public class ValidationUtils {
 	 * Check if the testcases are synchron with resources description
 	 * @throws IOException
 	 */
-	public static void validateConnectorRefExists() throws IOException {
+	public static void validateConnectorRefExists()  {
 		
 		configuration().getTestCasesHolder().getTestCases().forEach(tc -> tc.getTestSteps().forEach(ts -> ts.getConnectorRefs().forEach(conRef -> {
 			if (configuration().getResourcesHolder().findResourceByRef(conRef) == null) {
@@ -75,9 +75,9 @@ public class ValidationUtils {
 	/**
 	 * Git does not allow empty folders to be checked in. bugfixing it.
 	 */
-	public static void cleanGitIgnore(File root) {
+	public static void cleanGitIgnore() {
 
-		Iterable<File> testCases = FileUtils.listFolders(root);
+		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
 
 		testCases.forEach(tcase -> {
 			FileUtils.listFolders(tcase).forEach(tstep -> {
@@ -101,9 +101,9 @@ public class ValidationUtils {
 	/**
 	 * Git does not allow empty folders to be checked in. bugfixing it.
 	 */
-	public static void fixGitEmptyFoldersProblem(File root) {
+	public static void fixGitEmptyFoldersProblem() {
 
-		Iterable<File> testCases = FileUtils.listFolders(root);
+		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
 
 		testCases.forEach(tcase -> {
 			FileUtils.listFolders(tcase).forEach(

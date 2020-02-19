@@ -1,7 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
@@ -29,7 +28,7 @@ public class ConfigurationTest {
 		Assert.assertEquals(configuration().getTchApi().getTestcasesFileName(), "ConfigurationTest-testcases.yaml");
 		Assert.assertEquals(configuration().getRhApi().getResourcesFileName(), "ConfigurationTest-resources.yaml");
 		
-		System.out.println(" --> "+ configuration().getRhApi().getFullPath() );
+		System.out.println(" --> "+ configuration().getFullPath() );
 		System.out.println(" --> "+ configuration().getRhApi().getResourcesFileName() );
 		
 		configuration().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );

@@ -3,7 +3,7 @@ package com.rockit.common.blackboxtester.suite.configuration;
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
+import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import java.io.File;
 import java.io.IOException;

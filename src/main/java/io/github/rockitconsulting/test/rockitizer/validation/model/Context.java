@@ -21,9 +21,6 @@ public class Context {
 	}
 
 	public Context(String dataSourceId) {
-		connector = dataSourceId;
-		testStep = dataSourceId;
-		testCase  = dataSourceId;
 		rootPath  = dataSourceId;
 	}
 	
@@ -44,20 +41,23 @@ public class Context {
 
 	@Override
 	public String toString() {
-		return "Context [rootPath=" + rootPath + ", testCase=" + testCase + ", testStep=" + testStep + ", connector=" + connector + "]";
+		return "Context [ " + (rootPath!=null?"rootPath=" + rootPath:"") +
+				 (testCase!=null?", testCase=" + testCase+",":"") +
+				 (testStep!=null?", testStep=" + testStep+",":"") +
+				 (connector!=null?", connector=" + connector+",":"") +
+				  "]";
 	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((connector == null) ? 0 : connector.hashCode());
+		result = prime * result + ((rootPath == null) ? 0 : rootPath.hashCode());
 		result = prime * result + ((testCase == null) ? 0 : testCase.hashCode());
 		result = prime * result + ((testStep == null) ? 0 : testStep.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -73,6 +73,11 @@ public class Context {
 				return false;
 		} else if (!connector.equals(other.connector))
 			return false;
+		if (rootPath == null) {
+			if (other.rootPath != null)
+				return false;
+		} else if (!rootPath.equals(other.rootPath))
+			return false;
 		if (testCase == null) {
 			if (other.testCase != null)
 				return false;
@@ -85,5 +90,6 @@ public class Context {
 			return false;
 		return true;
 	}
+
 	
 }

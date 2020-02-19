@@ -1,10 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
-import io.github.rockitconsulting.test.rockitizer.cli.TestObjectFactory;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 import io.github.rockitconsulting.test.rockitizer.validation.model.ValidationHolder;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
@@ -17,22 +15,20 @@ import com.google.common.base.Joiner;
 public class ValidationUtilsTest {
 	public static Logger log = Logger.getLogger(ValidationUtilsTest.class.getName());
 
-	final String rootPath = ConfigUtils.getAbsoluteRootPath();
-	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
-
-	String rootPathTestSrc = rootPath + relPath;
+	
 
 	
 	@Before
 	public void before () {
+		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		ValidationHolder.reset();
 	}
 	
 	@Test
 	public void cleanGitIgnore() throws IOException {
-		ValidationUtils.fixGitEmptyFoldersProblem(new File(rootPathTestSrc));
-		ValidationUtils.cleanGitIgnore(new File(rootPathTestSrc));
-		ValidationUtils.fixGitEmptyFoldersProblem(new File(rootPathTestSrc));
+		ValidationUtils.fixGitEmptyFoldersProblem();
+		ValidationUtils.cleanGitIgnore();
+		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s1 = ValidationHolder.validationHolder().size();
 		Assert.assertEquals(s1, 20);
 	
@@ -43,12 +39,11 @@ public class ValidationUtilsTest {
 	
 	@Test
 	public void checkTesCaseStructureIsValid() throws IOException {
-		ValidationUtils.cleanGitIgnore(new File(rootPathTestSrc));
-		
-		ValidationUtils.fixGitEmptyFoldersProblem(new File(rootPathTestSrc));
+		ValidationUtils.cleanGitIgnore();
+		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s1 = ValidationHolder.validationHolder().size();
 		Assert.assertEquals(s1, 20);
-		ValidationUtils.fixGitEmptyFoldersProblem(new File(rootPathTestSrc));
+		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s2 = ValidationHolder.validationHolder().size();
 		Assert.assertEquals(s2, 20);
 		Assert.assertTrue("size stays the same, messages  should be added while context exists" + s1 + "==" + s2, s1==s2);

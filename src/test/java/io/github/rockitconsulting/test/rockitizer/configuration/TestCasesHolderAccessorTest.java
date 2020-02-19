@@ -1,6 +1,6 @@
-package io.github.rockitconsulting.test.rockitizer.api;
+package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.api.TestCasesHolderAccessor;
+import io.github.rockitconsulting.test.rockitizer.configuration.TestCasesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
