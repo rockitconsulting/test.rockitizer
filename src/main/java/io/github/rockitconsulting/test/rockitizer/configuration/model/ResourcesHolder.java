@@ -64,15 +64,15 @@ import java.util.Map;
 public class ResourcesHolder  {
 	
 	private Map<String, String> payloadReplacer = new HashMap<>();
-	private List<DBConnector> dbConnectors = new ArrayList<>();
-	private List<HTTPConnector> httpConnectors = new ArrayList<>();
-	private List<FileConnector> fileConnectors = new ArrayList<>();
-	private List<MQConnector> mqConnectors = new ArrayList<>();
-	private List<SCPConnector> scpConnectors = new ArrayList<>();
+	private List<DBConnector>   dbConnectors 	= new ArrayList<>();
+	private List<HTTPConnector> httpConnectors 	= new ArrayList<>();
+	private List<FileConnector> fileConnectors 	= new ArrayList<>();
+	private List<MQConnector>   mqConnectors 	= new ArrayList<>();
+	private List<SCPConnector>  scpConnectors	= new ArrayList<>();
 	
-	private List<MQDataSource> mqDataSources =  new ArrayList<>();
-	private List<DBDataSource> dbDataSources =  new ArrayList<>();
-	private List<KeyStore> keyStores =  new ArrayList<>();
+	private List<MQDataSource> 	mqDataSources =  new ArrayList<>();
+	private List<DBDataSource> 	dbDataSources =  new ArrayList<>();
+	private List<KeyStore> 		keyStores 	  =  new ArrayList<>();
 
 	public ResourcesHolder() {}
 
@@ -308,18 +308,19 @@ public class ResourcesHolder  {
 	
 	
 	
-/*
+
 
 	@Override
 	public String toString() {
-		return "TestSuite " + System.lineSeparator() +" [ suiteMode=" + suiteMode + System.lineSeparator() 
+		return this.getClass().getSimpleName() + System.lineSeparator() +" [ "
 				+ ( mqDataSources.isEmpty()?"":", mqDataSources="+ mqDataSources + System.lineSeparator()) 
 				+ ( dbDataSources.isEmpty()?"":", dbDataSources="+ dbDataSources + System.lineSeparator() )
 				+ ( keyStores.isEmpty()?"":", keyStores="+ keyStores +  System.lineSeparator())
-				+ ( testCases.isEmpty()?"":", testCases="+ testCases + System.lineSeparator() )
+				+ ( scpConnectors.isEmpty()?"":", scpConnectors="+ scpConnectors + System.lineSeparator() )
+				+ ( payloadReplacer.isEmpty()?"":", payloadReplacer="+ payloadReplacer + System.lineSeparator() )
 				+ "]";
 	}
-*/	
+
 	
 	
 	

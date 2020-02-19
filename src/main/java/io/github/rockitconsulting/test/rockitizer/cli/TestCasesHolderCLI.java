@@ -17,6 +17,9 @@ public class TestCasesHolderCLI extends RuntimeContextCLI {
 
 	public static Logger log = Logger.getLogger(TestCasesHolderCLI.class.getName());
 
+	private String testcasesFileName = "testcases.yaml";
+
+	
 	/**
 	 * Reads yam configuration into the holder object
 	 * CLI relevant: instantiate Resources from yaml
@@ -65,6 +68,15 @@ public class TestCasesHolderCLI extends RuntimeContextCLI {
 		return holder;
 	}
 
+	public String getTestcasesFileName() {
+		return testcasesFileName;
+	}
+
+	void setTestcasesFileName(String testcasesFileName) {
+		this.testcasesFileName = testcasesFileName;
+	}
+	
+	
 	public String contextAsString() {
 		return "[ filename: " + getTestcasesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() + "]";
 

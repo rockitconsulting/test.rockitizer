@@ -24,6 +24,8 @@ public class ResourcesHolderCLI extends RuntimeContextCLI {
 
 	public static Logger log = Logger.getLogger(ResourcesHolderCLI.class.getName());
 
+	private String resourcesFileName = "resources.yaml";
+
 	/**
 	 * Reads yam configuration into the holder object
 	 * CLI relevant: instantiate Resources from yaml
@@ -155,6 +157,13 @@ public class ResourcesHolderCLI extends RuntimeContextCLI {
 		}
 	}
 
+	public String getResourcesFileName() {
+		return resourcesFileName;
+	}
+
+	void setResourcesFileName(String resourcesFileName) {
+		this.resourcesFileName = resourcesFileName;
+	}
 
 
 

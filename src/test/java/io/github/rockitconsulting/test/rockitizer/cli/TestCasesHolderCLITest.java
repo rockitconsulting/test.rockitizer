@@ -43,7 +43,7 @@ public class TestCasesHolderCLITest {
 		tcCLI.setTestcasesFileName("testcases-generated-01.yaml");
 		TestCasesHolder tch1 = tcCLI.generateResources();
 		Assert.assertNotNull(tch1);
-		Assert.assertTrue( new File(tcCLI.getFullPath()+ tcCLI.getResourcesFileName()).exists());
+		Assert.assertTrue( new File(tcCLI.getFullPath()+ tcCLI.getTestcasesFileName()).exists());
 		
 	}
 

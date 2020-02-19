@@ -28,6 +28,9 @@ public class ResourcesHolderCLITest {
 		rhCLI.setAbsolutePath(rootPath);
 		rhCLI.setRelativePath(relPath);
 		rhCLI.setResourcesFileName("resources-generated.yaml");
+		log.info ( rhCLI.contextAsString() );
+
+		
 		
 	}
 
@@ -36,7 +39,11 @@ public class ResourcesHolderCLITest {
 	@Test
 	public void readResources() throws IOException {
 		ResourcesHolder rh1 = rhCLI.generateResources();
+		log.info ( " rh1 " + rh1.toString() );
+		
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
+		log.info ( " rh2 " + rh1.toString() );
+		
 		Assert.assertTrue(rh1.getDbConnectors().size() == rh2.getDbConnectors().size());
 		Assert.assertTrue(rh1.getHttpConnectors().size() == rh2.getHttpConnectors().size());
 		Assert.assertTrue(rh1.getMqConnectors().size() == rh2.getMqConnectors().size());
@@ -67,9 +74,6 @@ public class ResourcesHolderCLITest {
 		
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated-with-payload-replacements-01.yaml");
 		Assert.assertTrue(rh1.getPayloadReplacer().size() == rh2.getPayloadReplacer().size());
-		
-		
-		
 	}
 	
 

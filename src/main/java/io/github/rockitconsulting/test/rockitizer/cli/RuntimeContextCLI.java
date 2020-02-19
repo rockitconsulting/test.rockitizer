@@ -13,8 +13,6 @@ public class RuntimeContextCLI {
 
 	static final String OUTPUT = Constants.OUTPUT_FOLDER;
 
-	private String resourcesFileName = "resources.yaml";
-	private String testcasesFileName = "testcases.yaml";
 
 	private String absolutePath = ConfigUtils.getAbsoluteRootPath();
 	private String relativePath = "";
@@ -23,13 +21,6 @@ public class RuntimeContextCLI {
 		return absolutePath + relativePath;
 	}
 
-	public String getResourcesFileName() {
-		return resourcesFileName;
-	}
-
-	void setResourcesFileName(String resourcesFileName) {
-		this.resourcesFileName = resourcesFileName;
-	}
 
 	public String getAbsolutePath() {
 		return absolutePath;
@@ -47,12 +38,5 @@ public class RuntimeContextCLI {
 		this.relativePath = relativePath;
 	}
 
-	public String getTestcasesFileName() {
-		return testcasesFileName;
-	}
-
-	void setTestcasesFileName(String testcasesFileName) {
-		this.testcasesFileName = testcasesFileName;
-	}
 
 }
