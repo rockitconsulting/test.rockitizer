@@ -23,8 +23,8 @@ public class ConnectorFactoryTest {
 	public void before() {
 		TestObjectFactory.resetConfigurationToDefault();
 		Assert.assertNotNull(configuration());
-		Assert.assertEquals(configuration().getTchCLI().getTestcasesFileName(), "testcases.yaml");
-		Assert.assertEquals(configuration().getRhCLI().getResourcesFileName(), "resources.yaml");
+		Assert.assertEquals(configuration().getTchApi().getTestcasesFileName(), "testcases.yaml");
+		Assert.assertEquals(configuration().getRhApi().getResourcesFileName(), "resources.yaml");
 	}
 
 

@@ -45,8 +45,8 @@ public class PayloadReplacerTest {
 	public void before() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName());
 		Assert.assertNotNull(configuration());
-		Assert.assertEquals(configuration().getTchCLI().getTestcasesFileName(), "PayloadReplacerTest-testcases.yaml");
-		Assert.assertEquals(configuration().getRhCLI().getResourcesFileName(), "PayloadReplacerTest-resources.yaml");
+		Assert.assertEquals(configuration().getTchApi().getTestcasesFileName(), "PayloadReplacerTest-testcases.yaml");
+		Assert.assertEquals(configuration().getRhApi().getResourcesFileName(), "PayloadReplacerTest-resources.yaml");
 	}
 
 	

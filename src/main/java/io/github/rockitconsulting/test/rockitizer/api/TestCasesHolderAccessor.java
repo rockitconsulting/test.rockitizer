@@ -1,5 +1,6 @@
-package io.github.rockitconsulting.test.rockitizer.cli;
+package io.github.rockitconsulting.test.rockitizer.api;
 
+import io.github.rockitconsulting.test.rockitizer.common.RuntimeContext;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.Payload;
@@ -13,9 +14,11 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-public class TestCasesHolderCLI extends RuntimeContextCLI {
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-	public static Logger log = Logger.getLogger(TestCasesHolderCLI.class.getName());
+public class TestCasesHolderAccessor extends RuntimeContext {
+
+	public static Logger log = Logger.getLogger(TestCasesHolderAccessor.class.getName());
 
 	private String testcasesFileName = "testcases.yaml";
 
@@ -49,7 +52,7 @@ public class TestCasesHolderCLI extends RuntimeContextCLI {
 
 			FileUtils.listFolders(tcFolder).forEach(tsFolder -> {
 				TestStep testStep = new TestStep(tsFolder);
-				if (testStep.getTestStepName().equalsIgnoreCase(OUTPUT)) {
+				if (testStep.getTestStepName().equalsIgnoreCase(Constants.OUTPUT_FOLDER)) {
 					return;
 				}
 				testCase.getTestSteps().add(testStep);
@@ -72,7 +75,7 @@ public class TestCasesHolderCLI extends RuntimeContextCLI {
 		return testcasesFileName;
 	}
 
-	void setTestcasesFileName(String testcasesFileName) {
+	public void setTestcasesFileName(String testcasesFileName) {
 		this.testcasesFileName = testcasesFileName;
 	}
 	

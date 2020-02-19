@@ -1,5 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import io.github.rockitconsulting.test.rockitizer.common.RuntimeContext;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
@@ -7,7 +8,7 @@ import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
 
-public class CommonCLI extends RuntimeContextCLI {
+public class CommonCLI extends RuntimeContext {
 	public static Logger log = Logger.getLogger(CommonCLI.class.getName());
 
 	/**

@@ -1,5 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import io.github.rockitconsulting.test.rockitizer.api.ResourcesHolderAccessor;
+import io.github.rockitconsulting.test.rockitizer.api.TestCasesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
@@ -13,30 +15,30 @@ public class TestObjectFactory {
 
 
 	public static void resetConfigurationToDefault() {
-		ResourcesHolderCLI rhCLI = new ResourcesHolderCLI();
-		TestCasesHolderCLI tcCLI = new TestCasesHolderCLI();
+		ResourcesHolderAccessor rhCLI = new ResourcesHolderAccessor();
+		TestCasesHolderAccessor tcCLI = new TestCasesHolderAccessor();
 		Configuration.reset(rhCLI, tcCLI);
 	}
 
 	
 	public static void resetConfigurationToContextDemoPrj(String filenamePrefix) {
-		ResourcesHolderCLI rhCLI = TestObjectFactory.createResourcesHolderCLI(rootPath, relPath, filenamePrefix + "-resources.yaml");
-		TestCasesHolderCLI tcCLI = TestObjectFactory.createTestCasesHolderCLI(rootPath, relPath, filenamePrefix + "-testcases.yaml");
+		ResourcesHolderAccessor rhCLI = TestObjectFactory.createResourcesHolderCLI(rootPath, relPath, filenamePrefix + "-resources.yaml");
+		TestCasesHolderAccessor tcCLI = TestObjectFactory.createTestCasesHolderCLI(rootPath, relPath, filenamePrefix + "-testcases.yaml");
 		Configuration.reset(rhCLI, tcCLI);
 	}
 
 
 	public static void resetConfigurationToContext(String pRootPath, String pRelPath, String filenamePrefix) {
-		ResourcesHolderCLI rhCLI = TestObjectFactory.createResourcesHolderCLI(pRootPath, pRelPath, filenamePrefix + "-resources.yaml");
-		TestCasesHolderCLI tcCLI = TestObjectFactory.createTestCasesHolderCLI(pRootPath, pRelPath, filenamePrefix + "-testcases.yaml");
+		ResourcesHolderAccessor rhCLI = TestObjectFactory.createResourcesHolderCLI(pRootPath, pRelPath, filenamePrefix + "-resources.yaml");
+		TestCasesHolderAccessor tcCLI = TestObjectFactory.createTestCasesHolderCLI(pRootPath, pRelPath, filenamePrefix + "-testcases.yaml");
 		Configuration.reset(rhCLI, tcCLI);
 
 	}
 
 	
 
-	public static ResourcesHolderCLI createResourcesHolderCLI(String rootPath, String relPath, String filename) {
-		ResourcesHolderCLI rhCLI = new ResourcesHolderCLI();
+	public static ResourcesHolderAccessor createResourcesHolderCLI(String rootPath, String relPath, String filename) {
+		ResourcesHolderAccessor rhCLI = new ResourcesHolderAccessor();
 		if(null!=rootPath) {	
 			rhCLI.setAbsolutePath(rootPath);
 		}
@@ -51,8 +53,8 @@ public class TestObjectFactory {
 		return rhCLI;
 	}
 
-	public static TestCasesHolderCLI createTestCasesHolderCLI(String rootPath, String relPath, String filename) {
-		TestCasesHolderCLI tchCLI = new TestCasesHolderCLI();
+	public static TestCasesHolderAccessor createTestCasesHolderCLI(String rootPath, String relPath, String filename) {
+		TestCasesHolderAccessor tchCLI = new TestCasesHolderAccessor();
 		if(null!=rootPath) {	
 			tchCLI.setAbsolutePath(rootPath);
 		}

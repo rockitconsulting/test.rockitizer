@@ -1,5 +1,6 @@
-package io.github.rockitconsulting.test.rockitizer.cli;
+package io.github.rockitconsulting.test.rockitizer.api;
 
+import io.github.rockitconsulting.test.rockitizer.common.RuntimeContext;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
@@ -18,11 +19,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 
-public class ResourcesHolderCLI extends RuntimeContextCLI {
 
-	public static Logger log = Logger.getLogger(ResourcesHolderCLI.class.getName());
+public class ResourcesHolderAccessor extends RuntimeContext {
+
+	public static Logger log = Logger.getLogger(ResourcesHolderAccessor.class.getName());
 
 	private String resourcesFileName = "resources.yaml";
 
@@ -68,7 +71,7 @@ public class ResourcesHolderCLI extends RuntimeContextCLI {
 		FileUtils.listFolders(new File(getFullPath())).forEach(tcFolder -> {
 			FileUtils.listFolders(tcFolder).forEach(tsFolder -> {
 
-				if (tsFolder.getName().equalsIgnoreCase(OUTPUT)) {
+				if (tsFolder.getName().equalsIgnoreCase(Constants.OUTPUT_FOLDER)) {
 					return;
 				}
 
@@ -161,7 +164,7 @@ public class ResourcesHolderCLI extends RuntimeContextCLI {
 		return resourcesFileName;
 	}
 
-	void setResourcesFileName(String resourcesFileName) {
+	public void setResourcesFileName(String resourcesFileName) {
 		this.resourcesFileName = resourcesFileName;
 	}
 

@@ -1,7 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.cli.ResourcesHolderCLI;
-import io.github.rockitconsulting.test.rockitizer.cli.TestCasesHolderCLI;
+import io.github.rockitconsulting.test.rockitizer.api.ResourcesHolderAccessor;
+import io.github.rockitconsulting.test.rockitizer.api.TestCasesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
@@ -24,7 +24,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 /**
  * Configuration singleton accessable over primary
  * {@link Configuration#configuration()} and junit helper
- * {@link Configuration#reset(ResourcesHolderCLI, TestCasesHolderCLI)}
+ * {@link Configuration#reset(ResourcesHolderAccessor, TestCasesHolderAccessor)}
  *
  */
 public class Configuration {
@@ -35,8 +35,8 @@ public class Configuration {
 
 	public static Logger log = Logger.getLogger(Configuration.class.getName());
 
-	private static ResourcesHolderCLI rhCLI = new ResourcesHolderCLI();
-	private static TestCasesHolderCLI tchCLI = new TestCasesHolderCLI();
+	private static ResourcesHolderAccessor rhApi = new ResourcesHolderAccessor();
+	private static TestCasesHolderAccessor tchApi = new TestCasesHolderAccessor();
 
 	private RunModeTypes runMode = RunModeTypes.REPLAY;
 
@@ -46,7 +46,7 @@ public class Configuration {
 	private static Configuration INSTANCE = null;
 
 	private Configuration() {
-		this(rhCLI, tchCLI);
+		this(rhApi, tchApi);
 	}
 
 	/**
@@ -54,15 +54,15 @@ public class Configuration {
 	 * @param rhcli
 	 * @param tchcli
 	 */
-	private Configuration(ResourcesHolderCLI rhcli, TestCasesHolderCLI tchcli) {
-		rhCLI = rhcli;
-		tchCLI = tchcli;
+	private Configuration(ResourcesHolderAccessor rhcli, TestCasesHolderAccessor tchcli) {
+		rhApi = rhcli;
+		tchApi = tchcli;
 		try {
 			log.info("#######################################################################################################################");
-			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchCLI.contextAsString()
-					+ System.lineSeparator() + "\t -resources : " + rhCLI.contextAsString());
-			rh = rhCLI.readResources();
-			tch = tchCLI.readResources();
+			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
+			rh = rhApi.readResources();
+			tch = tchApi.readResources();
 
 			if (System.getProperty(Constants.MODE_KEY) != null
 					&& (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY)
@@ -104,7 +104,7 @@ public class Configuration {
 	 * @param tchcli
 	 * @return
 	 */
-	public static void reset(ResourcesHolderCLI rhcli, TestCasesHolderCLI tchcli) {
+	public static void reset(ResourcesHolderAccessor rhcli, TestCasesHolderAccessor tchcli) {
 		INSTANCE =  new Configuration(rhcli, tchcli);
 	}
 
@@ -147,10 +147,6 @@ public class Configuration {
 		return ds;
 	}
 
-	public Map<String, String> getPayloadReplacements() {
-		return rh.getPayloadReplacer();
-
-	}
 
 	public RunModeTypes getRunMode() {
 		return runMode;
@@ -168,12 +164,17 @@ public class Configuration {
 		return tch;
 	}
 
-	public  ResourcesHolderCLI getRhCLI() {
-		return rhCLI;
+	public  ResourcesHolderAccessor getRhApi() {
+		return rhApi;
 	}
 
-	public  TestCasesHolderCLI getTchCLI() {
-		return tchCLI;
+	public  TestCasesHolderAccessor getTchApi() {
+		return tchApi;
 	}
 
+	public Map<String, String> getPayloadReplacements() {
+		return rh.getPayloadReplacer();
+
+	}
+	
 }

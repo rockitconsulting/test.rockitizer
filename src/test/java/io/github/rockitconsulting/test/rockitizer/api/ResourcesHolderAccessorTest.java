@@ -1,5 +1,6 @@
-package io.github.rockitconsulting.test.rockitizer.cli;
+package io.github.rockitconsulting.test.rockitizer.api;
 
+import io.github.rockitconsulting.test.rockitizer.api.ResourcesHolderAccessor;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
@@ -13,15 +14,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ResourcesHolderCLITest {
+public class ResourcesHolderAccessorTest {
 
-	public static Logger log = Logger.getLogger(ResourcesHolderCLITest.class.getName());
+	public static Logger log = Logger.getLogger(ResourcesHolderAccessorTest.class.getName());
 
 	final String rootPath = ConfigUtils.getAbsoluteRootPath();
 	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
 	String rootPathTestSrc = rootPath + relPath;
 
-	ResourcesHolderCLI rhCLI = new ResourcesHolderCLI();
+	ResourcesHolderAccessor rhCLI = new ResourcesHolderAccessor();
 
 	@Before
 	public void before() {

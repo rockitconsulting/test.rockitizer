@@ -1,6 +1,4 @@
-package io.github.rockitconsulting.test.rockitizer.cli;
-
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
+package io.github.rockitconsulting.test.rockitizer.common;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
@@ -9,9 +7,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtil
  *
  *
  */
-public class RuntimeContextCLI {
-
-	static final String OUTPUT = Constants.OUTPUT_FOLDER;
+public class RuntimeContext {
 
 
 	private String absolutePath = ConfigUtils.getAbsoluteRootPath();
@@ -26,15 +22,15 @@ public class RuntimeContextCLI {
 		return absolutePath;
 	}
 
-	void setAbsolutePath(String absolutePath) {
+	public void setAbsolutePath(String absolutePath) {
 		this.absolutePath = absolutePath;
 	}
 
-	String getRelativePath() {
+	public String getRelativePath() {
 		return relativePath;
 	}
 
-	void setRelativePath(String relativePath) {
+	public void setRelativePath(String relativePath) {
 		this.relativePath = relativePath;
 	}
 

@@ -26,11 +26,11 @@ public class ConfigurationTest {
 	public void before() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName());
 		Assert.assertNotNull(configuration());
-		Assert.assertEquals(configuration().getTchCLI().getTestcasesFileName(), "ConfigurationTest-testcases.yaml");
-		Assert.assertEquals(configuration().getRhCLI().getResourcesFileName(), "ConfigurationTest-resources.yaml");
+		Assert.assertEquals(configuration().getTchApi().getTestcasesFileName(), "ConfigurationTest-testcases.yaml");
+		Assert.assertEquals(configuration().getRhApi().getResourcesFileName(), "ConfigurationTest-resources.yaml");
 		
-		System.out.println(" --> "+ configuration().getRhCLI().getFullPath() );
-		System.out.println(" --> "+ configuration().getRhCLI().getResourcesFileName() );
+		System.out.println(" --> "+ configuration().getRhApi().getFullPath() );
+		System.out.println(" --> "+ configuration().getRhApi().getResourcesFileName() );
 		
 		configuration().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
 		configuration().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
