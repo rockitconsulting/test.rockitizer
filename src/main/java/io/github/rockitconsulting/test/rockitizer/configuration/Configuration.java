@@ -11,9 +11,9 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.Validatable;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
+import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.util.Map;
 

@@ -35,19 +35,14 @@ public class ResourcesHolderCLITest {
 	@Test
 	public void readResources() throws IOException {
 		ResourcesHolder rh1 = rhCLI.generateResources();
-		log.info(" rh1 " + rh1.toString());
-		log.info(" rh1 db " + rh1.getDbConnectors());
 		
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
-		log.info(" rh2 " + rh2.toString());
-		
-		log.info(" rh2 db " + rh2.getDbConnectors());
 
-		Assert.assertTrue("db:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors()
+		Assert.assertTrue("db connectors sizes:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors()
 				.size());
-		Assert.assertTrue("http: " + rh1.getHttpConnectors().size() + "/" + rh2.getHttpConnectors().size(), rh1.getHttpConnectors().size() == rh2
+		Assert.assertTrue("http connectors sizes: " + rh1.getHttpConnectors().size() + "/" + rh2.getHttpConnectors().size(), rh1.getHttpConnectors().size() == rh2
 				.getHttpConnectors().size());
-		Assert.assertTrue("mq: " + rh1.getMqConnectors().size() + "/" + rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2.getMqConnectors()
+		Assert.assertTrue("mq connectors sizes: " + rh1.getMqConnectors().size() + "/" + rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2.getMqConnectors()
 				.size());
 	}
 

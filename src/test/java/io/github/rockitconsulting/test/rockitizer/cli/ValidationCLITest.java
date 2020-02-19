@@ -4,7 +4,10 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesH
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.model.ValidationHolder;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +17,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
+
 public class ValidationCLITest {
 	public static Logger log = Logger.getLogger(ValidationCLITest.class.getName());
 
 	final String rootPath = ConfigUtils.getAbsoluteRootPath();
 	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
-	String rootPathTestSrc = rootPath + relPath;
 
+	String rootPathTestSrc = rootPath + relPath;
 	ResourcesHolderCLI rhCLI = new ResourcesHolderCLI();
 	TestCasesHolderCLI tcCLI = new TestCasesHolderCLI();
 
@@ -68,6 +73,9 @@ public class ValidationCLITest {
 		})));
 		Assert.assertTrue(result.size()==4);
 	}
+
+	
+	
 
 	/*
 	 * @Test public void testSyncBetwenTestCasesAndResources() throws

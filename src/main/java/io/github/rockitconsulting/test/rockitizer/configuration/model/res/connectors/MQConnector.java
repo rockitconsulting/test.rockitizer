@@ -1,6 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.ValidationUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
 import java.io.File;
 import java.util.List;

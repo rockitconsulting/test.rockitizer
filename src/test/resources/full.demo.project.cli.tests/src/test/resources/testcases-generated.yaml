@@ -6,7 +6,11 @@ testCases:
   testSteps:
   - connectorRefs:
     - conRefId: FILEDEL.IN.FILE2FILE
+      payloads:
+      - fileName: .gitignore
     - conRefId: FILEDEL.OUT.FILE2FILE
+      payloads:
+      - fileName: .gitignore
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: FILEPUT.IN.FILE2FILE
@@ -15,12 +19,18 @@ testCases:
     testStepName: a001FILEPutMessage
   - connectorRefs:
     - conRefId: FILEGET.OUT.FILE2FILE
+      payloads:
+      - fileName: .gitignore
     testStepName: a002FILEGetMessage
 - testCaseName: FILEinMQOutTest
   testSteps:
   - connectorRefs:
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     - conRefId: MQGET.OUT.FILE2MQ
+      payloads:
+      - fileName: .gitignore
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: FILEPUT.IN.FILE2MQ
@@ -29,9 +39,13 @@ testCases:
     testStepName: a001FILEPutMessage
   - connectorRefs:
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     testStepName: a002MQGetError
   - connectorRefs:
     - conRefId: MQGET.OUT.FILE2MQ
+      payloads:
+      - fileName: .gitignore
     testStepName: a002MQGetMessage
 - testCaseName: JSONwithDatabaseTest
   testSteps:
@@ -40,6 +54,8 @@ testCases:
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: HTTP.JADDBOOK
@@ -49,6 +65,8 @@ testCases:
   - testStepName: a002DBGetError
   - connectorRefs:
     - conRefId: DBGET.GETBOOKS
+      payloads:
+      - fileName: .gitignore
     testStepName: a002DBGETMessage
 - testCaseName: MQinDBOutTest
   testSteps:
@@ -57,7 +75,11 @@ testCases:
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     - conRefId: MQGET.IN.MQ2DB
+      payloads:
+      - fileName: .gitignore
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: MQPUT.IN.MQ2DB
@@ -66,17 +88,27 @@ testCases:
     testStepName: a001MQPutMessage
   - connectorRefs:
     - conRefId: DBGET.GETBOOKS
+      payloads:
+      - fileName: .gitignore
     testStepName: a002DBGETMessage
   - testStepName: a002MQGetError
   - connectorRefs:
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     testStepName: a003MQGetError
 - testCaseName: MQinMQoutTest
   testSteps:
   - connectorRefs:
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     - conRefId: MQGET.IN.MQ2MQ
+      payloads:
+      - fileName: .gitignore
     - conRefId: MQGET.OUT.MQ2MQ
+      payloads:
+      - fileName: .gitignore
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: MQPUT.IN.MQ2MQ
@@ -85,9 +117,13 @@ testCases:
     testStepName: a001MQPutMessage
   - connectorRefs:
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     testStepName: a002MQGetError
   - connectorRefs:
     - conRefId: MQGET.OUT.MQ2MQ
+      payloads:
+      - fileName: .gitignore
     testStepName: a002MQGetMessage
 - testCaseName: WSwithDatabaseTest
   testSteps:
@@ -96,6 +132,8 @@ testCases:
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
+      payloads:
+      - fileName: .gitignore
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: HTTP.ADDBOOK
@@ -105,4 +143,6 @@ testCases:
   - testStepName: a002DBGetError
   - connectorRefs:
     - conRefId: DBGET.GETBOOKS
+      payloads:
+      - fileName: .gitignore
     testStepName: a002DBGETMessage

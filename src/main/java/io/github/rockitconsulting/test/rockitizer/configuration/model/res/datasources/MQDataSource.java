@@ -1,7 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.Validatable;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.ValidationUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
 import java.util.List;
 import java.util.Map;

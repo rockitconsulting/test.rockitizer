@@ -14,6 +14,7 @@ import com.rockit.common.blackboxtester.connector.Connector;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.util.FileUtils;
 
 public class ConnectorFolder extends AbstractTestFolder {
@@ -39,6 +40,10 @@ public class ConnectorFolder extends AbstractTestFolder {
 		} else if (FileUtils.listFiles(getInFolder()).iterator().hasNext()) {
 
 			for (File input : FileUtils.listFiles(getInFolder())) {
+				
+				if(input.getName().equalsIgnoreCase(Constants.GITIGNORE)) {
+					continue;
+				}
 				((WriteConnector) connector).setRequest(input);
 				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
 				connector.proceed();

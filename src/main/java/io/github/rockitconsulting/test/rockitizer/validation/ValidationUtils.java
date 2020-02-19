@@ -1,0 +1,124 @@
+package io.github.rockitconsulting.test.rockitizer.validation;
+
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
+import static io.github.rockitconsulting.test.rockitizer.validation.model.ValidationHolder.validationHolder;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
+public class ValidationUtils {
+
+	private static void checkValid(String paramName, String paramValue, List<String> messages) {
+		if (paramValue == null) {
+			messages.add(" mandatory param [" + paramName + "] cannot be 'null'");
+		} else if (paramValue.startsWith("@") && paramValue.endsWith("@")) {
+			messages.add(" mandatory param [" + paramName + "] with value '" + paramValue + "' must exist and cannot contain @placeholders@");
+		}
+	}
+
+	/**
+	 * @usage ImmutableMap.<String, String>builder(). put(k, v). put(k, v).
+	 *        build()
+	 * 
+	 * @param context
+	 * @param fields
+	 * @return
+	 */
+	public static Map<String, List<String>> checkValid(String context, Map<String, String> fields) {
+
+		List<String> messages = new ArrayList<>();
+
+		fields.forEach((f, v) -> {
+			ValidationUtils.checkValid(f, v, messages);
+		});
+
+		Map<String, List<String>> res = new LinkedHashMap<String, List<String>>();
+		if (!messages.isEmpty()) {
+			res.put(context, messages);
+		}
+		return res;
+
+	}
+
+	/**
+	 * Git does not allow empty folders to be checked in. bugfixing it.
+	 */
+	public static void cleanGitIgnore(File root) {
+
+		Iterable<File> testCases = FileUtils.listFolders(root);
+
+		testCases.forEach(tcase -> {
+			FileUtils.listFolders(tcase).forEach(tstep -> {
+				if (tstep.getName().equalsIgnoreCase(Constants.OUTPUT_FOLDER)) {
+					return;
+				}
+
+				FileUtils.listFolders(tstep).forEach(connector -> {
+					FileUtils.listFiles(connector).forEach(payload -> {
+						if (payload.getName().equals(Constants.GITIGNORE)) {
+							payload.delete();
+						}
+					});
+				});
+			});
+
+		});
+
+	}
+
+	/**
+	 * Git does not allow empty folders to be checked in. bugfixing it.
+	 */
+	public static void fixGitEmptyFoldersProblem(File root) {
+
+		Iterable<File> testCases = FileUtils.listFolders(root);
+
+		testCases.forEach(tcase -> {
+			FileUtils.listFolders(tcase).forEach(
+					tstep -> {
+						if (tstep.getName().equalsIgnoreCase(Constants.OUTPUT_FOLDER)) {
+							return;
+						}
+
+						FileUtils.listFolders(tstep).forEach(
+								connector -> {
+
+									if (!FileUtils.listFiles(connector).iterator().hasNext()) {
+
+										try {
+											new File(connector.getAbsolutePath() + File.separator + Constants.GITIGNORE).createNewFile();
+											validationHolder().add(
+													new Context(connector),
+													ImmutableList
+															.<Message> builder()
+															.add(new Message(Message.LEVEL.WARN, "Connector is empty. Creating the " + Constants.GITIGNORE
+																	+ " file to enforce the github checkin ")).build());
+
+										} catch (Exception e) {
+											validationHolder().add(
+													new Context(connector),
+													ImmutableList
+															.<Message> builder()
+															.add(new Message(Message.LEVEL.ERROR, "Connector is empty. Creating the " + Constants.GITIGNORE
+																	+ " failed with error " + e.getMessage())).build());
+										}
+
+									}
+
+								});
+
+					});
+
+		});
+
+	}
+
+}

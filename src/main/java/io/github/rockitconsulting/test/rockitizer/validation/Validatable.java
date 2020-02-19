@@ -1,4 +1,4 @@
-package io.github.rockitconsulting.test.rockitizer.configuration.model.validation;
+package io.github.rockitconsulting.test.rockitizer.validation;
 
 import java.util.List;
 import java.util.Map;

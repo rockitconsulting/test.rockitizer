@@ -1,6 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.validation.Validatable;
+import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.beans.Transient;
 import java.io.File;

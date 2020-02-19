@@ -15,6 +15,16 @@ public final class Constants {
 
 	public static final String DB2_DRIVER = "com.ibm.db2.jcc.DB2Driver";
 	public static final String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
+	
+	public static final String REPLAY_PATH = "/target/replay/";
+	public static final String RECORD_PATH = "/src/test/resources/";
+	public static final String MODE_KEY = "mode";
+	
+	/**
+	 * GIT Bug: force commit for empty folders 
+	 */
+	public static final String GITIGNORE = ".gitignore";
+
 
 //	
 //	public static final String MQMANAGER_NAME_KEY    = "MQMANAGER.NAME";
@@ -43,9 +53,6 @@ public final class Constants {
 //	public static final String MQOUT_KEY = "MQGET.";
 //	public static final String FILE_PATH_KEY = ".PATH";
 	
-	public static final String REPLAY_PATH = "/target/replay/";
-	public static final String RECORD_PATH = "/src/test/resources/";
-	public static final String MODE_KEY = "mode";
 
 
 	public static  enum Connectors {
