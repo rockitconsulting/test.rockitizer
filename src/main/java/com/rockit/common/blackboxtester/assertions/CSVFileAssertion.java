@@ -8,9 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.exceptions.AssertionException;
 
@@ -62,7 +62,7 @@ public class CSVFileAssertion extends AbstractAssertion  {
 			Set<String> ff2Lines = new HashSet<String>(f2Lines);
 			f1Lines.removeAll(ff2Lines);
 			f2Lines.removeAll(ff1Lines);
-			assertTrue("\n " + f1.getAbsolutePath() + " diff: \n " + StringUtils.join(f1Lines, "\n") + "\n-----------------\n" + f2.getAbsolutePath() + " diff: \n " + StringUtils.join(f2Lines, "\n"), f2Lines.isEmpty() && f1Lines.isEmpty());
+			assertTrue("\n " + f1.getAbsolutePath() + " diff: \n " + Joiner.on("\n").join(f1Lines) + "\n-----------------\n" + f2.getAbsolutePath() + " diff: \n " + Joiner.on("\n").join(f2Lines), f2Lines.isEmpty() && f1Lines.isEmpty());
 		} catch (IOException e) {
 			LOGGER.error("asserting: " + f1.getAbsolutePath() + " with target "  + f2.getAbsolutePath() , e );
 			throw new AssertionError("asserting: " + f1.getAbsolutePath() + " with target "  + f2.getAbsolutePath(), e);

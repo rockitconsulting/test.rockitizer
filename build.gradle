@@ -44,36 +44,21 @@ eclipse {
 }
 
 dependencies {
-    compile 'org.apache.httpcomponents:httpclient:4.5'
-    compile 'junit:junit:4.11'
-    compile 'com.googlecode.java-diff-utils:diffutils:1.2.1'
-    compile 'org.xmlunit:xmlunit-core:2.1.0'
-    compile 'commons-io:commons-io:2.4'
-    compile 'commons-httpclient:commons-httpclient:3.1'
-    compile 'xerces:xercesImpl:2.8.0'
-    compile 'xalan:xalan:2.7.1'
-    compile 'com.google.guava:guava:27.0-jre'
-    compile 'log4j:log4j:1.2.17'
-    compile 'commons-configuration:commons-configuration:1.10'
-    compile 'org.json:json:20160810'
-    compile 'com.jcraft:jsch:0.1.54'
-    compile 'org.codehaus.groovy:groovy:2.4.7'
-    compile 'xml-apis:xml-apis:1.4.01'
-    compile 'com.google.code.gson:gson:2.8.5'
-    compile 'io.fares.junit.soapui:soapui-junit-mockrunner-tests:0.0.3'
-    compile 'com.ibm.mq:mq:9.3'
-    compile 'com.ibm.mq:allclient:9.3'
-    compile 'com.ibm.mq:jmqi:9.3'
-    compile 'com.ibm.mq:commonservices:9.3'
-    compile 'com.ibm.mq:headers:9.3'
-    compile 'com.ibm.mq:pcf:9.3'
-    compile 'com.oracle:ojdbc6:11.0'
-    compile 'com.ibm.db2:db2jcc4:11.1'
+    compile 'com.oracle.ojdbc:ojdbc10_g:19.3.0.0'
+    compile 'com.ibm.db2.jcc:db2jcc:db2jcc4'
+    compile 'com.ibm.mq:com.ibm.mq.allclient:9.1.4.0'
     compile 'org.yaml:snakeyaml:1.25'
-    compile 'org.reflections:reflections:0.9.12'
     compile 'junit:junit:4.11'
+    compile 'log4j:log4j:1.2.17'    
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+	compile 'org.xmlunit:xmlunit-core:2.1.0'  
     compile 'com.google.guava:guava:27.0-jre'
-    compile 'commons-io:commons-io:2.4'
+  	compile 'com.jcraft:jsch:0.1.54'
+    compile 'commons-io:commons-io:2.4'	
+    compile 'org.json:json:20160810' //for newer version the null key for responseCode by HTTPConnector#urlConnection.getHeaderFields() makes problems //TODO migration + junit       
+	compile 'org.apache.commons:commons-text:1.8'     
+	
+
 }
 
 archivesBaseName='test.rockitizer'
