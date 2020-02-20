@@ -1,17 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
-import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
-import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
-import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
