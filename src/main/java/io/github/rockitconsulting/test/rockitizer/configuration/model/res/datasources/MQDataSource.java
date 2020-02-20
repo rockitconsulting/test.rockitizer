@@ -98,7 +98,7 @@ public class MQDataSource implements Validatable {
 	
 	@Override
 	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
+		return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
 				"id", id,
 				"qmgr", qmgr, 
 				"port", port,

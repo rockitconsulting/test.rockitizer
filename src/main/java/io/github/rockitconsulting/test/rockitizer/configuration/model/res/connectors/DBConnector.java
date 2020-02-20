@@ -65,12 +65,12 @@ public class DBConnector extends BaseConnector {
 	public Map<Context, List<Message>> validate() {
 		
 		if(type == Types.DBGET) {
-			return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
-					"query", query, 
+			return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
+					"query", query == null?"@query@":query, 
 					"dsRefId", dsRefId
 					));
 		} else {
-			return ValidationUtils.checkValid(getContext(), (Map<String, String>) ImmutableMap.of(
+			return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
 					"dsRefId", dsRefId
 					));
 			

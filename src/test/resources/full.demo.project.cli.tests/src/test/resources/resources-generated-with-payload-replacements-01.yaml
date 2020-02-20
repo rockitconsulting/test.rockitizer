@@ -43,7 +43,7 @@ httpConnectors:
   dsRefId: defaultKS
   url: '@https://default@'
   method: '@POST|GET|PUT@'
-  contentType: '@application/xml | | |@'
+  contentType: '@application/xml@'
   userAgent: '@GENERATED!!!! Mozilla/5.0@'
   timeout: '@500000@'
 - id: HTTP.ADDBOOK
@@ -51,7 +51,7 @@ httpConnectors:
   dsRefId: defaultKS
   url: '@https://default@'
   method: '@POST|GET|PUT@'
-  contentType: '@application/xml | | |@'
+  contentType: '@application/xml@'
   userAgent: '@GENERATED!!!! Mozilla/5.0@'
   timeout: '@500000@'
 fileConnectors:

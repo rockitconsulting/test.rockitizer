@@ -1,4 +1,7 @@
-package io.github.rockitconsulting.test.rockitizer.validation.model;
+package io.github.rockitconsulting.test.rockitizer.validation;
+
+import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
+import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +15,8 @@ import com.google.common.base.Joiner;
 public class ValidationHolder extends HashMap<Context, List<Message>> {
 
 	/**
-	 * 
+	 *  SINGLETON Holder of Validation Messages with {@link #reset()} function
+	 *   
 	 */
 	public static Logger log = Logger.getLogger(ValidationHolder.class.getName());
 	
@@ -30,7 +34,7 @@ public class ValidationHolder extends HashMap<Context, List<Message>> {
 	
 
 	public static ValidationHolder reset() {
-		validationHolder = new ValidationHolder();
+		validationHolder.clear();
 		return validationHolder();
 	}
 

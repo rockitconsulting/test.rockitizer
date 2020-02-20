@@ -1,7 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
-import io.github.rockitconsulting.test.rockitizer.validation.model.ValidationHolder;
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder;
 
 import java.io.IOException;
 
@@ -20,12 +20,12 @@ public class ValidationUtilsTest {
 	
 	@Before
 	public void before () {
-		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		ValidationHolder.reset();
 	}
 	
 	@Test
 	public void cleanGitIgnore() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		ValidationUtils.cleanGitIgnore();
 		ValidationUtils.fixGitEmptyFoldersProblem();
@@ -39,6 +39,7 @@ public class ValidationUtilsTest {
 	
 	@Test
 	public void checkTesCaseStructureIsValid() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		ValidationUtils.cleanGitIgnore();
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s1 = ValidationHolder.validationHolder().size();
@@ -67,6 +68,26 @@ public class ValidationUtilsTest {
 		ValidationUtils.validateConnectorRefExists();
 		ValidationHolder.validationHolder().forEach( (k,v)-> log.info("Validation erros: " + k + " - " +  Joiner.on(";").join(v) )  );
 		Assert.assertTrue(ValidationHolder.validationHolder().size()==3);
+	}
+	
+	
+	
+	@Test
+	public void validateResourceConfiigurationIsValid() {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName()+"-Valid");
+		ValidationUtils.validateResources();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size()==0);
+		
+	}
+
+	@Test
+	public void validateResourceConfiigurationIsNotValid() {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName()+"-Invalid");
+		ValidationUtils.validateResources();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size()==3);
+		
 	}
 	
 	

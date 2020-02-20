@@ -60,6 +60,9 @@ public abstract class BaseConnector implements Validatable {
 
 	@Transient
 	public Context getContext() {
+		if (context == null ) {
+			context = new Context(id);
+		}
 		return context;
 	}
 

@@ -21,7 +21,7 @@ public class HTTPConnector extends BaseConnector   {
 	
 	private String  method = "@POST|GET|PUT@";
 	
-	private String  contentType="@application/xml | | |@";
+	private String  contentType="@application/xml@";
 	
 	private String userAgent = "@GENERATED!!!! Mozilla/5.0@";
 	
@@ -122,7 +122,7 @@ public class HTTPConnector extends BaseConnector   {
 
 	@Override
 	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkValid (  getContext(), 
+		return ValidationUtils.checkFieldsValid (  getContext(), 
 				ImmutableMap.<String, String>builder().
 				put("dsRefId", dsRefId).
 				put("url", url).

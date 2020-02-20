@@ -33,14 +33,15 @@ dbConnectors:
       dsRefId: defaultDB
     - id: DBGET.GETBOOKS
       type: DBGET
-      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
+      #query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
       dsRefId: defaultDB
 httpConnectors:
     - id: HTTP.ADDBOOK
-      url: 'http://scharrdev01:7800/BookService'
+      #url: 'http://scharrdev01:7800/BookService'
       type: HTTP
       method: 'POST'
       timeout: 500000
+      #contentType: 'application/xml'
       dsRefId: defaultKS
       userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
     - id: HTTP.JADDBOOK
@@ -56,7 +57,7 @@ fileConnectors:
       path: 'C:/temp/FILE2FILE_IN'
     - id: FILEDEL.OUT.FILE2FILE
       type: FILEDEL
-      path: 'C:/temp/FILE2FILE_OUT'
+      #path: 'C:/temp/FILE2FILE_OUT'
     - id: FILEPUT.IN.FILE2MQ
       type: FILEPUT
       path: 'C:/temp/FILE2MQ_IN'

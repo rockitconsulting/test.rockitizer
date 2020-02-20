@@ -81,7 +81,7 @@ public class SCPConnector extends BaseConnector  {
 	}
 	@Override
 	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkValid (  getContext(), 
+		return ValidationUtils.checkFieldsValid (  getContext(), 
 				ImmutableMap.<String, String>builder()
 				.put("host", host)
 				.put("path", path)

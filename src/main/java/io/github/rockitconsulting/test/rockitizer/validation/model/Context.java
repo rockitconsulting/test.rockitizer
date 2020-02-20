@@ -2,8 +2,13 @@ package io.github.rockitconsulting.test.rockitizer.validation.model;
 
 import java.io.File;
 
+/**
+ * Context for validation errors
+ *
+ */
 public class Context {
 
+	private String id;
 	private String rootPath;
 	private String testCase;
 	private String testStep;
@@ -12,7 +17,11 @@ public class Context {
 	@SuppressWarnings("unused")
 	private Context() {}
 	
-	//	TODO separate DS and connector contexts, basically only the string representation is relevant, thus can be moved to common interfaces
+
+	/**
+	 * Context based on the FS location for testcases validation 
+	 * @param connectorFolder
+	 */
 	public Context(File connectorFolder) {
 		connector = connectorFolder.getName();
 		testStep = connectorFolder.getParentFile().getName();
@@ -20,8 +29,12 @@ public class Context {
 		rootPath  = connectorFolder.getParentFile().getParentFile().getParentFile().getAbsolutePath();
 	}
 
-	public Context(String dataSourceId) {
-		rootPath  = dataSourceId;
+	/**
+	 * Context based on the id for resources validation 
+	 * @param id 
+	 */
+	public Context(String id) {
+		this.id  = id;
 	}
 	
 	public String getRootPath() {
@@ -41,10 +54,12 @@ public class Context {
 
 	@Override
 	public String toString() {
-		return "Context [ " + (rootPath!=null?"rootPath=" + rootPath:"") +
-				 (testCase!=null?", testCase=" + testCase+",":"") +
-				 (testStep!=null?", testStep=" + testStep+",":"") +
-				 (connector!=null?", connector=" + connector+",":"") +
+		return "Context [ " + 
+				 (id!=null?"id=" + id:"") + 
+				 (rootPath!=null?"rootPath=" + rootPath:"") +
+				 (testCase!=null?", testCase=" + testCase:"") +
+				 (testStep!=null?", testStep=" + testStep:"") +
+				 (connector!=null?", connector=" + connector:"") +
 				  "]";
 	}
 
@@ -53,6 +68,7 @@ public class Context {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((connector == null) ? 0 : connector.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((rootPath == null) ? 0 : rootPath.hashCode());
 		result = prime * result + ((testCase == null) ? 0 : testCase.hashCode());
 		result = prime * result + ((testStep == null) ? 0 : testStep.hashCode());
@@ -73,6 +89,11 @@ public class Context {
 				return false;
 		} else if (!connector.equals(other.connector))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (rootPath == null) {
 			if (other.rootPath != null)
 				return false;
@@ -90,6 +111,8 @@ public class Context {
 			return false;
 		return true;
 	}
+
+
 
 	
 }
