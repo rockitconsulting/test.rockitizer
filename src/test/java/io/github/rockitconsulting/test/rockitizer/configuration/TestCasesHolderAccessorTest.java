@@ -34,7 +34,7 @@ public class TestCasesHolderAccessorTest {
 	
 	@Test
 	public void readResources() throws IOException {
-		TestCasesHolder tch1 = tcCLI.generateResources();
+		TestCasesHolder tch1 = tcCLI.testCasesHolderToYaml();
 		TestCasesHolder tch2 = ConfigUtils.testCasesHolderFromYaml(relPath + "testcases-generated.yaml");
 		Assert.assertTrue(tch1.getTestCases().size() == tch2.getTestCases().size());
 	}
@@ -42,7 +42,7 @@ public class TestCasesHolderAccessorTest {
 	@Test
 	public void generateResources() throws IOException {
 		tcCLI.setTestcasesFileName("testcases-generated-01.yaml");
-		TestCasesHolder tch1 = tcCLI.generateResources();
+		TestCasesHolder tch1 = tcCLI.testCasesHolderToYaml();
 		Assert.assertNotNull(tch1);
 		Assert.assertTrue( new File(tcCLI.getFullPath()+ tcCLI.getTestcasesFileName()).exists());
 		

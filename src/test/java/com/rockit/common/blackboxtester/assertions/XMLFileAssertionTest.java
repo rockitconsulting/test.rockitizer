@@ -15,7 +15,7 @@ public class XMLFileAssertionTest {
 
 	@Before
 	public void setUp() {
-		xmlFileAssertion = new XMLFileAssertion(null, null, null);
+		xmlFileAssertion = new XMLFileAssertion(null);
 	}
 
 	@Test

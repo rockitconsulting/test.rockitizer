@@ -1,7 +1,5 @@
 package com.rockit.common.blackboxtester.assertions.fixedlength;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class FixedLengthFileAssertionTest {

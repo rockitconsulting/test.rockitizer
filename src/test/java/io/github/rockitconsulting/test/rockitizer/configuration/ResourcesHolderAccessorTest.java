@@ -35,22 +35,22 @@ public class ResourcesHolderAccessorTest {
 
 	@Test
 	public void readResources() throws IOException {
-		ResourcesHolder rh1 = rhCLI.generateResources();
-		
+		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(null);
+
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
 
-		Assert.assertTrue("db connectors sizes:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2.getDbConnectors()
-				.size());
-		Assert.assertTrue("http connectors sizes: " + rh1.getHttpConnectors().size() + "/" + rh2.getHttpConnectors().size(), rh1.getHttpConnectors().size() == rh2
-				.getHttpConnectors().size());
-		Assert.assertTrue("mq connectors sizes: " + rh1.getMqConnectors().size() + "/" + rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2.getMqConnectors()
-				.size());
+		Assert.assertTrue("db connectors sizes:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2
+				.getDbConnectors().size());
+		Assert.assertTrue("http connectors sizes: " + rh1.getHttpConnectors().size() + "/" + rh2.getHttpConnectors().size(),
+				rh1.getHttpConnectors().size() == rh2.getHttpConnectors().size());
+		Assert.assertTrue("mq connectors sizes: " + rh1.getMqConnectors().size() + "/" + rh2.getMqConnectors().size(), rh1.getMqConnectors().size() == rh2
+				.getMqConnectors().size());
 	}
 
 	@Test
 	public void generateResources() throws IOException {
 		rhCLI.setResourcesFileName("resources-generated-01.yaml");
-		ResourcesHolder rh1 = rhCLI.generateResources();
+		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(null);
 		Assert.assertNotNull(rh1);
 		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());
 
@@ -64,7 +64,7 @@ public class ResourcesHolderAccessorTest {
 		replacements.put("KEY2", "VALUE2");
 
 		rhCLI.setResourcesFileName("resources-generated-with-payload-replacements-01.yaml");
-		ResourcesHolder rh1 = rhCLI.generateResources(replacements);
+		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(replacements);
 
 		Assert.assertNotNull(rh1);
 		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());

@@ -50,7 +50,7 @@ public class KeyStore implements Validatable {
 	
 	@Override
 	public Context getContext() {
-		return new Context(getId());
+		return new Context.Builder().withId(getId());
 	}	
 	@Override
 	public boolean isValid() {

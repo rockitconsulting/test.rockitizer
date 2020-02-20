@@ -3,7 +3,7 @@ package io.github.rockitconsulting.test.rockitizer.validation.model;
 import java.io.File;
 
 /**
- * Context for validation errors
+ * Context for validation errors with inner builder {@link Builder}
  *
  */
 public class Context {
@@ -14,28 +14,14 @@ public class Context {
 	private String testStep;
 	private String connector;
 	
-	@SuppressWarnings("unused")
-	private Context() {}
+	private Context(Builder builder) {
+		connector = builder.connector;
+		testStep = builder.testStep;
+		testCase  = builder.testCase;
+		rootPath  = builder.rootPath;
+		id  		= builder.id;
+	}
 	
-
-	/**
-	 * Context based on the FS location for testcases validation 
-	 * @param connectorFolder
-	 */
-	public Context(File connectorFolder) {
-		connector = connectorFolder.getName();
-		testStep = connectorFolder.getParentFile().getName();
-		testCase  = connectorFolder.getParentFile().getParentFile().getName();
-		rootPath  = connectorFolder.getParentFile().getParentFile().getParentFile().getAbsolutePath();
-	}
-
-	/**
-	 * Context based on the id for resources validation 
-	 * @param id 
-	 */
-	public Context(String id) {
-		this.id  = id;
-	}
 	
 	public String getRootPath() {
 		return rootPath;
@@ -54,12 +40,12 @@ public class Context {
 
 	@Override
 	public String toString() {
-		return "Context [ " + 
-				 (id!=null?"id=" + id:"") + 
-				 (rootPath!=null?"rootPath=" + rootPath:"") +
-				 (testCase!=null?", testCase=" + testCase:"") +
-				 (testStep!=null?", testStep=" + testStep:"") +
-				 (connector!=null?", connector=" + connector:"") +
+		return "Context [" + 
+				 (id!=null?		  " id=" + id:"") + 
+				 (rootPath!=null? " rootPath=" + rootPath:"") +
+				 (testCase!=null? " testCase=" + testCase:"") +
+				 (testStep!=null? " testStep=" + testStep:"") +
+				 (connector!=null?" connector=" + connector:"") +
 				  "]";
 	}
 
@@ -112,7 +98,62 @@ public class Context {
 		return true;
 	}
 
+	 public static class Builder    {
+		 
+			private String id;
+			private String rootPath;
+			private String testCase;
+			private String testStep;
+			private String connector;
+		
+			public Context withConnector(String testCase, String testStep, String connector) {
+				this.connector = connector;
+				this.testStep  = testStep;
+				this.testCase  = testCase;
+				return new Context(this);
+			}
 
+			public Context withTestStep(String testCase, String testStep) {
+				this.testStep  = testStep;
+				this.testCase  = testCase;
+				return new Context(this);
+			}
+	
+			public Context withTestCase(String testCase) {
+				this.testCase  = testCase;
+				return new Context(this);
+			}
+			
+			
+			public Context withConnector(File connectorFolder) {
+				connector = connectorFolder.getName();
+				testStep = connectorFolder.getParentFile().getName();
+				testCase  = connectorFolder.getParentFile().getParentFile().getName();
+				rootPath  = connectorFolder.getParentFile().getParentFile().getParentFile().getAbsolutePath();
+				return new Context(this);
+			}
+
+			public Context withTesStep(File stepFolder) {
+				testStep = stepFolder.getName();
+				testCase  = stepFolder.getParentFile().getName();
+				rootPath  = stepFolder.getParentFile().getParentFile().getAbsolutePath();
+				return new Context(this);
+			}
+		 
+			public Context withTesCase(File caseFolder) {
+				testCase  = caseFolder.getName();
+				rootPath  = caseFolder.getParentFile().getAbsolutePath();
+				return new Context(this);
+			}
+		 
+			public Context withId(String id) {
+				this.id = id;
+				return new Context(this);
+			}
+		 
+		 
+		 
+	 }
 
 	
 }

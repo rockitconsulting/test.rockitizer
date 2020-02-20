@@ -1,5 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import java.io.IOException;
+
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
 public class ValidationCLI {
@@ -35,6 +37,16 @@ public class ValidationCLI {
 	 */
 	public void validateResources()  {
 		ValidationUtils.validateResources();
+	}
+
+	
+	/**
+	 * Validate resources configuration 
+	 * @throws IOException 
+	 * 
+	 */
+	public void validateTestCasesAndFileSystemInSync() throws IOException  {
+		ValidationUtils.validateTestCasesAndFileSystemInSync();;
 	}
 
 }

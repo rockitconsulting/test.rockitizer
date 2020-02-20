@@ -59,8 +59,8 @@ public class Configuration {
 			log.info("#######################################################################################################################");
 			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
-			rh = rhApi.readResources();
-			tch = tchApi.readResources();
+			rh = rhApi.resourcesHolderFromYaml();
+			tch = tchApi.testCasesHolderFromYaml();
 
 			if (System.getProperty(Constants.MODE_KEY) != null
 					&& (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY)

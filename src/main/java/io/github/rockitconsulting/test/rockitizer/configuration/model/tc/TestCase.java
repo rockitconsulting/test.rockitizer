@@ -35,11 +35,37 @@ public class TestCase  {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return System.lineSeparator() + " 	TestCase [testCaseName=" + testCaseName + ", " + System.lineSeparator() + " 		testSteps="
 				+ testSteps + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((testCaseName == null) ? 0 : testCaseName.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TestCase other = (TestCase) obj;
+		if (testCaseName == null) {
+			if (other.testCaseName != null)
+				return false;
+		} else if (!testCaseName.equals(other.testCaseName))
+			return false;
+		return true;
 	}
 
 

@@ -29,20 +29,17 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	 * @return
 	 * @throws IOException
 	 */
-	public TestCasesHolder readResources() throws IOException {
+	public TestCasesHolder testCasesHolderFromYaml() throws IOException {
 		return ConfigUtils.testCasesHolderFromYaml(getRelativePath() + getTestcasesFileName());
 	}
 
+
 	/**
-	 * Creates config file <testcase.yaml> based on the directory structure
-	 * CLI relevant: generate Resources from yaml
-	 * 
+	 * Generates the testcases structure from filesystem 
+	 *  
 	 * @return
-	 * @throws IOException
 	 */
-
-	public TestCasesHolder generateResources() throws IOException {
-
+	public TestCasesHolder testCasesHolderFromFileSystem()  {
 		TestCasesHolder holder = new TestCasesHolder();
 
 		FileUtils.listFolders(new File(getFullPath())).forEach(tcFolder -> {
@@ -66,6 +63,17 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 			});
 		});
 
+		return holder;
+	}
+	
+	/**
+	 * Creates config file <testcase.yaml> from TestCaseHolder
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	public TestCasesHolder testCasesHolderToYaml() throws IOException {
+		TestCasesHolder holder = testCasesHolderFromFileSystem();
 		ConfigUtils.writeToYaml(holder, getFullPath() + getTestcasesFileName());
 		return holder;
 	}

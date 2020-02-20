@@ -36,7 +36,7 @@ public abstract class BaseConnector implements Validatable {
 	
 	public BaseConnector (File location) {
 		this.id = location.getName();
-		context = new Context(location);
+		context =  new Context.Builder().withConnector(location);
 	}
 
 	public String getId() {
@@ -61,7 +61,7 @@ public abstract class BaseConnector implements Validatable {
 	@Transient
 	public Context getContext() {
 		if (context == null ) {
-			context = new Context(id);
+			context =  new Context.Builder().withId(getId());;
 		}
 		return context;
 	}

@@ -55,5 +55,32 @@ public class ConnectorRef {
 		this.payloads = payloads;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((conRefId == null) ? 0 : conRefId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConnectorRef other = (ConnectorRef) obj;
+		if (conRefId == null) {
+			if (other.conRefId != null)
+				return false;
+		} else if (!conRefId.equals(other.conRefId))
+			return false;
+		return true;
+	}
+	
+	
+
 	
 }

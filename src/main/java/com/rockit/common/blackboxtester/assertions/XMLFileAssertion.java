@@ -40,16 +40,7 @@ public class XMLFileAssertion extends AbstractAssertion {
 		this.step = step;
 	}
 	
-	/** 
-	 *  use the XMLFileAssertion("step/connector")
-	 */
-	@Deprecated
-	public XMLFileAssertion(String recordPath, String replayPath, String step) {
-		setRecordPath(replayPath);
-		setReplayPath(replayPath);
-		this.step = step;
-	}
-	
+
 	
 	@Override
 	public void proceed() {

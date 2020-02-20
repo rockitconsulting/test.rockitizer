@@ -35,6 +35,31 @@ public class TestStep  {
 	public void setConnectorRefs(List<ConnectorRef> connectorRefs) {
 		this.connectorRefs = connectorRefs;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((testStepName == null) ? 0 : testStepName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TestStep other = (TestStep) obj;
+		if (testStepName == null) {
+			if (other.testStepName != null)
+				return false;
+		} else if (!testStepName.equals(other.testStepName))
+			return false;
+		return true;
+	}
 	
 
 	/*
