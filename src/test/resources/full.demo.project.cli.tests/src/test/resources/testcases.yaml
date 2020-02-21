@@ -46,7 +46,6 @@ testCases:
       payloads:
       - fileName: testinput.json
     testStepName: a001JSONPutMessage
-  - testStepName: a002DBGetError
   - connectorRefs:
     - conRefId: DBGET.GETBOOKS
     testStepName: a002DBGETMessage
@@ -67,7 +66,6 @@ testCases:
   - connectorRefs:
     - conRefId: DBGET.GETBOOKS
     testStepName: a002DBGETMessage
-  - testStepName: a002MQGetError
   - connectorRefs:
     - conRefId: MQGET.ERROR
     testStepName: a003MQGetError
@@ -102,7 +100,6 @@ testCases:
       payloads:
       - fileName: testinput.xml
     testStepName: a001WSPutMessage
-  - testStepName: a002DBGetError
   - connectorRefs:
     - conRefId: DBGET.GETBOOKS
     testStepName: a002DBGETMessage

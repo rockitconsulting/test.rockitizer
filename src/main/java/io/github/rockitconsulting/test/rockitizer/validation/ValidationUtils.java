@@ -225,6 +225,58 @@ public class ValidationUtils {
 		return errorContext;
 	}
 
+	
+	/**
+	 *  validation directory structure and tescases 
+	 *  make warnings for empty testcases/tessteps
+	 * 
+	 * @throws IOException
+	 */
+	public static void validateNotAllowedEmptyStructures() throws IOException {
+		String testcases = configuration().getTchApi().getTestcasesFileName();
+
+		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
+		TestCasesHolder tch2 = configuration().getTchApi().testCasesHolderFromFileSystem();
+
+		validateNotAllowedEmptyStructures(tch1).forEach(
+				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in " + testcases )));
+		validateNotAllowedEmptyStructures(tch2).forEach(
+				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in FileSystem")));
+
+	}
+	
+	
+	/**
+	 * make warnings for empty testcases/tessteps
+	 * 
+	 * @param tch1
+	 * @param tch2
+	 * @return
+	 */
+	private static List<Context> validateNotAllowedEmptyStructures(TestCasesHolder tch1) {
+		List<Context> errorContext = new ArrayList<>();
+
+		tch1.getTestCases().forEach(tc1 -> {
+
+			if (tc1.getTestSteps().isEmpty()) {
+				errorContext.add(new Context.Builder().withTestCase(tc1.getTestCaseName()));
+				return;
+
+			}
+
+			tc1.getTestSteps().forEach(ts1 -> {
+
+				if (ts1.getConnectorRefs().isEmpty()) {
+					errorContext.add(new Context.Builder().withTestStep(tc1.getTestCaseName(), ts1.getTestStepName()));
+
+				}
+
+			});
+
+		});
+		return errorContext;
+	}
+
 	/**
 	 * Process validation for single resource
 	 * 

@@ -86,7 +86,7 @@ public class ValidationUtilsTest {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
 		ValidationUtils.validateTestCasesAndFileSystemInSync();
 		ValidationHolder.validationHolder().logValidationErrors();
-		Assert.assertTrue(ValidationHolder.validationHolder().size() == 10);
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 12);
 
 	}
 
@@ -98,6 +98,23 @@ public class ValidationUtilsTest {
 		ValidationHolder.validationHolder().logValidationErrors();
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
 
+	}
+	
+	
+	@Test
+	public void validateNotAllowedEmptyStructuresOK() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj();
+		ValidationUtils.validateNotAllowedEmptyStructures();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
+	}
+		
+	@Test
+	public void validateNotAllowedEmptyStructuresNOK() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		ValidationUtils.validateNotAllowedEmptyStructures();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 3);
 	}
 
 
