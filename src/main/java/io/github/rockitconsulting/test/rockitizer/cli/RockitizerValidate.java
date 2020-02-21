@@ -24,10 +24,6 @@ public class RockitizerValidate implements Runnable {
 	@Override
 	public void run() {
 
-			System.out.println("#################################printing current context####################");
-			System.out.println("Path:" + Configuration.configuration().getFullPath());
-			System.out.println("#############################################################################");
-		
 		
 			System.out.println("adding .gitignore to enforce empty folders commit");
 			ValidationUtils.fixGitEmptyFoldersProblem();
