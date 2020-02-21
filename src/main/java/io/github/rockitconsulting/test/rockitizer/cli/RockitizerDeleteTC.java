@@ -1,8 +1,9 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import picocli.CommandLine;
+import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "delete",
+@CommandLine.Command(name = "delete-testcase",
 	sortOptions = false,
 	headerHeading = "@|bold,underline Benutzung:|@%n%n",
 	synopsisHeading = "%n",
@@ -13,6 +14,15 @@ import picocli.CommandLine;
 	description = "Stores the current contents of the index in a new commit " +
 			"along with a log message from the user describing the changes.")
 
-public class RockitizerDelete {
+public class RockitizerDeleteTC implements Runnable {
+
+	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+    String testcase;
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
