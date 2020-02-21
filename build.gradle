@@ -57,7 +57,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'	
     compile 'org.json:json:20160810' //for newer version the null key for responseCode by HTTPConnector#urlConnection.getHeaderFields() makes problems //TODO migration + junit       
 	compile 'org.apache.commons:commons-text:1.8'     
-	
+	compile 'info.picocli:picocli:4.2.0'
 
 }
 
