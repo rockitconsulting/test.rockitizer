@@ -41,8 +41,8 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	
 	/**
 	 * CLI relevant: generate Resources from yaml
-	 * @return
-	 * @throws IOException
+	 * @return 
+	 * 
 	 */
 
 	public ResourcesHolder resourcesHolderFromFileSystem()  {
@@ -53,7 +53,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	/**
 	 * CLI relevant: generate Resources from yaml
 	 * @return
-	 * @throws IOException
+	 * 
 	 */
 
 	public ResourcesHolder resourcesHolderFromFileSystem(Map <String, String> payloadReplacer)  {

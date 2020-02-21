@@ -19,20 +19,18 @@ public class TestBuilder extends AbstractTestFolder {
 	public static final Logger LOGGER = Logger.getLogger(TestBuilder.class.getName());
 	private List<Assertions> assertions = Lists.newArrayList();
 
-
 	public TestBuilder(Class<?> clazz) {
 		super(clazz.getSimpleName());
 	}
 
 	public TestStepBuilder addStep(String stepName) {
 		super.setTestStepName(stepName);
-		
+
 		if (isReplayMode()) {
 			copyRecordToReplayTarget(stepName);
 		}
-		return new TestStepBuilder( getTestName() ,stepName);
+		return new TestStepBuilder(getTestName(), stepName);
 	}
-
 
 	public TestBuilder addAssertion(Assertions assertion) {
 		assertion.setRecordPath(getRecordOutputFolder());
@@ -50,72 +48,71 @@ public class TestBuilder extends AbstractTestFolder {
 		for (Assertions assertion : assertions) {
 			assertion.proceed();
 		}
-		
-		LOGGER.info(  " Number of assertions processed successfully: "+assertions.size()+ " [\n\t" + Joiner.on(",\n\t").join(assertions)+ "\n      ]");
+
+		LOGGER.info(" Number of assertions processed successfully: " + assertions.size() + " [\n\t" + Joiner.on(",\n\t").join(assertions) + "\n      ]");
 	}
-	
 
 	public void deleteOutputFolder() throws IOException {
-		if(!isReplayMode() ) {
-			TestProtocol.write( getTestStepName() + "\t Deleting record output folder " + getRecordOutputFolder());
-			FileUtils.deleteDirectory( new File(getRecordOutputFolder()) );
-		}else {
-			TestProtocol.write( getTestStepName() + "\t Deleting replay  folder " + getReplayFolder());
-			FileUtils.deleteDirectory(new  File( getReplayFolder() ));
+		if (!isReplayMode()) {
+			TestProtocol.write(getTestStepName() + "\t Deleting record output folder " + getRecordOutputFolder());
+			FileUtils.deleteDirectory(new File(getRecordOutputFolder()));
+		} else {
+			TestProtocol.write(getTestStepName() + "\t Deleting replay  folder " + getReplayFolder());
+			FileUtils.deleteDirectory(new File(getReplayFolder()));
 		}
 	}
-	
+
 	/**
 	 * @return /src/test/TestName/output
 	 */
 	protected String getRecordOutputFolder() {
-		return getRecordFolder()  +  Constants.OUTPUT_FOLDER;
+		return getRecordFolder() + Constants.OUTPUT_FOLDER;
 	}
-	
+
 	/**
 	 * @return /target/replay/TestName/output
 	 */
 	protected String getReplayOutputFolder() {
-		return getReplayFolder() +  Constants.OUTPUT_FOLDER;
+		return getReplayFolder() + Constants.OUTPUT_FOLDER;
 	}
-	
+
 	/**
 	 * @return /src/test/TestName
 	 */
-	public String getRecordFolder() { 
+	public String getRecordFolder() {
 		return getRecordRootPath() + getInFolderName();
 	}
 
 	/**
 	 * @return /target/replay/TestName
 	 */
-	public String getReplayFolder() {  
+	public String getReplayFolder() {
 		return getReplayRootPath() + getInFolderName();
 	}
 
-	
-
-
 	private void copyRecordToReplayTarget(String stepName) {
-		
+
 		if (new File(getRecordFolder() + "/" + stepName).exists() == false) {
 			new File(getRecordFolder() + "/" + stepName).mkdirs();
 		}
 		new File(getReplayFolder() + "/" + stepName).mkdirs();
-		
+
 		try {
-			
-			FileUtils.copyDirectory(new File(getRecordFolder() + "/" + stepName),
-					new File(getReplayFolder() + "/" + "/" + stepName));
-			
+
+			FileUtils.copyDirectory(new File(getRecordFolder() + "/" + stepName), new File(getReplayFolder() + "/" + "/" + stepName));
+
 		} catch (IOException e) {
-			
+
 			LOGGER.error("Can not make copy of " + getRecordFolder() + "/" + stepName + " to replay target " + getReplayFolder() + "/" + stepName);
 			throw new GenericException(e);
 		}
-		
-		LOGGER.info(getTestStepName() + "\t Copying " + Constants.RECORD_PATH +  getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH +  getTestName() + "/" + getTestStepName() );
+
+		LOGGER.info(getTestStepName() + "\t Copying " + Constants.RECORD_PATH + getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH
+				+ getTestName() + "/" + getTestStepName());
 	}
 
-	
+	public boolean isRecordFolderExists() {
+		return new File(this.getRecordFolder()).exists();
+	}
+
 }

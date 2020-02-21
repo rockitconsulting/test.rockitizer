@@ -100,7 +100,7 @@ public class Configuration {
 	 * For test support generate always new instance, no caching
 	 * @param rhcli
 	 * @param tchcli
-	 * @return
+	 * 
 	 */
 	public static void reset(ResourcesHolderAccessor rhcli, TestCasesHolderAccessor tchcli) {
 		INSTANCE =  new Configuration(rhcli, tchcli);

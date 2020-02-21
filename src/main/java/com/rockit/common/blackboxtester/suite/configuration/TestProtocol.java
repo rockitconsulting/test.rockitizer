@@ -46,9 +46,14 @@ public class TestProtocol {
 	    LOGGER.info(string);
 		
 	}
+	
+	public static void writeError(String m) {
+		LOGGER.error("Critical: Execution cancelled. " + m);
+	}
+	
 
 	public static void writeFatal(Throwable thr) {
-		LOGGER.fatal("ERROR: Execution cancelled.  Please see the below Exception for details  \n\n", thr);
+		LOGGER.error("Critical: Execution cancelled.  Please see the below Exception for details  \n\n", thr);
 	}
 	
 	

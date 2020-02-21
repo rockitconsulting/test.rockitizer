@@ -178,7 +178,7 @@ public class ResourcesHolder  {
 	/**
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addtion custom searchById function, instead of dependency on equals and hashcode
-	 * @param fileDelConnector
+	 * @param mqConnector
 	 */
 	public void addMqConnector(MQConnector mqConnector) {
 		if (!getMqConnectors().stream().anyMatch(c -> c.getId().equals(mqConnector.getId()))) {

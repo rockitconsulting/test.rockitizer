@@ -18,13 +18,17 @@ public abstract class AbstractTestWrapper {
 	public static final Logger LOGGER = Logger.getLogger(AbstractTestWrapper.class.getName());
 
 	@Before
-	public void cleanRecordFolderAndConnectors() throws IOException { 
+	public void cleanRecordFolderAndConnectors() throws IOException {
 
 		TestProtocol.writeHeading(testBuilder.getTestName(), "Configuration");
 		TestProtocol.write(testBuilder);
 
 		TestProtocol.writeHeading(testBuilder.getTestName(), "Executing  [" + configuration().getRunMode() + "]");
 
+		if (!testBuilder.isRecordFolderExists()) {
+			TestProtocol.writeError("Record folder doesn't exist" + testBuilder.getRecordFolder());
+			System.exit(1);
+		}
 		testBuilder.addStep(Constants.BEFORE_FOLDER).execute();
 		testBuilder.deleteOutputFolder();
 

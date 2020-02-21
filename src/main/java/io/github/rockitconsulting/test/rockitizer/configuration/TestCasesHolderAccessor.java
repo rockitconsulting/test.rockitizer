@@ -67,7 +67,7 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	}
 	
 	/**
-	 * Creates config file <testcase.yaml> from TestCaseHolder
+	 * Creates config file &lt;testcase.yaml&gt; from TestCaseHolder
 	 * 
 	 * @return
 	 * @throws IOException

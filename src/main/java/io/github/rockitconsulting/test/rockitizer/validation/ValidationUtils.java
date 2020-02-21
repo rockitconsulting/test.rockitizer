@@ -22,7 +22,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 public class ValidationUtils {
 
 	/**
-	 * @usage ImmutableMap.<String, String>builder(). put(k, v). put(k, v).
+	 *  ImmutableMap.&lt;String, String&gt;builder(). put(k, v). put(k, v).
 	 *        build()
 	 * 
 	 * @param context
@@ -48,7 +48,7 @@ public class ValidationUtils {
 	/**
 	 * Check if the testcases are synchron with resources description
 	 * 
-	 * @throws IOException
+	 * 
 	 */
 	public static void validateConnectorRefExists() {
 
@@ -144,7 +144,7 @@ public class ValidationUtils {
 	/**
 	 * Process validation for all resources
 	 * 
-	 * @param validatables
+	 * 
 	 */
 	public static void validateResources() {
 
