@@ -6,6 +6,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.snakeyaml.Config
 import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,26 +57,27 @@ public class ConfigUtils {
 
 	}
 
-	public static ResourcesHolder resourcesHolderFromYaml(String yamlFileNameWithRelPath) throws IOException {
+	public static ResourcesHolder resourcesHolderFromYaml(String path) throws IOException {
 
 		Constructor constructor = new Constructor(ResourcesHolder.class);
 		TypeDescription customTypeDescription = new TypeDescription(ResourcesHolder.class);
 		constructor.addTypeDescription(customTypeDescription);
 
-		InputStream inputStream = ConfigUtils.class.getClassLoader().getResourceAsStream(yamlFileNameWithRelPath);
+		InputStream inputStream = new FileInputStream(path);
+				//ConfigUtils.class.getClassLoader().getResourceAsStream(yamlFileNameWithRelPath);
 
 		Yaml yaml = new Yaml(constructor);
 		return yaml.load(inputStream);
 
 	}
 
-	public static TestCasesHolder testCasesHolderFromYaml(String yamlFileNameWithRelPath) throws IOException {
+	public static TestCasesHolder testCasesHolderFromYaml(String path) throws IOException {
 
 		Constructor constructor = new Constructor(TestCasesHolder.class);
 		TypeDescription customTypeDescription = new TypeDescription(TestCasesHolder.class);
 		constructor.addTypeDescription(customTypeDescription);
 
-		InputStream inputStream = ConfigUtils.class.getClassLoader().getResourceAsStream(yamlFileNameWithRelPath);
+		InputStream inputStream = new FileInputStream(path);
 
 		Yaml yaml = new Yaml(constructor);
 		return yaml.load(inputStream);

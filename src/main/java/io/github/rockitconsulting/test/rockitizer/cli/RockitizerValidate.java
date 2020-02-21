@@ -1,5 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder;
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
@@ -23,6 +24,11 @@ public class RockitizerValidate implements Runnable {
 	@Override
 	public void run() {
 
+			System.out.println("#################################printing current context####################");
+			System.out.println("Path:" + Configuration.configuration().getFullPath());
+			System.out.println("#############################################################################");
+		
+		
 			System.out.println("adding .gitignore to enforce empty folders commit");
 			ValidationUtils.fixGitEmptyFoldersProblem();
 			System.out.println("added .gitignore. re-run validation");

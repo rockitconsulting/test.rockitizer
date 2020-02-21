@@ -30,7 +30,7 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	 * @throws IOException
 	 */
 	public TestCasesHolder testCasesHolderFromYaml() throws IOException {
-		return ConfigUtils.testCasesHolderFromYaml(getRelativePath() + getTestcasesFileName());
+		return ConfigUtils.testCasesHolderFromYaml(getFullPath() + getTestcasesFileName());
 	}
 
 

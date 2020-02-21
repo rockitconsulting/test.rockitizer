@@ -35,7 +35,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	 * @throws IOException
 	 */
 	public ResourcesHolder resourcesHolderFromYaml() throws IOException {
-		return ConfigUtils.resourcesHolderFromYaml(getRelativePath() + getResourcesFileName());
+		return ConfigUtils.resourcesHolderFromYaml(getFullPath() + getResourcesFileName());
 	}
 
 	

@@ -35,7 +35,7 @@ public class TestCasesHolderAccessorTest {
 	@Test
 	public void readResources() throws IOException {
 		TestCasesHolder tch1 = tcCLI.testCasesHolderToYaml();
-		TestCasesHolder tch2 = ConfigUtils.testCasesHolderFromYaml(relPath + "testcases-generated.yaml");
+		TestCasesHolder tch2 = ConfigUtils.testCasesHolderFromYaml(rootPathTestSrc + "testcases-generated.yaml");
 		Assert.assertTrue(tch1.getTestCases().size() == tch2.getTestCases().size());
 	}
 

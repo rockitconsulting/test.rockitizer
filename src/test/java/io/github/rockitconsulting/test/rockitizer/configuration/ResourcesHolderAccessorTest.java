@@ -37,7 +37,7 @@ public class ResourcesHolderAccessorTest {
 	public void readResources() throws IOException {
 		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(null);
 
-		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated.yaml");
+		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(rootPathTestSrc + "resources-generated.yaml");
 
 		Assert.assertTrue("db connectors sizes:  " + rh1.getDbConnectors().size() + "/" + rh2.getDbConnectors().size(), rh1.getDbConnectors().size() == rh2
 				.getDbConnectors().size());
@@ -69,7 +69,7 @@ public class ResourcesHolderAccessorTest {
 		Assert.assertNotNull(rh1);
 		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());
 
-		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(relPath + "resources-generated-with-payload-replacements-01.yaml");
+		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(rootPathTestSrc + "resources-generated-with-payload-replacements-01.yaml");
 		Assert.assertTrue(rh1.getPayloadReplacer().size() == rh2.getPayloadReplacer().size());
 	}
 
