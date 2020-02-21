@@ -27,7 +27,10 @@ public class RockitizerCreateConn implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		// TODO Check if testcase exist
+		// TODO Check if teststep exist
+		// TODO Create connector
+		// TODO Append to junit test
 		
 	}
 

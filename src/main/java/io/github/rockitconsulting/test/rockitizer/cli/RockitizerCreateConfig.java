@@ -24,7 +24,8 @@ public class RockitizerCreateConfig implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		// TODO Check environment 
+		// TODO Check create configuration
 		
 	}
 
