@@ -14,7 +14,7 @@ subcommands = {
         RockitizerCreateTS.class,
         RockitizerCreateConn.class,
         RockitizerCreateConfig.class,
-        RockitizerDelete.class,
+        RockitizerDeleteTC.class,
         RockitizerSync.class,
         RockitizerList.class,
         RockitizerValidate.class,
