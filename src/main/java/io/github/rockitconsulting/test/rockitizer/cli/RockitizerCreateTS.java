@@ -2,7 +2,6 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
-import java.io.File;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
@@ -23,31 +22,10 @@ public class RockitizerCreateTS implements Runnable {
 	@Override
 	public void run() {
 
-		File checkTestcaseDir = new File(rootPath + relPath + testcase);
-		if (checkTestcaseDir.exists()) {
-			File theDir = new File(rootPath + relPath + testcase + "/"
-					+ teststep);
-			// if the directory does not exist, create it
-			if (!theDir.exists()) {
-				System.out.println("creating directory: " + theDir.getName());
-				boolean result = false;
-
-				try {
-					theDir.mkdir();
-					result = true;
-				} catch (SecurityException se) {
-					// handle it
-				}
-				if (result) {
-					System.out.println("DIR created");
-				}
-			} else {
-				System.out.println("DIR already exists");
-			}
-		}else{
-			
-			System.out.println(testcase + " does not exist!");
-		}
+		// TODO Check if testcase exist
+		// TODO Check if teststep exist
+		// TODO Create teststep
+		// TODO Append to junit test
 	}
 
 }
