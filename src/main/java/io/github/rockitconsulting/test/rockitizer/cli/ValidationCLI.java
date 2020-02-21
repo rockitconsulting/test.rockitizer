@@ -46,7 +46,10 @@ public class ValidationCLI {
 	 * 
 	 */
 	public void validateTestCasesAndFileSystemInSync() throws IOException  {
-		ValidationUtils.validateTestCasesAndFileSystemInSync();;
+		ValidationUtils.validateTestCasesAndFileSystemInSync();
+		
 	}
-
+	public void validateNotAllowedEmptyStructures() throws IOException  {
+		ValidationUtils.validateNotAllowedEmptyStructures();
+	}
 }
