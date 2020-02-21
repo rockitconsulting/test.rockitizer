@@ -40,13 +40,13 @@ public class ConnectorFolder extends AbstractTestFolder {
 		} else if (FileUtils.listFiles(getInFolder()).iterator().hasNext()) {
 
 			for (File input : FileUtils.listFiles(getInFolder())) {
-				
-				if(input.getName().equalsIgnoreCase(Constants.GITIGNORE)) {
-					continue;
+
+				if (!input.getName().equalsIgnoreCase(Constants.GITIGNORE)) {
+					((WriteConnector) connector).setRequest(input);
+					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
 				}
-				((WriteConnector) connector).setRequest(input);
-				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
 				connector.proceed();
+
 				if (connector instanceof ReadConnector) {
 					saveResponse(connector, input.getName());
 				}
@@ -68,7 +68,10 @@ public class ConnectorFolder extends AbstractTestFolder {
 			String response = ((ReadConnector) connector).getResponse();
 
 			if (null != response) {
-//				LOGGER.info(getTestStepName()+"\t [connector:"+ connector.getName() +"] - Saving connector "+ connector.getName() +" content to output folder "  + getOutFolder() );
+				// LOGGER.info(getTestStepName()+"\t [connector:"+
+				// connector.getName() +"] - Saving connector "+
+				// connector.getName() +" content to output folder " +
+				// getOutFolder() );
 				try {
 					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 					Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + idx + ".txt"));
@@ -78,11 +81,14 @@ public class ConnectorFolder extends AbstractTestFolder {
 				}
 				idx++;
 			}
-		} while (null != ((ReadConnector) connector).getResponse()
-				&& MQGET.toString().equalsIgnoreCase(connector.getType()));
+		} while (null != ((ReadConnector) connector).getResponse() && MQGET.toString().equalsIgnoreCase(connector.getType()));
 	}
 
 	private void saveResponse(Connector connector, String fileName) {
+
+		if (fileName.equalsIgnoreCase(Constants.GITIGNORE)) {
+			fileName = "0.txt";
+		} // TODO redesign
 
 		String response = ((ReadConnector) connector).getResponse();
 
