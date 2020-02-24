@@ -9,8 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-
 public class CommonCLITest {
 	public static Logger log = Logger.getLogger(CommonCLITest.class.getName());
 

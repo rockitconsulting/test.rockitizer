@@ -55,18 +55,22 @@ public class Configuration {
 			log.info("#######################################################################################################################");
 
 			initEnvironmentFromSystemProperty();
-			initRunModeFromSystemProperty();
+			
+			if(initFromYaml) {
+				initAndLogRunModeFromSystemProperty();
+				rhApi.initFromYaml();
+				tchApi.initFromYaml();
+			} else { 
+				log.warn(" running in CLI configuration generation mode" );
+				rhApi.initFromFileSystem();
+				tchApi.initFromFileSystem();
+			}
+			
+
 
 			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 
-			if(initFromYaml) {
-				rhApi.initFromYaml();
-				tchApi.initFromYaml();
-			} else { 
-				rhApi.initFromFileSystem();
-				tchApi.initFromFileSystem();
-			}
 
 			// TODO add complete validation here
 			log.info("#######################################################################################################################");
@@ -78,7 +82,7 @@ public class Configuration {
 
 	}
 
-	private void initRunModeFromSystemProperty() {
+	private void initAndLogRunModeFromSystemProperty() {
 		if (System.getProperty(Constants.MODE_KEY) != null
 				&& (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY)
 						.equalsIgnoreCase(RunModeTypes.RECORD.name()))) {

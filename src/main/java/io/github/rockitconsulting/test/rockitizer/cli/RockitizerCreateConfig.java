@@ -1,14 +1,10 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-
-import java.io.File;
-import java.io.IOException;
-
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
+
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 @CommandLine.Command(name = "create-config",
 sortOptions = false,
@@ -39,38 +35,13 @@ public class RockitizerCreateConfig implements Runnable {
 		}
 		
 		String resourcesFile = configuration().getFullPath() + configuration().getRhApi().getResourcesFileName(); 
-
-		if ( !new File(resourcesFile ).exists() )  {
-				System.out.println( " creating new " + resourcesFile + " for environemnt " + environment);
-			} else {
-				System.out.println( " overwriting " + resourcesFile + " for environemnt " + environment);
-			}
-				
-		try {
-			configuration().getRhApi().resourcesHolderFromFileSystemToYaml(null);			
-			
-		} catch (IOException e) {
-			System.out.println( " error occured:  " + e.getMessage());
-			e.printStackTrace();
-		}
-
-		
 		String testcasesFile = configuration().getFullPath() + configuration().getTchApi().getTestcasesFileName(); 
-
-		if ( !new File(testcasesFile ).exists() )  {
-				System.out.println( " creating new " + testcasesFile + " for environemnt " + environment);
-			} else {
-				System.out.println( " overwriting " + testcasesFile + " for environemnt " + environment);
-			}
+		
+		System.out.println( " Result: ");
+		System.out.println( " generated new " + testcasesFile + " for environemnt " + environment);
+		System.out.println( " generated new " + resourcesFile + " for environemnt " + environment);
 				
-		try {
-			configuration().getRhApi().resourcesHolderFromFileSystemToYaml(null);			
-			
-		} catch (IOException e) {
-			System.out.println( " error occured:  " + e.getMessage());
-			e.printStackTrace();
-		}
-
+	
 		//remove fs init mode
 		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
 
