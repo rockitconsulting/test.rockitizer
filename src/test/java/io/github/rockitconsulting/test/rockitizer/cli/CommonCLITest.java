@@ -19,7 +19,6 @@ public class CommonCLITest {
 
 	@Before
 	public void before() {
-		System.clearProperty(Constants.INIT_CLI_KEY);
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		Assert.assertNotNull(configuration());
 		
@@ -39,7 +38,6 @@ public class CommonCLITest {
 
 	@After
 	public void after() {
-		System.clearProperty(Constants.INIT_CLI_KEY);
 	}
 
 

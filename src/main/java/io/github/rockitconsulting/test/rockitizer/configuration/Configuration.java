@@ -96,7 +96,7 @@ public class Configuration {
 	}
 
 	private void initEnvironmentFromSystemProperty() {
-		if( System.getProperty(Constants.INIT_CLI_KEY) !=null ) {
+		if( System.getProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY) !=null ) {
 			initFromYaml = false;
 		}
 		

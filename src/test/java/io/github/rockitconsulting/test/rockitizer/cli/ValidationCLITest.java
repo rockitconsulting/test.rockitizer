@@ -24,7 +24,7 @@ public class ValidationCLITest {
 
 	@After
 	public void after() {
-		System.clearProperty(Constants.INIT_CLI_KEY);
+		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
 	}
 	
 }

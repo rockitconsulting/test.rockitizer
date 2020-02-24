@@ -23,7 +23,7 @@ public final class Constants {
 	/**
 	 * additional system property for identification of initialisation mode FS vs YAML 
 	 */
-	public static final String INIT_CLI_KEY = "initMode";
+	public static final String INIT_CONFIG_FROM_FILESYSTEM_KEY = "initMode";
 	
 	/**
 	 * GIT Bug: force commit for empty folders 

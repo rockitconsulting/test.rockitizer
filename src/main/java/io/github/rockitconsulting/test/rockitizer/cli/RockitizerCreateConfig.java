@@ -21,16 +21,20 @@ header = "Record changes to the repository.",
 description = "Stores the current contents of the index in a new commit " +
     	"along with a log message from the user describing the changes.")
 
-public class RockitizerCreateConfig extends CommonCLI implements Runnable {
+public class RockitizerCreateConfig implements Runnable {
 
 	@Parameters(index = "0", description = "Environment.....")
     String environment;
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		
 		if(environment != null ) {
-			System.out.println( " setting  environment " + environment );
+			System.out.println( " setting  environment " + environment + " and forcing config generation from filesystem");
+			System.setProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY, "CLI");
 			System.setProperty(Constants.ENV_KEY, environment ) ;
 		}
 		
@@ -66,6 +70,9 @@ public class RockitizerCreateConfig extends CommonCLI implements Runnable {
 			System.out.println( " error occured:  " + e.getMessage());
 			e.printStackTrace();
 		}
+
+		//remove fs init mode
+		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
 
 	}
 
