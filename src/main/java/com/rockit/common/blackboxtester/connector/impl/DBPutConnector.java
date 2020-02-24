@@ -60,7 +60,7 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 		try {
 			List<String> commandsList = extractSQLCommandsFromPayload();
 			for (String cmd : commandsList) {
-				cmd = cmd + ";";
+				cmd = cmd + DELIMITER;
 				LOGGER.info(cmd);
 
 				final Statement statement = connection.createStatement();
@@ -98,7 +98,7 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 			commands.append(line.trim()).append(" ");
 		}
 
-		List<String> commandsList = Splitter.on(";").trimResults().omitEmptyStrings().splitToList(commands);
+		List<String> commandsList = Splitter.on(DELIMITER).trimResults().omitEmptyStrings().splitToList(commands);
 		return commandsList;
 	}
 
