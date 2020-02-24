@@ -15,6 +15,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 
 public class ConfigurationTest {
 
@@ -36,6 +38,22 @@ public class ConfigurationTest {
 
 		
 	}
+
+	
+	@Test
+	public void testRuntimeParamsConfig() {
+		System.setProperty(Constants.MODE_KEY, "record");
+		System.setProperty(Constants.ENV_KEY, "devp");
+		Configuration.reset();
+		Assert.assertEquals(configuration().getEnvironment(), "devp");
+		Assert.assertEquals(configuration().getRunMode(), Configuration.RunModeTypes.RECORD);
+		Assert.assertEquals(configuration().getRhApi().getResourcesFileName() + " equals resources-devp.yaml", configuration().getRhApi().getResourcesFileName(), "resources-devp.yaml" );
+		System.clearProperty(Constants.MODE_KEY);
+		System.clearProperty(Constants.ENV_KEY);
+
+		
+	}
+
 	
 	@Test
 	public void testDBConfigWithDataSourceOK() {

@@ -1,6 +1,5 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder;
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
@@ -46,13 +45,7 @@ public class RockitizerValidate implements Runnable {
 				System.out.println("Validation successfull. Please commit the changes if nescessary.");
 				
 			}
-			
-			
-			
-	
-	
-		
-		
+
 		
 	}
 

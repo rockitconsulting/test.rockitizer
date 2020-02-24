@@ -33,18 +33,20 @@ public class Configuration {
 
 	public static Logger log = Logger.getLogger(Configuration.class.getName());
 
-	private static ResourcesHolderAccessor rhApi = new ResourcesHolderAccessor();
-	private static TestCasesHolderAccessor tchApi = new TestCasesHolderAccessor();
-
-	private RunModeTypes runMode = RunModeTypes.REPLAY;
+	private static ResourcesHolderAccessor rhApi;
+	private static TestCasesHolderAccessor tchApi;
 
 	private static ResourcesHolder rh;
 	private static TestCasesHolder tch;
 
 	private static Configuration INSTANCE = null;
 
+	private RunModeTypes runMode = RunModeTypes.REPLAY;
+
+	private String environment;
+
 	private Configuration() {
-		this(rhApi, tchApi);
+		this(new ResourcesHolderAccessor(), new TestCasesHolderAccessor());
 	}
 
 	/**
@@ -57,27 +59,16 @@ public class Configuration {
 		tchApi = tchcli;
 		try {
 			log.info("#######################################################################################################################");
+			
+			initEnvironmentFromSystemProperty();
+			initRunModeFromSystemProperty();
+
+			
 			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 			rh = rhApi.resourcesHolderFromYaml();
 			tch = tchApi.testCasesHolderFromYaml();
 
-			if (System.getProperty(Constants.MODE_KEY) != null
-					&& (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY)
-							.equalsIgnoreCase(RunModeTypes.RECORD.name()))) {
-
-				if (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("replay")) {
-					setRunMode(RunModeTypes.REPLAY);
-
-				} else {
-					setRunMode(RunModeTypes.RECORD);
-				}
-
-				log.info("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
-
-			} else {
-				log.warn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
-			}
 
 			// TODO add complete validation here
 			log.info("#######################################################################################################################");
@@ -89,6 +80,37 @@ public class Configuration {
 
 	}
 
+	private void initRunModeFromSystemProperty() {
+		if (System.getProperty(Constants.MODE_KEY) != null
+				&& (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY)
+						.equalsIgnoreCase(RunModeTypes.RECORD.name()))) {
+
+			if (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("replay")) {
+				setRunMode(RunModeTypes.REPLAY);
+			} else {
+				setRunMode(RunModeTypes.RECORD);
+			}
+			log.info("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
+
+		} else {
+			log.warn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
+		}
+	}
+
+	
+	private void initEnvironmentFromSystemProperty() {
+		if (System.getProperty(Constants.ENV_KEY)!=null) {
+			setEnvironment(System.getProperty(Constants.ENV_KEY));
+			log.info("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
+
+		} else {
+			setEnvironment(null);
+			log.warn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
+
+		}
+	}
+
+
 	public static Configuration configuration() {
 		if (INSTANCE == null) {
 			INSTANCE = new Configuration();
@@ -98,14 +120,20 @@ public class Configuration {
 
 	/**
 	 * For test support generate always new instance, no caching
+	 * 
 	 * @param rhcli
 	 * @param tchcli
 	 * 
 	 */
 	public static void reset(ResourcesHolderAccessor rhcli, TestCasesHolderAccessor tchcli) {
-		INSTANCE =  new Configuration(rhcli, tchcli);
+		INSTANCE = new Configuration(rhcli, tchcli);
 	}
 
+	public static void reset() {
+		INSTANCE = new Configuration();
+	}
+
+	
 	public Validatable getConnectorById(String id) {
 		Validatable c = (Validatable) rh.findResourceByRef(new ConnectorRef(id));
 		if (c == null) {
@@ -145,7 +173,6 @@ public class Configuration {
 		return ds;
 	}
 
-
 	public RunModeTypes getRunMode() {
 		return runMode;
 	}
@@ -154,19 +181,19 @@ public class Configuration {
 		this.runMode = runMode;
 	}
 
-	public  ResourcesHolder getResourcesHolder() {
+	public ResourcesHolder getResourcesHolder() {
 		return rh;
 	}
 
-	public  TestCasesHolder getTestCasesHolder() {
+	public TestCasesHolder getTestCasesHolder() {
 		return tch;
 	}
 
-	public  ResourcesHolderAccessor getRhApi() {
+	public ResourcesHolderAccessor getRhApi() {
 		return rhApi;
 	}
 
-	public  TestCasesHolderAccessor getTchApi() {
+	public TestCasesHolderAccessor getTchApi() {
 		return tchApi;
 	}
 
@@ -174,9 +201,20 @@ public class Configuration {
 		return rh.getPayloadReplacer();
 
 	}
-	
+
 	public String getFullPath() {
 		return getRhApi().getFullPath();
 	}
-	
+
+	public String getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(String environment) {
+		this.environment = environment;
+		if(environment!=null) {
+			rhApi.setResourcesFileName("resources-"+environment+".yaml");
+		}
+	}
+
 }
