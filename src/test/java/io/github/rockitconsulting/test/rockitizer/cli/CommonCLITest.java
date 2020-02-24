@@ -4,9 +4,12 @@ import static io.github.rockitconsulting.test.rockitizer.configuration.Configura
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class CommonCLITest {
 	public static Logger log = Logger.getLogger(CommonCLITest.class.getName());
@@ -16,6 +19,7 @@ public class CommonCLITest {
 
 	@Before
 	public void before() {
+		System.clearProperty(Constants.INIT_CLI_KEY);
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		Assert.assertNotNull(configuration());
 		
@@ -31,6 +35,11 @@ public class CommonCLITest {
 	@Test
 	public void testPrintTestSuite() {
 		commonCLI.printAllTests();
+	}
+
+	@After
+	public void after() {
+		System.clearProperty(Constants.INIT_CLI_KEY);
 	}
 
 

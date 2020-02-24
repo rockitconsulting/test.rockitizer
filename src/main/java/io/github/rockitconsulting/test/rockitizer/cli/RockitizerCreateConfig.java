@@ -21,7 +21,7 @@ header = "Record changes to the repository.",
 description = "Stores the current contents of the index in a new commit " +
     	"along with a log message from the user describing the changes.")
 
-public class RockitizerCreateConfig implements Runnable {
+public class RockitizerCreateConfig extends CommonCLI implements Runnable {
 
 	@Parameters(index = "0", description = "Environment.....")
     String environment;

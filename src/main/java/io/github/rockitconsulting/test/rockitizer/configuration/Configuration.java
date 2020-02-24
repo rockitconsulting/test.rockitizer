@@ -96,6 +96,11 @@ public class Configuration {
 	}
 
 	private void initEnvironmentFromSystemProperty() {
+		if( System.getProperty(Constants.INIT_CLI_KEY) !=null ) {
+			initFromYaml = false;
+		}
+		
+		
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
 			log.info("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));

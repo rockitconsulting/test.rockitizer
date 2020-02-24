@@ -8,9 +8,17 @@ import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 public class CommonCLI {
 	public static Logger log = Logger.getLogger(CommonCLI.class.getName());
 
+	
+	public CommonCLI() {
+		System.setProperty(Constants.INIT_CLI_KEY, "CLI");
+		
+	}
+	
 	/**
 	 * CLI relevant: print testsuite
 	 */
