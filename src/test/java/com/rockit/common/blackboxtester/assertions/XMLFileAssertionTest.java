@@ -1,5 +1,12 @@
 package com.rockit.common.blackboxtester.assertions;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,6 +85,33 @@ public class XMLFileAssertionTest {
 		xmlFileAssertion.ignore(ImmutableList.of("hits")).ignoreAttrs(ImmutableList.of("ignore2"))
 				.compare(Input.fromString(control), Input.fromString(test))
 				.withNodeMatcher(ElementSelectors.byNameAndText).checkForSimilar().build();
+	}
+
+	
+	@Test
+	public void checkMultilineEqualsToOnelineFromString() {
+		String control = "<root>" + System.lineSeparator() + "<shards></shards></root>";
+		String test = "<root><shards></shards></root>";
+		
+		xmlFileAssertion.ignore(ImmutableList.of("dateTime", "create_ms", "total_ms", "elastic_ms", "_id", "sort", "total","took"))
+				.compare(Input.fromString(control), Input.fromString(test))
+				.withNodeMatcher(ElementSelectors.byNameAndText).checkForSimilar().build();
+	}
+	
+	@Test
+	public void checkMultilineEqualsToOnelineFromFile() throws URISyntaxException {
+		
+		Path recSrcSingle = Paths.get(ClassLoader.getSystemResource("assertions/XMLFileAssertion/mutiline/single.xml").toURI());
+		File single = new File(recSrcSingle.toString());
+		assertTrue(single.exists());
+		
+		Path recSrcMulti = Paths.get(ClassLoader.getSystemResource("assertions/XMLFileAssertion/mutiline/multi.xml").toURI());
+		File multi = new File(recSrcMulti.toString());
+		assertTrue(multi.exists());
+		
+		xmlFileAssertion.ignore(ImmutableList.of("dateTime", "create_ms", "total_ms", "elastic_ms", "_id", "sort", "total","took"))
+				.compare(Input.fromFile(multi), Input.fromFile(single))
+				.withNodeMatcher(ElementSelectors.byNameAndText).checkForIdentical().build();
 	}
 
 }
