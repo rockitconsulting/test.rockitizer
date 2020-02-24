@@ -43,7 +43,7 @@ public class RockitizerCreateConfig implements Runnable {
 			}
 				
 		try {
-			configuration().getRhApi().resourcesHolderToYaml(null);			
+			configuration().getRhApi().resourcesHolderFromFileSystemToYaml(null);			
 			
 		} catch (IOException e) {
 			System.out.println( " error occured:  " + e.getMessage());
@@ -60,7 +60,7 @@ public class RockitizerCreateConfig implements Runnable {
 			}
 				
 		try {
-			configuration().getRhApi().resourcesHolderToYaml(null);			
+			configuration().getRhApi().resourcesHolderFromFileSystemToYaml(null);			
 			
 		} catch (IOException e) {
 			System.out.println( " error occured:  " + e.getMessage());

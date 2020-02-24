@@ -1,16 +1,11 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
-import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
-import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.util.Map;
@@ -36,14 +31,13 @@ public class Configuration {
 	private static ResourcesHolderAccessor rhApi;
 	private static TestCasesHolderAccessor tchApi;
 
-	private static ResourcesHolder rh;
-	private static TestCasesHolder tch;
-
 	private static Configuration INSTANCE = null;
 
 	private RunModeTypes runMode = RunModeTypes.REPLAY;
 
 	private String environment;
+	
+	private boolean initFromYaml = true;
 
 	private Configuration() {
 		this(new ResourcesHolderAccessor(), new TestCasesHolderAccessor());
@@ -59,16 +53,20 @@ public class Configuration {
 		tchApi = tchcli;
 		try {
 			log.info("#######################################################################################################################");
-			
+
 			initEnvironmentFromSystemProperty();
 			initRunModeFromSystemProperty();
 
-			
 			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
-			rh = rhApi.resourcesHolderFromYaml();
-			tch = tchApi.testCasesHolderFromYaml();
 
+			if(initFromYaml) {
+				rhApi.initFromYaml();
+				tchApi.initFromYaml();
+			} else { 
+				rhApi.initFromFileSystem();
+				tchApi.initFromFileSystem();
+			}
 
 			// TODO add complete validation here
 			log.info("#######################################################################################################################");
@@ -97,9 +95,8 @@ public class Configuration {
 		}
 	}
 
-	
 	private void initEnvironmentFromSystemProperty() {
-		if (System.getProperty(Constants.ENV_KEY)!=null) {
+		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
 			log.info("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
 
@@ -109,7 +106,6 @@ public class Configuration {
 
 		}
 	}
-
 
 	public static Configuration configuration() {
 		if (INSTANCE == null) {
@@ -133,60 +129,12 @@ public class Configuration {
 		INSTANCE = new Configuration();
 	}
 
-	
-	public Validatable getConnectorById(String id) {
-		Validatable c = (Validatable) rh.findResourceByRef(new ConnectorRef(id));
-		if (c == null) {
-			throw new ResourceNotFoundException(id);
-		}
-		if (!c.isValid()) {
-			throw new ValidationException(c.validate());
-		}
-		return c;
-	}
-
-	public DBDataSource getDBDataSourceByConnector(DBConnector connector) {
-		DBDataSource ds = rh.findDBDataSourceById(connector.getDsRefId());
-		if (ds == null) {
-			throw new ResourceNotFoundException(connector.getDsRefId());
-		}
-
-		if (!ds.isValid()) {
-			throw new ValidationException(ds.validate());
-		}
-		return ds;
-	}
-
-	public MQDataSource getMQDataSourceByConnector(MQConnector connector) {
-		MQDataSource ds = rh.findMQDataSourceById(connector.getDsRefId());
-		if (!ds.isValid()) {
-			throw new ValidationException(ds.validate());
-		}
-		return ds;
-	}
-
-	public KeyStore getKeyStoreByConnector(HTTPConnector connector) {
-		KeyStore ds = rh.findKeyStoreById(connector.getDsRefId());
-		if (ds != null && !ds.isValid()) {
-			throw new ValidationException(ds.validate());
-		}
-		return ds;
-	}
-
 	public RunModeTypes getRunMode() {
 		return runMode;
 	}
 
 	public void setRunMode(RunModeTypes runMode) {
 		this.runMode = runMode;
-	}
-
-	public ResourcesHolder getResourcesHolder() {
-		return rh;
-	}
-
-	public TestCasesHolder getTestCasesHolder() {
-		return tch;
 	}
 
 	public ResourcesHolderAccessor getRhApi() {
@@ -197,11 +145,6 @@ public class Configuration {
 		return tchApi;
 	}
 
-	public Map<String, String> getPayloadReplacements() {
-		return rh.getPayloadReplacer();
-
-	}
-
 	public String getFullPath() {
 		return getRhApi().getFullPath();
 	}
@@ -210,15 +153,40 @@ public class Configuration {
 		return environment;
 	}
 
-	/** 
-	 * Please use the System.setProperty(Constants.ENV_KEY, env ) for proper initialisation
+	/**
+	 * Please use the System.setProperty(Constants.ENV_KEY, env ) for proper
+	 * initialisation
+	 * 
 	 * @param environment
 	 */
 	private void setEnvironment(String environment) {
 		this.environment = environment;
-		if(environment!=null) {
-			rhApi.setResourcesFileName("resources-"+environment+".yaml");
+		if (environment != null) {
+			rhApi.setResourcesFileName("resources-" + environment + ".yaml");
 		}
+	}
+
+	public Validatable getConnectorById(String id) {
+		return getRhApi().getConnectorById(id);
+	}
+
+	public DBDataSource getDBDataSourceByConnector(DBConnector cfg) {
+		return getRhApi().getDBDataSourceByConnector(cfg);
+	}
+
+	public MQDataSource getMQDataSourceByConnector(MQConnector cfg) {
+		return getRhApi().getMQDataSourceByConnector(cfg);
+
+	}
+
+	public KeyStore getKeyStoreByConnector(HTTPConnector cfg) {
+		return getRhApi().getKeyStoreByConnector(cfg);
+
+	}
+
+	public Map<String, String> getPayloadReplacements() {
+		return getRhApi().getResourcesHolder().getPayloadReplacer();
+
 	}
 
 }

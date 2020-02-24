@@ -20,6 +20,19 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	public static Logger log = Logger.getLogger(TestCasesHolderAccessor.class.getName());
 
 	private String testcasesFileName = "testcases.yaml";
+	
+	private TestCasesHolder testCasesHolder;
+
+	
+
+	void initFromYaml() throws IOException {
+		testCasesHolder = testCasesHolderFromYaml();
+	}
+	
+	void initFromFileSystem() throws IOException {
+		testCasesHolder = testCasesHolderFromFileSystem();
+	}
+	
 
 	
 	/**
@@ -72,9 +85,9 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	 * @return
 	 * @throws IOException
 	 */
-	public TestCasesHolder testCasesHolderToYaml() throws IOException {
+	public TestCasesHolder testCasesHolderFromFileSystemToYaml() throws IOException {
 		TestCasesHolder holder = testCasesHolderFromFileSystem();
-		ConfigUtils.writeToYaml(holder, getFullPath() + getTestcasesFileName());
+		ConfigUtils.writeModelObjToYaml(holder, getFullPath() + getTestcasesFileName());
 		return holder;
 	}
 
@@ -90,5 +103,15 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	public String contextAsString() {
 		return "[ filename: " + getTestcasesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() + "]";
 
+	}
+
+
+	public TestCasesHolder getTestCasesHolder() {
+		return testCasesHolder;
+	}
+
+
+	public void setTestCasesHolder(TestCasesHolder testCasesHolder) {
+		this.testCasesHolder = testCasesHolder;
 	}
 }

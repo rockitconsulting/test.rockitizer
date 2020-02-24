@@ -35,7 +35,7 @@ public class ResourcesHolderAccessorTest {
 
 	@Test
 	public void readResources() throws IOException {
-		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(null);
+		ResourcesHolder rh1 = rhCLI.resourcesHolderFromFileSystemToYaml(null);
 
 		ResourcesHolder rh2 = ConfigUtils.resourcesHolderFromYaml(rootPathTestSrc + "resources-generated.yaml");
 
@@ -50,7 +50,7 @@ public class ResourcesHolderAccessorTest {
 	@Test
 	public void generateResources() throws IOException {
 		rhCLI.setResourcesFileName("resources-generated-01.yaml");
-		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(null);
+		ResourcesHolder rh1 = rhCLI.resourcesHolderFromFileSystemToYaml(null);
 		Assert.assertNotNull(rh1);
 		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());
 
@@ -64,7 +64,7 @@ public class ResourcesHolderAccessorTest {
 		replacements.put("KEY2", "VALUE2");
 
 		rhCLI.setResourcesFileName("resources-generated-with-payload-replacements-01.yaml");
-		ResourcesHolder rh1 = rhCLI.resourcesHolderToYaml(replacements);
+		ResourcesHolder rh1 = rhCLI.resourcesHolderFromFileSystemToYaml(replacements);
 
 		Assert.assertNotNull(rh1);
 		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());

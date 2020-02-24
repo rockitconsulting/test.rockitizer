@@ -22,8 +22,8 @@ public class CommonCLITest {
 		System.out.println(" --> "+ configuration().getFullPath() );
 		System.out.println(" --> "+ configuration().getRhApi().getResourcesFileName() );
 		
-		configuration().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
-		configuration().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
+		configuration().getRhApi().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
+		configuration().getRhApi().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
 
 		
 	}

@@ -37,7 +37,7 @@ public class ConfigUtils {
 	}
 	
 	
-	public static void writeToYaml(Object container, String yamlFileNameWithAbsPath) throws IOException {
+	public static void writeModelObjToYaml(Object container, String yamlFileNameWithAbsPath) throws IOException {
 		DumperOptions options = new DumperOptions();
 		options.setDefaultFlowStyle(FlowStyle.BLOCK);
 		options.setPrettyFlow(true);

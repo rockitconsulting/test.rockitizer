@@ -9,8 +9,12 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connec
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
+import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
+import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,15 +30,27 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 	public static Logger log = Logger.getLogger(ResourcesHolderAccessor.class.getName());
 
+	private ResourcesHolder resourcesHolder;
+	
 	private String resourcesFileName = "resources.yaml";
 
+
+	void initFromYaml() throws IOException {
+		resourcesHolder = resourcesHolderFromYaml();
+	}
+
+	void initFromFileSystem() throws IOException {
+		resourcesHolder = resourcesHolderFromFileSystemToYaml(null);
+	}
+	
+	
 	/**
 	 * Reads yam configuration into the holder object
 	 * CLI relevant: instantiate Resources from yaml
 	 * @return
 	 * @throws IOException
 	 */
-	public ResourcesHolder resourcesHolderFromYaml() throws IOException {
+	ResourcesHolder resourcesHolderFromYaml() throws IOException {
 		return ConfigUtils.resourcesHolderFromYaml(getFullPath() + getResourcesFileName());
 	}
 
@@ -45,7 +61,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	 * 
 	 */
 
-	public ResourcesHolder resourcesHolderFromFileSystem()  {
+	ResourcesHolder resourcesHolderFromFileSystem()  {
 		return resourcesHolderFromFileSystem(null);
 	}
 	
@@ -56,7 +72,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	 * 
 	 */
 
-	public ResourcesHolder resourcesHolderFromFileSystem(Map <String, String> payloadReplacer)  {
+	ResourcesHolder resourcesHolderFromFileSystem(Map <String, String> payloadReplacer)  {
 
 		ResourcesHolder resources = new ResourcesHolder();
 
@@ -83,6 +99,16 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 		return resources;
 	}
+
+	
+	public String getResourcesFileName() {
+		return resourcesFileName;
+	}
+
+	public void setResourcesFileName(String resourcesFileName) {
+		this.resourcesFileName = resourcesFileName;
+	}
+
 	
 	
 	/**
@@ -91,12 +117,63 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	 * @throws IOException
 	 */
 
-	public ResourcesHolder resourcesHolderToYaml(Map <String, String> payloadReplacer) throws IOException {
+	public ResourcesHolder resourcesHolderFromFileSystemToYaml(Map <String, String> payloadReplacer) throws IOException {
 
 		ResourcesHolder resources = resourcesHolderFromFileSystem(payloadReplacer);
-		ConfigUtils.writeToYaml(resources, getFullPath() + getResourcesFileName());
+		ConfigUtils.writeModelObjToYaml(resources, getFullPath() + getResourcesFileName());
 		return resources;
 	}
+
+	
+	public Validatable getConnectorById(String id) {
+		Validatable c = (Validatable) resourcesHolder.findResourceByRef(new ConnectorRef(id));
+		if (c == null) {
+			throw new ResourceNotFoundException(id);
+		}
+		if (!c.isValid()) {
+			throw new ValidationException(c.validate());
+		}
+		return c;
+	}
+
+	public DBDataSource getDBDataSourceByConnector(DBConnector connector) {
+		DBDataSource ds = resourcesHolder.findDBDataSourceById(connector.getDsRefId());
+		if (ds == null) {
+			throw new ResourceNotFoundException(connector.getDsRefId());
+		}
+
+		if (!ds.isValid()) {
+			throw new ValidationException(ds.validate());
+		}
+		return ds;
+	}
+
+	public MQDataSource getMQDataSourceByConnector(MQConnector connector) {
+		MQDataSource ds = resourcesHolder.findMQDataSourceById(connector.getDsRefId());
+		if (!ds.isValid()) {
+			throw new ValidationException(ds.validate());
+		}
+		return ds;
+	}
+
+	public KeyStore getKeyStoreByConnector(HTTPConnector connector) {
+		KeyStore ds = resourcesHolder.findKeyStoreById(connector.getDsRefId());
+		if (ds != null && !ds.isValid()) {
+			throw new ValidationException(ds.validate());
+		}
+		return ds;
+	}
+	
+
+
+
+	public String contextAsString() {
+		return "[ filename: " + getResourcesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() +"]";
+		
+	}
+
+
+
 
 	
 	
@@ -173,19 +250,21 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		}
 	}
 
-	public String getResourcesFileName() {
-		return resourcesFileName;
+
+
+
+
+
+
+	public ResourcesHolder getResourcesHolder() {
+		return resourcesHolder;
 	}
 
-	public void setResourcesFileName(String resourcesFileName) {
-		this.resourcesFileName = resourcesFileName;
+
+
+	public void setResourcesHolder(ResourcesHolder resourcesHolder) {
+		this.resourcesHolder = resourcesHolder;
 	}
 
-
-
-	public String contextAsString() {
-		return "[ filename: " + getResourcesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() +"]";
-		
-	}
 
 }
