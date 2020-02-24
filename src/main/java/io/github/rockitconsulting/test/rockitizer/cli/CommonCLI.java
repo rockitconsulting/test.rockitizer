@@ -43,4 +43,57 @@ public class CommonCLI {
 
 	}
 
+	public void create(String path) {
+
+		File theDir = new File(path);
+		// if the directory does not exist, create it
+		if (!theDir.exists()) {
+			System.out.println("creating directory: " + theDir.getName());
+			boolean result = false;
+
+			try {
+				theDir.mkdir();
+				result = true;
+			} catch (SecurityException se) {
+				// handle it
+			}
+			if (result) {
+				System.out.println("DIR created in: " + configuration().getFullPath());
+			}
+		} else {
+			System.out.println("DIR already exists in: " + configuration().getFullPath());
+		}
+
+	}
+
+	public void delete(String path) {
+
+		File theDir = new File(path);
+		// if the directory does not exist, create it
+		if (theDir.exists()) {
+			System.out.println("deleting directory: " + theDir.getName());
+			boolean result = false;
+
+			File[] allContents = theDir.listFiles();
+			if (allContents != null) {
+				for (File file : allContents) {
+					delete(file.getPath());
+				}
+			}
+
+			try {
+				theDir.delete();
+				result = true;
+			} catch (SecurityException se) {
+				// handle it
+			}
+			if (result) {
+				System.out.println("DIR: " + theDir.getName() + " deleted in: " + configuration().getFullPath());
+			}
+		} else {
+			System.out.println("DIR: " + theDir.getName() + " does not exist in: " + configuration().getFullPath());
+		}
+
+	}
+
 }

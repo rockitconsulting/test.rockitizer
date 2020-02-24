@@ -21,6 +21,8 @@ subcommands = {
         RockitizerSyncConfig.class,
         RockitizerSyncTC.class,
         RockitizerListAll.class,
+        RockitizerListTC.class,
+        RockitizerListConfig.class,
         RockitizerValidate.class,
         CommandLine.HelpCommand.class
 })
