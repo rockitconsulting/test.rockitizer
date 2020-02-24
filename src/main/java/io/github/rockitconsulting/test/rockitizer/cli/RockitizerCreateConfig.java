@@ -5,6 +5,8 @@ import static io.github.rockitconsulting.test.rockitizer.configuration.Configura
 import java.io.File;
 import java.io.IOException;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -26,6 +28,12 @@ public class RockitizerCreateConfig implements Runnable {
 	
 	@Override
 	public void run() {
+		
+		if(environment != null ) {
+			System.out.println( " setting  environment " + environment );
+			System.setProperty(Constants.ENV_KEY, environment ) ;
+		}
+		
 		String resourcesFile = configuration().getFullPath() + configuration().getRhApi().getResourcesFileName(); 
 
 		if ( !new File(resourcesFile ).exists() )  {

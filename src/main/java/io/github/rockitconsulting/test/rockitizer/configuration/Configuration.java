@@ -210,7 +210,11 @@ public class Configuration {
 		return environment;
 	}
 
-	public void setEnvironment(String environment) {
+	/** 
+	 * Please use the System.setProperty(Constants.ENV_KEY, env ) for proper initialisation
+	 * @param environment
+	 */
+	private void setEnvironment(String environment) {
 		this.environment = environment;
 		if(environment!=null) {
 			rhApi.setResourcesFileName("resources-"+environment+".yaml");
