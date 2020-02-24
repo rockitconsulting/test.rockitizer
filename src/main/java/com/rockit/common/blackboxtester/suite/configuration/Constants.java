@@ -20,12 +20,17 @@ public final class Constants {
 	public static final String RECORD_PATH = "/src/test/resources/";
 	public static final String MODE_KEY = "mode";
 	public static final String ENV_KEY = "env";
-
+	/**
+	 * additional system property for identification of initialisation mode FS vs YAML 
+	 */
+	public static final String INIT_CONFIG_FROM_FILESYSTEM_KEY = "initMode";
 	
 	/**
 	 * GIT Bug: force commit for empty folders 
 	 */
 	public static final String GITIGNORE = ".gitignore";
+	public static final String SHOWLOG = "showLog";
+	
 
 
 //	

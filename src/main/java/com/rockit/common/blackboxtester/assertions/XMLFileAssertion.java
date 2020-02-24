@@ -82,7 +82,7 @@ public class XMLFileAssertion extends AbstractAssertion {
 	 * @return
 	 */
 	protected XMLFileAssertion build() {
-		Diff diff= diffBuilder.build();
+		Diff diff= diffBuilder.normalizeWhitespace().build();
 		assertFalse(diff.getDifferences().toString() , diff.hasDifferences());
 		return this;
 	}	

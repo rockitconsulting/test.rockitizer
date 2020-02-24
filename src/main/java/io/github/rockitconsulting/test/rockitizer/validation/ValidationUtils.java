@@ -22,8 +22,8 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 public class ValidationUtils {
 
 	/**
-	 *  ImmutableMap.&lt;String, String&gt;builder(). put(k, v). put(k, v).
-	 *        build()
+	 * ImmutableMap.&lt;String, String&gt;builder(). put(k, v). put(k, v).
+	 * build()
 	 * 
 	 * @param context
 	 * @param fields
@@ -53,13 +53,14 @@ public class ValidationUtils {
 	public static void validateConnectorRefExists() {
 
 		configuration()
+				.getTchApi()
 				.getTestCasesHolder()
 				.getTestCases()
 				.forEach(
 						tc -> tc.getTestSteps().forEach(
 								ts -> ts.getConnectorRefs().forEach(
 										conRef -> {
-											if (configuration().getResourcesHolder().findResourceByRef(conRef) == null) {
+											if (configuration().getRhApi().getResourcesHolder().findResourceByRef(conRef) == null) {
 
 												validationHolder().add(
 														new Context.Builder().withId(conRef.getConRefId()),
@@ -148,15 +149,15 @@ public class ValidationUtils {
 	 */
 	public static void validateResources() {
 
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getMqConnectors());
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getDbConnectors());
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getFileConnectors());
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getHttpConnectors());
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getScpConnectors());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getMqConnectors());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getDbConnectors());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getFileConnectors());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getHttpConnectors());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getScpConnectors());
 
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getMqDataSources());
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getDbDataSources());
-		ValidationUtils.validateResources(configuration().getResourcesHolder().getKeyStores());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getMqDataSources());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getDbDataSources());
+		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getKeyStores());
 
 	}
 
@@ -225,10 +226,9 @@ public class ValidationUtils {
 		return errorContext;
 	}
 
-	
 	/**
-	 *  validation directory structure and tescases 
-	 *  make warnings for empty testcases/tessteps
+	 * validation directory structure and tescases make warnings for empty
+	 * testcases/tessteps
 	 * 
 	 * @throws IOException
 	 */
@@ -239,13 +239,12 @@ public class ValidationUtils {
 		TestCasesHolder tch2 = configuration().getTchApi().testCasesHolderFromFileSystem();
 
 		validateNotAllowedEmptyStructures(tch1).forEach(
-				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in " + testcases )));
+				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in " + testcases)));
 		validateNotAllowedEmptyStructures(tch2).forEach(
 				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in FileSystem")));
 
 	}
-	
-	
+
 	/**
 	 * make warnings for empty testcases/tessteps
 	 * 

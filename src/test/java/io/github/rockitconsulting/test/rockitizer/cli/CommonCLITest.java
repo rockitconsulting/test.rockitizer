@@ -4,6 +4,7 @@ import static io.github.rockitconsulting.test.rockitizer.configuration.Configura
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,8 +23,8 @@ public class CommonCLITest {
 		System.out.println(" --> "+ configuration().getFullPath() );
 		System.out.println(" --> "+ configuration().getRhApi().getResourcesFileName() );
 		
-		configuration().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
-		configuration().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
+		configuration().getRhApi().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
+		configuration().getRhApi().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
 
 		
 	}
@@ -31,6 +32,10 @@ public class CommonCLITest {
 	@Test
 	public void testPrintTestSuite() {
 		commonCLI.printAllTests();
+	}
+
+	@After
+	public void after() {
 	}
 
 

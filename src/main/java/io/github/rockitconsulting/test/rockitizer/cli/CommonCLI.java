@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 public class CommonCLI {
 	public static Logger log = Logger.getLogger(CommonCLI.class.getName());
 
+	
+	
 	/**
 	 * CLI relevant: print testsuite
 	 */
