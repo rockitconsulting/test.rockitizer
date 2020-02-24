@@ -6,6 +6,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connec
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.util.Map;
@@ -52,7 +53,7 @@ public class Configuration {
 		rhApi = rhcli;
 		tchApi = tchcli;
 		try {
-			log.info("#######################################################################################################################");
+			LogUtils.LogInfo("#######################################################################################################################");
 
 			initEnvironmentFromSystemProperty();
 			
@@ -61,22 +62,22 @@ public class Configuration {
 				rhApi.initFromYaml();
 				tchApi.initFromYaml();
 			} else { 
-				log.warn(" running in CLI configuration generation mode" );
+				LogUtils.LogWarn(" running in CLI configuration generation mode" );
 				rhApi.initFromFileSystem();
 				tchApi.initFromFileSystem();
 			}
 			
 
 
-			log.info("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+			LogUtils.LogInfo("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 
 
 			// TODO add complete validation here
-			log.info("#######################################################################################################################");
+			LogUtils.LogInfo("#######################################################################################################################");
 
 		} catch (Throwable thr) {
-			log.fatal("configuration initialization exception", thr);
+			LogUtils.LogError("configuration initialization exception", thr);
 
 		}
 
@@ -92,10 +93,10 @@ public class Configuration {
 			} else {
 				setRunMode(RunModeTypes.RECORD);
 			}
-			log.info("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
+			LogUtils.LogInfo("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
 
 		} else {
-			log.warn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
+			LogUtils.LogWarn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
 		}
 	}
 
@@ -107,11 +108,11 @@ public class Configuration {
 		
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
-			log.info("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
+			LogUtils.LogInfo("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
 
 		} else {
 			setEnvironment(null);
-			log.warn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
+			LogUtils.LogWarn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
 
 		}
 	}

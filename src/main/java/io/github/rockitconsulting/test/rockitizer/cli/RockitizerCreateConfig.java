@@ -1,6 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -28,6 +29,8 @@ public class RockitizerCreateConfig implements Runnable {
 	@Override
 	public void run() {
 		
+		LogUtils.disableLogging(); 
+		
 		if(environment != null ) {
 			System.out.println( " setting  environment " + environment + " and forcing config generation from filesystem");
 			System.setProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY, "CLI");
@@ -44,7 +47,8 @@ public class RockitizerCreateConfig implements Runnable {
 	
 		//remove fs init mode
 		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
-
+		
+		LogUtils.enableLogging();
 	}
 
 }

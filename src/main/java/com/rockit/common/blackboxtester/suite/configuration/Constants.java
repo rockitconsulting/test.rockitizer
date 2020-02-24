@@ -29,6 +29,7 @@ public final class Constants {
 	 * GIT Bug: force commit for empty folders 
 	 */
 	public static final String GITIGNORE = ".gitignore";
+	public static final String SHOWLOG = "showLog";
 	
 
 
