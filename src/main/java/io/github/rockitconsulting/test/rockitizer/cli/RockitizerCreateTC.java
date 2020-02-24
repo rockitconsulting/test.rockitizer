@@ -1,7 +1,9 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 
+import java.io.File;
+import java.io.IOException;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
@@ -20,18 +22,36 @@ description = "Stores the current contents of the index in a new commit " +
 
 public class RockitizerCreateTC implements Runnable {
 	
-	final String rootPath  = ConfigUtils.getAbsoluteRootPath();
-	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
-	
 	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
     String testcase;
 
 	@Override
 	public void run() {
 		
-		// TODO Check if testcase exist
-		// TODO Create testcase
-		// TODO Create junit test
+		// TODO Check if testcase exist 	done
+		// TODO Create testcase 			done
+		// TODO Create junit test 
+		
+		CommonCLI cli = new CommonCLI();
+		TemplateCLI tmp = new TemplateCLI();
+		
+		File file = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/")+ this.testcase + ".java");
+		  
+		//Create the file
+		try {
+			if (file.createNewFile())
+			{
+				tmp.createJunitClass(this.testcase, configuration().getFullPath().replaceFirst("/resources/", "/java/")+ this.testcase + ".java");
+			    System.out.println("File is created!");
+			} else {
+			    System.out.println("File already exists.");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		cli.create(configuration().getFullPath() + this.testcase);
 		
 	}
 

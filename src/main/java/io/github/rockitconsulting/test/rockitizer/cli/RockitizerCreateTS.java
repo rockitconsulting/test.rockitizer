@@ -1,5 +1,9 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+
+import java.io.File;
+
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 
@@ -26,6 +30,19 @@ public class RockitizerCreateTS implements Runnable {
 		// TODO Check if teststep exist
 		// TODO Create teststep
 		// TODO Append to junit test
+		
+		CommonCLI cli = new CommonCLI();
+		
+		File theDir = new File(configuration().getFullPath() + testcase);
+		
+		if (theDir.exists()) {
+			System.out.println("creating directory: " + theDir.getName());
+			cli.create(configuration().getFullPath() + this.testcase + "/" + this.teststep);
+		}else{
+			System.out.println("DIR: " + theDir.getName() + " does not exist in: "
+					+ configuration().getFullPath());
+		}
+		
 	}
 
 }
