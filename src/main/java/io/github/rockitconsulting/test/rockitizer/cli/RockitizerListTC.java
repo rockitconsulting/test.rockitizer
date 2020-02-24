@@ -3,7 +3,7 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "delete-config",
+@CommandLine.Command(name = "list-testcase",
 sortOptions = false,
 headerHeading = "@|bold,underline Benutzung:|@%n%n",
 synopsisHeading = "%n",
@@ -12,15 +12,12 @@ parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 optionListHeading = "%n@|bold,underline Options:|@%n",
 header = "Record changes to the repository.",
 description = "Stores the current contents of the index in a new commit " +
-		"along with a log message from the user describing the changes.")
+    	"along with a log message from the user describing the changes.")
 
-public class RockitizerDeleteConfig implements Runnable {
+public class RockitizerListTC implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = "ConfigurationName.....")
-    String configuration;
-	
-	@Parameters(index = "1", description = "Environment.....")
-    String environment;
+	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+    String testcase;
 	
 	@Override
 	public void run() {

@@ -15,8 +15,12 @@ subcommands = {
         RockitizerCreateConn.class,
         RockitizerCreateConfig.class,
         RockitizerDeleteTC.class,
-        RockitizerSync.class,
-        RockitizerList.class,
+        RockitizerDeleteTS.class,
+        RockitizerDeleteConn.class,
+        RockitizerDeleteConfig.class,
+        RockitizerSyncConfig.class,
+        RockitizerSyncTC.class,
+        RockitizerListAll.class,
         RockitizerValidate.class,
         CommandLine.HelpCommand.class
 })

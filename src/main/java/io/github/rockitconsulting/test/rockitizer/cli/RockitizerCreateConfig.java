@@ -3,7 +3,7 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "create-configuration",
+@CommandLine.Command(name = "create-config",
 sortOptions = false,
 headerHeading = "@|bold,underline Benutzung:|@%n%n",
 synopsisHeading = "%n",
