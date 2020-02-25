@@ -31,7 +31,7 @@ public class CommonCLITest {
 
 	@Test
 	public void testPrintTestSuite() {
-		commonCLI.printAllTests();
+		commonCLI.listAll();
 	}
 
 	@After

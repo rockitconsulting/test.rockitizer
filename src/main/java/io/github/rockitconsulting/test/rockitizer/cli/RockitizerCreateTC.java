@@ -1,10 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-
-import java.io.File;
-import java.io.IOException;
-
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -28,30 +25,15 @@ public class RockitizerCreateTC implements Runnable {
 	@Override
 	public void run() {
 		
-		// TODO Check if testcase exist 	done
-		// TODO Create testcase 			done
-		// TODO Create junit test 
+		System.out.println("----------------------------------------------------->");
+		
+		LogUtils.disableLogging();
 		
 		CommonCLI cli = new CommonCLI();
-		TemplateCLI tmp = new TemplateCLI();
 		
-		File file = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/")+ this.testcase + ".java");
-		  
-		//Create the file
-		try {
-			if (file.createNewFile())
-			{
-				tmp.createJunitClass(this.testcase, configuration().getFullPath().replaceFirst("/resources/", "/java/")+ this.testcase + ".java");
-			    System.out.println("File is created!");
-			} else {
-			    System.out.println("File already exists.");
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cli.create(configuration().getFullPath() + this.testcase, this.testcase);
 		
-		cli.create(configuration().getFullPath() + this.testcase);
+		LogUtils.enableLogging();
 		
 	}
 

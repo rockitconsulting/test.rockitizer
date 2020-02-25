@@ -1,5 +1,10 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
+
+import java.io.File;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -27,7 +32,26 @@ public class RockitizerDeleteConn implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
+		LogUtils.disableLogging();
+		
+		System.out.println("----------------------------------------------------->");
+		
+		CommonCLI cli = new CommonCLI();
+
+		File caseDir = new File(configuration().getFullPath() + this.testcase);
+
+		if (caseDir.exists()) {
+			File stepDir = new File(configuration().getFullPath() + this.testcase + "/" + this.teststep);
+			if (stepDir.exists()) {
+				cli.delete(configuration().getFullPath() + this.testcase + "/" + this.teststep + "/" + this.connector, null);
+			} else {
+				System.out.println("DIR: " + stepDir.getName() + " does not exist in: " + configuration().getFullPath());
+			}
+		} else {
+			System.out.println("DIR: " + caseDir.getName() + " does not exist in: " + configuration().getFullPath());
+		}
+		LogUtils.enableLogging();
 		
 	}
 

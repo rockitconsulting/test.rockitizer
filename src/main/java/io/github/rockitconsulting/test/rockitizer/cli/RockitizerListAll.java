@@ -1,5 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "list",
@@ -19,7 +20,14 @@ public class RockitizerListAll implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
+		LogUtils.disableLogging();
+		
+		CommonCLI cli = new CommonCLI();
+		
+		cli.listAll();
+		
+		LogUtils.enableLogging();
 		
 	}
 

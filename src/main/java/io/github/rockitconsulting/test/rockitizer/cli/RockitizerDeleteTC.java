@@ -1,9 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-
-import java.io.File;
-
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -26,22 +24,16 @@ public class RockitizerDeleteTC implements Runnable {
 	@Override
 	public void run() {
 		
+		System.out.println("----------------------------------------------------->");
+		
+		LogUtils.disableLogging();
+		
 		CommonCLI cli = new CommonCLI();
 		
-		File file = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/")+ this.testcase + ".java"); 
-        
-        if(file.delete()) 
-        { 
-            System.out.println(testcase +".java" + " File deleted successfully"); 
-        } 
-        else
-        { 
-            System.out.println(testcase +".java" + " Failed to delete the file"); 
-        } 
+		cli.delete(configuration().getFullPath() + this.testcase, this.testcase);
 		
-		cli.delete(configuration().getFullPath() + this.testcase);
-		
+		LogUtils.enableLogging();
 	}
-	
+
 
 }

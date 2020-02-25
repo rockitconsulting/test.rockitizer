@@ -2,8 +2,10 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
@@ -11,22 +13,20 @@ import org.apache.log4j.Logger;
 public class CommonCLI {
 	public static Logger log = Logger.getLogger(CommonCLI.class.getName());
 
-	
-	
 	/**
 	 * CLI relevant: print testsuite
 	 */
-	public void printAllTests() {
+	public void listAll() {
 		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
 		testCases.forEach(tcase -> {
-			log.info("====================TC=======================================");
-			log.info(tcase.getName());
+			System.out.println("====================TC=======================================");
+			System.out.println(tcase.getName());
 			FileUtils.listFolders(tcase).forEach(tstep -> {
-				log.info("	\\_" + tstep.getName());
+				System.out.println("	\\_" + tstep.getName());
 				FileUtils.listFolders(tstep).forEach(connector -> {
-					log.info("		\\__" + connector.getName());
+					System.out.println("		\\__" + connector.getName());
 					FileUtils.listFiles(connector).forEach(payload -> {
-						log.info("			\\___" + payload.getName());
+						System.out.println("			\\___" + payload.getName());
 
 					});
 				});
@@ -35,6 +35,29 @@ public class CommonCLI {
 			;
 
 		});
+	}
+	
+	public void listTC(String testcase) {
+		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
+		testCases.forEach(tcase -> {
+			if(tcase.getName().contentEquals(testcase)){
+			System.out.println("====================TC=======================================");
+			System.out.println(tcase.getName());
+			FileUtils.listFolders(tcase).forEach(tstep -> {
+				System.out.println("	\\_" + tstep.getName());
+				FileUtils.listFolders(tstep).forEach(connector -> {
+					System.out.println("		\\__" + connector.getName());
+					FileUtils.listFiles(connector).forEach(payload -> {
+						System.out.println("			\\___" + payload.getName());
+
+					});
+				});
+
+			});
+			;
+		}
+		});
+		
 	}
 
 	public File findChildByName(final String context, final String name) {
@@ -45,8 +68,26 @@ public class CommonCLI {
 
 	}
 
-	public void create(String path) {
+	public void create(String path, String testcase) {
 
+		if (testcase != null) {
+			TemplateCLI tmp = new TemplateCLI();
+
+			File file = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
+
+			// Create the file
+			try {
+				if (file.createNewFile()) {
+					tmp.createJunitClass(testcase, configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
+					System.out.println("File is created!");
+				} else {
+					System.out.println("File already exists.");
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		File theDir = new File(path);
 		// if the directory does not exist, create it
 		if (!theDir.exists()) {
@@ -68,8 +109,17 @@ public class CommonCLI {
 
 	}
 
-	public void delete(String path) {
+	public void delete(String path, String testcase) {
 
+		if (testcase != null) {
+			File jUnitFile = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
+
+			if (jUnitFile.delete()) {
+				System.out.println(testcase + ".java" + " File deleted successfully");
+			} else {
+				System.out.println(testcase + ".java" + " Failed to delete the file");
+			}
+		}
 		File theDir = new File(path);
 		// if the directory does not exist, create it
 		if (theDir.exists()) {
@@ -79,7 +129,7 @@ public class CommonCLI {
 			File[] allContents = theDir.listFiles();
 			if (allContents != null) {
 				for (File file : allContents) {
-					delete(file.getPath());
+					delete(file.getPath(), null);
 				}
 			}
 
@@ -95,6 +145,8 @@ public class CommonCLI {
 		} else {
 			System.out.println("DIR: " + theDir.getName() + " does not exist in: " + configuration().getFullPath());
 		}
+
+		LogUtils.enableLogging();
 
 	}
 

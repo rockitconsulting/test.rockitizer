@@ -7,6 +7,7 @@ import java.io.File;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -26,23 +27,21 @@ public class RockitizerCreateTS implements Runnable {
 	@Override
 	public void run() {
 
-		// TODO Check if testcase exist
-		// TODO Check if teststep exist
-		// TODO Create teststep
-		// TODO Append to junit test
+		LogUtils.disableLogging();
+		
+		System.out.println("----------------------------------------------------->");
 		
 		CommonCLI cli = new CommonCLI();
 		
 		File theDir = new File(configuration().getFullPath() + testcase);
 		
 		if (theDir.exists()) {
-			System.out.println("creating directory: " + theDir.getName());
-			cli.create(configuration().getFullPath() + this.testcase + "/" + this.teststep);
+			cli.create(configuration().getFullPath() + this.testcase + "/" + this.teststep, null);
 		}else{
 			System.out.println("DIR: " + theDir.getName() + " does not exist in: "
 					+ configuration().getFullPath());
 		}
-		
+		LogUtils.enableLogging();
 	}
 
 }
