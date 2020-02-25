@@ -10,6 +10,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Strings;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
@@ -35,7 +36,7 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 	}
 
 	private String executeSql() {
-		StringBuffer writer = new StringBuffer().append("<root>");
+		StringBuffer writer = new StringBuffer().append("<ROOT>").append(System.lineSeparator());
 
 		try {
 			Statement stmt = connection.createStatement();
@@ -44,13 +45,15 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 
 			int colCount = metaData.getColumnCount();
 			while (rs.next()) {
-				for (int i = 1; i <= colCount; colCount++) {
+				writer.append("<").append("ROW").append(">");
+				for (int i = 1; i <= colCount; i++) {
 					String col = metaData.getColumnLabel(i);
 					String value = rs.getString(i);
 					writer.append("<").append(col).append(">");
-					writer.append(value);
+					writer.append(Strings.nullToEmpty(value).trim());
 					writer.append("</").append(col).append(">");
 				}
+				writer.append("</").append("ROW").append(">").append(System.lineSeparator());
 			}
 		} catch (final SQLException e) {
 
@@ -58,7 +61,7 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 			throw new ConnectorException(e);
 
 		}
-		writer.append("</root>");
+		writer.append("</ROOT>");
 		return writer.toString();
 
 	}
