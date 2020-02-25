@@ -10,7 +10,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtil
 public class TestObjectFactory {
 	
 	
-	final static String rootPath = ConfigUtils.getAbsoluteRootPath();
+	final static String rootPath = ConfigUtils.getAbsolutePathToResources();
 	final static String relPath = "full.demo.project.cli.tests/src/test/resources/";
 
 

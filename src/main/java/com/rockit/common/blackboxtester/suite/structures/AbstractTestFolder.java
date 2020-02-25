@@ -2,6 +2,7 @@ package com.rockit.common.blackboxtester.suite.structures;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 import java.io.File;
 
@@ -91,11 +92,11 @@ public class AbstractTestFolder {
 	}
 
 	public String getRecordRootPath() {
-		return new File("").getAbsolutePath().replace('\\', '/') + Constants.RECORD_PATH;
+		return ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH;
 	}
 
 	public String getReplayRootPath() {
-		return new File("").getAbsolutePath().replace('\\', '/') + Constants.REPLAY_PATH;
+		return ConfigUtils.getAbsolutePathToRoot() + Constants.REPLAY_PATH;
 	}
 
 	private File getOrCreateFolder(String path) {

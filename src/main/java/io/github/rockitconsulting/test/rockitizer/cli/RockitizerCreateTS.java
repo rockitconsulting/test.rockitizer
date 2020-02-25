@@ -21,7 +21,7 @@ import picocli.CommandLine.Parameters;
 								+ "along with a log message from the user describing the changes.")
 public class RockitizerCreateTS implements Runnable {
 
-	final String rootPath = ConfigUtils.getAbsoluteRootPath();
+	final String rootPath = ConfigUtils.getAbsolutePathToResources();
 	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
 
 	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")

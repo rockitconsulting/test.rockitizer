@@ -18,7 +18,7 @@ public class ResourcesHolderAccessorTest {
 
 	public static Logger log = Logger.getLogger(ResourcesHolderAccessorTest.class.getName());
 
-	final String rootPath = ConfigUtils.getAbsoluteRootPath();
+	final String rootPath = ConfigUtils.getAbsolutePathToResources();
 	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
 	String rootPathTestSrc = rootPath + relPath;
 

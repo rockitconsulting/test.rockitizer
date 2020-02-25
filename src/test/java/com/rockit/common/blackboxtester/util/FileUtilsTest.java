@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.util;
 
 import static org.junit.Assert.assertTrue;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 import java.io.File;
 import java.util.List;
@@ -20,7 +21,7 @@ public class FileUtilsTest {
 
 	@Test
 	public void testListFolders(){
-		String path = new File("").getAbsolutePath().replace('\\', '/') + Constants.RECORD_PATH + "/FileUtilsTest";
+		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "/FileUtilsTest";
 		Iterable<File> listFolders = FileUtils.listFolders(new File(path));
 		
 		for (File file : listFolders) {
@@ -30,7 +31,7 @@ public class FileUtilsTest {
 	
 	@Test
 	public void testListFiles(){
-		String path = new File("").getAbsolutePath().replace('\\', '/') + Constants.RECORD_PATH + "/FileUtilsTest/a001TestMQ/MQ@TEST.TRIGGER.@ENV@";
+		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "/FileUtilsTest/a001TestMQ/MQ@TEST.TRIGGER.@ENV@";
 		Iterable<File> listFiles = FileUtils.listFiles(new File(path));
 		
 		for (File file : listFiles) {

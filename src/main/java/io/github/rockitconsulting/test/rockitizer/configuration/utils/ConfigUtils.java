@@ -19,8 +19,19 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 public class ConfigUtils {
 	
-	public static final String getAbsoluteRootPath() {
-		return new File("").getAbsolutePath().replace('\\', '/') + "/src/test/resources/";
+	public static final String getAbsolutePathToRoot() {
+		String path  = new File("").getAbsolutePath();
+		if(System.getProperty("basedir") !=null && System.getProperty("app.home")!=null ) {
+			path = path.replace("\\bin", "").replace("\\target", "").replace("\\appassembler", "");
+		}
+		
+		return path.replace("\\", "/");
+	}
+	
+	
+	
+	public static final String getAbsolutePathToResources() {
+		return getAbsolutePathToRoot() + "/src/test/resources/";
 	}
 	
 

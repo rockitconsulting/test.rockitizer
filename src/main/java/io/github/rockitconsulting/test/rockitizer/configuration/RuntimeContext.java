@@ -10,7 +10,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtil
 public class RuntimeContext {
 
 
-	private String absolutePath = ConfigUtils.getAbsoluteRootPath();
+	private String absolutePath = ConfigUtils.getAbsolutePathToResources();
 	private String relativePath = "";
 
 	String getFullPath() {
