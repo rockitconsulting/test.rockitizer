@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Splitter;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
@@ -19,7 +20,8 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
 
 /**
- * Submitting of payload stored in the DBPUT@KEY folder.  
+ * Submitting of payload stored in the DBPUT@KEY folder.
+ * 
  * @author rockit2lp
  *
  */
@@ -31,13 +33,11 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 	private String id;
 	private File file;
 
-
 	public DBPutConnector(final String id) {
 		super(id);
-		
+
 		this.id = id;
 	}
-
 
 	@Override
 	public String getId() {
@@ -57,26 +57,22 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 	}
 
 	private void runScript() {
-
 		try {
+			List<String> commandsList = extractSQLCommandsFromPayload();
+			for (String cmd : commandsList) {
+				cmd = cmd + DELIMITER;
+				LOGGER.info(cmd);
 
-			List<String> lines = Files.readAllLines(Paths.get(file.getAbsolutePath()), Charset.defaultCharset());
-			for (String line : lines) {
-				StringBuilder command = new StringBuilder();
-				final String trimmedLine = line.trim();
-				if ((trimmedLine.length() < 1) || trimmedLine.startsWith("//") || trimmedLine.startsWith("--")) {
-					continue;
-				}
-				command.append(line.substring(0, line.lastIndexOf(DELIMITER))).append(" ");
-				LOGGER.info(command);
 				final Statement statement = connection.createStatement();
-				statement.execute(command.toString());
+				statement.execute(cmd.toString());
 				connection.commit();
 				statement.close();
+
 			}
+
 		} catch (SQLException |
 
-				IOException e) {
+		IOException e) {
 			LOGGER.error(e);
 			throw new ConnectorException(e);
 
@@ -89,6 +85,21 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 			}
 		}
 
+	}
+
+	List<String> extractSQLCommandsFromPayload() throws IOException {
+		StringBuilder commands = new StringBuilder();
+		List<String> lines = Files.readAllLines(Paths.get(file.getAbsolutePath()), Charset.defaultCharset());
+		for (String line : lines) {
+			final String trimmedLine = line.trim();
+			if ((trimmedLine.length() < 1) || trimmedLine.startsWith("//") || trimmedLine.startsWith("--")) {
+				continue;
+			}
+			commands.append(line.trim()).append(" ");
+		}
+
+		List<String> commandsList = Splitter.on(DELIMITER).trimResults().omitEmptyStrings().splitToList(commands);
+		return commandsList;
 	}
 
 	@Override
