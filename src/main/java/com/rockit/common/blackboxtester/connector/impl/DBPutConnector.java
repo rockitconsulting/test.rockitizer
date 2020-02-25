@@ -60,7 +60,6 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 		try {
 			List<String> commandsList = extractSQLCommandsFromPayload();
 			for (String cmd : commandsList) {
-				cmd = cmd + DELIMITER;
 				LOGGER.info(cmd);
 
 				final Statement statement = connection.createStatement();

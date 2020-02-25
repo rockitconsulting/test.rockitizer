@@ -3,10 +3,10 @@ package com.rockit.common.blackboxtester.connector.impl;
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 
-import java.io.StringWriter;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
-import javax.sql.rowset.WebRowSet;
+import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
@@ -15,7 +15,6 @@ import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.util.DatabaseConnection;
-import com.sun.rowset.WebRowSetImpl;
 
 public class DBGetConnector extends DatabaseConnection implements ReadConnector {
 	public static final Logger LOGGER = Logger.getLogger(DBGetConnector.class.getName());
@@ -36,25 +35,30 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 	}
 
 	private String executeSql() {
-		WebRowSet webRS;
-		StringWriter writer = null;
+		StringBuffer writer = new StringBuffer().append("<root>");
 
 		try {
-			webRS = new WebRowSetImpl();
-			webRS.setCommand(sqlQuery);
-			webRS.execute(connection);
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+			ResultSetMetaData metaData = rs.getMetaData();
 
-			writer = new StringWriter();
-			webRS.writeXml(writer);
-			webRS.close();
-
+			int colCount = metaData.getColumnCount();
+			while (rs.next()) {
+				for (int i = 1; i <= colCount; colCount++) {
+					String col = metaData.getColumnLabel(i);
+					String value = rs.getString(i);
+					writer.append("<").append(col).append(">");
+					writer.append(value);
+					writer.append("</").append(col).append(">");
+				}
+			}
 		} catch (final SQLException e) {
 
 			LOGGER.error("can not execute query: " + this.sqlQuery, e);
 			throw new ConnectorException(e);
 
 		}
-
+		writer.append("</root>");
 		return writer.toString();
 
 	}
