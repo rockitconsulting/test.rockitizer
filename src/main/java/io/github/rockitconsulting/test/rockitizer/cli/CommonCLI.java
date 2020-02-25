@@ -4,7 +4,9 @@ import static io.github.rockitconsulting.test.rockitizer.configuration.Configura
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.StreamSupport;
 
@@ -66,6 +68,25 @@ public class CommonCLI {
 
 		return file;
 
+	}
+	
+	public void listConfig(String path) throws IOException{
+		
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		try {
+		    StringBuilder sb = new StringBuilder();
+		    String line = br.readLine();
+
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    System.out.println(sb.toString());
+		} finally {
+		    br.close();
+		}
+		
 	}
 
 	public void create(String path, String testcase) {
