@@ -6,7 +6,7 @@ import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Spec;
 
 @Command(name = "rockit", mixinStandardHelpOptions = true, version = "subcommand demo 3.0",
-description = "Rockitizer is ......",
+description = "Rockitizer Command-Line Interface is easy to use and  ......",
 commandListHeading = "%nCommands:%n%nThe most commonly used rockitizer commands are:%n",
 footer = "%nSee 'rockit help <command>' to read about a specific subcommand or concept.",
 subcommands = {

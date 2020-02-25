@@ -11,8 +11,14 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "create-teststep", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "Record changes to the repository.", description = "Stores the current contents of the index in a new commit "
-		+ "along with a log message from the user describing the changes.")
+@CommandLine.Command(name = "create-teststep",
+	sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n",
+		synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n",
+			parameterListHeading = "%n@|bold,underline Parameters:|@%n",
+				optionListHeading = "%n@|bold,underline Options:|@%n",
+					header = "(Working) Create TestSteps",
+						description = "Stores the current contents of the index in a new commit "
+								+ "along with a log message from the user describing the changes.")
 public class RockitizerCreateTS implements Runnable {
 
 	final String rootPath = ConfigUtils.getAbsoluteRootPath();
