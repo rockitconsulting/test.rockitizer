@@ -1,5 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -16,15 +18,34 @@ description = "Stores the current contents of the index in a new commit " +
 
 public class RockitizerDeleteConfig implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = "ConfigurationName.....")
-    String configuration;
+	@Parameters(index = "0", arity = "1", description = ": [resources | testcases]")
+    public String configuration;
 	
-	@Parameters(index = "1", description = "Environment.....")
-    String environment;
+	@Parameters(index = "1", arity = "0..1", description = ": [%env%] - e.g. env = dev => <configuration>-dev.yaml will be deleted")
+    public String environment;
+	
+	public String path;
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
+		LogUtils.disableLogging();
+
+		CommonCLI cli = new CommonCLI();
+		
+		if (environment != null){
+			
+			path = configuration().getFullPath() + configuration + "." + environment + ".yaml";
+			
+		}else{
+
+			path = configuration().getFullPath() + configuration + ".yaml";
+
+		}
+		
+		cli.deleteConfig(path);
+		
+		LogUtils.enableLogging();
 		
 	}
 

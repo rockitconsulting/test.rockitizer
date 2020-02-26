@@ -170,5 +170,17 @@ public class CommonCLI {
 		LogUtils.enableLogging();
 
 	}
+	
+	public void deleteConfig(String path){
+		
+		File jUnitFile = new File(path);
+
+		if (jUnitFile.delete()) {
+			System.out.println(" File deleted successfully");
+		} else {
+			System.out.println(" Failed to delete the file");
+		}
+		
+	}
 
 }

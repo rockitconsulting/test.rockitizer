@@ -24,10 +24,10 @@ public class RockitizerCreateTS implements Runnable {
 	final String rootPath = ConfigUtils.getAbsolutePathToResources();
 	final String relPath = "full.demo.project.cli.tests/src/test/resources/";
 
-	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+	@Parameters(index = "0", arity = "1", description = "<TestcaseName>")
 	String testcase;
 
-	@Parameters(index = "1", arity = "1", description = "TeststepName.....")
+	@Parameters(index = "1", arity = "1", description = "<TeststepName>")
 	String teststep;
 
 	@Override

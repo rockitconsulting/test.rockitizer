@@ -19,7 +19,7 @@ description = "Stores the current contents of the index in a new commit " +
 
 public class RockitizerCreateTC implements Runnable {
 	
-	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+	@Parameters(index = "0", arity = "1", description = "<TestcaseName>")
     String testcase;
 
 	@Override

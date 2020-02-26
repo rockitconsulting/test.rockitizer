@@ -14,7 +14,7 @@ description = "Stores the current contents of the index in a new commit "
 		+ "along with a log message from the user describing the changes.")
 public class RockitizerListTC implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+	@Parameters(index = "0", arity = "1", description = "<TestcaseName>")
 	String testcase;
 
 	@Override
