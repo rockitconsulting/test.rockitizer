@@ -24,6 +24,7 @@ test {
       maxHeapSize = "512m"
       include "**/*Test.class"
       exclude '**/*Integration.class'
+      exclude '**/*IntegrationTest.class'
       exclude '**/*IT.class'
 }
 
