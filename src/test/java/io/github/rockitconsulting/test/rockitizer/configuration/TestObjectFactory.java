@@ -51,7 +51,7 @@ public class TestObjectFactory {
 
 	
 
-	public static ResourcesHolderAccessor createResourcesHolderCLI(String rootPath, String relPath, String filename) {
+	private static ResourcesHolderAccessor createResourcesHolderCLI(String rootPath, String relPath, String filename) {
 		ResourcesHolderAccessor rhCLI = new ResourcesHolderAccessor();
 		if(null!=rootPath) {	
 			rhCLI.setAbsolutePath(rootPath);
@@ -67,7 +67,7 @@ public class TestObjectFactory {
 		return rhCLI;
 	}
 
-	public static TestCasesHolderAccessor createTestCasesHolderCLI(String rootPath, String relPath, String filename) {
+	private static TestCasesHolderAccessor createTestCasesHolderCLI(String rootPath, String relPath, String filename) {
 		TestCasesHolderAccessor tchCLI = new TestCasesHolderAccessor();
 		if(null!=rootPath) {	
 			tchCLI.setAbsolutePath(rootPath);

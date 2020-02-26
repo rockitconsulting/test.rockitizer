@@ -6,6 +6,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactor
 
 import java.io.File;
 
+import org.junit.After;
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
@@ -27,6 +28,12 @@ public class RockitizerCreateConfigTest {
 
 		assertTrue(new File(Configuration.configuration().getFullPath() + Configuration.configuration().getRhApi().getResourcesFileName()).exists());
 
+	}
+	
+	@After
+	public void cleanEnv() {
+		System.clearProperty(Constants.ENV_KEY);
+		
 	}
 
 }
