@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class ResponseHeader {
 
-	public Map<String, List<String>> map;
+	private Map<String, List<String>> map;
 
 	public ResponseHeader(Map<String, List<String>> map) {
 

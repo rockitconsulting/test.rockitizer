@@ -67,7 +67,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
 			@Override
 			public boolean verify(String s, SSLSession sslSession) {
-				return true;
+				return true;//NOSONAR
 			}
 		});
 	}
@@ -194,7 +194,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			String name = url.getUserInfo().split(":")[0];
 			String password = url.getUserInfo().split(":")[1];
 			byte[] authEncBytes = Base64.getEncoder().encode((name + ":" + password).getBytes());
-			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));
+			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));//NOSONAR
 		}
 	}
 

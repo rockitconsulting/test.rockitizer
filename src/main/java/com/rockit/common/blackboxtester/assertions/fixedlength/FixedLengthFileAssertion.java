@@ -15,14 +15,15 @@
  */
 package com.rockit.common.blackboxtester.assertions.fixedlength;
 
-import com.google.common.io.Files;
-import com.rockit.common.blackboxtester.assertions.AbstractAssertion;
 import static com.rockit.common.blackboxtester.assertions.FileAssertion.LOGGER;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.google.common.io.Files;
+import com.rockit.common.blackboxtester.assertions.AbstractAssertion;
 
 /**
  *

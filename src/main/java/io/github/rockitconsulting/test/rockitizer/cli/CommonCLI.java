@@ -13,7 +13,7 @@ import java.util.stream.StreamSupport;
 import org.apache.log4j.Logger;
 
 public class CommonCLI {
-	public static Logger log = Logger.getLogger(CommonCLI.class.getName());
+	public static final Logger log = Logger.getLogger(CommonCLI.class.getName());
 
 	/**
 	 * CLI relevant: print testsuite
@@ -72,8 +72,8 @@ public class CommonCLI {
 	
 	public void listConfig(String path) throws IOException{
 		
-		BufferedReader br = new BufferedReader(new FileReader(path));
-		try {
+		try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+		
 		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
 
@@ -83,8 +83,7 @@ public class CommonCLI {
 		        line = br.readLine();
 		    }
 		    System.out.println(sb.toString());
-		} finally {
-		    br.close();
+		
 		}
 		
 	}
@@ -102,11 +101,11 @@ public class CommonCLI {
 					tmp.createJunitClass(testcase, configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
 					System.out.println("File is created!");
 				} else {
-					System.out.println("File already exists.");
+					System.err.println("File already exists.");
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("Error occured: " + e );
+				
 			}
 		}
 		File theDir = new File(path);
@@ -116,8 +115,7 @@ public class CommonCLI {
 			boolean result = false;
 
 			try {
-				theDir.mkdir();
-				result = true;
+				result = theDir.mkdir();
 			} catch (SecurityException se) {
 				// handle it
 			}
@@ -138,7 +136,7 @@ public class CommonCLI {
 			if (jUnitFile.delete()) {
 				System.out.println(testcase + ".java" + " File deleted successfully");
 			} else {
-				System.out.println(testcase + ".java" + " Failed to delete the file");
+				System.err.println(testcase + ".java" + " Failed to delete the file");
 			}
 		}
 		File theDir = new File(path);
@@ -155,8 +153,7 @@ public class CommonCLI {
 			}
 
 			try {
-				theDir.delete();
-				result = true;
+				result = theDir.delete();
 			} catch (SecurityException se) {
 				// handle it
 			}

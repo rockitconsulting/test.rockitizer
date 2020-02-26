@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'maven'
+     id 'jacoco'
 }
 
 repositories {
@@ -16,6 +17,49 @@ repositories {
         url = 'http://docker.rockit.local:8481/artifactory/libs-snapshot'
     }
 }
+
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+
+/*
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.5
+            }
+        }
+
+        rule {
+            enabled = false
+            element = 'CLASS'
+            includes = ['io.github.*','com.rockit.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 0.3
+            }
+        }
+    }
+}
+*/
+
+
+
 
 test {
       description = 'Run all SmallTests'

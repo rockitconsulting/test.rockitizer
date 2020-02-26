@@ -77,11 +77,6 @@ public class DBAssertion extends AbstractAssertion {
 					}
 					resultBuilder.append("\n");
 				}
-
-				rs.close();
-				statement.close();
-				connection.close();
-
 			
 		} catch (SQLException e) {
 			LOGGER.error("Database access error: ", e);
