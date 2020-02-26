@@ -5,6 +5,10 @@ import static io.github.rockitconsulting.test.rockitizer.validation.ValidationHo
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
@@ -166,7 +170,7 @@ public class ValidationUtils {
 	}
 
 	/**
-	 * Mirror validation of filesystem and tescases sync
+	 * Sync FS with Resources
 	 * 
 	 * @throws IOException
 	 */
@@ -180,17 +184,40 @@ public class ValidationUtils {
 		 rhfs.getDbConnectors().forEach( c -> {
 			 DBConnector match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			 if (match == null) {
-				 rhyaml.addDbConnector(match);
+				 rhyaml.addDbConnector(c);
+			 }
+		 });
+		 
+		 rhfs.getMqConnectors().forEach( c -> {
+			 MQConnector match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			 if (match == null) {
+				 rhyaml.addMqConnector(c);
+			 }
+		 });
+		 
+		 rhfs.getFileConnectors().forEach( c -> {
+			 FileConnector match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			 if (match == null) {
+				 rhyaml.addFileConnector(c);
+			 }
+		 });
+
+		 rhfs.getHttpConnectors().forEach( c -> {
+			 HTTPConnector match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			 if (match == null) {
+				 rhyaml.addHttpConnector(c);
+			 }
+		 });
+		 
+		 rhfs.getScpConnectors().forEach( c -> {
+			 SCPConnector match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			 if (match == null) {
+				 rhyaml.addScpConnector(c);
 			 }
 		 });
 		 
 		 
-		 
-		 
-//		 rhfs.getMqConnectors()
-//		 rhfs.getFileConnectors()
-//		 rhfs.getHttpConnectors()
-//		 rhfs.getScpConnectors()
+		 configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
 
 		 configuration().getRhApi().resourcesHolderToYaml(rhyaml);
 		 

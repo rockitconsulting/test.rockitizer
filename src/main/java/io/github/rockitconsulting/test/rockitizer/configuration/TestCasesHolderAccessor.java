@@ -79,6 +79,12 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 		return holder;
 	}
 	
+	
+	public void testCasesHolderToYaml(TestCasesHolder holder) throws IOException {
+		ConfigUtils.writeModelObjToYaml(holder, getFullPath() + getTestcasesFileName());
+	}
+	
+	
 	/**
 	 * Creates config file &lt;testcase.yaml&gt; from TestCaseHolder
 	 * 
@@ -87,7 +93,7 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	 */
 	public TestCasesHolder testCasesHolderFromFileSystemToYaml() throws IOException {
 		TestCasesHolder holder = testCasesHolderFromFileSystem();
-		ConfigUtils.writeModelObjToYaml(holder, getFullPath() + getTestcasesFileName());
+		testCasesHolderToYaml(holder);
 		return holder;
 	}
 

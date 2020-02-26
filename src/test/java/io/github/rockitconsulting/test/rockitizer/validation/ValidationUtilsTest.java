@@ -1,5 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import java.io.IOException;
@@ -122,7 +123,8 @@ public class ValidationUtilsTest {
 	public void testSyncResources() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
 		ValidationUtils.syncResources();
-		Assert.assertTrue(ValidationHolder.validationHolder().size() == 3);
+		Assert.assertTrue(Configuration.configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==2);
+		
 	}
 	
 

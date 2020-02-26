@@ -37,6 +37,10 @@ public class DBConnector extends BaseConnector {
 
 	public void setType(Types type) {
 		this.type = type;
+		if (Types.DBGET == type && query == null) {
+			query = "@query@";
+		}
+		
 	}
 
 	public String getQuery() {
