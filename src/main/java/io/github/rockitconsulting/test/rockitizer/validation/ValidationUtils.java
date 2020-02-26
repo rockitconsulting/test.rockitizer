@@ -6,6 +6,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesH
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.StreamSupport;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
@@ -245,6 +247,36 @@ public class ValidationUtils {
 
 	}
 
+	
+	public static void syncJavaAndTestCases() {
+
+		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
+		Iterable<File> junits = FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava()));
+		
+
+		testCases.forEach(tcase -> {
+			
+			 File match = StreamSupport.stream(junits.spliterator(), false).filter(ju -> ju.getName().replace(".java","").equals(tcase.getName())).findAny().orElse(null);
+			 if(match == null) {
+				 ValidationHolder.validationHolder().add( new Context.Builder().withTestCase(tcase)  , 
+						 new Message(Message.LEVEL.WARN, "Testcase exists but matching Junit [" + tcase.getName() + ".java] cannot be found under " + ConfigUtils.getAbsolutePathToJava() ));
+			 }
+			
+		});
+
+		
+		junits.forEach(junit -> {
+			
+			 File match = StreamSupport.stream(testCases.spliterator(), false).filter(tc -> tc.getName().equals( junit.getName().replace(".java","") )).findAny().orElse(null);
+			 if(match == null) {
+				 ValidationHolder.validationHolder().add( new Context.Builder().withId(junit.getName())  , 
+						 new Message(Message.LEVEL.WARN, "Junit [" + junit.getName() +"]   exists but matching TestCase [" + junit.getName().replace(".java","") + "] cannot be found under " + ConfigUtils.getAbsolutePathToResources() ));
+			 }
+			
+		});
+		
+	}
+	
 	/**
 	 * make warnings for empty testcases/tessteps
 	 * 

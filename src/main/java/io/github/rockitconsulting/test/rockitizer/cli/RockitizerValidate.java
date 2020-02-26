@@ -43,6 +43,7 @@ public class RockitizerValidate implements Runnable {
 			try {
 				ValidationUtils.validateTestCasesAndFileSystemInSync();
 				ValidationUtils.validateNotAllowedEmptyStructures();
+				ValidationUtils.syncJavaAndTestCases();
 
 			} catch (IOException e) {
 				e.printStackTrace();

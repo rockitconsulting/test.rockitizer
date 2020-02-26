@@ -140,7 +140,7 @@ public class Context {
 				return new Context(this);
 			}
 		 
-			public Context withTesCase(File caseFolder) {
+			public Context withTestCase(File caseFolder) {
 				testCase  = caseFolder.getName();
 				rootPath  = caseFolder.getParentFile().getAbsolutePath();
 				return new Context(this);
