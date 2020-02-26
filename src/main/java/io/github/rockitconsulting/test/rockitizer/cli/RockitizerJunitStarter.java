@@ -5,8 +5,11 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
@@ -33,17 +36,23 @@ public class RockitizerJunitStarter extends JUnitCore implements Runnable {
 	public void run() {
 
 		LogUtils.disableLogging();
+		List<Result> results = new ArrayList<>();
 
 		try {
+			
+			if (mode != null) {
+				System.setProperty(Constants.MODE_KEY, mode);
+			}
+			if (environment != null) {
+				System.setProperty(Constants.ENV_KEY, environment);
+			}
+			
 			if (testname != null) {
 				if (testname.equalsIgnoreCase("all")) {
 					FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava())).forEach(test -> {
 						try {
 
-							run(Class.forName(test.getName().replace(".java", "")));
-							System.out.println();
-							System.out.println();
-							System.out.println();
+							results.add(  run(Class.forName(test.getName().replace(".java", ""))) );
 							System.out.println();
 						} catch (Exception e) {
 							System.err.println(" Error: " + e.getMessage());
@@ -52,22 +61,25 @@ public class RockitizerJunitStarter extends JUnitCore implements Runnable {
 
 					});
 				} else {
-					run(Class.forName(testname));
+					results.add( run(Class.forName(testname)) );
 				}
 
 			}
-
-			if (mode != null) {
-				System.setProperty(Constants.MODE_KEY, mode);
-			}
-			if (environment != null) {
-				System.setProperty(Constants.ENV_KEY, environment);
-			}
-
+			
 		} catch (Throwable thr) {
 			System.err.println(" Error: " + thr.getMessage());
 		}
-
+		
+		int sumErrors = results.stream().mapToInt(Result::getFailureCount).sum();
+		int sumRuns = results.stream().mapToInt(Result::getRunCount).sum();
+		
+		System.out.println("Result: " + ( sumErrors>0?"NOK":"OK" ) );
+		System.out.println("Total runs " + sumRuns );
+		if(sumErrors>0) {
+			System.err.println("Total errors " + sumErrors );
+		}
+		
+		
 		LogUtils.enableLogging();
 
 	}

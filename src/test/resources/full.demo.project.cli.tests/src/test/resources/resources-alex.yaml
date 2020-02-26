@@ -1,0 +1,89 @@
+#########################################################################################################################
+############### This file has been generated. Kindly consider to replace the @@ placeholders with your values ###########
+#########################################################################################################################
+mqConnectors:
+- id: MQGET.ERROR
+  type: MQGET
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+- id: MQGET.OUT.FILE2MQ
+  type: MQGET
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+- id: MQGET.IN.MQ2DB
+  type: MQGET
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+- id: MQPUT.IN.MQ2DB
+  type: MQPUT
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+- id: MQGET.IN.MQ2MQ
+  type: MQGET
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+- id: MQGET.OUT.MQ2MQ
+  type: MQGET
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+- id: MQPUT.IN.MQ2MQ
+  type: MQPUT
+  dsRefId: defaultMQ
+  queue: '@defaultQueue@'
+dbConnectors:
+- id: DBPUT.CLAEN
+  type: DBPUT
+  dsRefId: defaultDB
+- id: DBGET.GETBOOKS
+  type: DBGET
+  dsRefId: defaultDB
+httpConnectors:
+- id: HTTP.JADDBOOK
+  type: HTTP
+  dsRefId: defaultKS
+  url: '@https://default@'
+  method: '@POST|GET|PUT@'
+  contentType: '@application/xml@'
+  userAgent: '@GENERATED!!!! Mozilla/5.0@'
+  timeout: '@500000@'
+- id: HTTP.ADDBOOK
+  type: HTTP
+  dsRefId: defaultKS
+  url: '@https://default@'
+  method: '@POST|GET|PUT@'
+  contentType: '@application/xml@'
+  userAgent: '@GENERATED!!!! Mozilla/5.0@'
+  timeout: '@500000@'
+fileConnectors:
+- id: FILEDEL.IN.FILE2FILE
+  type: FILEDEL
+  path: '@path@'
+- id: FILEDEL.OUT.FILE2FILE
+  type: FILEDEL
+  path: '@path@'
+- id: FILEPUT.IN.FILE2FILE
+  type: FILEPUT
+  path: '@path@'
+- id: FILEGET.OUT.FILE2FILE
+  type: FILEGET
+  path: '@path@'
+- id: FILEPUT.IN.FILE2MQ
+  type: FILEPUT
+  path: '@path@'
+mqDataSources:
+- id: defaultMQ
+  type: MQ
+  qmgr: '@QMGR@'
+  channel: '@SYSTEM.BKR.CONFIG@'
+  host: '@localhost@'
+  port: '@1414@'
+dbDataSources:
+- id: defaultDB
+  type: DB
+  url: '@url@'
+  user: '@usr@'
+  password: '@pwd@'
+keyStores:
+- id: defaultKS
+  type: TrustStore
+  path: '@c:\temp\myks.jks@'
