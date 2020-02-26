@@ -220,6 +220,7 @@ public class ValidationUtils {
 		 configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
 
 		 configuration().getRhApi().resourcesHolderToYaml(rhyaml);
+		 configuration().reinit();
 		 
 
 	}

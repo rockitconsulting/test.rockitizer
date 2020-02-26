@@ -1,7 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 
 import java.io.IOException;
 
@@ -121,9 +122,19 @@ public class ValidationUtilsTest {
 	
 	@Test
 	public void testSyncResources() throws IOException {
+		//init
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
+		//prepare for test
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		//clean db
+		rhyaml.getDbConnectors().clear();
+		//write new config
+		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
+		//re-init
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==0);
 		ValidationUtils.syncResources();
-		Assert.assertTrue(Configuration.configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==2);
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==2);
 		
 	}
 	

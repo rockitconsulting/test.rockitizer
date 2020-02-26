@@ -35,6 +35,8 @@ public class ConfigurationTest {
 		
 		configuration().getRhApi().getResourcesHolder().getHttpConnectors().forEach( c -> System.out.println(c.toString())  );
 		configuration().getRhApi().getResourcesHolder().getKeyStores().forEach( c -> System.out.println(c.toString())  );
+		System.clearProperty(Constants.MODE_KEY);
+		System.clearProperty(Constants.ENV_KEY);
 
 		
 	}
@@ -44,7 +46,7 @@ public class ConfigurationTest {
 	public void testRuntimeParamsConfig() {
 		System.setProperty(Constants.MODE_KEY, "record");
 		System.setProperty(Constants.ENV_KEY, "devp");
-		Configuration.reset();
+		configuration().reinit();
 		Assert.assertEquals(configuration().getEnvironment(), "devp");
 		Assert.assertEquals(configuration().getRunMode(), Configuration.RunModeTypes.RECORD);
 		Assert.assertEquals(configuration().getRhApi().getResourcesFileName() + " equals resources-devp.yaml", configuration().getRhApi().getResourcesFileName(), "resources-devp.yaml" );

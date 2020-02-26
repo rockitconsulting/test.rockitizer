@@ -9,6 +9,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -56,20 +57,8 @@ public class Configuration {
 		try {
 			LogUtils.LogInfo("#######################################################################################################################");
 
-			initEnvironmentFromSystemProperty();
+			handleInitialization();
 			
-			if(initFromYaml) {
-				initAndLogRunModeFromSystemProperty();
-				rhApi.initFromYaml();
-				tchApi.initFromYaml();
-			} else { 
-				LogUtils.LogWarn(" running in CLI configuration generation mode" );
-				rhApi.initFromFileSystem();
-				tchApi.initFromFileSystem();
-			}
-			
-
-
 			LogUtils.LogInfo("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
 					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 
@@ -83,6 +72,20 @@ public class Configuration {
 
 		}
 
+	}
+
+	private void handleInitialization() throws IOException {
+		initEnvironmentFromSystemProperty();
+		
+		if(initFromYaml) {
+			initAndLogRunModeFromSystemProperty();
+			rhApi.initFromYaml();
+			tchApi.initFromYaml();
+		} else { 
+			LogUtils.LogWarn(" running in CLI configuration generation mode" );
+			rhApi.initFromFileSystem();
+			tchApi.initFromFileSystem();
+		}
 	}
 
 	private void initAndLogRunModeFromSystemProperty() {
@@ -137,10 +140,27 @@ public class Configuration {
 		INSTANCE = new Configuration(rhcli, tchcli);
 	}
 
-	public static void reset() {
-		INSTANCE = new Configuration();
-	}
+	
+	/**
+	 *  Re-initialize config from yaml keeping context
+	 */
+	public void reinit()  {
+		try {
+			
+			handleInitialization();
+			
+			LogUtils.LogInfo("re-initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
+			
+		} catch (Throwable thr) {
+			log.error("configuration initialization exception", thr);
+			throw new FatalConfigurationException(thr.getMessage());
 
+		}
+		
+	}
+	
+	
 	public RunModeTypes getRunMode() {
 		return runMode;
 	}

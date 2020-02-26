@@ -37,6 +37,7 @@ dbConnectors:
 - id: DBGET.GETBOOKS
   type: DBGET
   dsRefId: defaultDB
+  query: '@query@'
 httpConnectors:
 - id: HTTP.JADDBOOK
   type: HTTP
