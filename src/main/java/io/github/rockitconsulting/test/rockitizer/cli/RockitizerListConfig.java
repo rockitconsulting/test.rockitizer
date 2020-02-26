@@ -20,10 +20,10 @@ public class RockitizerListConfig implements Runnable {
 
 	String path;
 
-	@Parameters(index = "0", arity = "1", description = "ConfigurationName.....resources or testcases")
+	@Parameters(index = "0", arity = "1", description = ": [resources | testcases]")
 	String configuration;
 
-	@Parameters(index = "1", arity = "0", description = "Environment.....")
+	@Parameters(index = "1", arity = "0..1", description = ": [%env%] - e.g. env = dev => <configuration>-dev.yaml will be listed")
 	String environment;
 
 	@Override
@@ -35,7 +35,7 @@ public class RockitizerListConfig implements Runnable {
 		
 		if (environment != null){
 			
-			path = configuration().getFullPath() + configuration + "." + environment + ".yaml";
+			path = configuration().getFullPath() + configuration + "-" + environment + ".yaml";
 			
 		}else{
 

@@ -18,7 +18,7 @@ import picocli.CommandLine.Parameters;
 
 public class RockitizerDeleteTC implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+	@Parameters(index = "0", arity = "1", description = "<TestcaseName>")
     String testcase;
 	
 	@Override

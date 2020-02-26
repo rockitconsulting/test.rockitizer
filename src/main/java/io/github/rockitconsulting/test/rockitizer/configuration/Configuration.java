@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.rockit.common.blackboxtester.exceptions.FatalConfigurationException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
@@ -77,7 +78,8 @@ public class Configuration {
 			LogUtils.LogInfo("#######################################################################################################################");
 
 		} catch (Throwable thr) {
-			LogUtils.LogError("configuration initialization exception", thr);
+			log.error("configuration initialization exception", thr);
+			throw new FatalConfigurationException(thr.getMessage());
 
 		}
 

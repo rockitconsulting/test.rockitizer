@@ -20,7 +20,14 @@ public class TestObjectFactory {
 		Configuration.reset(rhCLI, tcCLI);
 	}
 
+	public static void resetEmptyConfigurationToContextDemoPrj() {
+		ResourcesHolderAccessor rhCLI = TestObjectFactory.createResourcesHolderCLI(rootPath, relPath, null);
+		TestCasesHolderAccessor tcCLI = TestObjectFactory.createTestCasesHolderCLI(rootPath, relPath, null);
+		Configuration.reset(rhCLI, tcCLI);
+	}
 
+	
+	
 	public static void resetConfigurationToContextDemoPrj() {
 		ResourcesHolderAccessor rhCLI = TestObjectFactory.createResourcesHolderCLI(rootPath, relPath, "resources.yaml");
 		TestCasesHolderAccessor tcCLI = TestObjectFactory.createTestCasesHolderCLI(rootPath, relPath, "testcases.yaml");

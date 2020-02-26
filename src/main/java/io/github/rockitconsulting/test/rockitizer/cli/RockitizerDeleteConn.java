@@ -21,13 +21,13 @@ description = "Stores the current contents of the index in a new commit " +
 
 public class RockitizerDeleteConn implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = "TestcaseName.....")
+	@Parameters(index = "0", arity = "1", description = "<TestcaseName>")
     String testcase;
 	
-	@Parameters(index = "1", arity = "1", description = "TeststepName.....")
+	@Parameters(index = "1", arity = "1", description = "<TeststepName>")
     String teststep;
 	
-	@Parameters(index = "2", arity = "1", description = "ConnectorName.....")
+	@Parameters(index = "2", arity = "1", description = "<ConnectorName>")
     String connector;
 	
 	@Override
