@@ -117,5 +117,14 @@ public class ValidationUtilsTest {
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 3);
 	}
 
+	
+	@Test
+	public void testSyncResources() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
+		ValidationUtils.syncResources();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 3);
+	}
+	
 
 }
+

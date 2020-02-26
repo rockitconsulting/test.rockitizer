@@ -2,7 +2,9 @@ package io.github.rockitconsulting.test.rockitizer.validation;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import static io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder.validationHolder;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
@@ -168,6 +170,38 @@ public class ValidationUtils {
 	 * 
 	 * @throws IOException
 	 */
+	public static void syncResources() throws IOException {
+		
+
+
+		 ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		 ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
+
+		 rhfs.getDbConnectors().forEach( c -> {
+			 DBConnector match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			 if (match == null) {
+				 rhyaml.addDbConnector(match);
+			 }
+		 });
+		 
+		 
+		 
+		 
+//		 rhfs.getMqConnectors()
+//		 rhfs.getFileConnectors()
+//		 rhfs.getHttpConnectors()
+//		 rhfs.getScpConnectors()
+
+		 configuration().getRhApi().resourcesHolderToYaml(rhyaml);
+		 
+
+	}
+
+	/**
+	 * Mirror validation of filesystem and tescases sync
+	 * 
+	 * @throws IOException
+	 */
 	public static void validateTestCasesAndFileSystemInSync() throws IOException {
 		String testcases = configuration().getTchApi().getTestcasesFileName();
 
@@ -247,36 +281,39 @@ public class ValidationUtils {
 
 	}
 
-	
 	public static void syncJavaAndTestCases() {
 
 		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
 		Iterable<File> junits = FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava()));
-		
 
 		testCases.forEach(tcase -> {
-			
-			 File match = StreamSupport.stream(junits.spliterator(), false).filter(ju -> ju.getName().replace(".java","").equals(tcase.getName())).findAny().orElse(null);
-			 if(match == null) {
-				 ValidationHolder.validationHolder().add( new Context.Builder().withTestCase(tcase)  , 
-						 new Message(Message.LEVEL.WARN, "Testcase exists but matching Junit [" + tcase.getName() + ".java] cannot be found under " + ConfigUtils.getAbsolutePathToJava() ));
-			 }
-			
+
+			File match = StreamSupport.stream(junits.spliterator(), false).filter(ju -> ju.getName().replace(".java", "").equals(tcase.getName())).findAny()
+					.orElse(null);
+			if (match == null) {
+				ValidationHolder.validationHolder().add(
+						new Context.Builder().withTestCase(tcase),
+						new Message(Message.LEVEL.WARN, "Testcase exists but matching Junit [" + tcase.getName() + ".java] cannot be found under "
+								+ ConfigUtils.getAbsolutePathToJava()));
+			}
+
 		});
 
-		
 		junits.forEach(junit -> {
-			
-			 File match = StreamSupport.stream(testCases.spliterator(), false).filter(tc -> tc.getName().equals( junit.getName().replace(".java","") )).findAny().orElse(null);
-			 if(match == null) {
-				 ValidationHolder.validationHolder().add( new Context.Builder().withId(junit.getName())  , 
-						 new Message(Message.LEVEL.WARN, "Junit [" + junit.getName() +"]   exists but matching TestCase [" + junit.getName().replace(".java","") + "] cannot be found under " + ConfigUtils.getAbsolutePathToResources() ));
-			 }
-			
+
+			File match = StreamSupport.stream(testCases.spliterator(), false).filter(tc -> tc.getName().equals(junit.getName().replace(".java", ""))).findAny()
+					.orElse(null);
+			if (match == null) {
+				ValidationHolder.validationHolder().add(
+						new Context.Builder().withId(junit.getName()),
+						new Message(Message.LEVEL.WARN, "Junit [" + junit.getName() + "]   exists but matching TestCase ["
+								+ junit.getName().replace(".java", "") + "] cannot be found under " + ConfigUtils.getAbsolutePathToResources()));
+			}
+
 		});
-		
+
 	}
-	
+
 	/**
 	 * make warnings for empty testcases/tessteps
 	 * 

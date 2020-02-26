@@ -50,7 +50,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	 * @return
 	 * @throws IOException
 	 */
-	ResourcesHolder resourcesHolderFromYaml() throws IOException {
+	public ResourcesHolder resourcesHolderFromYaml() throws IOException {
 		return ConfigUtils.resourcesHolderFromYaml(getFullPath() + getResourcesFileName());
 	}
 
@@ -61,7 +61,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	 * 
 	 */
 
-	ResourcesHolder resourcesHolderFromFileSystem()  {
+	public ResourcesHolder resourcesHolderFromFileSystem()  {
 		return resourcesHolderFromFileSystem(null);
 	}
 	
@@ -110,6 +110,17 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	}
 
 	
+	/**
+	 * CLI relevant: write resources to yaml
+	 * @return
+	 * @throws IOException
+	 */
+
+	public void resourcesHolderToYaml(ResourcesHolder resources) throws IOException {
+		ConfigUtils.writeModelObjToYaml(resources, getFullPath() + getResourcesFileName());
+
+	}
+
 	
 	/**
 	 * CLI relevant: generate Resources from yaml
@@ -120,7 +131,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	public ResourcesHolder resourcesHolderFromFileSystemToYaml(Map <String, String> payloadReplacer) throws IOException {
 
 		ResourcesHolder resources = resourcesHolderFromFileSystem(payloadReplacer);
-		ConfigUtils.writeModelObjToYaml(resources, getFullPath() + getResourcesFileName());
+		resourcesHolderToYaml (resources);
 		return resources;
 	}
 
