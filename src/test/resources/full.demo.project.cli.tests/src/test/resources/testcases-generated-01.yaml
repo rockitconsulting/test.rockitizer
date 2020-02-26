@@ -4,142 +4,102 @@
 testCases:
 - testCaseName: FILEinFILEOutTest
   testSteps:
-  - connectorRefs:
+  - testStepName: 0BEFORE
+    connectorRefs:
     - conRefId: FILEDEL.IN.FILE2FILE
-      payloads:
-      - fileName: .gitignore
     - conRefId: FILEDEL.OUT.FILE2FILE
-      payloads:
-      - fileName: .gitignore
-    testStepName: 0BEFORE
-  - connectorRefs:
+  - testStepName: a001FILEPutMessage
+    connectorRefs:
     - conRefId: FILEPUT.IN.FILE2FILE
       payloads:
       - fileName: testinput.xml
-    testStepName: a001FILEPutMessage
-  - connectorRefs:
+  - testStepName: a002FILEGetMessage
+    connectorRefs:
     - conRefId: FILEGET.OUT.FILE2FILE
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002FILEGetMessage
 - testCaseName: FILEinMQOutTest
   testSteps:
-  - connectorRefs:
+  - testStepName: 0BEFORE
+    connectorRefs:
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
     - conRefId: MQGET.OUT.FILE2MQ
-      payloads:
-      - fileName: .gitignore
-    testStepName: 0BEFORE
-  - connectorRefs:
+  - testStepName: a001FILEPutMessage
+    connectorRefs:
     - conRefId: FILEPUT.IN.FILE2MQ
       payloads:
       - fileName: testinput.xml
-    testStepName: a001FILEPutMessage
-  - connectorRefs:
+  - testStepName: a002MQGetError
+    connectorRefs:
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002MQGetError
-  - connectorRefs:
+  - testStepName: a002MQGetMessage
+    connectorRefs:
     - conRefId: MQGET.OUT.FILE2MQ
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002MQGetMessage
 - testCaseName: JSONwithDatabaseTest
   testSteps:
-  - connectorRefs:
+  - testStepName: 0BEFORE
+    connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
-    testStepName: 0BEFORE
-  - connectorRefs:
+  - testStepName: a001JSONPutMessage
+    connectorRefs:
     - conRefId: HTTP.JADDBOOK
       payloads:
       - fileName: testinput.json
-    testStepName: a001JSONPutMessage
-  - connectorRefs:
+  - testStepName: a002DBGETMessage
+    connectorRefs:
     - conRefId: DBGET.GETBOOKS
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002DBGETMessage
 - testCaseName: MQinDBOutTest
   testSteps:
-  - connectorRefs:
+  - testStepName: 0BEFORE
+    connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
     - conRefId: MQGET.IN.MQ2DB
-      payloads:
-      - fileName: .gitignore
-    testStepName: 0BEFORE
-  - connectorRefs:
+  - testStepName: a001MQPutMessage
+    connectorRefs:
     - conRefId: MQPUT.IN.MQ2DB
       payloads:
       - fileName: testinput.xml
-    testStepName: a001MQPutMessage
-  - connectorRefs:
+  - testStepName: a002DBGETMessage
+    connectorRefs:
     - conRefId: DBGET.GETBOOKS
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002DBGETMessage
-  - connectorRefs:
+  - testStepName: a003MQGetError
+    connectorRefs:
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
-    testStepName: a003MQGetError
 - testCaseName: MQinMQoutTest
   testSteps:
-  - connectorRefs:
+  - testStepName: 0BEFORE
+    connectorRefs:
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
     - conRefId: MQGET.IN.MQ2MQ
-      payloads:
-      - fileName: .gitignore
     - conRefId: MQGET.OUT.MQ2MQ
-      payloads:
-      - fileName: .gitignore
-    testStepName: 0BEFORE
-  - connectorRefs:
+  - testStepName: a001MQPutMessage
+    connectorRefs:
     - conRefId: MQPUT.IN.MQ2MQ
       payloads:
       - fileName: testinput.xml
-    testStepName: a001MQPutMessage
-  - connectorRefs:
+  - testStepName: a002MQGetError
+    connectorRefs:
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002MQGetError
-  - connectorRefs:
+  - testStepName: a002MQGetMessage
+    connectorRefs:
     - conRefId: MQGET.OUT.MQ2MQ
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002MQGetMessage
 - testCaseName: WSwithDatabaseTest
   testSteps:
-  - connectorRefs:
+  - testStepName: 0BEFORE
+    connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
-      payloads:
-      - fileName: .gitignore
-    testStepName: 0BEFORE
-  - connectorRefs:
+  - testStepName: a001WSPutMessage
+    connectorRefs:
     - conRefId: HTTP.ADDBOOK
       payloads:
       - fileName: testinput.xml
-    testStepName: a001WSPutMessage
-  - connectorRefs:
+  - testStepName: a002DBGETMessage
+    connectorRefs:
     - conRefId: DBGET.GETBOOKS
-      payloads:
-      - fileName: .gitignore
-    testStepName: a002DBGETMessage

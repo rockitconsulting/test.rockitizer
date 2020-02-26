@@ -20,24 +20,20 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	public static Logger log = Logger.getLogger(TestCasesHolderAccessor.class.getName());
 
 	private String testcasesFileName = "testcases.yaml";
-	
-	private TestCasesHolder testCasesHolder;
 
-	
+	private TestCasesHolder testCasesHolder;
 
 	void initFromYaml() throws IOException {
 		testCasesHolder = testCasesHolderFromYaml();
 	}
-	
+
 	void initFromFileSystem() throws IOException {
 		testCasesHolder = testCasesHolderFromFileSystem();
 	}
-	
 
-	
 	/**
-	 * Reads yam configuration into the holder object
-	 * CLI relevant: instantiate Resources from yaml
+	 * Reads yam configuration into the holder object CLI relevant: instantiate
+	 * Resources from yaml
 	 * 
 	 * @return
 	 * @throws IOException
@@ -46,13 +42,12 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 		return ConfigUtils.testCasesHolderFromYaml(getFullPath() + getTestcasesFileName());
 	}
 
-
 	/**
-	 * Generates the testcases structure from filesystem 
-	 *  
+	 * Generates the testcases structure from filesystem
+	 * 
 	 * @return
 	 */
-	public TestCasesHolder testCasesHolderFromFileSystem()  {
+	public TestCasesHolder testCasesHolderFromFileSystem() {
 		TestCasesHolder holder = new TestCasesHolder();
 
 		FileUtils.listFolders(new File(getFullPath())).forEach(tcFolder -> {
@@ -69,7 +64,9 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 				FileUtils.listFolders(tsFolder).forEach(connFolder -> {
 					ConnectorRef connectorRef = new ConnectorRef(connFolder);
 					FileUtils.listFiles(connFolder).forEach(payload -> {
-						connectorRef.getPayloads().add(new Payload(payload));
+						if (!payload.getName().equals(Constants.GITIGNORE)) {
+							connectorRef.getPayloads().add(new Payload(payload));
+						}
 					});
 					testStep.getConnectorRefs().add(connectorRef);
 				});
@@ -78,13 +75,11 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 
 		return holder;
 	}
-	
-	
+
 	public void testCasesHolderToYaml(TestCasesHolder holder) throws IOException {
 		ConfigUtils.writeModelObjToYaml(holder, getFullPath() + getTestcasesFileName());
 	}
-	
-	
+
 	/**
 	 * Creates config file &lt;testcase.yaml&gt; from TestCaseHolder
 	 * 
@@ -104,18 +99,15 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	public void setTestcasesFileName(String testcasesFileName) {
 		this.testcasesFileName = testcasesFileName;
 	}
-	
-	
+
 	public String contextAsString() {
 		return "[ filename: " + getTestcasesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() + "]";
 
 	}
 
-
 	public TestCasesHolder getTestCasesHolder() {
 		return testCasesHolder;
 	}
-
 
 	public void setTestCasesHolder(TestCasesHolder testCasesHolder) {
 		this.testCasesHolder = testCasesHolder;
