@@ -38,11 +38,8 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 	private String executeSql() {
 		StringBuffer writer = new StringBuffer().append("<ROOT>").append(System.lineSeparator());
 
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(sqlQuery);
+		try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sqlQuery)) {
 			ResultSetMetaData metaData = rs.getMetaData();
-
 			int colCount = metaData.getColumnCount();
 			while (rs.next()) {
 				writer.append("<").append("ROW").append(">");

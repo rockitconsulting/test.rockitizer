@@ -45,23 +45,20 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	private Integer connectTimeOut;
 	private URL url;
 	private File file;
-	
-	
-	
+
 	public HTTPConnector(String id) {
-		io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector cfg = 
-				(io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration().getConnectorById(id);
-		
-		
+		io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector cfg = (io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration()
+				.getConnectorById(id);
+
 		this.id = id;
 		this.urlStr = cfg.getUrl();
 		this.method = cfg.getMethod();
 		this.contentType = cfg.getContentType();
 		this.userAgent = cfg.getUserAgent();
-		this.connectTimeOut = Integer.valueOf( cfg.getTimeout() );
-		
+		this.connectTimeOut = Integer.valueOf(cfg.getTimeout());
+
 		KeyStore ks = configuration().getKeyStoreByConnector(cfg);
-		if(ks!=null) {
+		if (ks != null) {
 			this.trustStore = ks.getPath();
 		}
 	}
@@ -109,29 +106,27 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			}
 
 			enhanceBasicAuthentication(urlConnection);
-			if ( urlConnection.getDoOutput()) {
+			if (urlConnection.getDoOutput()) {
 				enhancePayload(urlConnection);
 			}
 
 			InputStream is = urlConnection.getInputStream();
 			String result = IOUtils.toString(is);
-			
-			if(this.contentType.equalsIgnoreCase(CONTENT_TYPE_XML)) {
+
+			if (this.contentType.equalsIgnoreCase(CONTENT_TYPE_XML)) {
 				setReponse(result);
 			} else {
-				
-				
+
 				JSONObject response = new JSONObject();
 
 				// Header & Body
 				Map<String, List<String>> map = urlConnection.getHeaderFields();
 				ResponseHeader newResonseHeader = new ResponseHeader(map);
 				JSONObject responseHeader = newResonseHeader.getResponsHeader();
-				response.put("response",
-						new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
+				response.put("response", new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
 
 				setReponse(XML.toString(response));
-				
+
 			}
 
 		} catch (IOException e) {
@@ -146,7 +141,9 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 		} finally {
 			try {
-				urlConnection.disconnect();
+				if (urlConnection != null) {
+					urlConnection.disconnect();
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -201,8 +198,6 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		}
 	}
 
-
-
 	@Override
 	public String getId() {
 		return id;
@@ -234,15 +229,15 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		throw new GenericException("not yet supported");
 
 	}
-//	
-//	public void setUrlStr(String urlStr) {
-//		this.urlStr = urlStr;
-//	}
-//	public void setMethod(String method) {
-//		this.method = method;
-//	}
-//	public void setContentType(String contentType) {
-//		this.contentType = contentType;
-//	}
+	//
+	// public void setUrlStr(String urlStr) {
+	// this.urlStr = urlStr;
+	// }
+	// public void setMethod(String method) {
+	// this.method = method;
+	// }
+	// public void setContentType(String contentType) {
+	// this.contentType = contentType;
+	// }
 
 }

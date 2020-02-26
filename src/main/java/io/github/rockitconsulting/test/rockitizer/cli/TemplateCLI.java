@@ -8,9 +8,8 @@ public class TemplateCLI {
 	
 	public void createJunitClass(String testcase, String path){
 		
-		FileWriter myWriter;
-		try {
-			myWriter = new FileWriter(path);
+
+		try (FileWriter myWriter = new FileWriter(path)) {
 			myWriter.write("import org.apache.log4j.Logger;"+System.lineSeparator());
 			myWriter.write("import org.junit.Test;"+System.lineSeparator());
 			myWriter.write("import org.xmlunit.diff.ElementSelectors;"+System.lineSeparator());
@@ -32,8 +31,7 @@ public class TemplateCLI {
 			myWriter.write("}"+System.lineSeparator());
 		    myWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Failed by generation: "+ e);
 		}
 	      System.out.println("Successfully wrote to the file.");
 		

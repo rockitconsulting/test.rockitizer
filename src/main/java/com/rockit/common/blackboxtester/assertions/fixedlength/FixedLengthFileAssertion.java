@@ -30,73 +30,71 @@ import java.util.Scanner;
  */
 public class FixedLengthFileAssertion extends AbstractAssertion {
 
-    private String step = "";
+	private String step = "";
 
-    protected List<String> recorded = new ArrayList<>();
-    protected List<String> replayed = new ArrayList<>();
+	protected List<String> recorded = new ArrayList<>();
+	protected List<String> replayed = new ArrayList<>();
 
-    private RecordConfig recordConfig = null;
-    private final DifferenceBuilder db = new DifferenceBuilder(this);
+	private RecordConfig recordConfig = null;
+	private final DifferenceBuilder db = new DifferenceBuilder(this);
 
-    public FixedLengthFileAssertion(String recordPath, String replayPath, String step, String recordConfigString) {
-        setRecordPath(recordPath);
-        setReplayPath(replayPath);
-        recordConfig = RecordsConfig.getInstance().getRecordConfig(recordConfigString);
-        this.step = step;
-    }
+	public FixedLengthFileAssertion(String recordPath, String replayPath, String step, String recordConfigString) {
+		setRecordPath(recordPath);
+		setReplayPath(replayPath);
+		recordConfig = RecordsConfig.getInstance().getRecordConfig(recordConfigString);
+		this.step = step;
+	}
 
-    @Override
-    public void proceed() {
-        File recordFolder = new File(recordPath + File.separator + step);
-        File replayFolder = new File(replayPath + File.separator + step);
+	@Override
+	public void proceed() {
+		File recordFolder = new File(recordPath + File.separator + step);
+		File replayFolder = new File(replayPath + File.separator + step);
 
-        for (File recordFile : Files.fileTraverser().depthFirstPreOrder(recordFolder)) {
-            if (recordFile.isFile()) {
-                String relativePath = recordFolder.toURI().relativize(recordFile.toURI()).getPath();
-                String replayFilePath = replayFolder + File.separator + relativePath;
-                recorded = fileToLineList(recordFile.getAbsolutePath());
-                replayed = fileToLineList(replayFilePath);
-                db.build(recordFile.getName());
-                LOGGER.debug("fixedlength recorded content " + recordFile.getPath() + " with replayed " + replayFilePath);
-            }
-        }
-        db.doAssert();
-    }
+		for (File recordFile : Files.fileTraverser().depthFirstPreOrder(recordFolder)) {
+			if (recordFile.isFile()) {
+				String relativePath = recordFolder.toURI().relativize(recordFile.toURI()).getPath();
+				String replayFilePath = replayFolder + File.separator + relativePath;
+				recorded = fileToLineList(recordFile.getAbsolutePath());
+				replayed = fileToLineList(replayFilePath);
+				db.build(recordFile.getName());
+				LOGGER.debug("fixedlength recorded content " + recordFile.getPath() + " with replayed " + replayFilePath);
+			}
+		}
+		db.doAssert();
+	}
 
-    protected static List<String> fileToLineList(String filePath) {
-        File fileToExtract = new File(filePath);
-        List<String> lineList = new ArrayList<>();
-        if (fileToExtract.isFile()) {
-        	Scanner sc = null;
-            try {
-                sc = new Scanner(fileToExtract);
-                while (sc.hasNextLine()) {
-                    lineList.add(sc.nextLine());
-                }
-            } catch (FileNotFoundException e) {
-                //[TODO: handle Exception]
-            }finally {
-            	sc.close();
-            }
-        }
+	protected static List<String> fileToLineList(String filePath) {
+		File fileToExtract = new File(filePath);
+		List<String> lineList = new ArrayList<>();
+		if (fileToExtract.isFile()) {
 
-        return lineList;
-    }
+			try (Scanner sc = new Scanner(fileToExtract)) {
 
-    public String getStep() {
-        return step;
-    }
+				while (sc.hasNextLine()) {
+					lineList.add(sc.nextLine());
+				}
+			} catch (Exception e) {
+				LOGGER.error("Error occured: ", e);
+			}
+		}
 
-    public List<String> getRecorded() {
-        return recorded;
-    }
+		return lineList;
+	}
 
-    public List<String> getReplayed() {
-        return replayed;
-    }
+	public String getStep() {
+		return step;
+	}
 
-    public RecordConfig getRecordConfig() {
-        return recordConfig;
-    }
+	public List<String> getRecorded() {
+		return recorded;
+	}
+
+	public List<String> getReplayed() {
+		return replayed;
+	}
+
+	public RecordConfig getRecordConfig() {
+		return recordConfig;
+	}
 
 }

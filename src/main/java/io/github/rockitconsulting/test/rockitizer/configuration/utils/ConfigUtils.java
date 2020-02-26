@@ -18,22 +18,20 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 public class ConfigUtils {
-	
+
 	public static final String getAbsolutePathToRoot() {
-		String path  = new File("").getAbsolutePath();
-		if(System.getProperty("basedir") !=null && System.getProperty("app.home")!=null ) {
+		String path = new File("").getAbsolutePath();
+		if (System.getProperty("basedir") != null && System.getProperty("app.home") != null) {
 			path = path.replace("\\bin", "").replace("\\target", "").replace("\\appassembler", "");
 		}
-		
+
 		return path.replace("\\", "/");
 	}
-	
-	
-	
+
 	public static final String getAbsolutePathToResources() {
 		return getAbsolutePathToRoot() + "/src/test/resources/";
 	}
-	
+
 	public static final String getAbsolutePathToJava() {
 		return getAbsolutePathToRoot() + "/src/test/java/";
 	}
@@ -45,12 +43,11 @@ public class ConfigUtils {
 
 	public static String connectorTypeFromConnectorId(String connId) {
 		if (!connId.contains(".")) {
-			throw new InvalidConnectorFormatException (connId);
+			throw new InvalidConnectorFormatException(connId);
 		}
 		return connId.contains(".") ? connId.split("\\.")[0] : connId;
 	}
-	
-	
+
 	public static void writeModelObjToYaml(Object container, String yamlFileNameWithAbsPath) throws IOException {
 		DumperOptions options = new DumperOptions();
 		options.setDefaultFlowStyle(FlowStyle.BLOCK);
@@ -59,15 +56,15 @@ public class ConfigUtils {
 
 		Yaml yaml = new Yaml(customRepresenter, options);
 
-		FileWriter fw = new FileWriter(yamlFileNameWithAbsPath, false);
-		fw.write("#########################################################################################################################"
-				+ System.lineSeparator());
-		fw.write("############### This file has been generated. Kindly consider to replace the @@ placeholders with your values ###########"
-				+ System.lineSeparator());
-		fw.write("#########################################################################################################################"
-				+ System.lineSeparator());
-		fw.write(yaml.dumpAsMap(container));
-		fw.close();
+		try (FileWriter fw = new FileWriter(yamlFileNameWithAbsPath, false)) {
+			fw.write("#########################################################################################################################"
+					+ System.lineSeparator());
+			fw.write("############### This file has been generated. Kindly consider to replace the @@ placeholders with your values ###########"
+					+ System.lineSeparator());
+			fw.write("#########################################################################################################################"
+					+ System.lineSeparator());
+			fw.write(yaml.dumpAsMap(container));
+		}
 
 	}
 
@@ -78,7 +75,7 @@ public class ConfigUtils {
 		constructor.addTypeDescription(customTypeDescription);
 
 		InputStream inputStream = new FileInputStream(path);
-				//ConfigUtils.class.getClassLoader().getResourceAsStream(yamlFileNameWithRelPath);
+		// ConfigUtils.class.getClassLoader().getResourceAsStream(yamlFileNameWithRelPath);
 
 		Yaml yaml = new Yaml(constructor);
 		return yaml.load(inputStream);
@@ -97,7 +94,5 @@ public class ConfigUtils {
 		return yaml.load(inputStream);
 
 	}
-	
-
 
 }

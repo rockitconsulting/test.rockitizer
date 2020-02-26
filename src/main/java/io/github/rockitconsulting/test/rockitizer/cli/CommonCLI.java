@@ -64,7 +64,7 @@ public class CommonCLI {
 
 	public File findChildByName(final String context, final String name) {
 		Iterable<File> childs = FileUtils.listFolders(new File(context));
-		File file = StreamSupport.stream(childs.spliterator(), false).filter(f -> f.getName().equalsIgnoreCase(name)).findFirst().get();
+		File file = StreamSupport.stream(childs.spliterator(), false).filter(f -> f.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
 
 		return file;
 
