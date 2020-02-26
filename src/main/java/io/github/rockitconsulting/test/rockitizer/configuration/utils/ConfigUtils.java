@@ -34,6 +34,9 @@ public class ConfigUtils {
 		return getAbsolutePathToRoot() + "/src/test/resources/";
 	}
 	
+	public static final String getAbsolutePathToJava() {
+		return getAbsolutePathToRoot() + "/src/test/java/";
+	}
 
 	public static String connectorTypeFromFolder(File connFolder) {
 		return connectorTypeFromConnectorId(connFolder.getName());
