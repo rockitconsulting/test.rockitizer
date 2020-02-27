@@ -1,6 +1,12 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
+
+import java.io.IOException;
+
 import picocli.CommandLine;
+import picocli.CommandLine.Parameters;
 
 @CommandLine.Command(name = "show-resources",
 sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n",
@@ -13,10 +19,37 @@ description = "Stores the current contents of the index in a new commit "
 
 public class RockitizerShowRC implements Runnable {
 
+	String path;
+
+	@Parameters(index = "0", arity = "0..1", description = ": [%env%] - e.g. env = dev => <configuration>-dev.yaml will be listed")
+	String environment;
+
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+
+		LogUtils.disableLogging();
+
+		CommonCLI cli = new CommonCLI();
 		
+		if (environment != null){
+			
+			path = configuration().getFullPath() + "resources-" + environment + ".yaml";
+			
+		}else{
+
+			path = configuration().getFullPath() + "resources.yaml";
+
+		}
+		
+		try {
+			cli.listConfig(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		LogUtils.enableLogging();
+
 	}
 
 }

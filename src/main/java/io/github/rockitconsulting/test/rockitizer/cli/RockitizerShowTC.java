@@ -1,5 +1,10 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
+
+import java.io.IOException;
+
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "show-testcases",
@@ -13,10 +18,26 @@ description = "Stores the current contents of the index in a new commit "
 
 public class RockitizerShowTC implements Runnable {
 
+	String path;
+
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+
+		LogUtils.disableLogging();
+
+		CommonCLI cli = new CommonCLI();
 		
+		path = configuration().getFullPath() + "testcases.yaml";
+
+		try {
+			cli.listConfig(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		LogUtils.enableLogging();
+
 	}
 
 }

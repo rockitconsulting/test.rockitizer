@@ -1,6 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 
@@ -38,27 +39,46 @@ public class CommonCLI {
 
 		});
 	}
-	
-	public void listTC(String testcase) {
-		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
-		testCases.forEach(tcase -> {
-			if(tcase.getName().contentEquals(testcase)){
-			System.out.println("====================TC=======================================");
-			System.out.println(tcase.getName());
-			FileUtils.listFolders(tcase).forEach(tstep -> {
-				System.out.println("	\\_" + tstep.getName());
-				FileUtils.listFolders(tstep).forEach(connector -> {
-					System.out.println("		\\__" + connector.getName());
-					FileUtils.listFiles(connector).forEach(payload -> {
-						System.out.println("			\\___" + payload.getName());
 
+	public void listTC(String testcase, boolean recursive) throws IOException {
+
+		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
+
+		if (recursive) {
+			System.out.println(testcase);
+			if (testcase != null && !testcase.contentEquals("all")) {
+				tch1.getTestCases().forEach(tc -> {
+					if (testcase.contentEquals(tc.getTestCaseName())) {
+						System.out.println(tc.getTestCaseName());
+						tc.getTestSteps().forEach(ts -> {
+							System.out.println("	\\_" + ts.getTestStepName());
+							ts.getConnectorRefs().forEach(cr -> {
+								System.out.println("		\\__" + cr.getConRefId());
+							});
+						});
+					}
+				});
+			} else {
+				tch1.getTestCases().forEach(tc -> {
+					System.out.println(tc.getTestCaseName());
+					tc.getTestSteps().forEach(ts -> {
+						System.out.println("	\\_" + ts.getTestStepName());
+						ts.getConnectorRefs().forEach(cr -> {
+							System.out.println("		\\__" + cr.getConRefId());
+						});
 					});
 				});
-
+			}
+		} else {
+			if(testcase.contentEquals("all")){
+			tch1.getTestCases().forEach(tc -> {
+				System.out.println(tc.getTestCaseName());
 			});
-			;
+			}
 		}
-		});
+	}
+	
+	public void listRC(String recorce, boolean recursive) throws IOException {
 		
 	}
 
@@ -69,23 +89,23 @@ public class CommonCLI {
 		return file;
 
 	}
-	
-	public void listConfig(String path) throws IOException{
-		
-		try(BufferedReader br = new BufferedReader(new FileReader(path))) {
-		
-		    StringBuilder sb = new StringBuilder();
-		    String line = br.readLine();
 
-		    while (line != null) {
-		        sb.append(line);
-		        sb.append(System.lineSeparator());
-		        line = br.readLine();
-		    }
-		    System.out.println(sb.toString());
-		
+	public void listConfig(String path) throws IOException {
+
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = br.readLine();
+			}
+			System.out.println(sb.toString());
+
 		}
-		
+
 	}
 
 	public void create(String path, String testcase) {
@@ -104,8 +124,8 @@ public class CommonCLI {
 					System.err.println("File already exists.");
 				}
 			} catch (IOException e) {
-				System.err.println("Error occured: " + e );
-				
+				System.err.println("Error occured: " + e);
+
 			}
 		}
 		File theDir = new File(path);
@@ -167,9 +187,9 @@ public class CommonCLI {
 		LogUtils.enableLogging();
 
 	}
-	
-	public void deleteConfig(String path){
-		
+
+	public void deleteConfig(String path) {
+
 		File jUnitFile = new File(path);
 
 		if (jUnitFile.delete()) {
@@ -177,7 +197,7 @@ public class CommonCLI {
 		} else {
 			System.out.println(" Failed to delete the file");
 		}
-		
+
 	}
 
 }
