@@ -34,7 +34,6 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	
 	private String resourcesFileName = "resources.yaml";
 
-
 	void initFromYaml() throws IOException {
 		resourcesHolder = resourcesHolderFromYaml();
 	}
@@ -54,7 +53,6 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		return ConfigUtils.resourcesHolderFromYaml(getFullPath() + getResourcesFileName());
 	}
 
-	
 	/**
 	 * CLI relevant: generate Resources from yaml
 	 * @return 

@@ -1,6 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
+
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class CommonCLI {
 	public static final Logger log = Logger.getLogger(CommonCLI.class.getName());
@@ -78,7 +81,23 @@ public class CommonCLI {
 		}
 	}
 	
-	public void listRC(String recorce, boolean recursive) throws IOException {
+	public void listRC(String env, boolean recursive) throws IOException {
+		
+		if(env.contentEquals(null)){
+			ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+			
+			rhyaml.getDbConnectors().forEach(conn -> {
+				
+				System.out.println(rhyaml.getDbConnectors());
+				System.out.println("	\\_" + conn.getId());
+				
+				
+			});
+			
+		}else{
+			System.setProperty(Constants.ENV_KEY , env);
+			ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		}
 		
 	}
 

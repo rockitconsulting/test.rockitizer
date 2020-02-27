@@ -1,11 +1,11 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
-import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 
 import java.io.IOException;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
+import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 @CommandLine.Command(name = "list-resources",
@@ -19,13 +19,11 @@ description = "Stores the current contents of the index in a new commit "
 
 public class RockitizerListRC implements Runnable {
 
-	String path;
-
-	@Parameters(index = "0", arity = "1", description = ": [resources | testcases]")
-	String configuration;
-
-	@Parameters(index = "1", arity = "0..1", description = ": [%env%] - e.g. env = dev => <configuration>-dev.yaml will be listed")
-	String environment;
+	@Parameters(index = "0", arity = "0..1", description = "<env>")
+	String env;
+	
+	@Option(names = { "-r", "--recursive" }, arity = "0..1", description = "the archive file")
+	boolean recursive;
 
 	@Override
 	public void run() {
@@ -34,20 +32,10 @@ public class RockitizerListRC implements Runnable {
 
 		CommonCLI cli = new CommonCLI();
 		
-		if (environment != null){
-			
-			path = configuration().getFullPath() + configuration + "-" + environment + ".yaml";
-			
-		}else{
-
-			path = configuration().getFullPath() + configuration + ".yaml";
-
-		}
-		
 		try {
-			cli.listConfig(path);
+			cli.listRC(env, recursive);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+				System.out.println("Error: " + e);
 			e.printStackTrace();
 		}
 
