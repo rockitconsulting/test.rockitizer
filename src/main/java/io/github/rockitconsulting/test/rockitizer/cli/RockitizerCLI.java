@@ -19,10 +19,12 @@ subcommands = {
         RockitizerDeleteTS.class,
         RockitizerDeleteConn.class,
         RockitizerDeleteConfig.class,
-        RockitizerSyncConfig.class,
+        RockitizerSync.class,
         RockitizerJunitStarter.class,
         RockitizerListTC.class,
         RockitizerListRC.class,
+        RockitizerShowTC.class,
+        RockitizerShowRC.class,
         RockitizerValidate.class,
         CommandLine.HelpCommand.class
 })

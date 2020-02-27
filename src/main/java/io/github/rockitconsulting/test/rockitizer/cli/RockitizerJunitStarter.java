@@ -16,7 +16,13 @@ import picocli.CommandLine.Parameters;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "test", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "(Working) Create Configuration", description = "Stores the current contents of the index in a new commit "
+@CommandLine.Command(name = "run", sortOptions = false,
+headerHeading = "@|bold,underline Benutzung:|@%n%n",
+synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n",
+parameterListHeading = "%n@|bold,underline Parameters:|@%n",
+optionListHeading = "%n@|bold,underline Options:|@%n",
+header = "(Working) cli run <testName | all> [<record | replay>] [<env>]",
+description = "Stores the current contents of the index in a new commit "
 		+ "along with a log message from the user describing the changes.")
 public class RockitizerJunitStarter extends JUnitCore implements Runnable {
 

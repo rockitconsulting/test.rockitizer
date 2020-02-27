@@ -15,7 +15,7 @@ synopsisHeading = "%n",
 descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 optionListHeading = "%n@|bold,underline Options:|@%n",
-header = "(Working) Delete Connectors",
+header = "(Working) cli delete-connector <testcaseName> <teststepName> <connectorName>",
 description = "Stores the current contents of the index in a new commit " +
 		"along with a log message from the user describing the changes.")
 
