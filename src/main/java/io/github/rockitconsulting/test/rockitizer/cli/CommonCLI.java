@@ -83,21 +83,18 @@ public class CommonCLI {
 	
 	public void listRC(String env, boolean recursive) throws IOException {
 		
-		if(env.contentEquals(null)){
 			ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
 			
-			rhyaml.getDbConnectors().forEach(conn -> {
-				
-				System.out.println(rhyaml.getDbConnectors());
-				System.out.println("	\\_" + conn.getId());
-				
-				
-			});
 			
-		}else{
-			System.setProperty(Constants.ENV_KEY , env);
-			ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
-		}
+			if(rhyaml.getDbConnectors().size()>0) {
+				System.out.println("DBConnectors");
+				rhyaml.getDbConnectors().forEach(conn -> {
+					System.out.println("	\\_" + "id:"+ conn.getId()  +", type: " + conn.getType() + ( conn.getQuery()!=null?"query: "+ conn.getQuery():"" ) ); 
+					
+					
+				});
+				
+			} 
 		
 	}
 
