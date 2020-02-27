@@ -8,24 +8,21 @@ import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Spec;
 
 @Command(name = Constants.CLI_COMMAND, mixinStandardHelpOptions = true, version = "subcommand demo 3.0",
-description = "Rockitizer Command-Line Interface is easy to use and  ......",
 commandListHeading = "%nCommands:%n%nThe most commonly used rockitizer commands are:%n",
-footer = "%nSee 'rockit help <command>' to read about a specific subcommand or concept.%n %nTriggered command chains:",
+footer = "%nSee 'rockit help <command>' to read about a specific subcommand or concept.%n %nTriggered command chains:%ncreate-testcase = sync + create-testcase + sync %ncreate-teststep = sync + create-teststep + sync %ncreate-connector = sync + create-connector + sync %ncreate-env = sync + create-env + sync %ndelete-testcase = sync + delete-testcase + sync %ndelete-teststep = sync + delete-teststep + sync %ndelete-connector = sync + delete-connector + sync %ndelete-env = sync + delete-env + sync %n sync = sync %nrun = sync + run + sync %nlist-resources = sync + list-resources + sync %nlist-testcases = sync + list-testcases %n validate = sync + validate %n help = help ",
 subcommands = {
         RockitizerCreateTC.class,
         RockitizerCreateTS.class,
         RockitizerCreateConn.class,
-        RockitizerJunitStarter.class,
         RockitizerCreateConfig.class,
         RockitizerDeleteTC.class,
         RockitizerDeleteTS.class,
         RockitizerDeleteConn.class,
         RockitizerDeleteConfig.class,
         RockitizerSyncConfig.class,
-        RockitizerSyncTC.class,
-        RockitizerListAll.class,
+        RockitizerJunitStarter.class,
         RockitizerListTC.class,
-        RockitizerListConfig.class,
+        RockitizerListRC.class,
         RockitizerValidate.class,
         CommandLine.HelpCommand.class
 })
