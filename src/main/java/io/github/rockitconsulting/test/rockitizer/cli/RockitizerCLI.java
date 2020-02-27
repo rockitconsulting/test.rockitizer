@@ -10,7 +10,7 @@ import picocli.CommandLine.Spec;
 @Command(name = Constants.CLI_COMMAND, mixinStandardHelpOptions = true, version = "subcommand demo 3.0",
 description = "Rockitizer Command-Line Interface is easy to use and  ......",
 commandListHeading = "%nCommands:%n%nThe most commonly used rockitizer commands are:%n",
-footer = "%nSee 'rockit help <command>' to read about a specific subcommand or concept.",
+footer = "%nSee 'rockit help <command>' to read about a specific subcommand or concept.%n %nTriggered command chains:",
 subcommands = {
         RockitizerCreateTC.class,
         RockitizerCreateTS.class,
