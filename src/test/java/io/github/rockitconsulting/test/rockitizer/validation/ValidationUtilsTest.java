@@ -1,6 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.validation;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import static io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder.validationHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 
@@ -27,8 +28,9 @@ public class ValidationUtilsTest {
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		ValidationUtils.cleanGitIgnore();
 		ValidationUtils.fixGitEmptyFoldersProblem();
-		int s1 = ValidationHolder.validationHolder().size();
-		Assert.assertEquals(s1, 20);
+		int s1 = validationHolder().size();
+		validationHolder().logValidationErrors();
+		Assert.assertEquals(20, s1 );
 
 	}
 

@@ -8,6 +8,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import java.io.File;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,8 @@ public class RockitizerCreateTestTest {
 	public void before() {
 		System.clearProperty(Constants.ENV_KEY);	
 	}
+	
+	
 
 	@Test
 	public void testHelp() {
@@ -43,11 +46,8 @@ public class RockitizerCreateTestTest {
 	public void testCreateTestCase() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
 		Assert.assertEquals( new CommandLine(new RockitizerCreateTest()).execute(tc), 0);
-		File tcf = new File(configuration().getFullPath()+File.separator+tc);
-		log.info(" checking with context tc: "+ tcf.getAbsolutePath());
-		Assert.assertTrue(tcf.exists());
-		Assert.assertTrue(tcf.delete());
-		Assert.assertFalse(tcf.exists());
+		
+		deleteTestCaseRecursiveAndCheck();
 		
 		//check junit java created
 		File junit = new File(ConfigUtils.getAbsolutePathToJava()+File.separator+tc+".java");
@@ -57,6 +57,7 @@ public class RockitizerCreateTestTest {
 		
 
 	}
+
 	
 	@Test
 	public void testCreateTestStep() {
@@ -67,10 +68,13 @@ public class RockitizerCreateTestTest {
 		
 		
 		File tsf = new File(configuration().getFullPath()+File.separator+tc + File.separator + ts );
-		log.info(" checking with context tc: "+ tsf.getAbsolutePath());
+		log.info(" checking with context teststep: "+ tsf.getAbsolutePath());
 		Assert.assertTrue(tsf.exists());
 		FileUtils.deleteDirectory(tsf);
 		Assert.assertFalse(tsf.exists());
+		
+		deleteTestCaseRecursiveAndCheck();
+		
 		
 
 	}
@@ -90,8 +94,19 @@ public class RockitizerCreateTestTest {
 		FileUtils.deleteDirectory(cf);
 		Assert.assertFalse(cf.exists());
 		
+		deleteTestCaseRecursiveAndCheck();
+		
 
 	}
+	
+	private void deleteTestCaseRecursiveAndCheck() {
+		File tcf = new File(configuration().getFullPath()+File.separator+tc);
+		log.info(" delete tc recursive: "+ tcf.getAbsolutePath());
+		Assert.assertTrue(tcf.exists());
+		FileUtils.deleteDirectory(tcf);
+		Assert.assertFalse(tcf.exists());
+	}
+	
 
 	private void checkJunitNotCreated() {
 		File junit = new File(ConfigUtils.getAbsolutePathToJava()+File.separator+tc+".java");
