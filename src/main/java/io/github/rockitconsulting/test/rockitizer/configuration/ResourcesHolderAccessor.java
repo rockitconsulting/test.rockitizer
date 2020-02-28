@@ -110,7 +110,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	
 	/**
 	 * CLI relevant: write resources to yaml
-	 * @return
+	 * 
 	 * @throws IOException
 	 */
 
