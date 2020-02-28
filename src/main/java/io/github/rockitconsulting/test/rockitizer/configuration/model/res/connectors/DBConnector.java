@@ -40,7 +40,7 @@ public class DBConnector extends BaseConnector {
 		if (Types.DBGET == type && query == null) {
 			query = "@query@";
 		}
-		
+
 	}
 
 	public String getQuery() {
@@ -67,17 +67,18 @@ public class DBConnector extends BaseConnector {
 
 	@Override
 	public Map<Context, List<Message>> validate() {
-		
-		if(type == Types.DBGET) {
-			return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
-					"query", query == null?"@query@":query, 
-					"dsRefId", dsRefId
-					));
+
+		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap());
+
+	}
+
+	@Override
+	public Map<String, String> getFieldsAsOrderedMap() {
+		if (type == Types.DBGET) {
+			return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "query", query == null ? "@query@" : query, "dsRefId", dsRefId);
 		} else {
-			return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
-					"dsRefId", dsRefId
-					));
-			
+			return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "dsRefId", dsRefId);
+
 		}
 	}
 

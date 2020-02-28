@@ -11,28 +11,26 @@ import java.util.Map;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
-public class SCPConnector extends BaseConnector  {
+public class SCPConnector extends BaseConnector {
 
 	public enum Types {
 		SCPPUT
 	}
-	
-	private String host 	= "@host@";
-	private String path 	= "@path@";
-	private String user 	= "@usr@";
+
+	private String host = "@host@";
+	private String path = "@path@";
+	private String user = "@usr@";
 	private String password = "@pwd";
 	private Types type;
 
 	public SCPConnector() {
 		super();
 	}
-	
+
 	public SCPConnector(File location) {
 		super(location);
 	}
 
-	
-	
 	public Types getType() {
 		return type;
 	}
@@ -72,24 +70,24 @@ public class SCPConnector extends BaseConnector  {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@Override
 	public String toString() {
-		return type + ":{" +  (Strings.isNullOrEmpty(getId())?"": "id=" + getId() + ", ") 
-				+  (Strings.isNullOrEmpty(path)?"": "path=" + path ) 
-			+ "}";
+		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(path) ? "" : "path=" + path) + "}";
 	}
+
 	@Override
 	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkFieldsValid (  getContext(), 
-				ImmutableMap.<String, String>builder()
-				.put("host", host)
-				.put("path", path)
-				.put("user", user)
-				.put("password", password)
-				.build()
-	
+		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap()
+
 		);
+	}
+
+	@Override
+	public Map<String, String> getFieldsAsOrderedMap() {
+		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("host", host).put("path", path)
+				.put("user", user).put("password", password).build();
+
 	}
 
 }

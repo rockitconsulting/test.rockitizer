@@ -11,25 +11,23 @@ import java.util.Map;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
-public class FileConnector extends BaseConnector  {
+public class FileConnector extends BaseConnector {
 
 	public enum Types {
 		FILEDEL, FILEPUT, FILEGET
 	}
-	
-	private Types type;	
+
+	private Types type;
 	private String path = "@path@";
 
-
-	
 	public FileConnector() {
 		super();
 	}
-	
+
 	public FileConnector(File location) {
 		super(location);
 	}
-	
+
 	public Types getType() {
 		return type;
 	}
@@ -46,23 +44,19 @@ public class FileConnector extends BaseConnector  {
 		this.path = path;
 	}
 
-	
-	@Override
-	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
-				"path", path 
-				));
-	}
-	
-	
 	@Override
 	public String toString() {
-		return type + ":{" +  (Strings.isNullOrEmpty(getId())?"": "id=" + getId() + ", ") +  (Strings.isNullOrEmpty(path)?"": "path=" + path ) 
-			+ "}";
+		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(path) ? "" : "path=" + path) + "}";
 	}
 
+	@Override
+	public Map<Context, List<Message>> validate() {
+		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap());
+	}
 
-	
-	
+	@Override
+	public Map<String, String> getFieldsAsOrderedMap() {
+		return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "path", path);
+	}
 
 }

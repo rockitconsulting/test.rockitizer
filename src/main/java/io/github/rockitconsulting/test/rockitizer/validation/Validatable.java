@@ -13,5 +13,7 @@ public interface Validatable {
 	public boolean isValid();
 	
 	public Map<Context, List<Message>> validate();
+	
+	public Map<String, String> getFieldsAsOrderedMap();
 
 }

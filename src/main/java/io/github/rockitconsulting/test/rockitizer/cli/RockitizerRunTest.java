@@ -24,7 +24,7 @@ optionListHeading = "%n@|bold,underline Options:|@%n",
 header = "(Working) cli run <testName | all> [<record | replay>] [<env>]",
 description = "Stores the current contents of the index in a new commit "
 		+ "along with a log message from the user describing the changes.")
-public class RockitizerJunitStarter extends JUnitCore implements Runnable {
+public class RockitizerRunTest extends JUnitCore implements Runnable {
 
 	@Parameters(index = "0", arity = "1", description = ": [%%testname%%] - e.g. MyJUnitTest or all")
 	String testname;

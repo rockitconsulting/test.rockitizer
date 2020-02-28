@@ -1,23 +1,33 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
 
 
+
 public class CommonCLI {
 	public static final Logger log = Logger.getLogger(CommonCLI.class.getName());
-
+	
+	
+	public static final String[] banner = {
+		"@|green __________               __   .__  __  .__                      |@", 
+        "@|green \\______   \\ ____   ____ |  | _|__|/  |_|__|_______ ___________  |@",
+        "@|green  |       _//  _ \\_/ ___\\|  |/ /  \\   __\\  \\___   // __ \\_  __ \\ |@",
+        "@|green  |    |   (  <_> )  \\___|    <|  ||  | |  |/    /\\  ___/|  | \\/ |@",
+        "@|green  |____|_  /\\____/ \\___  >__|_ \\__||__| |__/_____ \\\\___  >__|    |@",		
+        "@|green         \\/            \\/     \\/                 \\/    \\/        |@"
+	};
+	
+	
+	
 	/**
 	 * CLI relevant: print testsuite
 	 */
@@ -42,7 +52,7 @@ public class CommonCLI {
 		});
 	}
 
-	public void listTC(String testcase, boolean recursive) throws IOException {
+	public void treeTC(String testcase, boolean recursive) throws IOException {
 
 		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
 
@@ -72,33 +82,14 @@ public class CommonCLI {
 				});
 			}
 		} else {
-			if(testcase.contentEquals("all")){
-			tch1.getTestCases().forEach(tc -> {
-				System.out.println(tc.getTestCaseName());
-			});
+			if (testcase.contentEquals("all")) {
+				tch1.getTestCases().forEach(tc -> {
+					System.out.println(tc.getTestCaseName());
+				});
 			}
 		}
 	}
-	
-	public void listRC(String env, boolean recursive) throws IOException {
-		
-			ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
-			
-			
-			if(rhyaml.getDbConnectors().size()>0) {
-				System.out.println("DBConnectors");
-				rhyaml.getDbConnectors().forEach(conn -> {
-					System.out.println("	\\_" + "id:"+ conn.getId()  +", type: " + conn.getType() + ( conn.getQuery()!=null?"query: "+ conn.getQuery():"" ) ); 
-					System.out.println("	\\_" + "id:"+ conn.getId());
-					System.out.println("	\\_" + "type: " + conn.getType());
-					System.out.println("	\\_" + ( conn.getQuery()!=null?"query: "+ conn.getQuery():"" ));
-					System.out.println("	\\_" + "DsRefId:"+ conn.getDsRefId());
-					
-				});
-				
-			} 
-		
-	}
+
 
 	public File findChildByName(final String context, final String name) {
 		Iterable<File> childs = FileUtils.listFolders(new File(context));
@@ -108,63 +99,7 @@ public class CommonCLI {
 
 	}
 
-	public void listConfig(String path) throws IOException {
 
-		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			System.out.println(sb.toString());
-
-		}
-
-	}
-
-	public void create(String path, String testcase) {
-
-		if (testcase != null) {
-			TemplateCLI tmp = new TemplateCLI();
-
-			File file = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
-
-			// Create the file
-			try {
-				if (file.createNewFile()) {
-					tmp.createJunitClass(testcase, configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
-					System.out.println("File is created!");
-				} else {
-					System.err.println("File already exists.");
-				}
-			} catch (IOException e) {
-				System.err.println("Error occured: " + e);
-
-			}
-		}
-		File theDir = new File(path);
-		// if the directory does not exist, create it
-		if (!theDir.exists()) {
-			System.out.println("creating directory: " + theDir.getName());
-			boolean result = false;
-
-			try {
-				result = theDir.mkdir();
-			} catch (SecurityException se) {
-				// handle it
-			}
-			if (result) {
-				System.out.println("DIR created in: " + configuration().getFullPath());
-			}
-		} else {
-			System.out.println("DIR already exists in: " + configuration().getFullPath());
-		}
-
-	}
 
 	public void delete(String path, String testcase) {
 

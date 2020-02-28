@@ -11,24 +11,24 @@ import java.util.Map;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
-public class MQConnector extends BaseConnector  {
+public class MQConnector extends BaseConnector {
 
 	public enum Types {
 		MQGET, MQPUT
 	}
 
-	private String queue="@defaultQueue@";
-	private String dsRefId="defaultMQ";
+	private String queue = "@defaultQueue@";
+	private String dsRefId = "defaultMQ";
 	private Types type;
-	
+
 	public MQConnector() {
 		super();
 	}
-	
+
 	public MQConnector(File location) {
 		super(location);
 	}
-	
+
 	public Types getType() {
 		return type;
 	}
@@ -37,7 +37,6 @@ public class MQConnector extends BaseConnector  {
 		this.type = type;
 	}
 
-
 	public String getDsRefId() {
 		return dsRefId;
 	}
@@ -45,7 +44,7 @@ public class MQConnector extends BaseConnector  {
 	public void setDsRefId(String dsRefId) {
 		this.dsRefId = dsRefId;
 	}
-	
+
 	public String getQueue() {
 		return queue;
 	}
@@ -53,25 +52,21 @@ public class MQConnector extends BaseConnector  {
 	public void setQueue(String queue) {
 		this.queue = queue;
 	}
-	
 
 	@Override
 	public String toString() {
-		return type + ":{" +  (Strings.isNullOrEmpty(getId())?"": "id=" + getId() + ", ") +   
-				(Strings.isNullOrEmpty(queue)?"": "queue=" + queue + ", ") +
-				(Strings.isNullOrEmpty(dsRefId)?"":"dsRefId=" + dsRefId+", ") 
-			+ "}";
+		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(queue) ? "" : "queue=" + queue + ", ")
+				+ (Strings.isNullOrEmpty(dsRefId) ? "" : "dsRefId=" + dsRefId + ", ") + "}";
 	}
-
 
 	@Override
 	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkFieldsValid(getContext(), (Map<String, String>) ImmutableMap.of(
-				"queue", queue, 
-				"dsRefId", dsRefId
-				));
+		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap());
 	}
-	
 
+	@Override
+	public Map<String, String> getFieldsAsOrderedMap() {
+		return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString() , "queue", queue, "dsRefId", dsRefId);
+	}
 
 }
