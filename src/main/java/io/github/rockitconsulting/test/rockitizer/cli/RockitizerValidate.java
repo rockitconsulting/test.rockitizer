@@ -14,7 +14,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 @CommandLine.Command(name = "validate", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
 descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
-optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli validate <env>", description = " Complete validation for the testsuite.")
+optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli validate [<env>]", description = " Complete validation for the testsuite.")
 public class RockitizerValidate implements Runnable {
 
 	@Option(defaultValue = "true", showDefaultValue=CommandLine.Help.Visibility.ALWAYS, names = { "-gitfix", "--addgitignore" }, arity = "0..1", description = "add .gitignore to all GET connector folders to allow get commit.")
