@@ -14,7 +14,6 @@ import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
 
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class CommonCLI {
 	public static final Logger log = Logger.getLogger(CommonCLI.class.getName());
@@ -90,7 +89,10 @@ public class CommonCLI {
 				System.out.println("DBConnectors");
 				rhyaml.getDbConnectors().forEach(conn -> {
 					System.out.println("	\\_" + "id:"+ conn.getId()  +", type: " + conn.getType() + ( conn.getQuery()!=null?"query: "+ conn.getQuery():"" ) ); 
-					
+					System.out.println("	\\_" + "id:"+ conn.getId());
+					System.out.println("	\\_" + "type: " + conn.getType());
+					System.out.println("	\\_" + ( conn.getQuery()!=null?"query: "+ conn.getQuery():"" ));
+					System.out.println("	\\_" + "DsRefId:"+ conn.getDsRefId());
 					
 				});
 				

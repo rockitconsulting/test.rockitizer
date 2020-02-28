@@ -3,6 +3,8 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 
 import java.io.IOException;
 
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
@@ -31,6 +33,10 @@ public class RockitizerListRC implements Runnable {
 		LogUtils.disableLogging();
 
 		CommonCLI cli = new CommonCLI();
+		
+		if(!env.contentEquals(null)){
+		System.setProperty(Constants.ENV_KEY, env);
+		}
 		
 		try {
 			cli.listRC(env, recursive);
