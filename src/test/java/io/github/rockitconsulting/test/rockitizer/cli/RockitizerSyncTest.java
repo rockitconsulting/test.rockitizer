@@ -9,29 +9,28 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 import picocli.CommandLine;
 
-public class RockitizerRunTestTest  extends CommonCLITest {
+public class RockitizerSyncTest extends CommonCLITest {
 
 	@Test
 	public void testHelp() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
-		System.out.println(new CommandLine(new RockitizerRunTest()).getUsageMessage());
+		System.out.println(new CommandLine(new RockitizerSync()).getUsageMessage());
 
 	}
 
 	@Test
-	public void testRunTests() {
+	public void testSync() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
-		Assert.assertEquals(new CommandLine(new RockitizerRunTest()).execute("all"), 0);
+		Assert.assertEquals(new CommandLine(new RockitizerSync()).execute(), 0);
 
 	}
 
 	@Test
-	public void testRunTestsParams() {
+	public void testSyncWithParams() {
 		System.setProperty(Constants.ENV_KEY, "devp");
-		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
-		Assert.assertEquals( new CommandLine(new RockitizerRunTest()).execute("all","replay","devp"), 0);
-		
-		
+		TestObjectFactory.resetConfigurationToContextDemoPrj();
+		Assert.assertEquals(new CommandLine(new RockitizerSync()).execute("devp"), 0);
 
 	}
+
 }
