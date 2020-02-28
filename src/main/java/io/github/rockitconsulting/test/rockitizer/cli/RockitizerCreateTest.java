@@ -2,7 +2,6 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +12,7 @@ import picocli.CommandLine.Parameters;
 
 @CommandLine.Command(name = "create-testcase", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
 parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header ="create-testcase <testcase> [<teststep>] [<connector>]", 
-description = " creates the test objects in the file system ")
+description = " Creates the test objects in the file system ")
 public class RockitizerCreateTest implements Runnable {
 
  
@@ -29,9 +28,7 @@ public class RockitizerCreateTest implements Runnable {
 
 	@Override
 	public void run() {
-
-
-		LogUtils.disableLogging();
+		
 		
 		try {
 			if (teststep != null && connector != null) {
@@ -45,8 +42,7 @@ public class RockitizerCreateTest implements Runnable {
 		} catch (IOException e) {
 			System.err.println("Error occured: " + e);
 		}
-
-		LogUtils.enableLogging();
+	
 
 	}
 

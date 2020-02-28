@@ -7,12 +7,13 @@ import picocli.CommandLine.Parameters;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "create-config", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "(Working) Create Configuration", description = "Stores the current contents of the index in a new commit "
-		+ "along with a log message from the user describing the changes.")
+@CommandLine.Command(name = "create-config", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", 
+header = "create-config <env>", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
 public class RockitizerCreateConfig implements Runnable {
 
-	@Parameters(index = "0", description = ": [%env%] - e.g. env = dev => <configuration>-dev.yaml will be created")
-	String environment;
+	@Parameters(index = "0", description = ": env = dev => generation of resources-dev.yaml and tastcases.yaml")
+	String env;
 
 	/*
 	 * (non-Javadoc)
@@ -25,18 +26,18 @@ public class RockitizerCreateConfig implements Runnable {
 		LogUtils.disableLogging();
 
 		try {
-			if (environment != null) {
-				System.out.println(" setting  environment " + environment + " and forcing config generation from filesystem");
+			if (env != null) {
+				System.out.println(" setting  environment " + env + " and forcing config generation from filesystem");
 				System.setProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY, "CLI");
-				System.setProperty(Constants.ENV_KEY, environment);
+				System.setProperty(Constants.ENV_KEY, env);
 			}
 
 			String resourcesFile = configuration().getFullPath() + configuration().getRhApi().getResourcesFileName();
 			String testcasesFile = configuration().getFullPath() + configuration().getTchApi().getTestcasesFileName();
 
 			System.out.println(" Result: ");
-			System.out.println(" generated new " + testcasesFile + " for environemnt " + environment);
-			System.out.println(" generated new " + resourcesFile + " for environemnt " + environment);
+			System.out.println(" generated new " + testcasesFile + " for environemnt " + env);
+			System.out.println(" generated new " + resourcesFile + " for environemnt " + env);
 
 		} catch (Throwable thr) {
 			System.err.println(" Error: " + thr.getMessage());
