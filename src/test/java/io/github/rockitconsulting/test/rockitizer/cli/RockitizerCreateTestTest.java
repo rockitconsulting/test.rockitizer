@@ -8,7 +8,6 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import java.io.File;
 
 import org.apache.log4j.Logger;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
