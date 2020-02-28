@@ -23,7 +23,6 @@ public class RockitizerCreateConfig implements Runnable {
 	@Override
 	public void run() {
 
-		LogUtils.disableLogging();
 
 		try {
 			if (env != null) {

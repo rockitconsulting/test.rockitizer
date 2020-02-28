@@ -34,6 +34,9 @@ public class RockitizerCLI extends CommonCLI implements Runnable {
 		int execute = new CommandLine(new RockitizerCLI()).execute(args);
 
 		LogUtils.enableLogging();
+		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
+		System.clearProperty(Constants.ENV_KEY);
+
 		System.exit(execute);
 	}
 

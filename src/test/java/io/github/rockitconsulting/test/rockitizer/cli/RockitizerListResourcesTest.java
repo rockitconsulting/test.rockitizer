@@ -11,7 +11,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 import picocli.CommandLine;
 
-public class RockitizerListResourcesTest {
+public class RockitizerListResourcesTest  extends CommonCLITest {
 
 	@Before
 	public void before() {

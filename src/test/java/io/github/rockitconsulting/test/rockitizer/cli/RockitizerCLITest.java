@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import picocli.CommandLine;
 
-public class RockitizerCLITest {
+public class RockitizerCLITest  extends CommonCLITest {
 
 	@Test
 	public void testHelp() {

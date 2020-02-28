@@ -1,5 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import java.io.IOException;
+
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -16,15 +19,18 @@ description = "Stores the current contents of the index in a new commit " +
 
 public class RockitizerSync implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = "ConfigurationName.....")
-    String configuration;
 	
-	@Parameters(index = "1", description = "Environment.....")
-    String environment;
+	@Parameters(index = "0", arity = "0..1",description = "env.....")
+    String env;
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		try {
+			ValidationUtils.syncResources();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

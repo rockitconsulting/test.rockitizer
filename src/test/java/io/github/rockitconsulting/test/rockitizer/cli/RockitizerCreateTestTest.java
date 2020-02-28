@@ -16,7 +16,7 @@ import picocli.CommandLine;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-public class RockitizerCreateTestTest {
+public class RockitizerCreateTestTest  extends CommonCLITest {
 	public static Logger log = Logger.getLogger(RockitizerCreateTestTest.class.getName());
 	
 	private String tc = "TestTestCase";

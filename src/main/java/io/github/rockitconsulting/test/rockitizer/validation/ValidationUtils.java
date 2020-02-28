@@ -309,7 +309,7 @@ public class ValidationUtils {
 
 	}
 
-	public static void syncJavaAndTestCases() {
+	public static void validateSyncJavaAndTestCases() {
 
 		Iterable<File> testCases = FileUtils.listFolders(new File(configuration().getFullPath()));
 		Iterable<File> junits = FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava()));
