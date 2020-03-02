@@ -16,7 +16,7 @@ import picocli.CommandLine.Parameters;
 	descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 	parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 	optionListHeading = "%n@|bold,underline Options:|@%n",
-	header = "(Working) cli delete-testcase <testcaseName>",
+	header = "cli delete <testcase> [<teststep>] [<connector>]",
 	description = "Stores the current contents of the index in a new commit " +
 			"along with a log message from the user describing the changes.")
 
