@@ -10,7 +10,7 @@ import java.io.IOException;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "create-testcase", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+@CommandLine.Command(name = "create", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
 parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header ="create-testcase <testcase> [<teststep>] [<connector>]", 
 description = " Creates the test objects in the file system ")
 public class RockitizerCreateTest implements Runnable {

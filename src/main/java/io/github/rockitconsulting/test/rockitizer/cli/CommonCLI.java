@@ -52,44 +52,6 @@ public class CommonCLI {
 		});
 	}
 
-	public void treeTC(String testcase, boolean recursive) throws IOException {
-
-		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
-
-		if (recursive) {
-			System.out.println(testcase);
-			if (testcase != null && !testcase.contentEquals("all")) {
-				tch1.getTestCases().forEach(tc -> {
-					if (testcase.contentEquals(tc.getTestCaseName())) {
-						System.out.println(tc.getTestCaseName());
-						tc.getTestSteps().forEach(ts -> {
-							System.out.println("	\\_" + ts.getTestStepName());
-							ts.getConnectorRefs().forEach(cr -> {
-								System.out.println("		\\__" + cr.getConRefId());
-							});
-						});
-					}
-				});
-			} else {
-				tch1.getTestCases().forEach(tc -> {
-					System.out.println(tc.getTestCaseName());
-					tc.getTestSteps().forEach(ts -> {
-						System.out.println("	\\_" + ts.getTestStepName());
-						ts.getConnectorRefs().forEach(cr -> {
-							System.out.println("		\\__" + cr.getConRefId());
-						});
-					});
-				});
-			}
-		} else {
-			if (testcase.contentEquals("all")) {
-				tch1.getTestCases().forEach(tc -> {
-					System.out.println(tc.getTestCaseName());
-				});
-			}
-		}
-	}
-
 
 	public File findChildByName(final String context, final String name) {
 		Iterable<File> childs = FileUtils.listFolders(new File(context));
@@ -99,47 +61,6 @@ public class CommonCLI {
 
 	}
 
-
-
-	public void delete(String path, String testcase) {
-
-		if (testcase != null) {
-			File jUnitFile = new File(configuration().getFullPath().replaceFirst("/resources/", "/java/") + testcase + ".java");
-
-			if (jUnitFile.delete()) {
-				System.out.println(testcase + ".java" + " File deleted successfully");
-			} else {
-				System.err.println(testcase + ".java" + " Failed to delete the file");
-			}
-		}
-		File theDir = new File(path);
-		// if the directory does not exist, create it
-		if (theDir.exists()) {
-			System.out.println("deleting directory: " + theDir.getName());
-			boolean result = false;
-
-			File[] allContents = theDir.listFiles();
-			if (allContents != null) {
-				for (File file : allContents) {
-					delete(file.getPath(), null);
-				}
-			}
-
-			try {
-				result = theDir.delete();
-			} catch (SecurityException se) {
-				// handle it
-			}
-			if (result) {
-				System.out.println("DIR: " + theDir.getName() + " deleted in: " + configuration().getFullPath());
-			}
-		} else {
-			System.out.println("DIR: " + theDir.getName() + " does not exist in: " + configuration().getFullPath());
-		}
-
-		LogUtils.enableLogging();
-
-	}
 
 	public void deleteConfig(String path) {
 
