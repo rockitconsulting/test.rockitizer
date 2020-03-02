@@ -14,8 +14,7 @@ public class DBDataSource implements Validatable {
 
 	String type = "DB";
 	String user = "@usr@";
-	//NOSONAR
-	String password = "@pwd@";
+	String password = "@pwd@";//NOSONAR
 	String url = "@url@";
 	String id = "defaultDB";
 

@@ -126,7 +126,7 @@ public class ValidationUtils {
 									if (!FileUtils.listFiles(connector).iterator().hasNext()) {
 
 										try {
-											new File(connector.getAbsolutePath() + File.separator + Constants.GITIGNORE).createNewFile();
+											new File(connector.getAbsolutePath() + File.separator + Constants.GITIGNORE).createNewFile();//NOSONAR
 											validationHolder().add(
 													new Context.Builder().withConnector(connector),
 													new Message(Message.LEVEL.WARN, "Connector is empty. Creating the " + Constants.GITIGNORE
