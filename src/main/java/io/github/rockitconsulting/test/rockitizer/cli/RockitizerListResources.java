@@ -3,7 +3,6 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.io.IOException;
@@ -32,7 +31,6 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 	@Override
 	public void run() {
 
-		LogUtils.disableLogging();
 
 		if (env != null) {
 			System.setProperty(Constants.ENV_KEY, env);
@@ -49,7 +47,6 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 			e.printStackTrace();
 		}
 
-		LogUtils.enableLogging();
 
 	}
 

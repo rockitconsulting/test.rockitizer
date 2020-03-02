@@ -1,11 +1,12 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.IOException;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -20,31 +21,42 @@ description = "Stores the current contents of the index in a new commit "
 		+ "along with a log message from the user describing the changes.")
 public class RockitizerListTestCases implements Runnable {
 
-	@Parameters(index = "0", arity = "0..1", description = "<TestcaseName>")
+	enum ViewType {
+		yaml, tree
+	};
+
+	
+	@Parameters(index = "0", arity = "1", description = "test case name or all")
 	String testcase;
 	
-	@Option(names = { "-r", "--recursive" }, arity = "0..1", description = "the archive file")
-	boolean recursive;
+	@Option( defaultValue="true", names = { "-r", "--recursive" }, arity = "0..1", description = "recursive true|false")
+	boolean recursive=true;
+
+	@Option(defaultValue = "yaml", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
+	ViewType view = ViewType.yaml;
+
 	
 	@Override
 	public void run() {
 
-		LogUtils.disableLogging();
 
 		
 
 		try {
-			treeTC(this.testcase,this.recursive);
+			if (view == ViewType.tree) {
+				treeTC();
+			} else {
+				System.out.println(FileUtils.readFile(configuration().getFullPath() + configuration().getTchApi().getTestcasesFileName()));
+			}
+			
+			
+			
 		} catch (IOException e) {
-			System.out.println("Error: " + e);
-			e.printStackTrace();
+			System.err.println("Error: " + e);
 		}
-
-		LogUtils.enableLogging();
-
 	}
 	
-	public void treeTC(String testcase, boolean recursive) throws IOException {
+	public void treeTC() throws IOException {
 
 		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
 
@@ -53,24 +65,12 @@ public class RockitizerListTestCases implements Runnable {
 			if (testcase != null && !testcase.contentEquals("all")) {
 				tch1.getTestCases().forEach(tc -> {
 					if (testcase.contentEquals(tc.getTestCaseName())) {
-						System.out.println(tc.getTestCaseName());
-						tc.getTestSteps().forEach(ts -> {
-							System.out.println("	\\_" + ts.getTestStepName());
-							ts.getConnectorRefs().forEach(cr -> {
-								System.out.println("		\\__" + cr.getConRefId());
-							});
-						});
+						printTC(tc);
 					}
 				});
 			} else {
 				tch1.getTestCases().forEach(tc -> {
-					System.out.println(tc.getTestCaseName());
-					tc.getTestSteps().forEach(ts -> {
-						System.out.println("	\\_" + ts.getTestStepName());
-						ts.getConnectorRefs().forEach(cr -> {
-							System.out.println("		\\__" + cr.getConRefId());
-						});
-					});
+					printTC(tc);
 				});
 			}
 		} else {
@@ -80,6 +80,16 @@ public class RockitizerListTestCases implements Runnable {
 				});
 			}
 		}
+	}
+
+	private void printTC(TestCase tc) {
+		System.out.println(tc.getTestCaseName());
+		tc.getTestSteps().forEach(ts -> {
+			System.out.println("	\\_" + ts.getTestStepName());
+			ts.getConnectorRefs().forEach(cr -> {
+				System.out.println("		\\__" + cr.getConRefId());
+			});
+		});
 	}
 
 }
