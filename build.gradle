@@ -4,19 +4,12 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'maven'
-     id 'jacoco'
+    id 'jacoco'
 }
 
 repositories {
     mavenLocal()
-    maven {
-        url = 'http://docker.rockit.local:8481/artifactory/libs-release'
-    }
-
-    maven {
-        url = 'http://docker.rockit.local:8481/artifactory/libs-snapshot'
-    }
-}
+ }
 
 
 jacoco {
