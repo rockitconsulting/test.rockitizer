@@ -16,7 +16,7 @@ sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n",
 synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 optionListHeading = "%n@|bold,underline Options:|@%n",
-header = "(Working) cli list-testcases [<testcaseName> | <all>] [<-r true>]",
+header = "list-testcases [-r[=<recursive>]] [-v[=<view>]] <testcase | all>",
 description = "Stores the current contents of the index in a new commit "
 		+ "along with a log message from the user describing the changes.")
 public class RockitizerListTestCases implements Runnable {
@@ -26,10 +26,10 @@ public class RockitizerListTestCases implements Runnable {
 	};
 
 	
-	@Parameters(index = "0", arity = "1", description = "test case name or all")
+	@Parameters(index = "0", arity = "1", description = "values: testcase or all")
 	String testcase;
 	
-	@Option( defaultValue="true", names = { "-r", "--recursive" }, arity = "0..1", description = "recursive true|false")
+	@Option( defaultValue="true", names = { "-r", "--recursive" }, arity = "0..1", description = "values: true,false")
 	boolean recursive=true;
 
 	@Option(defaultValue = "yaml", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
