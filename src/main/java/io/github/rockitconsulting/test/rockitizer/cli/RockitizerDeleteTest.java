@@ -9,14 +9,14 @@ import java.io.File;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "delete",
+@CommandLine.Command(name = "delete-test",
 	sortOptions = false,
 	headerHeading = "@|bold,underline Benutzung:|@%n%n",
 	synopsisHeading = "%n",
 	descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 	parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 	optionListHeading = "%n@|bold,underline Options:|@%n",
-	header = "cli delete <testcase> [<teststep>] [<connector>]",
+	header = "cli delete-test <testcase> [<teststep>] [<connector>]",
 	description = "Stores the current contents of the index in a new commit " +
 			"along with a log message from the user describing the changes.")
 
