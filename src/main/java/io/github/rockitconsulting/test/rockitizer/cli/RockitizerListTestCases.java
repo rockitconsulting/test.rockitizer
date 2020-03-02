@@ -11,36 +11,24 @@ import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "list-testcases",
-sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n",
-synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n",
-parameterListHeading = "%n@|bold,underline Parameters:|@%n",
-optionListHeading = "%n@|bold,underline Options:|@%n",
-header = "cli list-testcases [<testcaseName> | <all>] [<-r true>]",
-description = "Stores the current contents of the index in a new commit "
-		+ "along with a log message from the user describing the changes.")
+@CommandLine.Command(name = "list-testcases", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-testcases [-r[=<true|false>]] [-v[=<yaml|tree>]] <testcase|all>", description = "Listing testcases from testcases.yaml")
 public class RockitizerListTestCases implements Runnable {
 
 	enum ViewType {
 		yaml, tree
 	};
 
-	
 	@Parameters(index = "0", arity = "1", description = "test case name or all")
 	String testcase;
-	
-	@Option( defaultValue="true", names = { "-r", "--recursive" }, arity = "0..1", description = "recursive true|false")
-	boolean recursive=true;
+
+	@Option(defaultValue = "true", names = { "-r", "--recursive" }, arity = "0..1", description = "recursive true|false")
+	boolean recursive = true;
 
 	@Option(defaultValue = "yaml", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
 	ViewType view = ViewType.yaml;
 
-	
 	@Override
 	public void run() {
-
-
-		
 
 		try {
 			if (view == ViewType.tree) {
@@ -48,14 +36,12 @@ public class RockitizerListTestCases implements Runnable {
 			} else {
 				System.out.println(FileUtils.readFile(configuration().getFullPath() + configuration().getTchApi().getTestcasesFileName()));
 			}
-			
-			
-			
+
 		} catch (IOException e) {
 			System.err.println("Error: " + e);
 		}
 	}
-	
+
 	public void treeTC() throws IOException {
 
 		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();

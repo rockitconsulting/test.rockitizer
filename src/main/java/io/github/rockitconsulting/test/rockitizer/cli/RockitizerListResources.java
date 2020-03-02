@@ -15,7 +15,7 @@ import picocli.CommandLine.Parameters;
 import com.google.common.base.Strings;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "list-resources", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-resources [-v[=<view>]] [<env>]", description = "listing of resources-<env>.yaml")
+@CommandLine.Command(name = "list-resources", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-resources [-v[=<yaml|tree>]] [<env>]", description = "listing of resources-<env>.yaml")
 public class RockitizerListResources extends CommonCLI implements Runnable {
 
 	enum ViewType {

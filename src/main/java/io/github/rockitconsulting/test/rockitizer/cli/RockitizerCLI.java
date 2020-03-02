@@ -26,7 +26,7 @@ public class RockitizerCLI extends CommonCLI implements Runnable {
 
 	public static void main(String[] args) {
 		
-		System.setProperty("picocli.usage.width", "200");
+		System.setProperty("picocli.usage.width", "400");
 		LogUtils.disableLogging();
 		
 		
