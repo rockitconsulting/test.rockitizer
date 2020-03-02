@@ -13,7 +13,7 @@ public class CommonCLI {
 	public static final Logger log = Logger.getLogger(CommonCLI.class.getName());
 	
 	
-	public static final String[] banner = {
+	protected static final String[] banner = {
 		"@|green __________               __   .__  __  .__                      |@", 
         "@|green \\______   \\ ____   ____ |  | _|__|/  |_|__|_______ ___________  |@",
         "@|green  |       _//  _ \\_/ ___\\|  |/ /  \\   __\\  \\___   // __ \\_  __ \\ |@",

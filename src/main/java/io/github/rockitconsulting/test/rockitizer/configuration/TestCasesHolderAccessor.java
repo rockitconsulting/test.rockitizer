@@ -17,7 +17,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class TestCasesHolderAccessor extends RuntimeContext {
 
-	public static Logger log = Logger.getLogger(TestCasesHolderAccessor.class.getName());
+	public static final Logger log = Logger.getLogger(TestCasesHolderAccessor.class.getName());
 
 	private String testcasesFileName = "testcases.yaml";
 
