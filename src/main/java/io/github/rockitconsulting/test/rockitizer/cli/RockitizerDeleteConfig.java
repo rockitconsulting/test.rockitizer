@@ -1,7 +1,9 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
+
+import java.io.File;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -29,10 +31,8 @@ public class RockitizerDeleteConfig implements Runnable {
 	@Override
 	public void run() {
 		
-		LogUtils.disableLogging();
-
-		CommonCLI cli = new CommonCLI();
 		
+	
 		if (environment != null){
 			
 			path = configuration().getFullPath() + configuration + "." + environment + ".yaml";
@@ -43,10 +43,23 @@ public class RockitizerDeleteConfig implements Runnable {
 
 		}
 		
-		cli.deleteConfig(path);
+		deleteConfig(path);
 		
-		LogUtils.enableLogging();
 		
+		
+	}
+	
+	
+
+	public void deleteConfig(String path) {
+
+
+		if (new File(path).delete()) {
+			System.out.println(" Configuration deleted successfully: " + path);
+		} else {
+			System.err.println(" Failed to delete the file: " + path);
+		}
+
 	}
 
 }

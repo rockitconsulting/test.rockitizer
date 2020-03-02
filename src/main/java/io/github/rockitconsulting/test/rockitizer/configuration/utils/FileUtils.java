@@ -64,20 +64,6 @@ public class FileUtils {
 		}
 	}
 
-	public static void deleteFilesRecursive(File f) {
-
-		if (f.exists() && f.isDirectory()) {
-			File[] files = f.listFiles();
-			for (File ff : files) {
-				deleteFilesRecursive(ff);
-			}
-		} else if (f.exists()) {
-			if (!f.delete()) {
-				LOGGER.warn("cannot delete " + f.getAbsolutePath());
-			}
-		}
-	}
-
 	public static String readFile(String path) throws IOException {
 
 		return Joiner.on(System.lineSeparator()).join(Files.readLines(new File(path), Charsets.UTF_8));
