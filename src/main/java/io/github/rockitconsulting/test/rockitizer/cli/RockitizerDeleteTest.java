@@ -1,11 +1,11 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -34,56 +34,24 @@ public class RockitizerDeleteTest implements Runnable {
 	@Override
 	public void run() {
 		
-		LogUtils.disableLogging();
+		
+			String path;
 		
 			if (teststep != null && connector != null) {
-				delete(configuration().getFullPath() + this.testcase + File.separator + this.teststep + File.separator + this.connector);
+				path= configuration().getFullPath() + this.testcase + File.separator + this.teststep + File.separator + this.connector;
+				FileUtils.deleteDirectory( new File (path) );
 			} else if (teststep != null) {
-				delete(configuration().getFullPath() + this.testcase + File.separator + this.teststep);
+				path= configuration().getFullPath() + this.testcase + File.separator + this.teststep;
+				FileUtils.deleteDirectory( new File (path) );
+				
 			} else {
-				delete(configuration().getFullPath() + this.testcase);
-				deleteJunitClass(ConfigUtils.getAbsolutePathToJava() + testcase + ".java");
+				path = configuration().getFullPath() + this.testcase;
+				FileUtils.deleteDirectory( new File (path) );
+				new File(ConfigUtils.getAbsolutePathToJava() + testcase + ".java").delete();
+				
 			}
-
-		LogUtils.enableLogging();
-	}
-
-	
-	private void deleteJunitClass(String path) {
-		File theDir = new File(path);
-		if (theDir.exists()) {
-			theDir.delete();
-			System.out.println("DIR: " + theDir.getName() + " deleted in: " + configuration().getFullPath());
-		} else {
-			System.out.println("DIR: " + theDir.getName() + " does not exist in: " + configuration().getFullPath());
-		}
-		
-	}
-
-
-	public void delete(String path) {
-
-		File theDir = new File(path);
-		if (theDir.exists()) {
-			System.out.println("deleting directory: " + theDir.getName());
-			boolean result = false;
-
-			File[] allContents = theDir.listFiles();
-			if (allContents != null) {
-				for (File file : allContents) {
-					delete(file.getPath());
-				}
-			}
-				result = theDir.delete();
 			
-			if (result) {
-				System.out.println("DIR: " + theDir.getName() + " deleted in: " + configuration().getFullPath());
-			}
-		} else {
-			System.out.println("DIR: " + theDir.getName() + " does not exist in: " + configuration().getFullPath());
-		}
-
+		System.out.println("Deleted: " + path);
+			
 	}
-
-
 }

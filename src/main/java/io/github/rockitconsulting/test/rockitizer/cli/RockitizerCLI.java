@@ -25,8 +25,11 @@ subcommands = { RockitizerRunTest.class, RockitizerListTestCases.class, Rockitiz
 public class RockitizerCLI extends CommonCLI implements Runnable {
 
 	public static void main(String[] args) {
+		
 		System.setProperty("picocli.usage.width", "200");
 		LogUtils.disableLogging();
+		
+		
 		for (String line : banner) {
 			System.out.println(CommandLine.Help.Ansi.AUTO.string(line));
 		}

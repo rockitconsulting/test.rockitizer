@@ -91,6 +91,9 @@ public class RockitizerDeleteTestTest {
 		
 		File tsf = new File(configuration().getFullPath()+File.separator+tc);
 		Assert.assertTrue(tsf.exists());
+
+		
+		Assert.assertEquals( new CommandLine(new RockitizerDeleteTest()).execute(tc), 0);
 		
 	}
 	
