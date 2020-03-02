@@ -9,10 +9,10 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 @CommandLine.Command(name = "create-env", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
 descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", 
-header = "cli create-env <env>", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
+header = "cli create-env [<env>]", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
 public class RockitizerCreateConfig implements Runnable {
 
-	@Parameters(index = "0", description = ": env = dev => generation of resources-dev.yaml and tastcases.yaml")
+	@Parameters(index = "0",arity = "0..1", description = ": env = dev => generation of resources-dev.yaml and tastcases.yaml")
 	String env;
 
 	/*
