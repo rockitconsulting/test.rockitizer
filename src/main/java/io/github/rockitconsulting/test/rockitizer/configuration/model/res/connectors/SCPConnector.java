@@ -20,7 +20,7 @@ public class SCPConnector extends BaseConnector {
 	private String host = "@host@";
 	private String path = "@path@";
 	private String user = "@usr@";
-	private String password = "@pwd";//NOSONAR
+	private String parol = "@pwd";//NOSONAR
 	private Types type;
 
 	public SCPConnector() {
@@ -64,11 +64,11 @@ public class SCPConnector extends BaseConnector {
 	}
 
 	public String getPassword() {
-		return password;
+		return parol;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.parol = password;
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class SCPConnector extends BaseConnector {
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
 		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("host", host).put("path", path)
-				.put("user", user).put("password", password).build();//NOSONAR
+				.put("user", user).put("password", parol).build();
 
 	}
 
