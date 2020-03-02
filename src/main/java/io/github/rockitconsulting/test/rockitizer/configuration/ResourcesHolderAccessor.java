@@ -28,7 +28,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class ResourcesHolderAccessor extends RuntimeContext {
 
-	public static Logger log = Logger.getLogger(ResourcesHolderAccessor.class.getName());
+	public static final Logger log = Logger.getLogger(ResourcesHolderAccessor.class.getName());
 
 	private ResourcesHolder resourcesHolder;
 	

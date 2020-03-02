@@ -29,7 +29,7 @@ public class Configuration {
 		REPLAY, RECORD
 	}
 
-	public static Logger log = Logger.getLogger(Configuration.class.getName());
+	public static final Logger log = Logger.getLogger(Configuration.class.getName());
 
 	private static ResourcesHolderAccessor rhApi;
 	private static TestCasesHolderAccessor tchApi;

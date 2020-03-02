@@ -20,6 +20,7 @@ public class SCPConnector extends BaseConnector {
 	private String host = "@host@";
 	private String path = "@path@";
 	private String user = "@usr@";
+	//NOSONAR
 	private String password = "@pwd";
 	private Types type;
 

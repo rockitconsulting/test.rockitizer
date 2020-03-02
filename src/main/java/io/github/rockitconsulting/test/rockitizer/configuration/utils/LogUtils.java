@@ -6,7 +6,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class LogUtils {
 	
-	public static Logger log = Logger.getLogger(LogUtils.class.getName());
+	public static final Logger log = Logger.getLogger(LogUtils.class.getName());
 	
 	
 	public static void enableLogging () {

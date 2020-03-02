@@ -44,7 +44,6 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 			}
 		} catch (IOException e) {
 			System.out.println("Error: " + e);
-			e.printStackTrace();
 		}
 
 

@@ -13,7 +13,7 @@ public class RockitizerDeleteConfig implements Runnable {
 	@Parameters(index = "0", arity = "0..1", description = ": env = dev => deletion of resources-dev.yaml")
 	public String env;
 
-	public String path;
+	private String path;
 
 	@Override
 	public void run() {
