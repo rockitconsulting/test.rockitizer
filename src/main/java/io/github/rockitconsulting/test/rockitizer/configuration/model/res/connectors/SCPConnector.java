@@ -86,7 +86,7 @@ public class SCPConnector extends BaseConnector {
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
 		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("host", host).put("path", path)
-				.put("user", user).put("password", password).build();
+				.put("user", user).put("password", password).build();//NOSONAR
 
 	}
 

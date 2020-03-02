@@ -17,7 +17,7 @@ import picocli.CommandLine.Parameters;
 	parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 	optionListHeading = "%n@|bold,underline Options:|@%n",
 	header = "cli delete-test <testcase> [<teststep>] [<connector>]",
-	description = "Stores the current contents of the index in a new commit " +
+	description = "Deletes the test objects in the file system " +
 			"along with a log message from the user describing the changes.")
 
 public class RockitizerDeleteTest implements Runnable {
