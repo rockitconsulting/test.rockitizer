@@ -1,6 +1,7 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
@@ -32,10 +33,12 @@ public class RockitizerSync implements Runnable {
 		}
 
 		try {
-			ValidationUtils.syncResources();
+			List<String> messages = ValidationUtils.syncConfig();
+			System.out.println ("testcases.yaml has been sucessfully generated from filesystem ");
+			System.out.println ( ((env!=null)? "resources-"+env+"yaml" : "resources.yaml" ) + " updated with following configuration:");
+			messages.forEach(m -> System.out.println (m));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Sync failed:" + e);
 		}
 		
 	}

@@ -171,19 +171,22 @@ public class ValidationUtils {
 
 	/**
 	 * Sync FS with Resources
+	 * @return 
 	 * 
 	 * @throws IOException
 	 */
-	public static void syncResources() throws IOException {
+	public static List<String> syncConfig() throws IOException {
 		
 
-
+		List<String> messages = new ArrayList<>();
+		
 		 ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
 		 ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
 
 		 rhfs.getDbConnectors().forEach( c -> {
 			 DBConnector match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			 if (match == null) {
+				 messages.add("sync to yaml: "+ c.toString());
 				 rhyaml.addDbConnector(c);
 			 }
 		 });
@@ -191,6 +194,7 @@ public class ValidationUtils {
 		 rhfs.getMqConnectors().forEach( c -> {
 			 MQConnector match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			 if (match == null) {
+				 messages.add("sync to yaml: "+ c.toString());
 				 rhyaml.addMqConnector(c);
 			 }
 		 });
@@ -198,6 +202,7 @@ public class ValidationUtils {
 		 rhfs.getFileConnectors().forEach( c -> {
 			 FileConnector match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			 if (match == null) {
+				 messages.add("sync to yaml: "+ c.toString());
 				 rhyaml.addFileConnector(c);
 			 }
 		 });
@@ -205,6 +210,7 @@ public class ValidationUtils {
 		 rhfs.getHttpConnectors().forEach( c -> {
 			 HTTPConnector match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			 if (match == null) {
+				 messages.add("sync to yaml: "+ c.toString());
 				 rhyaml.addHttpConnector(c);
 			 }
 		 });
@@ -212,6 +218,7 @@ public class ValidationUtils {
 		 rhfs.getScpConnectors().forEach( c -> {
 			 SCPConnector match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			 if (match == null) {
+				 messages.add("sync to yaml: "+ c.toString());
 				 rhyaml.addScpConnector(c);
 			 }
 		 });
@@ -222,6 +229,7 @@ public class ValidationUtils {
 		 configuration().getRhApi().resourcesHolderToYaml(rhyaml);
 		 configuration().reinit();
 		 
+		 return messages;
 
 	}
 

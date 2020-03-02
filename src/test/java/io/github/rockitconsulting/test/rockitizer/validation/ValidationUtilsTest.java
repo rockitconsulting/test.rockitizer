@@ -6,6 +6,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactor
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -123,7 +124,7 @@ public class ValidationUtilsTest {
 
 	
 	@Test
-	public void testSyncResources() throws IOException {
+	public void testSyncConfig() throws IOException {
 		//init
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
 		//prepare for test
@@ -135,7 +136,10 @@ public class ValidationUtilsTest {
 		//re-init
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
 		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==0);
-		ValidationUtils.syncResources();
+		List<String> syncConfig = ValidationUtils.syncConfig();
+		Assert.assertTrue(syncConfig.size()==2);
+		syncConfig.forEach( m ->System.out.println(m) );
+		
 		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==2);
 		
 	}
