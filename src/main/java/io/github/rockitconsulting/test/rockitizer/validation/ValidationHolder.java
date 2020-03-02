@@ -19,7 +19,7 @@ public class ValidationHolder extends HashMap<Context, List<Message>> {
 	 * SINGLETON Holder of Validation Messages with {@link #reset()} function
 	 * 
 	 */
-	public static Logger log = Logger.getLogger(ValidationHolder.class.getName());
+	public static final Logger log = Logger.getLogger(ValidationHolder.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
