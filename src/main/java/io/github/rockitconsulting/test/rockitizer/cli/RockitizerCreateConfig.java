@@ -7,9 +7,9 @@ import picocli.CommandLine.Parameters;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "create-config", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
+@CommandLine.Command(name = "create-env", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
 descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", 
-header = "create-config <env>", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
+header = "cli create-env <env>", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
 public class RockitizerCreateConfig implements Runnable {
 
 	@Parameters(index = "0", description = ": env = dev => generation of resources-dev.yaml and tastcases.yaml")

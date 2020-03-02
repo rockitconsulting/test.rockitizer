@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-
 import picocli.CommandLine;
 
 public class RockitizerListTestcasesTest  extends CommonCLITest {

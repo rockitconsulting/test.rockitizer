@@ -7,24 +7,21 @@ import java.io.File;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "delete-config",
+@CommandLine.Command(name = "delete-env",
 sortOptions = false,
 headerHeading = "@|bold,underline Benutzung:|@%n%n",
 synopsisHeading = "%n",
 descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 optionListHeading = "%n@|bold,underline Options:|@%n",
-header = "(Working)  cli delete-env <env>",
+header = "cli delete-env <env>",
 description = "Stores the current contents of the index in a new commit " +
 		"along with a log message from the user describing the changes.")
 
 public class RockitizerDeleteConfig implements Runnable {
-
-	@Parameters(index = "0", arity = "1", description = ": [resources | testcases]")
-    public String configuration;
 	
-	@Parameters(index = "1", arity = "0..1", description = ": [%env%] - e.g. env = dev => <configuration>-dev.yaml will be deleted")
-    public String environment;
+	@Parameters(index = "0", arity = "0..1", description = ": env = dev => deletion of resources-dev.yaml")
+    public String env;
 	
 	public String path;
 	
@@ -33,13 +30,13 @@ public class RockitizerDeleteConfig implements Runnable {
 		
 		
 	
-		if (environment != null){
+		if (env != null){
 			
-			path = configuration().getFullPath() + configuration + "." + environment + ".yaml";
+			path = configuration().getFullPath() + "resources-" + env + ".yaml";
 			
 		}else{
 
-			path = configuration().getFullPath() + configuration + ".yaml";
+			path = configuration().getFullPath() + "resources.yaml";
 
 		}
 		
