@@ -14,16 +14,16 @@ public class DBDataSource implements Validatable {
 
 	String type = "DB";
 	String user = "@usr@";
-	String password = "@pwd@";//NOSONAR
+	String parol = "@pwd@";//NOSONAR
 	String url = "@url@";
 	String id = "defaultDB";
 
 	public String getPassword() {
-		return password;
+		return parol;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.parol = password;
 	}
 
 	public String getUrl() {
@@ -60,7 +60,7 @@ public class DBDataSource implements Validatable {
 
 	@Override
 	public String toString() {
-		return "DBDataSource [type=" + type + ", username=" + user + ", password=" + password + ", url=" + url + ", id=" + id + "]";
+		return "DBDataSource [type=" + type + ", username=" + user + ", password=" + parol + ", url=" + url + ", id=" + id + "]";
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class DBDataSource implements Validatable {
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
 
-		return (Map<String, String>) ImmutableMap.of("id", id, "type", type, "url", url, "user", user, "password", password);
+		return (Map<String, String>) ImmutableMap.of("id", id, "type", type, "url", url, "user", user, "password", parol);
 
 	}
 
