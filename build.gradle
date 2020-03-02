@@ -4,19 +4,13 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'maven'
-     id 'jacoco'
+    id 'jacoco'
 }
 
 repositories {
     mavenLocal()
-    maven {
-        url = 'http://docker.rockit.local:8481/artifactory/libs-release'
-    }
-
-    maven {
-        url = 'http://docker.rockit.local:8481/artifactory/libs-snapshot'
-    }
-}
+    mavenCentral()
+ }
 
 
 jacoco {
@@ -108,6 +102,6 @@ dependencies {
 
 archivesBaseName='test.rockitizer'
 group = 'io.github.rockitconsulting'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.3-SNAPSHOT'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
