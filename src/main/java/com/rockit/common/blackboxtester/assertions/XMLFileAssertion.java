@@ -152,4 +152,8 @@ public class XMLFileAssertion extends AbstractAssertion {
 		
 	}
 
+	public String getStep() {
+		return step;
+	}
+
 }
