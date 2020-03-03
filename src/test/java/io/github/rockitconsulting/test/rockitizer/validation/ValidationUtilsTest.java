@@ -119,7 +119,7 @@ public class ValidationUtilsTest {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
 		ValidationUtils.validateNotAllowedEmptyStructures();
 		ValidationHolder.validationHolder().logValidationErrors();
-		Assert.assertTrue(ValidationHolder.validationHolder().size() == 3);
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 4);
 	}
 
 	

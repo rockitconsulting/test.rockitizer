@@ -24,8 +24,6 @@ testCases:
     testStepName: 0BEFORE
   - connectorRefs:
     - conRefId: FILEPUT.IN.FILE2MQ
-      payloads:
-      - fileName: testinput.xml
     testStepName: a001FILEPutMessage
   - connectorRefs:
     - conRefId: MQGET.ERROR

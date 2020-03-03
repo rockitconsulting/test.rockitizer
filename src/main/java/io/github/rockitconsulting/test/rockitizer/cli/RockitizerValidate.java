@@ -17,8 +17,8 @@ descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeadi
 optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli validate [-gitfix[=<gitfix>]] [<env>]", description = " Complete validation for the testsuite.")
 public class RockitizerValidate implements Runnable {
 
-	@Option(defaultValue = "true", showDefaultValue=CommandLine.Help.Visibility.ALWAYS, names = { "-gitfix", "--addgitignore" }, arity = "0..1", description = "add .gitignore to all GET connector folders to allow get commit.")
-	boolean gitfix=true;
+	@Option(defaultValue = "false", showDefaultValue=CommandLine.Help.Visibility.ALWAYS, names = { "-gitfix", "--addgitignore" }, arity = "0..1", description = "add .gitignore to all GET connector folders to allow get commit.")
+	boolean gitfix=false;
 
 	@Parameters(index = "0", arity = "0..1", description = ": env = dev => validation with environment dependent resources-dev.yaml")
 	String env;

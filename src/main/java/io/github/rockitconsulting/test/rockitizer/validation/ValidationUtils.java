@@ -120,29 +120,28 @@ public class ValidationUtils {
 							return;
 						}
 
-						FileUtils.listFolders(tstep).forEach(
-								connector -> {
+						FileUtils.listFolders(tstep).forEach(connector -> {
 
-									if (!FileUtils.listFiles(connector).iterator().hasNext()) {
+							if (!FileUtils.listFiles(connector).iterator().hasNext()) {
 
-										try {
-											new File(connector.getAbsolutePath() + File.separator + Constants.GITIGNORE).createNewFile();//NOSONAR
-											validationHolder().add(
-													new Context.Builder().withConnector(connector),
-													new Message(Message.LEVEL.WARN, "Connector is empty. Creating the " + Constants.GITIGNORE
-															+ " file to enforce the github checkin "));
+								try {
+									new File(connector.getAbsolutePath() + File.separator + Constants.GITIGNORE).createNewFile();// NOSONAR
+								validationHolder().add(
+										new Context.Builder().withConnector(connector),
+										new Message(Message.LEVEL.WARN, "Connector is empty. Creating the " + Constants.GITIGNORE
+												+ " file to enforce the github checkin "));
 
-										} catch (Exception e) {
-											validationHolder().add(
-													new Context.Builder().withConnector(connector),
-													new Message(Message.LEVEL.ERROR, "Connector is empty. Creating the " + Constants.GITIGNORE
-															+ " failed with error " + e.getMessage()));
+							} catch (Exception e) {
+								validationHolder().add(
+										new Context.Builder().withConnector(connector),
+										new Message(Message.LEVEL.ERROR, "Connector is empty. Creating the " + Constants.GITIGNORE + " failed with error "
+												+ e.getMessage()));
 
-										}
+							}
 
-									}
+						}
 
-								});
+					}	);
 
 					});
 
@@ -171,65 +170,64 @@ public class ValidationUtils {
 
 	/**
 	 * Sync FS with Resources
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * @throws IOException
 	 */
 	public static List<String> syncConfig() throws IOException {
-		
 
 		List<String> messages = new ArrayList<>();
-		
-		 ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
-		 ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
 
-		 rhfs.getDbConnectors().forEach( c -> {
-			 DBConnector match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			 if (match == null) {
-				 messages.add("sync to yaml: "+ c.toString());
-				 rhyaml.addDbConnector(c);
-			 }
-		 });
-		 
-		 rhfs.getMqConnectors().forEach( c -> {
-			 MQConnector match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			 if (match == null) {
-				 messages.add("sync to yaml: "+ c.toString());
-				 rhyaml.addMqConnector(c);
-			 }
-		 });
-		 
-		 rhfs.getFileConnectors().forEach( c -> {
-			 FileConnector match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			 if (match == null) {
-				 messages.add("sync to yaml: "+ c.toString());
-				 rhyaml.addFileConnector(c);
-			 }
-		 });
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
 
-		 rhfs.getHttpConnectors().forEach( c -> {
-			 HTTPConnector match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			 if (match == null) {
-				 messages.add("sync to yaml: "+ c.toString());
-				 rhyaml.addHttpConnector(c);
-			 }
-		 });
-		 
-		 rhfs.getScpConnectors().forEach( c -> {
-			 SCPConnector match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			 if (match == null) {
-				 messages.add("sync to yaml: "+ c.toString());
-				 rhyaml.addScpConnector(c);
-			 }
-		 });
-		 
-		 
-		 configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
+		rhfs.getDbConnectors().forEach(c -> {
+			DBConnector match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) {
+				messages.add("sync to yaml: " + c.toString());
+				rhyaml.addDbConnector(c);
+			}
+		});
 
-		 configuration().getRhApi().resourcesHolderToYaml(rhyaml);
-		 configuration().reinit();
-		 
-		 return messages;
+		rhfs.getMqConnectors().forEach(c -> {
+			MQConnector match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) {
+				messages.add("sync to yaml: " + c.toString());
+				rhyaml.addMqConnector(c);
+			}
+		});
+
+		rhfs.getFileConnectors().forEach(c -> {
+			FileConnector match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) {
+				messages.add("sync to yaml: " + c.toString());
+				rhyaml.addFileConnector(c);
+			}
+		});
+
+		rhfs.getHttpConnectors().forEach(c -> {
+			HTTPConnector match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) {
+				messages.add("sync to yaml: " + c.toString());
+				rhyaml.addHttpConnector(c);
+			}
+		});
+
+		rhfs.getScpConnectors().forEach(c -> {
+			SCPConnector match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) {
+				messages.add("sync to yaml: " + c.toString());
+				rhyaml.addScpConnector(c);
+			}
+		});
+
+		configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
+
+		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
+		configuration().reinit();
+
+		return messages;
 
 	}
 
@@ -310,10 +308,24 @@ public class ValidationUtils {
 		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
 		TestCasesHolder tch2 = configuration().getTchApi().testCasesHolderFromFileSystem();
 
-		validateNotAllowedEmptyStructures(tch1).forEach(
-				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in " + testcases)));
-		validateNotAllowedEmptyStructures(tch2).forEach(
-				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in FileSystem")));
+		//comparing yaml vs filesystem
+		validateNotAllowedEmptyStructures(tch1).forEach(c -> {
+			if (c.getConnector() != null) {
+				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "PUT connector must have payloads in " + testcases));
+			} else {
+				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in " + testcases));
+			}
+		});
+		//comparing filesystem vs yaml		
+		validateNotAllowedEmptyStructures(tch2).forEach(c -> {
+			if (c.getConnector() != null) {
+				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "PUT connector must have payloads in FileSystem"));
+			} else {
+
+				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in FileSystem"));
+			}
+
+		});
 
 	}
 
@@ -361,24 +373,41 @@ public class ValidationUtils {
 		List<Context> errorContext = new ArrayList<>();
 
 		tch1.getTestCases().forEach(tc1 -> {
-
-			if (tc1.getTestSteps().isEmpty()) {
-				errorContext.add(new Context.Builder().withTestCase(tc1.getTestCaseName()));
-				return;
-
-			}
-
-			tc1.getTestSteps().forEach(ts1 -> {
-
-				if (ts1.getConnectorRefs().isEmpty()) {
-					errorContext.add(new Context.Builder().withTestStep(tc1.getTestCaseName(), ts1.getTestStepName()));
+			// TestCase is empty -> not allowed
+				if (tc1.getTestSteps().isEmpty()) {
+					errorContext.add(new Context.Builder().withTestCase(tc1.getTestCaseName()));
+					return;
 
 				}
 
-			});
+				tc1.getTestSteps().forEach(ts1 -> {
+					// TestStep is empty -> not allowed
+						if (ts1.getConnectorRefs().isEmpty()) {
+							errorContext.add(new Context.Builder().withTestStep(tc1.getTestCaseName(), ts1.getTestStepName()));
+							return;
+						}
 
-		});
+						// Empty Payloads for GET connectors -> not allowed
+						ts1.getConnectorRefs().forEach(c -> {
+							if (!isConnectorPayloadsValid(c)) {
+								errorContext.add(new Context.Builder().withConnector(tc1.getTestCaseName(), ts1.getTestStepName(), c.getConRefId()));
+							}
+						});
+
+					});
+
+			});
 		return errorContext;
+	}
+
+	private static boolean isConnectorPayloadsValid(ConnectorRef c) {
+		String type = ConfigUtils.connectorTypeFromConnectorId(c.getConRefId());
+		if (type.endsWith("PUT") && c.getPayloads().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+
 	}
 
 	/**

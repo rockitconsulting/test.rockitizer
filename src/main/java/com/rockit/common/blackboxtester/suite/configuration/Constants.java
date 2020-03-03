@@ -68,7 +68,6 @@ public final class Constants {
 		SCPPUT("SCPPUT."), SCPGET("SCPGET."),
 		FILEPUT("FILEPUT."),FILEGET("FILEGET."),FILEDEL("FILEDEL."),
 		DBPUT("DBPUT."), DBGET("DBGET."), 
-		HTTPGET("HTTPGET."),
 		HTTP("HTTP.");
 	
 

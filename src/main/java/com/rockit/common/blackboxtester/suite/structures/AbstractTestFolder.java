@@ -43,7 +43,7 @@ public class AbstractTestFolder {
 		this.connectorName = connectorName;
 		this.inFolderName = testName + "/" + testStepName + "/" + connectorName + "/";
 		this.outFolderName = testName + "/" + Constants.OUTPUT_FOLDER + "/" + testStepName + "/" + connectorName + "/";
-		this.connectorType = connectorName.split("\\.")[0] + ".";
+		this.connectorType = ConfigUtils.connectorTypeFromConnectorId(connectorName) + ".";
 
 	}
 
