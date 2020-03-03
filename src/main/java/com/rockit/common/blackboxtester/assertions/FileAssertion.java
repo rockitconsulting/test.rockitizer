@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.exceptions.AssertionException;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class FileAssertion extends AbstractAssertion  {
 
@@ -29,6 +30,11 @@ public class FileAssertion extends AbstractAssertion  {
 			
 			String relativePath = recordFolder.toURI().relativize(recordFile.toURI()).getPath();
 			File replayFile = new File(replayFolder + "/" + relativePath );
+			
+			if(replayFile.getName().equalsIgnoreCase(Constants.GITIGNORE) || recordFile.getName().equalsIgnoreCase(Constants.GITIGNORE) ) {
+				continue;
+			}
+			
 			
 			LOGGER.debug("asserting: source " + recordFile.getAbsolutePath() + " with target "  + replayFile.getAbsolutePath() );
 			
