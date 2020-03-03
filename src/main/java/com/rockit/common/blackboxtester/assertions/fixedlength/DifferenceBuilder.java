@@ -8,7 +8,10 @@ package com.rockit.common.blackboxtester.assertions.fixedlength;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.junit.Assert;
+
+import com.rockit.common.blackboxtester.assertions.FixedLengthFileAssertion;
 
 public class DifferenceBuilder {
 
