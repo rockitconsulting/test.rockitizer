@@ -3,7 +3,6 @@ package com.rockit.common.blackboxtester.connector.impl;
 
 
 import com.rockit.common.blackboxtester.connector.ReadConnector;
-import com.rockit.common.blackboxtester.connector.impl.mq.MQAccessor;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
