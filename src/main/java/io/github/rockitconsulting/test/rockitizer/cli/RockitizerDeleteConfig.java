@@ -35,9 +35,9 @@ public class RockitizerDeleteConfig implements Runnable {
 	public void deleteConfig(String path) {
 
 		if (new File(path).delete()) {
-			System.out.println(" Configuration deleted successfully: " + path);
+			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Configuration deleted successfully: |@" + path));
 		} else {
-			System.err.println(" Failed to delete the file: " + path);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Failed to delete the file: |@" + path));
 		}
 
 	}

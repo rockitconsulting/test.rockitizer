@@ -48,10 +48,10 @@ public class RockitizerDeleteTest implements Runnable {
 				path = configuration().getFullPath() + this.testcase;
 				FileUtils.deleteDirectory( new File (path) );
 				new File(ConfigUtils.getAbsolutePathToJava() + testcase + ".java").delete();//NOSONAR
-				
+				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully Deleted: |@" + ConfigUtils.getAbsolutePathToJava() + testcase + ".java"));
 			}
 			
-		System.out.println("Deleted: " + path);
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully Deleted: |@" + path));
 			
 	}
 }

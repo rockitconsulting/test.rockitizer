@@ -43,7 +43,7 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 				System.out.println(FileUtils.readFile(configuration().getFullPath() + configuration().getRhApi().getResourcesFileName()));
 			}
 		} catch (IOException e) {
-			System.out.println("Error: " + e);
+			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Error: |@" + e));
 		}
 
 
@@ -53,18 +53,19 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
 
-		printPrintableResource(rhyaml.getMqConnectors(), "mqConnectors");
-		printPrintableResource(rhyaml.getFileConnectors(), "fileConnectors");
-		printPrintableResource(rhyaml.getDbConnectors(), "dbConnectors");
-		printPrintableResource(rhyaml.getScpConnectors(), "scpConnectors");
-		printPrintableResource(rhyaml.getMqDataSources(), "mqDataSourcres");
-		printPrintableResource(rhyaml.getDbDataSources(), "dbDataSourcres");
-		printPrintableResource(rhyaml.getKeyStores(), "KeyStores");
+		printPrintableResource(rhyaml.getMqConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow mqConnectors |@"));
+		printPrintableResource(rhyaml.getFileConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow fileConnectors |@"));
+		printPrintableResource(rhyaml.getDbConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow dbConnectors |@"));
+		printPrintableResource(rhyaml.getScpConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow scpConnectors |@"));
+		printPrintableResource(rhyaml.getMqDataSources(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow mqDataSourcres |@"));
+		printPrintableResource(rhyaml.getDbDataSources(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow dbDataSourcres |@"));
+		printPrintableResource(rhyaml.getKeyStores(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow KeyStores |@"));
 
 	}
 
 	private void printPrintableResource(List<? extends Validatable> resources, String root) {
-		String rootPrefix = Strings.padStart("\\_", 15, ' ');
+		String rootPx = CommandLine.Help.Ansi.AUTO.string("@|bold,yellow \\_|@");
+		String rootPrefix = "             " + rootPx;
 		String linePrefix = Strings.padStart("", 15, ' ');
 
 		if (resources.size() > 0) {

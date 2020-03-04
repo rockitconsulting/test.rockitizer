@@ -50,12 +50,12 @@ public class RockitizerValidate implements Runnable {
 				System.err.println("Result: Not valid with validation messages:");
 				ValidationHolder.validationHolder().forEach((k, v) -> System.err.println(k + " - " + Joiner.on(";").join(v)));
 			} else {
-				System.out.println("Validation successfull. Please commit the changes if nescessary.");
+				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + " Validation successfull. Please commit the changes if nescessary."));
 
 			}
 
 		} catch (IOException e) {
-			System.err.println("Validation error:" + e);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Validation error: |@" + e));
 		}
 	}
 

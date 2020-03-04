@@ -35,11 +35,11 @@ public class RockitizerCreateConfig implements Runnable {
 			String testcasesFile = configuration().getFullPath() + configuration().getTchApi().getTestcasesFileName();
 
 			System.out.println(" Result: ");
-			System.out.println("@|bold,green Success:|@" + " generated new " + testcasesFile + " for environemnt " + env);
-			System.out.println("@|bold,green Success:|@" + " generated new " + resourcesFile + " for environemnt " + env);
+			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Success:|@" + " generated new " + testcasesFile + " for environemnt " + env));
+			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Success:|@" + " generated new " + resourcesFile + " for environemnt " + env));
 
 		} catch (Throwable thr) {
-			System.err.println("@|bold,red Error: |@" + thr.getMessage());
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Error: |@" + thr.getMessage()));
 		}
 
 		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);

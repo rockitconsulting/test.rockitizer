@@ -32,7 +32,7 @@ public class RockitizerListTestCases implements Runnable {
 			}
 
 		} catch (IOException e) {
-			System.err.println("Error: " + e);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Error: |@" + e));
 		}
 	}
 
@@ -46,11 +46,11 @@ public class RockitizerListTestCases implements Runnable {
 	}
 
 	private void printTC(TestCase tc) {
-		System.out.println(tc.getTestCaseName());
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,yellow " + tc.getTestCaseName() + "|@"));
 		tc.getTestSteps().forEach(ts -> {
-			System.out.println("	\\_" + ts.getTestStepName());
+			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,yellow  	\\_|@" + ts.getTestStepName()));
 			ts.getConnectorRefs().forEach(cr -> {
-				System.out.println("		\\__" + cr.getConRefId());
+				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,yellow 		\\__|@" + cr.getConRefId()));
 			});
 		});
 	}

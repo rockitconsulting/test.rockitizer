@@ -73,16 +73,16 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 		int sumErrors = results.stream().mapToInt(Result::getFailureCount).sum();
 		int sumRuns = results.stream().mapToInt(Result::getRunCount).sum();
 
-		System.out.println("Result: " + (sumErrors > 0 ? "NOK" : "OK"));
-		System.out.println("Total runs " + sumRuns);
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold Result: |@") + (sumErrors > 0 ? CommandLine.Help.Ansi.AUTO.string("@|bold,red NOK|@") : CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@")));
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold Total runs |@" + sumRuns));
 		if (sumErrors > 0) {
-			System.err.println("Total errors " + sumErrors);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Total errors |@" + sumErrors));
 		}
 
 	}
 
 	private void registerJunitError(List<Result> results, Throwable thr) {
-		System.err.println("Error: " + thr.getClass().getSimpleName() + " " + thr.getMessage());
+		System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Error: |@" + thr.getClass().getSimpleName() + " " + thr.getMessage()));
 		Result result = new Result();
 		result.getFailures().add(new Failure(null, thr));
 		results.add(result);

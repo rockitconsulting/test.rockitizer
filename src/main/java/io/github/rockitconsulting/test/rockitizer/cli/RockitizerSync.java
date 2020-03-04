@@ -24,7 +24,7 @@ public class RockitizerSync implements Runnable {
 
 		try {
 			List<String> messages = ValidationUtils.syncConfig();
-			System.out.println("testcases.yaml has been sucessfully generated from filesystem ");
+			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + "testcases.yaml has been sucessfully generated from filesystem "));
 
 			if (messages.isEmpty()) {
 				System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " was up-to-date, no additions.");
@@ -34,7 +34,7 @@ public class RockitizerSync implements Runnable {
 				messages.forEach(m -> System.out.println(m));
 			}
 		} catch (IOException e) {
-			System.err.println("Sync failed:" + e);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Sync failed: |@" + e));
 		}
 
 	}
