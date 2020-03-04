@@ -18,49 +18,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
-	
-	mqConnectors:
-	    - id: MQGET.ERROR
-	      queueName: 'MQ.ERROR'
-	      type: MQGET
-	      dsRefId: defaultMQ
-	dbConnectors:
-	    - id: DBGET.GETBOOKS
-	      type: DBGET
-	      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
-	      dsRefId: defaultDB
-	httpConnectors:
-	    - id: HTTP.JADDBOOK
-	      url: 'http://scharrdev01:7080/JSONBookService'
-	      type: HTTP
-	      method: 'POST'
-	      timeout: 500000
-	      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
-	      contentType: 'application/json'
-	fileConnectors:
-	    - id: FILEDEL.OUT.FILE2FILE
-	      type: FILEDEL
-	      path: 'C:/temp/FILE2FILE_OUT'
-	    - id: FILEPUT.IN.FILE2MQ
-	      type: FILEPUT
-	      path: 'C:/temp/FILE2MQ_IN'
-	mqDataSources:
-	- id: defaultMQ
-	  name: QM1
-	  type: MQ
-	  port: 1414
-	  host: localhost
-	  channel: 'SYSTEM.BKR.CONFIG'
-	  username: 'admin'
-	  password: 'admin'
-	dbDataSources:
-	- id: defaultDB
-	  url: 'jdbc:db2://localhost:50000/ROCKIT'
-	  type: DB
-	  username: 'admin'
-	  password: 'admin'
- *
- */
+*  Test.Rockitizer - API regression testing framework 
+*   Copyright (C) 2020  rockit.consulting GmbH
+*
+*   This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see http://www.gnu.org/licenses/.
+*
+*/
+
 public class ResourcesHolder  {
 	
 	private Map<String, String> payloadReplacer = new HashMap<>();
