@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
@@ -36,7 +37,6 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 	 */
 	@Override
 	public void run() {
-
 		List<Result> results = new ArrayList<>();
 
 		try {
@@ -56,8 +56,7 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 							results.add(run(Class.forName(test.getName().replace(".java", ""))));
 							System.out.println();
 						} catch (Exception e) {
-							System.err.println(" Error: " + e.getMessage());
-
+							registerJunitError(results, e);
 						}
 
 					});
@@ -68,7 +67,7 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 			}
 
 		} catch (Throwable thr) {
-			System.err.println(" Error: " + thr.getMessage());
+			registerJunitError(results, thr);
 		}
 
 		int sumErrors = results.stream().mapToInt(Result::getFailureCount).sum();
@@ -80,6 +79,13 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 			System.err.println("Total errors " + sumErrors);
 		}
 
+	}
+
+	private void registerJunitError(List<Result> results, Throwable thr) {
+		System.err.println("Error: " + thr.getClass().getSimpleName() + " " + thr.getMessage());
+		Result result = new Result();
+		result.getFailures().add(new Failure(null, thr));
+		results.add(result);
 	}
 
 }

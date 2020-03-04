@@ -1,13 +1,14 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-
 import picocli.CommandLine;
+
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class RockitizerRunTestTest  extends CommonCLITest {
 
@@ -34,4 +35,19 @@ public class RockitizerRunTestTest  extends CommonCLITest {
 		
 
 	}
+	
+	@Test
+	public void testRunAllWithTestContext() {
+		Configuration.configuration().reinit();
+		Assert.assertEquals(new CommandLine(new RockitizerRunTest()).execute("com.rockit.common.blackboxtester.util.FileUtilsTest"), 0);
+	}
+
+	
+	@Test
+	public void testRunNotFoundJUnit() {
+		Configuration.configuration().reinit();
+		Assert.assertEquals(new CommandLine(new RockitizerRunTest()).execute("FileUtilsTest"), 0);
+	}
+	
+	
 }

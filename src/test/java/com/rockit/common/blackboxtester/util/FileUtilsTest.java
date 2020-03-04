@@ -27,6 +27,7 @@ public class FileUtilsTest {
 		for (File file : listFolders) {
 			assertTrue(file.getName(), connectorFolders.contains(file.getName()));
 		}
+		LOGGER.info("FileUtilsTest.testListFolders- OK");	
 	}
 	
 	@Test
@@ -37,5 +38,6 @@ public class FileUtilsTest {
 		for (File file : listFiles) {
 			assertTrue(file.getName(), connectorFiles.contains(file.getName()));
 		}
+		LOGGER.info("FileUtilsTest.testListFiles- OK");
 	}
 }
