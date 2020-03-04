@@ -1,3 +1,10 @@
+# 1.0.4 Release
+	- cli starter auto generation added
+	- cli developed
+	- json assertion 
+	- fixlength assertion
+	- GPL v3.0 License
+	
 # 1.0.0 Release
  	 - gradle with maven central release
 	-  yaml configuration
