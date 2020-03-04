@@ -29,7 +29,6 @@ public class RockitizerCreateTest implements Runnable {
 	@Override
 	public void run() {
 		
-		
 		try {
 			if (teststep != null && connector != null) {
 				createConnector();
@@ -40,31 +39,29 @@ public class RockitizerCreateTest implements Runnable {
 			}
 
 		} catch (IOException e) {
-			System.err.println("Error occured: " + e);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Error occured: |@" + e));
 		}
-	
-
 	}
 
 	void createTestCase() throws IOException {
 		String path = configuration().getFullPath() + this.testcase; 
 		new File(path).mkdirs();
 		createJunitClass();
-		System.out.println("Successfully created: " + path);
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully created: |@" + path));
 
 	}
 
 	 void createTesStep() throws IOException {
 		String path = configuration().getFullPath() + this.testcase + File.separator + this.teststep;
 		new File(path).mkdirs();
-		System.out.println("Successfully created: " + path);
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully created: |@" + path));
 
 	}
 
 	void createConnector() throws IOException {
 		String path = configuration().getFullPath() + this.testcase + File.separator + this.teststep + File.separator + this.connector;
 		new File(path).mkdirs();
-		System.out.println("Successfully created: " + path);
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully created: |@" + path));
 
 	}
 
@@ -93,9 +90,9 @@ public class RockitizerCreateTest implements Runnable {
 			myWriter.write("}" + System.lineSeparator());
 			myWriter.close();
 		} catch (IOException e) {
-			System.err.println("Failed by generation: " + e);
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Failed by generation: |@" + e));
 		}
-		System.out.println("JUnit template created: " + path);
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully JUnit template created: |@" + path));
 
 	}
 

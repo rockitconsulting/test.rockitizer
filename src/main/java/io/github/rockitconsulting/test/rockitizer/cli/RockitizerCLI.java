@@ -11,19 +11,25 @@ import picocli.CommandLine.Spec;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@Command(name = Constants.CLI_COMMAND, usageHelpAutoWidth = true, mixinStandardHelpOptions = true, version = "rockitizer 1.0", commandListHeading = "%nCommands:%n%nThe most commonly used rockitizer commands are:%n", footer = "%nSee '"
-		+ Constants.CLI_COMMAND + " help <command>' to read about a specific subcommand or concept.%n ",
-// + "%n Triggered command chains:"
-// + "%n create-test       = create-test + sync "
-// + "%n delete-test       = delete-test + sync "
-// + "%n create-config     = create-env  + validate "
-// + "%n run 	           = validate    + run "
-// + "%n list-resources    = sync        + list-resources  "
-// + "%n list-testcases    = sync        + list-testcases "
-// + "%n validate          = sync        + validate ",
+@Command(name = Constants.CLI_COMMAND,
+usageHelpAutoWidth = true, mixinStandardHelpOptions = true,
+version = "rockitizer 1.0",
+commandListHeading = "%nCommands:%n%nThe most commonly used rockitizer commands are:%n",
+footer = "%nSee '" + Constants.CLI_COMMAND + " help <command>' to read about a specific subcommand or concept.%n ",
 
-subcommands = { RockitizerRunTest.class, RockitizerListTestCases.class, RockitizerListResources.class, RockitizerCreateTest.class, RockitizerDeleteTest.class,
-		RockitizerCreateConfig.class, RockitizerDeleteConfig.class, RockitizerSync.class, RockitizerValidate.class, CommandLine.HelpCommand.class })
+subcommands = {
+		RockitizerRunTest.class,
+		RockitizerListTestCases.class,
+		RockitizerListResources.class,
+		RockitizerCreateTest.class,
+		RockitizerDeleteTest.class,
+		RockitizerCreateConfig.class,
+		RockitizerDeleteConfig.class,
+		RockitizerSync.class,
+		RockitizerValidate.class,
+		CommandLine.HelpCommand.class
+		})
+
 public class RockitizerCLI extends CommonCLI implements Runnable {
 
 	public static void main(String[] args) {
