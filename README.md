@@ -145,10 +145,21 @@ Known issues
 	Solution:
 		Java 1.8 recommended. Use the code compatibility option to Java 1.7 for all IIB versions prior 10.0.0.12
 
+Authors
+----
+
+test.rockitizer was created by `Yefym Dmukh <https://github.com/yefymdmukh>`.
+
+
+`test.rockitizer`_ is sponsored by `rockit.consulting GmbH
+<https://www.rockit.consulting>`_
+
 License
 ----
 
-MIT
+GNU General Public License v3.0 or later
+
+See `LICENSE <LICENSE>`_ to see the full text.
 
 Publications
 ----
