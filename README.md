@@ -148,18 +148,18 @@ Known issues
 Authors
 ----
 
-test.rockitizer was created by `Yefym Dmukh <https://github.com/yefymdmukh>`.
+`test.rockitizer` was created by [`Yefym Dmukh`](https://github.com/yefymdmukh).
 
 
-`test.rockitizer`_ is sponsored by `rockit.consulting GmbH
-<https://www.rockit.consulting>`_
+`test.rockitizer` is sponsored by [`rockit.consulting GmbH`](https://www.rockit.consulting)
 
 License
 ----
 
 GNU General Public License v3.0 or later
 
-See `LICENSE <LICENSE>`_ to see the full text.
+See [LICENSE](LICENSE.md) to see the full text.
+
 
 Publications
 ----
