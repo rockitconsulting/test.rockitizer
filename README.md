@@ -1,7 +1,7 @@
 # test.rockitizer - keep your integration tested!
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
-<span style=“color:blue;”> Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.</span>
+<span style=“#f1f8ff”> Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.</span>
 
 ![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
