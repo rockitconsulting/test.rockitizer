@@ -9,23 +9,17 @@ import java.io.IOException;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "list-testcases", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-testcases [-r[=<true|false>]] [-v[=<yaml|tree>]] <testcase|all>", description = "Listing testcases from testcases.yaml")
+@CommandLine.Command(name = "list-testcases", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-testcases [-v[=<yaml|tree>]]", description = "Listing testcases from testcases.yaml")
 public class RockitizerListTestCases implements Runnable {
 
 	enum ViewType {
 		yaml, tree
 	};
 
-	@Parameters(index = "0", arity = "1", description = "test case name or all")
-	String testcase;
 
-	@Option(defaultValue = "true", names = { "-r", "--recursive" }, arity = "0..1", description = "recursive true|false")
-	boolean recursive = true;
-
-	@Option(defaultValue = "yaml", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
-	ViewType view = ViewType.yaml;
+	@Option(defaultValue = "tree", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
+	ViewType view = ViewType.tree;
 
 	@Override
 	public void run() {
@@ -46,26 +40,9 @@ public class RockitizerListTestCases implements Runnable {
 
 		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
 
-		if (recursive) {
-			System.out.println(testcase);
-			if (testcase != null && !testcase.contentEquals("all")) {
-				tch1.getTestCases().forEach(tc -> {
-					if (testcase.contentEquals(tc.getTestCaseName())) {
-						printTC(tc);
-					}
-				});
-			} else {
-				tch1.getTestCases().forEach(tc -> {
-					printTC(tc);
-				});
-			}
-		} else {
-			if (testcase.contentEquals("all")) {
-				tch1.getTestCases().forEach(tc -> {
-					System.out.println(tc.getTestCaseName());
-				});
-			}
-		}
+		tch1.getTestCases().forEach(tc -> {
+			printTC(tc);
+		});
 	}
 
 	private void printTC(TestCase tc) {

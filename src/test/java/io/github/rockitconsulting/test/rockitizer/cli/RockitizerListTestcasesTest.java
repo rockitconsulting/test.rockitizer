@@ -27,28 +27,28 @@ public class RockitizerListTestcasesTest  extends CommonCLITest {
 	@Test
 	public void testYamlDefault() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
-		Assert.assertEquals(new CommandLine( new RockitizerListTestCases() ).execute("all"), 0);
+		Assert.assertEquals(new CommandLine( new RockitizerListTestCases() ).execute(), 0);
 	
 	}
 
 	@Test
 	public void testAllTestcasesTree() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
-		Assert.assertEquals( new CommandLine(new RockitizerListTestCases()).execute("all","-v","tree" ), 0);
+		Assert.assertEquals( new CommandLine(new RockitizerListTestCases()).execute("-v","tree" ), 0);
 
 	}
 
 	@Test
 	public void testTestCaseTree() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
-		Assert.assertEquals( new CommandLine(new RockitizerListTestCases()).execute("FILEinFILEOutTest","-v","tree" ), 0);
+		Assert.assertEquals( new CommandLine(new RockitizerListTestCases()).execute("-v","tree" ), 0);
 
 	}
 	
 	@Test
 	public void testTestCaseTreeRecursive() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
-		Assert.assertEquals( new CommandLine(new RockitizerListTestCases()).execute("FILEinFILEOutTest","-v","tree","-r" ), 0);
+		Assert.assertEquals( new CommandLine(new RockitizerListTestCases()).execute("-v","tree" ), 0);
 
 	}
 	

@@ -22,11 +22,11 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 		yaml, tree
 	};
 
-	@Parameters(index = "0", arity = "0..1", description = " current environment")
+	@Parameters(index = "0", arity = "0..1", description = " current env, e.g. devp ")
 	String env;
 
-	@Option(defaultValue = "yaml", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
-	ViewType view = ViewType.yaml;
+	@Option(defaultValue = "tree", names = { "-v", "--view" }, arity = "0..1", description = "type of view: ${COMPLETION-CANDIDATES}")
+	ViewType view = ViewType.tree;
 
 	@Override
 	public void run() {
