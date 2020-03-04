@@ -27,7 +27,7 @@ subcommands = { RockitizerRunTest.class, RockitizerListTestCases.class, Rockitiz
 public class RockitizerCLI extends CommonCLI implements Runnable {
 
 	public static void main(String[] args) {
-		System.setProperty("picocli.usage.width", "AUTO");
+		System.setProperty("picocli.usage.width", "400");
 		LogUtils.disableLogging();
 		AnsiConsole.systemInstall(); 
 		for (String line : banner) {
@@ -35,6 +35,7 @@ public class RockitizerCLI extends CommonCLI implements Runnable {
 		}
 		;
 		int execute = new CommandLine(new RockitizerCLI()).setColorScheme( CommandLine.Help.defaultColorScheme(Ansi.ON ) ).execute(args);
+
 		
 		LogUtils.enableLogging();
 		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
