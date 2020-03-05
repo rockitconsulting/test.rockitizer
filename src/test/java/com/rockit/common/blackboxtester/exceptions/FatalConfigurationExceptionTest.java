@@ -23,20 +23,21 @@ import org.junit.Test;
 *
 */
 
-public class ConnectorExceptionTest {
+public class FatalConfigurationExceptionTest {
 
-	@Test
-	public void testConnectorExceptionException() {
-		ConnectorException ce = new ConnectorException( new Exception("test"));
-		assertEquals("test", ce.getCause().getMessage());
 		
-	}
+		@Test
+		public void testFatalConfigurationExceptionException() {
+			FatalConfigurationException ce = new FatalConfigurationException( new Exception("test"));
+			assertEquals("test", ce.getCause().getMessage());
+			
+		}
 
-	@Test
-	public void testConnectorExceptionString() {
-		ConnectorException ce = new ConnectorException( "test");
-		assertEquals("test", ce.getMessage());
+		@Test
+		public void testFatalConfigurationExceptionString() {
+			FatalConfigurationException ce = new FatalConfigurationException( "test");
+			assertEquals("test", ce.getMessage());
 
-	}
-
+		}
+		
 }

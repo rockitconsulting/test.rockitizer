@@ -25,12 +25,10 @@ public class FatalConfigurationException extends RuntimeException {
 
 	public FatalConfigurationException(Exception e) {
 		super(e);
-		throw this;
 	}
 
 	public FatalConfigurationException(String msg) {
 		super(msg);
-		throw this;
 	}
 	
 	

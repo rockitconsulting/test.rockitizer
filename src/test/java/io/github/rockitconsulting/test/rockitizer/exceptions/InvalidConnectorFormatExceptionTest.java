@@ -1,4 +1,4 @@
-package com.rockit.common.blackboxtester.exceptions;
+package io.github.rockitconsulting.test.rockitizer.exceptions;
 
 import static org.junit.Assert.*;
 
@@ -23,20 +23,14 @@ import org.junit.Test;
 *
 */
 
-public class ConnectorExceptionTest {
+public class InvalidConnectorFormatExceptionTest {
 
 	@Test
-	public void testConnectorExceptionException() {
-		ConnectorException ce = new ConnectorException( new Exception("test"));
-		assertEquals("test", ce.getCause().getMessage());
+	public void testInvalidConnectorFormatExceptionString() {
 		
-	}
-
-	@Test
-	public void testConnectorExceptionString() {
-		ConnectorException ce = new ConnectorException( "test");
-		assertEquals("test", ce.getMessage());
-
+		InvalidConnectorFormatException ce = new InvalidConnectorFormatException( "test");
+		assertEquals("Invalid connector format: test. Following naming convention for the folders shall be followed:  HTTP.<id>, FILEDEL.<id>, FILEPUT.<id>, FILEGET.<id>, MQGET.<id>, MQPUT.<id>, DBPUT.<id>, DBGET.<id>, SCPPUT.<id> ", ce.getMessage());
+		
 	}
 
 }

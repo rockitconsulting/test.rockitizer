@@ -1,4 +1,4 @@
-package com.rockit.common.blackboxtester.exceptions;
+package io.github.rockitconsulting.test.rockitizer.exceptions;
 
 import static org.junit.Assert.*;
 
@@ -23,20 +23,12 @@ import org.junit.Test;
 *
 */
 
-public class ConnectorExceptionTest {
+public class ResourceNotFoundExceptionTest {
 
 	@Test
-	public void testConnectorExceptionException() {
-		ConnectorException ce = new ConnectorException( new Exception("test"));
-		assertEquals("test", ce.getCause().getMessage());
-		
-	}
-
-	@Test
-	public void testConnectorExceptionString() {
-		ConnectorException ce = new ConnectorException( "test");
-		assertEquals("test", ce.getMessage());
-
+	public void testResourceNotFoundExceptionString() {
+		ResourceNotFoundException ce = new ResourceNotFoundException( "test");
+		assertEquals(" Connector/DataSource configuration not found for id : test", ce.getMessage());
 	}
 
 }
