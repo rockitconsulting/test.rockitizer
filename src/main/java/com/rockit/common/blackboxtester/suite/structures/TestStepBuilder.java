@@ -45,7 +45,7 @@ public class TestStepBuilder extends AbstractTestFolder {
 			}
 		} catch (final Exception ex) {
 			TestProtocol.writeFatal(ex);
-			System.exit(1);
+			throw ex; //re-throw
 		}
 		return this;
 	}

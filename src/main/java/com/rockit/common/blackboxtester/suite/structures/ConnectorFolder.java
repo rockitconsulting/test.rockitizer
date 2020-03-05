@@ -70,6 +70,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 	}
 
 	private void handleReadConnector(Connector connector) {
+		TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 		connector.proceed();
 		if (connector instanceof ReadConnector) {
 			saveResponse(connector, "0.txt");
@@ -83,6 +84,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 			connector.proceed();
 
 			if (connector instanceof ReadConnector) {
+				TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 				saveResponse( connector, input.getName() );
 			}
 		}
@@ -91,13 +93,12 @@ public class ConnectorFolder extends AbstractTestFolder {
 	private void handleMQGetConnector(Connector connector) {
 		int idx = 0;
 		do {
-
+			TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 			connector.proceed();
 			String response = ((ReadConnector) connector).getResponse();
 
 			if (null != response) {
 				try {
-					TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 					Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + idx + ".txt"));
 				} catch (IOException e) {
 					throw new GenericException("can not write output file " + idx, e);
@@ -113,7 +114,6 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 		if (null != response) {
 			try {
-				TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 				Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + fileName));
 			} catch (IOException e) {
 				throw new GenericException("can not write output file " + fileName,e);
