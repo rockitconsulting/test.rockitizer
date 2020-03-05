@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -35,7 +34,6 @@ import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 */
 
 public class TestBuilder extends AbstractTestFolder {
-	public static final Logger LOGGER = Logger.getLogger(TestBuilder.class.getName());
 	private List<Assertions> assertions = Lists.newArrayList();
 
 	public TestBuilder(Class<?> clazz) {
@@ -68,7 +66,7 @@ public class TestBuilder extends AbstractTestFolder {
 			assertion.proceed();
 		}
 
-		LOGGER.info(" Number of assertions processed successfully: " + assertions.size() + " [\n\t" + Joiner.on(",\n\t").join(assertions) + "\n      ]");
+		TestProtocol.write(" Number of assertions processed successfully: " + assertions.size() + " [\n\t" + Joiner.on(",\n\t").join(assertions) + "\n      ]");
 	}
 
 	public void deleteOutputFolder() throws IOException {
@@ -121,12 +119,10 @@ public class TestBuilder extends AbstractTestFolder {
 			FileUtils.copyDirectory(new File(getRecordFolder() + "/" + stepName), new File(getReplayFolder() + "/" + "/" + stepName));
 
 		} catch (IOException e) {
-
-			LOGGER.error("Can not make copy of " + getRecordFolder() + "/" + stepName + " to replay target " + getReplayFolder() + "/" + stepName);
-			throw new GenericException(e);
+			throw new GenericException("Can not make copy of " + getRecordFolder() + "/" + stepName + " to replay target " + getReplayFolder() + "/" + stepName, e);
 		}
 
-		LOGGER.info(getTestStepName() + "\t Copying " + Constants.RECORD_PATH + getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH
+		TestProtocol.write(getTestStepName() + "\t Copying " + Constants.RECORD_PATH + getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH
 				+ getTestName() + "/" + getTestStepName());
 	}
 

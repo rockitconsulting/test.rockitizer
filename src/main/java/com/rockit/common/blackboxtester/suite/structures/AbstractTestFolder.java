@@ -126,7 +126,7 @@ public class AbstractTestFolder {
 		}
 		if (!file.isDirectory()) {
 			LOGGER.error("Folders only allowed");
-			throw new GenericException(new RuntimeException("Folders only allowed"));
+			throw new GenericException(new RuntimeException("File found, but folders only allowed:" + path));
 		}
 
 		return file;

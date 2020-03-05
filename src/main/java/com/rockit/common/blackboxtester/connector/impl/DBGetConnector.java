@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 
 import com.google.common.base.Strings;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
+import com.rockit.common.blackboxtester.connector.impl.db.DatabaseConnection;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
-import com.rockit.common.blackboxtester.util.DatabaseConnection;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
