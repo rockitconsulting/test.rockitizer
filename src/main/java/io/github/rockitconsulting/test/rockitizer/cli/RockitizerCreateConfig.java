@@ -1,7 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
@@ -63,7 +62,6 @@ public class RockitizerCreateConfig implements Runnable {
 		}
 
 		System.clearProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY);
-		LogUtils.enableLogging();
 	}
 
 }

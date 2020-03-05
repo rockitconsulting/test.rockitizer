@@ -67,6 +67,7 @@ public abstract class AbstractTestWrapper {
 	}
 
 	public TestBuilder newTestBuilderFor(Class<? extends AbstractTestWrapper> clazz) {
+		configuration();
 		testBuilder = new TestBuilder(clazz);
 		return testBuilder;
 	}
