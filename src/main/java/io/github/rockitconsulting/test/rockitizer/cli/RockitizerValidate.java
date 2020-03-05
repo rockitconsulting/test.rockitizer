@@ -67,7 +67,7 @@ public class RockitizerValidate implements Runnable {
 			ValidationUtils.validateSyncJavaAndTestCases();
 
 			if (ValidationHolder.validationHolder().size() > 0) {
-				System.err.println("Result: Not valid with validation messages:");
+				System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold Result: |@") + CommandLine.Help.Ansi.AUTO.string("@|bold,red NOK |@")+ "Not valid with validation messages:");
 				ValidationHolder.validationHolder().forEach((k, v) -> System.err.println(k + " - " + Joiner.on(";").join(v)));
 			} else {
 				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + " Validation successfull. Please commit the changes if nescessary."));
