@@ -5,8 +5,6 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.rockit.common.blackboxtester.connector.settings.Settings;
@@ -33,7 +31,6 @@ import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 */
 
 public class TestStepBuilder extends AbstractTestFolder {
-	public static final Logger LOGGER = Logger.getLogger(TestStepBuilder.class.getName());
 	private Iterable<ConnectorFolder> connectorFolders;
 
 	public TestStepBuilder(final String testName, String testStepName) {
@@ -76,11 +73,11 @@ public class TestStepBuilder extends AbstractTestFolder {
 	}
 
 	public TestStepBuilder sleep(final int ms) {
-		LOGGER.info(" Waiting " + ms + "ms" + " for results");
+		TestProtocol.write(" Waiting " + ms + "ms" + " for results");
 		try {
 			Thread.sleep(ms);
 		} catch (final InterruptedException e) {
-			LOGGER.error("thread is interrupted " + Thread.currentThread().getName(), e);
+			TestProtocol.writeError("thread is interrupted " + Thread.currentThread().getName(), e);
 			Thread.currentThread().interrupt();
 		}
 		return this;

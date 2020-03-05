@@ -8,13 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.Connector;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
+import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 
 /**
@@ -37,7 +36,6 @@ import com.rockit.common.blackboxtester.exceptions.GenericException;
 */
 
 public class ConnectorFolder extends AbstractTestFolder {
-	public static final Logger LOGGER = Logger.getLogger(ConnectorFolder.class.getName());
 
 	public ConnectorFolder(String testName, String testStepName, String connectorName) {
 		super(testName, testStepName, connectorName);
@@ -48,8 +46,10 @@ public class ConnectorFolder extends AbstractTestFolder {
 	 */
 	public void execute() {
 		List<Connector> connectors = getConnectorByFolderName();
-		if (connectors.isEmpty())
-			LOGGER.error(getTestStepName() + "\t Constains no Connector.");
+		if (connectors.isEmpty()) {
+			throw new GenericException(" teststep cannot be empty " + getInFolder() );
+		}
+		
 		for (Connector connector : connectors) {
 			execute(connector);
 		}
@@ -79,7 +79,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 	private void handlePayloads(Connector connector) {
 		for (File input : FileUtils.listFiles(getInFolder(), true)) {
 			((WriteConnector) connector).setRequest(input);
-			LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
+			TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
 			connector.proceed();
 
 			if (connector instanceof ReadConnector) {
@@ -97,11 +97,10 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 			if (null != response) {
 				try {
-					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
+					TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 					Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + idx + ".txt"));
 				} catch (IOException e) {
-					LOGGER.error("can not write output file " + idx, e);
-					throw new GenericException(e);
+					throw new GenericException("can not write output file " + idx, e);
 				}
 				idx++;
 			}
@@ -114,11 +113,10 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 		if (null != response) {
 			try {
-				LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
+				TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 				Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + fileName));
 			} catch (IOException e) {
-				LOGGER.error("can not write output file " + fileName, e);
-				throw new GenericException(e);
+				throw new GenericException("can not write output file " + fileName,e);
 			}
 
 		}

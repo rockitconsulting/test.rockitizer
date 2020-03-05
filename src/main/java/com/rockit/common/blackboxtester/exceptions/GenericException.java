@@ -1,5 +1,7 @@
 package com.rockit.common.blackboxtester.exceptions;
 
+import java.io.IOException;
+
 /**
 *  Test.Rockitizer - API regression testing framework 
 *   Copyright (C) 2020  rockit.consulting GmbH
@@ -25,12 +27,14 @@ public class GenericException extends RuntimeException {
 
 	public GenericException(Exception e) {
 		super(e);
-		throw this;
 	}
 
 	public GenericException(String msg) {
 	    super(msg);
-		throw this;
+	}
+
+	public GenericException(String msg, IOException e) {
+		super(msg, e);
 	}
 	
 	
