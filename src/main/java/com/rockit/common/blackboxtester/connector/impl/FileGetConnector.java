@@ -2,17 +2,15 @@ package com.rockit.common.blackboxtester.connector.impl;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 import java.nio.charset.Charset;
-
-import org.apache.log4j.Logger;
 
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -34,7 +32,6 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 */
 
 public class FileGetConnector implements ReadConnector {
-	public static final Logger LOGGER = Logger.getLogger(FileGetConnector.class.getName());
 
 	private String id;
 	private String srcPath;
@@ -61,12 +58,11 @@ public class FileGetConnector implements ReadConnector {
 					f = FileUtils.listFiles(f).iterator().next();
 				}
 			}
-//			response = Files.toString(f, Charset.defaultCharset());
 			response = Files.asCharSource(f, Charset.defaultCharset()).read();
 			
 		} catch (Exception e) {
-			LOGGER.error("[Connector:"+getId()+"] \t Connector error: " + getType(), e);
-		} finally {
+			throw new ConnectorException("[Connector:"+getId()+"] \t Connector error: " + getType() , e);
+
 		}
 
 	}
@@ -102,8 +98,7 @@ public class FileGetConnector implements ReadConnector {
 
 	@Override
 	public void setReponse(String response) {
-		LOGGER.error("set method is not allowed");
-		throw new ConnectorException(new RuntimeException("set method is not allowed"));
+		throw new ConnectorException("[Connector:" + getId() + "] \t Set method is not allowed");
 	}
 
 

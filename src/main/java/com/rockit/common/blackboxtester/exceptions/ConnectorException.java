@@ -1,5 +1,6 @@
 package com.rockit.common.blackboxtester.exceptions;
 
+
 /**
 *  Test.Rockitizer - API regression testing framework 
 *   Copyright (C) 2020  rockit.consulting GmbH
@@ -30,6 +31,10 @@ public class ConnectorException extends RuntimeException {
 
 	public ConnectorException(String msg) {
 		super(msg);
+	}
+
+	public ConnectorException(String msg, Throwable thr) {
+		super(msg, thr);
 	}
 
 

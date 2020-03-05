@@ -6,7 +6,6 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
@@ -38,14 +37,7 @@ public class DatabaseConnection {
 	protected String dbUrl, dbUser, dbPwd;
 	
 	protected Connection connection;
-	
-	@Deprecated
-	public DatabaseConnection(final String dbUrl, final String dbUser, final String dbPwd) {
-		this.dbUrl = dbUrl;
-		this.dbUser = dbUser;
-		this.dbPwd = dbPwd;
 
-	}
 	
 	
 	public DatabaseConnection(String id) {
@@ -64,18 +56,9 @@ public class DatabaseConnection {
 			Class.forName(this.dbUrl.contains("db2") ? Constants.DB2_DRIVER : Constants.ORACLE_DRIVER).newInstance();
 			this.connection = DriverManager.getConnection(this.dbUrl, this.dbUser, this.dbPwd);
 
-		} catch (final InstantiationException e) {
-
-			LOGGER.error("DB Connection object cannot be instantiated. \n" + "url:" + this.dbUrl + ", user:"
+		} catch (final Exception e) {
+			throw new GenericException("DB Connection object cannot be instantiated. \n" + "url:" + this.dbUrl + ", user:"
 					+ this.dbUser + ", password:" + this.dbPwd, e);
-			throw new GenericException(e);
-
-		} catch (final IllegalAccessException | ClassNotFoundException | SQLException e) {
-
-			LOGGER.error("DB Connection is not possible. \n" + "url:" + this.dbUrl + ", user:"
-					+ this.dbUser + ", password:" + this.dbPwd, e);
-			throw new GenericException(e);
-
 		} 
 	}
 }

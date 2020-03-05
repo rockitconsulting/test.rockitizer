@@ -1,6 +1,5 @@
 package com.rockit.common.blackboxtester.exceptions;
 
-import java.io.IOException;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -33,7 +32,7 @@ public class GenericException extends RuntimeException {
 	    super(msg);
 	}
 
-	public GenericException(String msg, IOException e) {
+	public GenericException(String msg, Exception e) {
 		super(msg, e);
 	}
 	

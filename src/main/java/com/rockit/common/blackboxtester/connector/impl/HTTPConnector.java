@@ -31,28 +31,27 @@ import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.connector.impl.http.ResponseHeader;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
-import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class HTTPConnector implements ReadConnector, WriteConnector {
 
@@ -86,7 +85,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
 			@Override
 			public boolean verify(String s, SSLSession sslSession) {
-				return true;//NOSONAR
+				return true;// NOSONAR
 			}
 		});
 	}
@@ -149,22 +148,17 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			}
 
 		} catch (IOException e) {
-
-			LOGGER.error("can not open connection: " + url, e);
-			throw new ConnectorException(e);
+			throw new ConnectorException("can not open connection: " + url, e);
 
 		} catch (JSONException je) {
-			// ( [TODO] eigene Exception werfen!!!!!!!!!
-			LOGGER.error("JSON deserialization Exception", je);
-			throw new ConnectorException(je);
+			throw new ConnectorException("JSON deserialization Exception", je);
 
 		} finally {
 			try {
 				if (urlConnection != null) {
 					urlConnection.disconnect();
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
+			} catch (Exception e) {// NOSONAR
 			}
 		}
 
@@ -213,7 +207,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			String name = url.getUserInfo().split(":")[0];
 			String password = url.getUserInfo().split(":")[1];
 			byte[] authEncBytes = Base64.getEncoder().encode((name + ":" + password).getBytes());
-			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));//NOSONAR
+			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));// NOSONAR
 		}
 	}
 
@@ -244,8 +238,6 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 	@Override
 	public void setRequest(final String request) {
-		LOGGER.error("Not supported: ");
-		throw new GenericException("not yet supported");
 
 	}
 	//

@@ -15,28 +15,27 @@ import com.google.common.base.Splitter;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.connector.impl.db.DatabaseConnection;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
-import com.rockit.common.blackboxtester.exceptions.GenericException;
-import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
+import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class DBPutConnector extends DatabaseConnection implements WriteConnector {
 
@@ -70,44 +69,35 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 	}
 
 	private void runScript() {
-		try {
-			List<String> commandsList = extractSQLCommandsFromPayload();
-			for (String cmd : commandsList) {
-				LOGGER.info(cmd);
+		List<String> commandsList = extractSQLCommandsFromPayload();
+		for (String cmd : commandsList) {
+			LOGGER.debug(cmd);
 
-				final Statement statement = connection.createStatement();
-				statement.execute(cmd.toString());
+			try (final Statement statement = connection.createStatement()) {
+				statement.execute(cmd);
 				connection.commit();
-				statement.close();
-
+			} catch (SQLException e) {
+				throw new ConnectorException("Error for cmd: " + cmd, e);
 			}
 
-		} catch (SQLException |
-
-		IOException e) {
-			LOGGER.error(e);
-			throw new ConnectorException(e);
-
-		} finally {
-			try {
-				connection.rollback();
-				connection.close();
-			} catch (final SQLException e) {
-				LOGGER.error(e);
-			}
 		}
 
 	}
 
-	List<String> extractSQLCommandsFromPayload() throws IOException {
+	List<String> extractSQLCommandsFromPayload() {
 		StringBuilder commands = new StringBuilder();
-		List<String> lines = Files.readAllLines(Paths.get(file.getAbsolutePath()), Charset.defaultCharset());
-		for (String line : lines) {
-			final String trimmedLine = line.trim();
-			if ((trimmedLine.length() < 1) || trimmedLine.startsWith("//") || trimmedLine.startsWith("--")) {
-				continue;
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(Paths.get(file.getAbsolutePath()), Charset.defaultCharset());
+			for (String line : lines) {
+				final String trimmedLine = line.trim();
+				if ((trimmedLine.length() < 1) || trimmedLine.startsWith("//") || trimmedLine.startsWith("--")) {
+					continue;
+				}
+				commands.append(line.trim()).append(" ");
 			}
-			commands.append(line.trim()).append(" ");
+		} catch (IOException e) {
+			throw new ConnectorException("Error for reading payload file: " + file.getAbsolutePath(), e);
 		}
 
 		List<String> commandsList = Splitter.on(DELIMITER).trimResults().omitEmptyStrings().splitToList(commands);
@@ -121,8 +111,6 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 
 	@Override
 	public void setRequest(final String request) {
-		LOGGER.error("Not supported: ");
-		throw new GenericException("not yet supported");
-
+		throw new ConnectorException("[Connector:" + getId() + "] \t Set method is not allowed");
 	}
 }
