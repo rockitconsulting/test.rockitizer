@@ -1,4 +1,4 @@
-package com.rockit.common.blackboxtester.util;
+package io.github.rockitconsulting.test.rockitizer.configuration.utils;
 
 import static org.junit.Assert.assertTrue;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
+
 
 /**
 *  Test.Rockitizer - API regression testing framework 

@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.suite.structures;
 
 import static com.rockit.common.blackboxtester.suite.configuration.SettingsHolder.cache;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 
@@ -10,7 +11,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.rockit.common.blackboxtester.connector.settings.Settings;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
-import com.rockit.common.blackboxtester.util.FileUtils;
+
 
 /**
 *  Test.Rockitizer - API regression testing framework 

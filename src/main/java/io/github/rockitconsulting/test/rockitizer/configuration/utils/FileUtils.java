@@ -10,6 +10,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
+import com.rockit.common.blackboxtester.exceptions.GenericException;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -47,12 +49,21 @@ public class FileUtils {
 			}
 		});
 	}
-
+	
 	public static Iterable<File> listFiles(final File root) {
+		return listFiles(root, false);
+	}
+
+
+	public static Iterable<File> listFiles(final File root, boolean ignoreGitIgnore) {
 		return Iterables.filter(Files.fileTraverser().breadthFirst(root), new Predicate<File>() {
 			@Override
 			public boolean apply(File input) {
-				return input.isFile() && input.getParentFile().equals(root);
+				if(!ignoreGitIgnore) {
+					return input.isFile() && input.getParentFile().equals(root);
+				} else {
+					return input.isFile() && input.getParentFile().equals(root) && !input.getName().equalsIgnoreCase(Constants.GITIGNORE);
+				}
 			}
 
 			@Override
@@ -64,6 +75,8 @@ public class FileUtils {
 
 	}
 
+	
+	
 	public static void copy(File from, File to) throws IOException {
 		if (from.isDirectory()) {
 			org.apache.commons.io.FileUtils.copyDirectory(from, to);
@@ -87,6 +100,33 @@ public class FileUtils {
 
 		return Joiner.on(System.lineSeparator()).join(Files.readLines(new File(path), Charsets.UTF_8));
 
+	}
+	
+	public static byte[] getContents(File file)  {
+		byte[] content;
+		try {
+			
+			content =  Files.toByteArray(file);
+		} catch (IOException e) {
+			LOGGER.error(e);
+			throw new GenericException(e);
+		} 
+		return content;
+		
+	}
+
+	public static void deleteFilesRecursive(File f) {
+		
+		if(f.exists() && f.isDirectory()) {
+			File[] files = f.listFiles();
+			for (File ff: files ) {
+				deleteFilesRecursive(ff);
+			}
+		} else if(f.exists()) {
+		   if(!f.delete()) {
+			   LOGGER.warn("cannot delete " + f.getAbsolutePath());
+		   }	
+		}
 	}
 
 }

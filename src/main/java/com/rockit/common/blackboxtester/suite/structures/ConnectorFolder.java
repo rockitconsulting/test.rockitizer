@@ -2,6 +2,7 @@ package com.rockit.common.blackboxtester.suite.structures;
 
 import static com.rockit.common.blackboxtester.suite.configuration.ConnectorFactory.connectorByFolder;
 import static com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors.MQGET;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +15,7 @@ import com.rockit.common.blackboxtester.connector.Connector;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-import com.rockit.common.blackboxtester.util.FileUtils;
+
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -43,10 +43,13 @@ public class ConnectorFolder extends AbstractTestFolder {
 		super(testName, testStepName, connectorName);
 	}
 
+	/**
+	 * Iterating over connectors and applying the needed logic on each
+	 */
 	public void execute() {
 		List<Connector> connectors = getConnectorByFolderName();
 		if (connectors.isEmpty())
-			LOGGER.info(getTestStepName() + "\t Constains no Connector.");
+			LOGGER.error(getTestStepName() + "\t Constains no Connector.");
 		for (Connector connector : connectors) {
 			execute(connector);
 		}
@@ -55,31 +58,37 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 	private void execute(Connector connector) {
 		if (MQGET.toString().equalsIgnoreCase(connector.getType())) {
-			saveResponses(connector);
-		} else if (FileUtils.listFiles(getInFolder()).iterator().hasNext()) {
-
-			for (File input : FileUtils.listFiles(getInFolder())) {
-
-				if (!input.getName().equalsIgnoreCase(Constants.GITIGNORE)) {
-					((WriteConnector) connector).setRequest(input);
-					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
-				}
-				connector.proceed();
-
-				if (connector instanceof ReadConnector) {
-					saveResponse(connector, input.getName());
-				}
-			}
-
+			handleMQGetConnector(connector);
+			return;
+		}
+		
+		if (FileUtils.listFiles(getInFolder(), true).iterator().hasNext()) {
+			handlePayloads(connector);
 		} else {
+			handleReadConnector(connector);
+		}
+	}
+
+	private void handleReadConnector(Connector connector) {
+		connector.proceed();
+		if (connector instanceof ReadConnector) {
+			saveResponse(connector, "0.txt");
+		}
+	}
+
+	private void handlePayloads(Connector connector) {
+		for (File input : FileUtils.listFiles(getInFolder(), true)) {
+			((WriteConnector) connector).setRequest(input);
+			LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
 			connector.proceed();
+
 			if (connector instanceof ReadConnector) {
-				saveResponse(connector, "0.txt");
+				saveResponse( connector, input.getName() );
 			}
 		}
 	}
 
-	private void saveResponses(Connector connector) {
+	private void handleMQGetConnector(Connector connector) {
 		int idx = 0;
 		do {
 
@@ -87,10 +96,6 @@ public class ConnectorFolder extends AbstractTestFolder {
 			String response = ((ReadConnector) connector).getResponse();
 
 			if (null != response) {
-				// LOGGER.info(getTestStepName()+"\t [connector:"+
-				// connector.getName() +"] - Saving connector "+
-				// connector.getName() +" content to output folder " +
-				// getOutFolder() );
 				try {
 					LOGGER.info(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
 					Files.write(response.getBytes("UTF-8"), new File(getOutFolder() + "/" + idx + ".txt"));
@@ -104,10 +109,6 @@ public class ConnectorFolder extends AbstractTestFolder {
 	}
 
 	private void saveResponse(Connector connector, String fileName) {
-
-		if (fileName.equalsIgnoreCase(Constants.GITIGNORE)) {
-			fileName = "0.txt";
-		} // TODO redesign
 
 		String response = ((ReadConnector) connector).getResponse();
 

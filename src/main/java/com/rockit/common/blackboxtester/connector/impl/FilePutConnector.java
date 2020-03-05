@@ -11,7 +11,7 @@ import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
-import com.rockit.common.blackboxtester.util.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 /**
 *  Test.Rockitizer - API regression testing framework 

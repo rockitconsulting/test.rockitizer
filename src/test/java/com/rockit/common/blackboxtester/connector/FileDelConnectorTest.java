@@ -3,6 +3,7 @@ package com.rockit.common.blackboxtester.connector;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.connector.impl.FileDelConnector;
-import com.rockit.common.blackboxtester.util.FileUtils;
+
 
 /**
 *  Test.Rockitizer - API regression testing framework 
