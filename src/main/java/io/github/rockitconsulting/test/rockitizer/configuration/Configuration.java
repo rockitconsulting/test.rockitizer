@@ -6,16 +6,14 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connec
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.LogUtils;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.rockit.common.blackboxtester.exceptions.FatalConfigurationException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
+import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -42,7 +40,6 @@ public class Configuration {
 		REPLAY, RECORD
 	}
 
-	public static final Logger log = Logger.getLogger(Configuration.class.getName());
 
 	private static ResourcesHolderAccessor rhApi;
 	private static TestCasesHolderAccessor tchApi;
@@ -68,20 +65,18 @@ public class Configuration {
 		rhApi = rhcli;
 		tchApi = tchcli;
 		try {
-			LogUtils.LogInfo("#######################################################################################################################");
+//			TestProtocol.write( TestProtocol.getHashSeperator() );
 
 			handleInitialization();
 			
-			LogUtils.LogInfo("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
-					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
+//			TestProtocol.write("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+//					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 
-
-			// TODO add complete validation here
-			LogUtils.LogInfo("#######################################################################################################################");
+//			TestProtocol.write( TestProtocol.getHashSeperator() );
 
 		} catch (Throwable thr) {
-			log.error("configuration initialization exception", thr);
-			throw new FatalConfigurationException(thr.getMessage());
+			TestProtocol.writeError("configuration initialization exception", thr);
+			throw new FatalConfigurationException("configuration initialization exception", thr);
 
 		}
 
@@ -95,7 +90,7 @@ public class Configuration {
 			rhApi.initFromYaml();
 			tchApi.initFromYaml();
 		} else { 
-			LogUtils.LogWarn(" running in CLI configuration generation mode" );
+			TestProtocol.writeWarn(" running in CLI configuration generation mode" );
 			rhApi.initFromFileSystem();
 			tchApi.initFromFileSystem();
 		}
@@ -111,10 +106,10 @@ public class Configuration {
 			} else {
 				setRunMode(RunModeTypes.RECORD);
 			}
-			LogUtils.LogInfo("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
+			//TestProtocol.write("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
 
 		} else {
-			LogUtils.LogWarn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
+			//TestProtocol.writeWarn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
 		}
 	}
 
@@ -126,16 +121,16 @@ public class Configuration {
 		
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
-			LogUtils.LogInfo("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
+			//TestProtocol.write("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
 
 		} else {
 			setEnvironment(null);
-			LogUtils.LogWarn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
+			//TestProtocol.writeWarn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
 
 		}
 	}
 
-	public static Configuration configuration() {
+	public static synchronized Configuration configuration() {
 		if (INSTANCE == null) {
 			INSTANCE = new Configuration();
 		}
@@ -149,7 +144,7 @@ public class Configuration {
 	 * @param tchcli
 	 * 
 	 */
-	public static void reset(ResourcesHolderAccessor rhcli, TestCasesHolderAccessor tchcli) {
+	public static synchronized void reset(ResourcesHolderAccessor rhcli, TestCasesHolderAccessor tchcli) {
 		INSTANCE = new Configuration(rhcli, tchcli);
 	}
 
@@ -162,12 +157,12 @@ public class Configuration {
 			
 			handleInitialization();
 			
-			LogUtils.LogInfo("re-initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
-					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
+			//TestProtocol.writeWarn("re-initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+			//		+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 			
 		} catch (Throwable thr) {
-			log.error("configuration initialization exception", thr);
-			throw new FatalConfigurationException(thr.getMessage());
+			TestProtocol.writeError("configuration initialization exception", thr);
+			throw new FatalConfigurationException("configuration initialization exception", thr);
 
 		}
 		

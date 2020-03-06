@@ -30,6 +30,10 @@ public class FatalConfigurationException extends RuntimeException {
 	public FatalConfigurationException(String msg) {
 		super(msg);
 	}
+
+	public FatalConfigurationException(String msg, Throwable thr) {
+			super(msg, thr);
+	}
 	
 	
 	
