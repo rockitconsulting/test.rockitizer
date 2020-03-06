@@ -14,6 +14,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCas
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
@@ -87,16 +88,58 @@ public class ValidationUtils {
 						tc -> tc.getTestSteps().forEach(
 								ts -> ts.getConnectorRefs().forEach(
 										conRef -> {
-											if (configuration().getRhApi().getResourcesHolder().findResourceByRef(conRef) == null) {
+											Object conn  = configuration().getRhApi().getResourcesHolder().findResourceByRef(conRef);
+											if (conn == null) {
 
 												validationHolder().add(
 														new Context.Builder().withId(conRef.getConRefId()),
 														new Message(Message.LEVEL.ERROR, "Connector " + conRef.getConRefId()
 																+ " exists in testcases but not in resources"));
 
+											} else {
+												
+												validateDataSourceRefForConnector(conn);
+												
 											}
 										})));
 
+	}
+
+	private static void validateDataSourceRefForConnector(Object conn) {
+	
+		if(conn instanceof DBConnector  ) {
+			try {
+				configuration().getDBDataSourceByConnector( (DBConnector)conn );
+			} catch (ResourceNotFoundException rnfe) {
+				registerValidationErrorDataSourceNotFound(  ((DBConnector)conn).getId(), ((DBConnector)conn).getDsRefId() );
+			}
+			
+		} else if(conn instanceof MQConnector  ) {
+			try {
+				configuration().getMQDataSourceByConnector( (MQConnector)conn );
+			} catch (ResourceNotFoundException rnfe) {
+				registerValidationErrorDataSourceNotFound(  ((MQConnector)conn).getId(), ((MQConnector)conn).getDsRefId() );
+			}
+			
+		} if(conn instanceof HTTPConnector  ) {
+			try {
+				configuration().getKeyStoreByConnector( (HTTPConnector)conn );
+			} catch (ResourceNotFoundException rnfe) {
+				registerValidationErrorDataSourceNotFound(  ((HTTPConnector)conn).getId(), ((HTTPConnector)conn).getDsRefId() );
+			}
+			
+		}
+		
+
+		
+	}
+
+	private static void registerValidationErrorDataSourceNotFound(String id, String dsRefId) {
+		validationHolder().add(
+				new Context.Builder().withId(id),
+				new Message(Message.LEVEL.ERROR, "Connector " + id
+						+ " references to non-existing datasource " + dsRefId));
+		
 	}
 
 	/**
@@ -184,6 +227,7 @@ public class ValidationUtils {
 		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getMqDataSources());
 		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getDbDataSources());
 		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getKeyStores());
+		//TODO add validation of resources
 
 	}
 

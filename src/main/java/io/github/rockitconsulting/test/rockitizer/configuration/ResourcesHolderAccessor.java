@@ -176,6 +176,11 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 	public MQDataSource getMQDataSourceByConnector(MQConnector connector) {
 		MQDataSource ds = resourcesHolder.findMQDataSourceById(connector.getDsRefId());
+		if (ds == null) {
+			throw new ResourceNotFoundException(connector.getDsRefId());
+		}
+
+		
 		if (!ds.isValid()) {
 			throw new ValidationException(ds.validate());
 		}
@@ -183,8 +188,16 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	}
 
 	public KeyStore getKeyStoreByConnector(HTTPConnector connector) {
+		if(connector.getDsRefId()==null) {
+			return null;
+		}
+		
 		KeyStore ds = resourcesHolder.findKeyStoreById(connector.getDsRefId());
-		if (ds != null && !ds.isValid()) {
+		if (ds == null) {
+			throw new ResourceNotFoundException(connector.getDsRefId());
+		}
+		
+		if (!ds.isValid()) {
 			throw new ValidationException(ds.validate());
 		}
 		return ds;

@@ -46,7 +46,6 @@ httpConnectors:
   contentType: '@application/xml@'
   userAgent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
   timeout: '500000'
-  dsRefId: defaultKS
 - id: HTTP.JADDBOOK
   type: HTTP
   url: http://scharrdev01:7080/JSONBookService
@@ -54,7 +53,6 @@ httpConnectors:
   contentType: application/json
   userAgent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
   timeout: '500000'
-  dsRefId: defaultKS
 fileConnectors:
 - id: FILEDEL.IN.FILE2FILE
   type: FILEDEL

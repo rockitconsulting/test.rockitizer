@@ -46,7 +46,6 @@ httpConnectors:
   contentType: '@application/xml@'
   userAgent: '@GENERATED!!!! Mozilla/5.0@'
   timeout: '@500000@'
-  dsRefId: defaultKS
 - id: HTTP.ADDBOOK
   type: HTTP
   url: '@https://default@'
@@ -54,7 +53,6 @@ httpConnectors:
   contentType: '@application/xml@'
   userAgent: '@GENERATED!!!! Mozilla/5.0@'
   timeout: '@500000@'
-  dsRefId: defaultKS
 fileConnectors:
 - id: FILEDEL.IN.FILE2FILE
   type: FILEDEL

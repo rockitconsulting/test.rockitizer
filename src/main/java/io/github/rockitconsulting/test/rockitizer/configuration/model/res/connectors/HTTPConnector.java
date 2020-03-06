@@ -48,7 +48,7 @@ public class HTTPConnector extends BaseConnector {
 
 	private Types type = Types.HTTP;
 
-	private String dsRefId = "defaultKS";
+	private String dsRefId;
 
 	public HTTPConnector() {
 		super();
@@ -130,7 +130,7 @@ public class HTTPConnector extends BaseConnector {
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
 		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("url", url)
-				.put("method", method).put("contentType", contentType).put("userAgent", userAgent).put("timeout", timeout).put("dsRefId", dsRefId).build();
+				.put("method", method).put("contentType", contentType).put("userAgent", userAgent).put("timeout", timeout).put("dsRefId", dsRefId==null?"":dsRefId).build();
 
 	}
 

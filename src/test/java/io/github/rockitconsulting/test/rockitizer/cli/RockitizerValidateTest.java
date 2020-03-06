@@ -40,7 +40,7 @@ public class RockitizerValidateTest extends CommonCLITest {
 	public void testValidate() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		Assert.assertEquals(new CommandLine(new RockitizerValidate()).execute(), 0);
-		Assert.assertTrue(ValidationHolder.validationHolder().size()==7);
+		Assert.assertTrue(ValidationHolder.validationHolder().size()==8);
 
 	}
 
@@ -48,7 +48,7 @@ public class RockitizerValidateTest extends CommonCLITest {
 	public void testValidateWithParams() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		Assert.assertEquals(new CommandLine(new RockitizerValidate()).execute("devp","-gitfix","true"), 0);
-		Assert.assertTrue(ValidationHolder.validationHolder().size()==7);
+		Assert.assertTrue(ValidationHolder.validationHolder().size()==8);
 
 	}	
 	
