@@ -15,7 +15,6 @@ import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
-import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 /**
  * Test.Rockitizer - API regression testing framework Copyright (C) 2020
@@ -102,12 +101,12 @@ public class SCPPutConnector implements WriteConnector {
 
 			String targetFilename = contentFile.getName();
 			channel.cd(destPath);
-			TestProtocol.write("[Connector:" + getId() + "] \t Copying " + contentFile.getName() + " to " + destPath);
+			//TestProtocol.write("[Connector:" + getId() + "] \t Copying " + contentFile.getName() + " to " + destPath);
 			channel.put(new FileInputStream(contentFile), targetFilename, ChannelSftp.OVERWRITE);
 
 			if (targetFilename.endsWith(".trans")) {
 				String targetFilenameRenamed = targetFilename.replaceAll(".trans", ".csv");
-				TestProtocol.write("[Connector:" + getId() + "] \t Renaming File  " + targetFilename + " to " + targetFilenameRenamed + " in " + destPath);
+				//TestProtocol.write("[Connector:" + getId() + "] \t Renaming File  " + targetFilename + " to " + targetFilenameRenamed + " in " + destPath);
 				channel.rename(targetFilename, destPath + "/" + targetFilenameRenamed);
 			}
 

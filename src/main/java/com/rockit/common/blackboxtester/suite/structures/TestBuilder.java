@@ -122,8 +122,8 @@ public class TestBuilder extends AbstractTestFolder {
 			throw new GenericException("Can not make copy of " + getRecordFolder() + "/" + stepName + " to replay target " + getReplayFolder() + "/" + stepName, e);
 		}
 
-		TestProtocol.write(getTestStepName() + "\t Copying " + Constants.RECORD_PATH + getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH
-				+ getTestName() + "/" + getTestStepName());
+//		TestProtocol.write(getTestStepName() + "\t Copying " + Constants.RECORD_PATH + getTestName() + "/" + getTestStepName() + " to " + Constants.REPLAY_PATH
+//				+ getTestName() + "/" + getTestStepName());
 	}
 
 	public boolean isRecordFolderExists() {

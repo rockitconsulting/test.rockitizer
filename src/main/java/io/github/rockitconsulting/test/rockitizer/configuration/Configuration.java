@@ -65,14 +65,14 @@ public class Configuration {
 		rhApi = rhcli;
 		tchApi = tchcli;
 		try {
-			TestProtocol.write( TestProtocol.getHashSeperator() );
+//			TestProtocol.write( TestProtocol.getHashSeperator() );
 
 			handleInitialization();
 			
-			TestProtocol.write("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
-					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
+//			TestProtocol.write("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+//					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 
-			TestProtocol.write( TestProtocol.getHashSeperator() );
+//			TestProtocol.write( TestProtocol.getHashSeperator() );
 
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
@@ -106,10 +106,10 @@ public class Configuration {
 			} else {
 				setRunMode(RunModeTypes.RECORD);
 			}
-			TestProtocol.write("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
+			//TestProtocol.write("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
 
 		} else {
-			TestProtocol.writeWarn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
+			//TestProtocol.writeWarn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
 		}
 	}
 
@@ -121,11 +121,11 @@ public class Configuration {
 		
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
-			TestProtocol.write("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
+			//TestProtocol.write("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
 
 		} else {
 			setEnvironment(null);
-			TestProtocol.writeWarn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
+			//TestProtocol.writeWarn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
 
 		}
 	}
@@ -157,8 +157,8 @@ public class Configuration {
 			
 			handleInitialization();
 			
-			TestProtocol.writeWarn("re-initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
-					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
+			//TestProtocol.writeWarn("re-initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
+			//		+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 			
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
