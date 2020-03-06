@@ -84,7 +84,6 @@ public class RockitizerDeleteTestTest {
 		File tsf = new File(configuration().getFullPath()+File.separator+tc + File.separator + ts );
 		Assert.assertTrue(tsf.exists());
 		
-		checkJunitNotCreated();
 		
 		Assert.assertEquals( new CommandLine(new RockitizerDeleteTest()).execute(tc,ts), 0);
 		
@@ -101,8 +100,6 @@ public class RockitizerDeleteTestTest {
 		log.info(" checking with context tc: "+ cf.getAbsolutePath());
 		Assert.assertTrue(cf.exists());
 		
-		//check no java created
-		checkJunitNotCreated();
 		
 		Assert.assertEquals( new CommandLine(new RockitizerDeleteTest()).execute(tc,ts,c), 0);
 		
@@ -116,11 +113,4 @@ public class RockitizerDeleteTestTest {
 		
 	}
 	
-
-	private void checkJunitNotCreated() {
-		File junit = new File(ConfigUtils.getAbsolutePathToJava()+File.separator+tc+".java");
-		Assert.assertFalse(junit.exists());
-	}
-
-
 }

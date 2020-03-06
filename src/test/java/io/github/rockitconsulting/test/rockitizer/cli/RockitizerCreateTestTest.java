@@ -82,9 +82,6 @@ public class RockitizerCreateTestTest  extends CommonCLITest {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
 		Assert.assertEquals( new CommandLine(new RockitizerCreateTest()).execute(tc,ts), 0);
 		
-		checkJunitNotCreated();
-		
-		
 		File tsf = new File(configuration().getFullPath()+File.separator+tc + File.separator + ts );
 		log.info(" checking with context teststep: "+ tsf.getAbsolutePath());
 		Assert.assertTrue(tsf.exists());
@@ -92,6 +89,12 @@ public class RockitizerCreateTestTest  extends CommonCLITest {
 		Assert.assertFalse(tsf.exists());
 		
 		deleteTestCaseRecursiveAndCheck();
+		
+		//check junit java created
+		File junit = new File(ConfigUtils.getAbsolutePathToJava()+File.separator+tc+".java");
+		Assert.assertTrue(junit.exists());
+		Assert.assertTrue(junit.delete());
+		Assert.assertFalse(junit.exists());
 		
 		
 
@@ -102,10 +105,6 @@ public class RockitizerCreateTestTest  extends CommonCLITest {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
 		Assert.assertEquals( new CommandLine(new RockitizerCreateTest()).execute(tc, ts, c ), 0);
 		
-		//check no java created
-		checkJunitNotCreated();
-		
-		
 		File cf = new File(configuration().getFullPath()+File.separator+tc + File.separator + ts + File.separator + c );
 		log.info(" checking with context tc: "+ cf.getAbsolutePath());
 		Assert.assertTrue(cf.exists());
@@ -113,6 +112,12 @@ public class RockitizerCreateTestTest  extends CommonCLITest {
 		Assert.assertFalse(cf.exists());
 		
 		deleteTestCaseRecursiveAndCheck();
+		
+		//check junit java created
+		File junit = new File(ConfigUtils.getAbsolutePathToJava()+File.separator+tc+".java");
+		Assert.assertTrue(junit.exists());
+		Assert.assertTrue(junit.delete());
+		Assert.assertFalse(junit.exists());
 		
 
 	}
@@ -125,11 +130,5 @@ public class RockitizerCreateTestTest  extends CommonCLITest {
 		Assert.assertFalse(tcf.exists());
 	}
 	
-
-	private void checkJunitNotCreated() {
-		File junit = new File(ConfigUtils.getAbsolutePathToJava()+File.separator+tc+".java");
-		Assert.assertFalse(junit.exists());
-	}
-
 
 }
