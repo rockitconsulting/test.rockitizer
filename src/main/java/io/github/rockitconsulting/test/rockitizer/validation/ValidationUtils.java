@@ -15,6 +15,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestSte
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
+import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
@@ -112,6 +113,8 @@ public class ValidationUtils {
 				configuration().getDBDataSourceByConnector( (DBConnector)conn );
 			} catch (ResourceNotFoundException rnfe) {
 				registerValidationErrorDataSourceNotFound(  ((DBConnector)conn).getId(), ((DBConnector)conn).getDsRefId() );
+			}catch (ValidationException ve) { //NOSONAR
+				//handled by another validation  
 			}
 			
 		} else if(conn instanceof MQConnector  ) {
@@ -119,14 +122,20 @@ public class ValidationUtils {
 				configuration().getMQDataSourceByConnector( (MQConnector)conn );
 			} catch (ResourceNotFoundException rnfe) {
 				registerValidationErrorDataSourceNotFound(  ((MQConnector)conn).getId(), ((MQConnector)conn).getDsRefId() );
+			}catch (ValidationException ve) { //NOSONAR
+				//handled by another validation  
 			}
+
 			
 		} if(conn instanceof HTTPConnector  ) {
 			try {
 				configuration().getKeyStoreByConnector( (HTTPConnector)conn );
 			} catch (ResourceNotFoundException rnfe) {
 				registerValidationErrorDataSourceNotFound(  ((HTTPConnector)conn).getId(), ((HTTPConnector)conn).getDsRefId() );
+			}catch (ValidationException ve) { //NOSONAR
+				//handled by another validation  
 			}
+
 			
 		}
 		

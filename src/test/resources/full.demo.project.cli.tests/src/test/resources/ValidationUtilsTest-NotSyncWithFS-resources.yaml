@@ -78,7 +78,7 @@ mqDataSources:
   password: 'admin'
 dbDataSources:
 - id: defaultDB
-  url: 'jdbc:db2://localhost:50000/ROCKIT'
+  url: '@jdbc:db2://localhost:50000/ROCKIT@'
   type: DB
   user: 'admin'
   password: 'admin'

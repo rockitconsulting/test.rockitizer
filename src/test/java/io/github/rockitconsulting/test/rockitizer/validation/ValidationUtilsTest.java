@@ -13,26 +13,28 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import picocli.CommandLine;
+
 import com.google.common.base.Joiner;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class ValidationUtilsTest {
 	public static Logger log = Logger.getLogger(ValidationUtilsTest.class.getName());
@@ -50,7 +52,7 @@ public class ValidationUtilsTest {
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s1 = validationHolder().size();
 		validationHolder().logValidationErrors();
-		Assert.assertEquals(20, s1 );
+		Assert.assertEquals(20, s1);
 
 	}
 
@@ -104,7 +106,6 @@ public class ValidationUtilsTest {
 
 	}
 
-
 	@Test
 	public void validateTestCasesNotSyncWithFileSystem() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
@@ -114,6 +115,19 @@ public class ValidationUtilsTest {
 
 	}
 
+	@Test
+	public void validateCompleteNotSyncWithFileSystem() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		ValidationUtils.validateConnectorRefExists();
+		ValidationUtils.validateResources();
+		ValidationUtils.validateTestCasesAndFileSystemInSync();
+		ValidationUtils.validateNotAllowedEmptyStructures();
+		ValidationUtils.validateSyncJavaAndTestCases();
+
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 23);
+
+	}
 
 	@Test
 	public void validateTestCasesInSyncWithFileSystem() throws IOException {
@@ -123,8 +137,7 @@ public class ValidationUtilsTest {
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
 
 	}
-	
-	
+
 	@Test
 	public void validateNotAllowedEmptyStructuresOK() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
@@ -132,7 +145,7 @@ public class ValidationUtilsTest {
 		ValidationHolder.validationHolder().logValidationErrors();
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
 	}
-		
+
 	@Test
 	public void validateNotAllowedEmptyStructuresNOK() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
@@ -141,28 +154,25 @@ public class ValidationUtilsTest {
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 4);
 	}
 
-	
 	@Test
 	public void testSyncConfig() throws IOException {
-		//init
+		// init
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
-		//prepare for test
+		// prepare for test
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
-		//clean db
+		// clean db
 		rhyaml.getDbConnectors().clear();
-		//write new config
+		// write new config
 		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
-		//re-init
+		// re-init
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
-		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==0);
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size() == 0);
 		List<String> syncConfig = ValidationUtils.syncConfig();
-		Assert.assertTrue(syncConfig.size()==2);
-		syncConfig.forEach( m ->System.out.println(m) );
-		
-		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size()==2);
-		
+		Assert.assertTrue(syncConfig.size() == 2);
+		syncConfig.forEach(m -> System.out.println(m));
+
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size() == 2);
+
 	}
-	
 
 }
-
