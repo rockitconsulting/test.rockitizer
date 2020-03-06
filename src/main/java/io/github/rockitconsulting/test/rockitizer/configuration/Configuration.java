@@ -90,7 +90,7 @@ public class Configuration {
 			rhApi.initFromYaml();
 			tchApi.initFromYaml();
 		} else { 
-			TestProtocol.writeWarn(" running in CLI configuration generation mode" );
+			//TestProtocol.writeWarn(" running in CLI configuration generation mode" );
 			rhApi.initFromFileSystem();
 			tchApi.initFromFileSystem();
 		}

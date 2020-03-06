@@ -47,7 +47,7 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 	}
 
 	void initFromFileSystem() throws IOException {
-		testCasesHolder = testCasesHolderFromFileSystem();
+		testCasesHolder = testCasesHolderFromFileSystemToYaml();
 	}
 
 	/**
