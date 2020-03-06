@@ -86,7 +86,7 @@ eclipse {
 }
 
 dependencies {
-    compile 'com.oracle.ojdbc:ojdbc10_g:19.3.0.0'
+    compile 'com.oracle.ojdbc:ojdbc8_g:19.3.0.0'
     compile 'com.ibm.db2.jcc:db2jcc:db2jcc4'
     compile 'com.ibm.mq:com.ibm.mq.allclient:9.1.4.0'
     compile 'org.yaml:snakeyaml:1.25'
