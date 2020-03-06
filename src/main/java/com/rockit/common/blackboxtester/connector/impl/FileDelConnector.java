@@ -52,7 +52,7 @@ public class FileDelConnector implements Connector {
 			FileUtils.deleteFilesRecursive(f);
 
 		} catch (Exception e) {
-			new ConnectorException("[Connector:" + getId() + "] \t Connector error: " + getType(), e);
+			throw new ConnectorException("[Connector:" + getId() + "] \t Connector error: " + getType(), e);
 		}
 
 	}

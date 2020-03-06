@@ -62,7 +62,6 @@ public class FileGetConnector implements ReadConnector {
 			
 		} catch (Exception e) {
 			throw new ConnectorException("[Connector:"+getId()+"] \t Connector error: " + getType() , e);
-
 		}
 
 	}
