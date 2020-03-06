@@ -49,6 +49,8 @@ public class RockitizerCreateTest implements Runnable {
 	@Override
 	public void run() {
 		
+		File fPath = new File(ConfigUtils.getAbsolutePathToJava() + testcase + ".java");
+		
 		try {
 			if (teststep != null && connector != null) {
 				createConnector();
@@ -56,6 +58,10 @@ public class RockitizerCreateTest implements Runnable {
 				createTesStep();
 			} else {
 				createTestCase();
+			}
+			
+			if(!fPath.exists()){
+				createJunitClass(fPath);
 			}
 
 		} catch (IOException e) {
@@ -66,7 +72,6 @@ public class RockitizerCreateTest implements Runnable {
 	void createTestCase() throws IOException {
 		String path = configuration().getFullPath() + this.testcase; 
 		new File(path).mkdirs();
-		createJunitClass();
 		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully created: |@" + path));
 
 	}
@@ -85,10 +90,10 @@ public class RockitizerCreateTest implements Runnable {
 
 	}
 
-	void createJunitClass() {
-		String path = ConfigUtils.getAbsolutePathToJava() + testcase + ".java";
+	void createJunitClass(File fPath) {
+		String sPath = fPath.toString();
 		
-		try (FileWriter myWriter = new FileWriter(path)) {
+		try (FileWriter myWriter = new FileWriter(sPath)) {
 			myWriter.write("import org.apache.log4j.Logger;" + System.lineSeparator());
 			myWriter.write("import org.junit.Test;" + System.lineSeparator());
 			myWriter.write("import org.xmlunit.diff.ElementSelectors;" + System.lineSeparator());
@@ -112,7 +117,7 @@ public class RockitizerCreateTest implements Runnable {
 		} catch (IOException e) {
 			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Failed by generation: |@" + e));
 		}
-		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully JUnit template created: |@" + path));
+		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully JUnit template created: |@" + sPath));
 
 	}
 
