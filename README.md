@@ -1,4 +1,4 @@
-[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
+<p align="center">[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)</p>
 
 # test.rockitizer - keep your integration tested!
 
