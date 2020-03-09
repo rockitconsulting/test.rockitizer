@@ -28,27 +28,27 @@ import com.rockit.common.blackboxtester.assertions.fixedlength.RecordConfig;
 import com.rockit.common.blackboxtester.assertions.fixedlength.RecordsConfig;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class FixedLengthFileAssertion extends AbstractAssertion {
 
-	private String step = "";
+	private String relPath = "";
 
 	protected List<String> recorded = new ArrayList<>();
 	protected List<String> replayed = new ArrayList<>();
@@ -56,17 +56,20 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 	private RecordConfig recordConfig = null;
 	private final DifferenceBuilder db = new DifferenceBuilder(this);
 
-	public FixedLengthFileAssertion(String recordPath, String replayPath, String step, String recordConfigString) {
-		setRecordPath(recordPath);
-		setReplayPath(replayPath);
-		recordConfig = RecordsConfig.getInstance().getRecordConfig(recordConfigString);
-		this.step = step;
+	public FixedLengthFileAssertion(String step, String connector, String config) {
+		recordConfig = RecordsConfig.getInstance().getRecordConfig(config);
+		this.relPath = File.separator + step + File.separator + connector;
+	}
+
+	public FixedLengthFileAssertion(String step, String config) {
+		recordConfig = RecordsConfig.getInstance().getRecordConfig(config);
+		this.relPath = File.separator + step;
 	}
 
 	@Override
 	public void proceed() {
-		File recordFolder = new File(recordPath + File.separator + step);
-		File replayFolder = new File(replayPath + File.separator + step);
+		File recordFolder = new File(recordPath + relPath);
+		File replayFolder = new File(replayPath + relPath);
 
 		for (File recordFile : Files.fileTraverser().depthFirstPreOrder(recordFolder)) {
 			if (recordFile.isFile()) {
@@ -99,10 +102,6 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 		return lineList;
 	}
 
-	public String getStep() {
-		return step;
-	}
-
 	public List<String> getRecorded() {
 		return recorded;
 	}
@@ -113,6 +112,14 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 
 	public RecordConfig getRecordConfig() {
 		return recordConfig;
+	}
+
+	public String getRelPath() {
+		return relPath;
+	}
+
+	public void setRelPath(String relPath) {
+		this.relPath = relPath;
 	}
 
 }

@@ -54,9 +54,10 @@ public class FixedLengthFileAssertionTest {
 		Path repSrc = Paths.get(ClassLoader.getSystemResource(path2).toURI());
 		File rep = new File(repSrc.toString());
 		assertTrue(rep.exists());
-
-		FixedLengthFileAssertion fixLengthFileAssertion = new FixedLengthFileAssertion(recSrc.toString(), repSrc.toString(), "stepname", "test1#1;2;3;4;5;6");
-		fixLengthFileAssertion.proceed();
+        FixedLengthFileAssertion fixedLengthFileAssertion = new FixedLengthFileAssertion("stepname", "test1#1;2;3;4;5;6");
+        fixedLengthFileAssertion.setRecordPath(recSrc.toString());
+        fixedLengthFileAssertion.setReplayPath(repSrc.toString());
+        fixedLengthFileAssertion.proceed();
 	}
 
 }

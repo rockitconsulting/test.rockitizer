@@ -20,23 +20,23 @@ import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class DBAssertion extends AbstractAssertion {
 
@@ -46,14 +46,32 @@ public class DBAssertion extends AbstractAssertion {
 	private String sql;
 	private Connection connection;
 
-	public DBAssertion(String sql, List<String> mustContainTokens) {
-		this("defaultDB", sql, mustContainTokens);
+	/**
+	 * default DB lookup with assertion, checking if the values are contained in
+	 * sql reslut
+	 * 
+	 * @param sqlQuery
+	 * @param mustContainTokens
+	 *            - list of values to check on
+	 */
+	public DBAssertion(String sqlQuery, List<String> mustContainTokens) {
+		this("defaultDB", sqlQuery, mustContainTokens);
 	}
 
-	public DBAssertion(String dsId, String sql, List<String> mustContainTokens) {
-		this.refDsId = dsId;
+	/**
+	 * DB lookup with assertion, checking if the values are contained in sql
+	 * reslut
+	 * 
+	 * @param datasourceId
+	 *            - id from resources.yaml
+	 * @param sqlQuery
+	 * @param mustContainTokens
+	 *            - list of values to check on
+	 */
+	public DBAssertion(String datasourceId, String sqlQuery, List<String> mustContainTokens) {
+		this.refDsId = datasourceId;
 		this.mustContainTokens = mustContainTokens;
-		this.sql = sql;
+		this.sql = sqlQuery;
 	}
 
 	@Override
@@ -80,23 +98,22 @@ public class DBAssertion extends AbstractAssertion {
 		ResultSetMetaData md;
 		int cols;
 
-		try (Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql)) {
-				md = rs.getMetaData();
-				cols = md.getColumnCount();
+		try (Statement statement = connection.createStatement(); ResultSet rs = statement.executeQuery(sql)) {
+			md = rs.getMetaData();
+			cols = md.getColumnCount();
 
+			for (int i = 0; i < cols; i++) {
+				resultBuilder.append(md.getColumnLabel(i + 1) + "\t");
+			}
+
+			while (rs.next()) {
 				for (int i = 0; i < cols; i++) {
-					resultBuilder.append(md.getColumnLabel(i + 1) + "\t");
+					String value = rs.getString(i + 1);
+					resultBuilder.append(value + "\t");
 				}
+				resultBuilder.append("\n");
+			}
 
-				while (rs.next()) {
-					for (int i = 0; i < cols; i++) {
-						String value = rs.getString(i + 1);
-						resultBuilder.append(value + "\t");
-					}
-					resultBuilder.append("\n");
-				}
-			
 		} catch (SQLException e) {
 			LOGGER.error("Database access error: ", e);
 			throw new GenericException(e);

@@ -21,66 +21,67 @@ import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.exceptions.AssertionException;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class XMLFileAssertion extends AbstractAssertion {
 
 	public static final Logger LOGGER = Logger.getLogger(XMLFileAssertion.class.getName());
 
-
 	private List<String> tokens = new ArrayList<>();
-	private List<String>  attrs = new ArrayList<>();
+	private List<String> attrs = new ArrayList<>();
 
 	private DiffBuilder diffBuilder;
-	
+
 	BuilderContext context = new XMLFileAssertion.BuilderContext();
 
+	private String relPath = "";
 
-	private String step;
-
-	
-	public XMLFileAssertion(String step) {
-		this.step = step;
+	@SuppressWarnings("unused")
+	private XMLFileAssertion() {
 	}
-	
 
-	
+	public XMLFileAssertion(String step) {
+		this.relPath = File.separator + step;
+	}
+
+	public XMLFileAssertion(String step, String connector) {
+		this.relPath = File.separator + step + File.separator + connector;
+	}
+
 	@Override
 	public void proceed() {
-		File recordFolder = new File(recordPath+ File.separator + step);
-		File replayFolder = new File(replayPath+ File.separator + step);
+		File recordFolder = new File(recordPath + relPath);
+		File replayFolder = new File(replayPath + relPath);
 
 		for (File recordFile : Files.fileTraverser().depthFirstPreOrder(recordFolder)) {
 			String relativePath = recordFolder.toURI().relativize(recordFile.toURI()).getPath();
 			File replayFile = new File(replayFolder + File.separator + relativePath);
 
 			if (recordFile.isFile() && replayFile.isFile()) {
-				LOGGER.debug("xmlasserting " + recordFile.getPath()  + " with " + replayFile.getPath() );
+				LOGGER.debug("xmlasserting " + recordFile.getPath() + " with " + replayFile.getPath());
 
-				
-				try { 
-				    compare(Input.fromFile(recordFile), Input.fromFile(replayFile)).build();
+				try {
+					compare(Input.fromFile(recordFile), Input.fromFile(replayFile)).build();
 				} catch (AssertionError e) {
-					throw new AssertionException(XMLFileAssertion.class.getSimpleName() + ":" + step+"/"+  relativePath , e);
+					throw new AssertionException(XMLFileAssertion.class.getSimpleName() + ":" + relPath + "/" + relativePath, e);
 				}
-				
-				
+
 			}
 		}
 	}
@@ -96,83 +97,83 @@ public class XMLFileAssertion extends AbstractAssertion {
 	}
 
 	/**
-	 * Important!!! only test visibility from the same package
-	 * called automatically by proceed()
+	 * Important!!! only test visibility from the same package called
+	 * automatically by proceed()
+	 * 
 	 * @return
 	 */
 	protected XMLFileAssertion build() {
-		Diff diff= diffBuilder.normalizeWhitespace().build();
-		assertFalse(diff.getDifferences().toString() , diff.hasDifferences());
-		return this;
-	}	
-	
-	
-	
-	public XMLFileAssertion ignoreWhitespaces() {
-		context.ignoreWhitespaces = true;		
+		Diff diff = diffBuilder.normalizeWhitespace().build();
+		assertFalse(diff.getDifferences().toString(), diff.hasDifferences());
 		return this;
 	}
 
-	
-	
+	public XMLFileAssertion ignoreWhitespaces() {
+		context.ignoreWhitespaces = true;
+		return this;
+	}
+
 	public XMLFileAssertion withNodeMatcher(ElementSelector selector) {
 		context.selector = selector;
 		return this;
 	}
-	
+
 	public XMLFileAssertion checkForSimilar() {
 		context.checkForSimilar = true;
 		return this;
 	}
-	
+
 	public XMLFileAssertion checkForIdentical() {
 		context.checkForIdentical = true;
 		return this;
 	}
-	
-	
-	
+
 	public XMLFileAssertion compare(Builder in1, Builder in2) {
 
 		diffBuilder = DiffBuilder.compare(in1).withTest(in2).withNodeFilter(new Predicate<Node>() {
 			public boolean test(Node node) {
-				LOGGER.trace("current node " + node.getNodeName() + " result "
-						+ String.valueOf(!tokens.contains(node.getNodeName())));
-				
+				LOGGER.trace("current node " + node.getNodeName() + " result " + String.valueOf(!tokens.contains(node.getNodeName())));
+
 				return !tokens.contains(node.getNodeName());
 			}
 		}).withAttributeFilter(new Predicate<Attr>() {
 			public boolean test(Attr a) {
-				LOGGER.trace("current attr " + a.getName() + " result "
-						+ String.valueOf(!attrs.contains(a.getName())));
-				
+				LOGGER.trace("current attr " + a.getName() + " result " + String.valueOf(!attrs.contains(a.getName())));
+
 				return !attrs.contains(a.getName());
 			}
-		
+
 		});
 
-		if(context.ignoreWhitespaces){
+		if (context.ignoreWhitespaces) {
 			diffBuilder.ignoreWhitespace();
-		}if(context.checkForIdentical){
+		}
+		if (context.checkForIdentical) {
 			diffBuilder.checkForIdentical();
-		}if(context.checkForSimilar){
+		}
+		if (context.checkForSimilar) {
 			diffBuilder.checkForSimilar();
-		}if(context.selector!=null){
+		}
+		if (context.selector != null) {
 			diffBuilder.withNodeMatcher(new DefaultNodeMatcher(context.selector));
 		}
-		
+
 		return this;
 	}
-	
+
 	private class BuilderContext {
-		
+
 		private boolean ignoreWhitespaces, checkForIdentical, checkForSimilar;
 		private ElementSelector selector;
-		
+
 	}
 
-	public String getStep() {
-		return step;
+	public String getRelPath() {
+		return relPath;
+	}
+
+	public void setRelPath(String relPath) {
+		this.relPath = relPath;
 	}
 
 }

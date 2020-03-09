@@ -61,7 +61,10 @@ public class DifferenceBuilderIT {
         System.out.println("build");
         System.out.println("getOffsetAt");
         String config = "test1#2;5;-2;6;2;-4;1";
-        new FixedLengthFileAssertion("c://temp//a//record","c://temp//a//replay","test1", config).proceed();
+        FixedLengthFileAssertion fixedLengthFileAssertion = new FixedLengthFileAssertion("test1", config);
+        fixedLengthFileAssertion.setRecordPath("c://temp//a//record");
+        fixedLengthFileAssertion.setRecordPath("c://temp//a//replay");
+        fixedLengthFileAssertion.proceed();
     }
     
 }
