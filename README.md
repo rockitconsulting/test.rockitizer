@@ -1,5 +1,5 @@
 [![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
-<p align="right"><img src="http://www.rockit.consulting/images/logo-fixed.png" alt="http://www.rockit.consulting" height="50px"></p>
+<p align="right"><img src="http://www.rockit.consulting/images/logo-fixed.png" alt="http://www.rockit.consulting" height="70px"></p>
 # test.rockitizer - keep your integration tested!
 
 
