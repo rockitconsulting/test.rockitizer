@@ -46,19 +46,16 @@ public class RockitizerRunTestTest  extends CommonCLITest {
 	}
 
 	@Test
-	public void testRunTestsParams() {
+	public void testRunTestsParamsIncludingCaseInsensitiveEnums() {
 		System.setProperty(Constants.ENV_KEY, "devp");
 		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
-		Assert.assertEquals( new CommandLine(new RockitizerRunTest()).execute("all","replay","devp"), 0);
-		
-		
-
+		Assert.assertEquals(0, new CommandLine(new RockitizerRunTest()).setCaseInsensitiveEnumValuesAllowed(true).execute("all","replay","devp"));
 	}
 	
 	@Test
 	public void testRunAllWithTestContext() {
 		Configuration.configuration().reinit();
-		Assert.assertEquals(new CommandLine(new RockitizerRunTest()).execute("com.rockit.common.blackboxtester.util.FileUtilsTest"), 0);
+		Assert.assertEquals(new CommandLine(new RockitizerRunTest()).execute("io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtilsTest"), 0);
 	}
 
 	

@@ -1,9 +1,10 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.utils;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -60,4 +61,16 @@ public class FileUtilsTest {
 		}
 		LOGGER.info("FileUtilsTest.testListFiles- OK");
 	}
+	
+	
+	@Test
+	public void testLastFile() throws URISyntaxException{
+
+		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "connectors/file/FileGetConnector/checkGetLast";
+		File lastFile = FileUtils.lastFile(new File(path));
+		
+		assertEquals("lastfile.xml", lastFile.getName());
+		LOGGER.info("FileUtilsTest.testLastFile- OK :" + lastFile);	
+	}
+	
 }

@@ -1,5 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.cli;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.Configuration.RunModeTypes;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
@@ -7,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -16,7 +18,11 @@ import picocli.CommandLine.Parameters;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "run", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli run <testName | all> [<record | replay>] [<env>]", description = "runs junit or complete test suite in console mode")
+@CommandLine.Command(name = "run", sortOptions = false, 
+headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli run <testName | all> [<record | replay>] [<env>]", 
+description = "runs junit or complete test suite in console mode")
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -39,14 +45,11 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 public class RockitizerRunTest extends JUnitCore implements Runnable {
 
-	enum Mode {
-		record, replay
-	};
 
 	@Parameters(index = "0", arity = "1", description = ": MyJUnitTest or all ")
 	String testname;
 	@Parameters(index = "1", arity = "0..1", description = ": ${COMPLETION-CANDIDATES}")
-	Mode mode;
+	RunModeTypes mode;
 	@Parameters(index = "2", arity = "0..1", description = ": e.g. env = dev")
 	String env;
 
@@ -69,6 +72,8 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 			}
 
 			if (testname != null) {
+				addListener(new TextListener(System.out));
+				
 				if (testname.equalsIgnoreCase("all")) {
 					FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava())).forEach(test -> {
 						try {

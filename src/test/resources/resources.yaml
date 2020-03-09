@@ -53,7 +53,10 @@ httpConnectors:
 fileConnectors:
     - id: FILEGET.FileGetConnectorTest
       type: FILEGET 
-      path: TestFileConnectors/test.xml
+      path: connectors/file/FileGetConnector/lastfile.xml
+    - id: FILEGET.NOT.EXISITNG.PATH
+      type: FILEGET 
+      path: notexistingpath
     - id: FILEPUT.FilePutConnectorTest
       type: FILEPUT 
       path: 'TestFileConnectors/'

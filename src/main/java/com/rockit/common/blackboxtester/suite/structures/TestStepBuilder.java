@@ -39,6 +39,10 @@ public class TestStepBuilder extends AbstractTestFolder {
 	}
 
 	public TestStepBuilder execute() {
+		if(this.isAssertMode()) {
+			return this;
+		}
+		
 		try {
 			for (final ConnectorFolder connectorFolder : getConnectorFolders()) {
 				connectorFolder.execute();
@@ -73,6 +77,11 @@ public class TestStepBuilder extends AbstractTestFolder {
 	}
 
 	public TestStepBuilder sleep(final int ms) {
+		if(this.isAssertMode()) {
+			return this;
+		}
+		
+		
 		TestProtocol.write(" Waiting " + ms + "ms" + " for results");
 		try {
 			Thread.sleep(ms);

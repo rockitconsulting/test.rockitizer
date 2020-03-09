@@ -61,7 +61,7 @@ public class RockitizerCLI extends CommonCLI implements Runnable {
 		System.out.println();
 
 		
-		int execute = new CommandLine(new RockitizerCLI()).setColorScheme( CommandLine.Help.defaultColorScheme(Ansi.ON ) ).execute(args);
+		int execute = new CommandLine(new RockitizerCLI()).setCaseInsensitiveEnumValuesAllowed(true).setColorScheme( CommandLine.Help.defaultColorScheme(Ansi.ON ) ).execute(args);
 
 		
 //		LogUtils.enableLogging();

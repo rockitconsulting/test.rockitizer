@@ -1,7 +1,9 @@
 package com.rockit.common.blackboxtester.connector;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import org.junit.Test;
 
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.connector.impl.FileGetConnector;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -78,24 +81,25 @@ public class FileGetConnectorTest {
 	@Test
 	public void testGetFirstByDir() throws URISyntaxException, IOException  {
 
-		Path SRC = Paths.get(ClassLoader.getSystemResource("TestFileConnectors").toURI());
-		File srcFile = new File(SRC.toString());
-		assertTrue(srcFile.exists());
-		
-		if(srcFile.isDirectory()) {
-			srcFile = srcFile.listFiles()[0];
-		}
-
-		
-//		String remote = Files.toString(srcFile, Charset.defaultCharset());
-		String remote = Files.asCharSource(srcFile, Charset.defaultCharset()).read();
-
-		fileGetConnector.setSrcPath(SRC.toString());
+		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "connectors/file/FileGetConnector/checkGetLast";
+		fileGetConnector.setSrcPath(path);
 		fileGetConnector.proceed();
-		assertTrue(remote, remote.equals(fileGetConnector.getResponse()));
+		assertEquals("my last modified file content", fileGetConnector.getResponse());
 	}
 	
+	@Test
+	public void testGetFirstByDirNullpointerfixOnNotExistingId() throws URISyntaxException, IOException  {
 
+		fileGetConnector = new FileGetConnector("FILEGET.NOT.EXISITNG.PATH");
+		tesfilePath = fileGetConnector.getSrcPath();
+
+		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "connectors/file/FileGetConnector/checkGetLast";
+		fileGetConnector.setSrcPath(path);
+		fileGetConnector.proceed();
+		assertEquals("my last modified file content", fileGetConnector.getResponse());
+	}
+
+	
 	@Test
 	public void testType() {
 		assertTrue(fileGetConnector.getType(), fileGetConnector.getType().equals("FILEGET."));

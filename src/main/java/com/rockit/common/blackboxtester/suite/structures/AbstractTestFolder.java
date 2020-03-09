@@ -109,6 +109,10 @@ public class AbstractTestFolder {
 		 return configuration().getRunMode()==Configuration.RunModeTypes.REPLAY;
 
 	}
+	public boolean isAssertMode() {
+		 return configuration().getRunMode()==Configuration.RunModeTypes.ASSERT;
+
+	}
 
 	public String getRecordRootPath() {
 		return ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH;

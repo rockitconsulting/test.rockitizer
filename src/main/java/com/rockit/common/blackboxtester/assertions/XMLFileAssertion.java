@@ -77,7 +77,7 @@ public class XMLFileAssertion extends AbstractAssertion {
 				try { 
 				    compare(Input.fromFile(recordFile), Input.fromFile(replayFile)).build();
 				} catch (AssertionError e) {
-					throw new AssertionException(XMLFileAssertion.class.getSimpleName() + ":" +  relativePath , e);
+					throw new AssertionException(XMLFileAssertion.class.getSimpleName() + ":" + step+"/"+  relativePath , e);
 				}
 				
 				

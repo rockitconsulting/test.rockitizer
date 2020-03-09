@@ -16,30 +16,29 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class Configuration {
 
 	public enum RunModeTypes {
-		REPLAY, RECORD
+		REPLAY, RECORD, ASSERT
 	}
-
 
 	private static ResourcesHolderAccessor rhApi;
 	private static TestCasesHolderAccessor tchApi;
@@ -49,7 +48,7 @@ public class Configuration {
 	private RunModeTypes runMode = RunModeTypes.REPLAY;
 
 	private String environment;
-	
+
 	private boolean initFromYaml = true;
 
 	private Configuration() {
@@ -65,14 +64,17 @@ public class Configuration {
 		rhApi = rhcli;
 		tchApi = tchcli;
 		try {
-//			TestProtocol.write( TestProtocol.getHashSeperator() );
+			// TestProtocol.write( TestProtocol.getHashSeperator() );
 
 			handleInitialization();
-			
-//			TestProtocol.write("initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
-//					+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
 
-//			TestProtocol.write( TestProtocol.getHashSeperator() );
+			// TestProtocol.write("initializing of configuration for the context: "
+			// + System.lineSeparator() + "\t -testcases : " +
+			// tchApi.contextAsString()
+			// + System.lineSeparator() + "\t -resources : " +
+			// rhApi.contextAsString());
+
+			// TestProtocol.write( TestProtocol.getHashSeperator() );
 
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
@@ -84,48 +86,53 @@ public class Configuration {
 
 	private void handleInitialization() throws IOException {
 		initEnvironmentFromSystemProperty();
-		
-		if(initFromYaml) {
+
+		if (initFromYaml) {
 			initAndLogRunModeFromSystemProperty();
 			rhApi.initFromYaml();
 			tchApi.initFromYaml();
-		} else { 
-			//TestProtocol.writeWarn(" running in CLI configuration generation mode" );
+		} else {
+			// TestProtocol.writeWarn(" running in CLI configuration generation mode"
+			// );
 			rhApi.initFromFileSystem();
 			tchApi.initFromFileSystem();
 		}
 	}
 
 	private void initAndLogRunModeFromSystemProperty() {
-		if (System.getProperty(Constants.MODE_KEY) != null
-				&& (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase(RunModeTypes.REPLAY.name()) || System.getProperty(Constants.MODE_KEY)
-						.equalsIgnoreCase(RunModeTypes.RECORD.name()))) {
+		if (System.getProperty(Constants.MODE_KEY) != null) {
 
 			if (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("replay")) {
 				setRunMode(RunModeTypes.REPLAY);
+			} else if (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("assert")) {
+				setRunMode(RunModeTypes.ASSERT);
 			} else {
 				setRunMode(RunModeTypes.RECORD);
 			}
-			//TestProtocol.write("initializing mode from command line: " + System.getProperty(Constants.MODE_KEY));
+			// TestProtocol.write("initializing mode from command line: " +
+			// System.getProperty(Constants.MODE_KEY));
 
 		} else {
-			//TestProtocol.writeWarn("running in default " + runMode + " mode, to override use the cmd: -D" + Constants.MODE_KEY + "=record ");
+			// TestProtocol.writeWarn("running in default " + runMode +
+			// " mode, to override use the cmd: -D" + Constants.MODE_KEY +
+			// "=record ");
 		}
 	}
 
 	private void initEnvironmentFromSystemProperty() {
-		if( System.getProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY) !=null ) {
+		if (System.getProperty(Constants.INIT_CONFIG_FROM_FILESYSTEM_KEY) != null) {
 			initFromYaml = false;
 		}
-		
-		
+
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
-			//TestProtocol.write("initializing environment from command line: " + System.getProperty(Constants.ENV_KEY));
+			// TestProtocol.write("initializing environment from command line: "
+			// + System.getProperty(Constants.ENV_KEY));
 
 		} else {
 			setEnvironment(null);
-			//TestProtocol.writeWarn("running with no environment, to override use the cmd: -D" + Constants.ENV_KEY + "=<Env>");
+			// TestProtocol.writeWarn("running with no environment, to override use the cmd: -D"
+			// + Constants.ENV_KEY + "=<Env>");
 
 		}
 	}
@@ -148,27 +155,28 @@ public class Configuration {
 		INSTANCE = new Configuration(rhcli, tchcli);
 	}
 
-	
 	/**
-	 *  Re-initialize config from yaml keeping context
+	 * Re-initialize config from yaml keeping context
 	 */
-	public void reinit()  {
+	public void reinit() {
 		try {
-			
+
 			handleInitialization();
-			
-			//TestProtocol.writeWarn("re-initializing of configuration for the context: " + System.lineSeparator() + "\t -testcases : " + tchApi.contextAsString()
-			//		+ System.lineSeparator() + "\t -resources : " + rhApi.contextAsString());
-			
+
+			// TestProtocol.writeWarn("re-initializing of configuration for the context: "
+			// + System.lineSeparator() + "\t -testcases : " +
+			// tchApi.contextAsString()
+			// + System.lineSeparator() + "\t -resources : " +
+			// rhApi.contextAsString());
+
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
 			throw new FatalConfigurationException("configuration initialization exception", thr);
 
 		}
-		
+
 	}
-	
-	
+
 	public RunModeTypes getRunMode() {
 		return runMode;
 	}

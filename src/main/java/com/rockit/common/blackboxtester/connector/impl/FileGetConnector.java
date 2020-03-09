@@ -54,9 +54,7 @@ public class FileGetConnector implements ReadConnector {
 		try {
 			File f = new File(srcPath);
 			if(f.isDirectory()) {
-				if( FileUtils.listFiles(f).iterator().hasNext() ) {
-					f = FileUtils.listFiles(f).iterator().next();
-				}
+				f = FileUtils.lastFile(f);
 			}
 			response = Files.asCharSource(f, Charset.defaultCharset()).read();
 			

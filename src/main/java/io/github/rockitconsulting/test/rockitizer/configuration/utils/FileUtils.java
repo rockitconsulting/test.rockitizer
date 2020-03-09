@@ -2,6 +2,8 @@ package io.github.rockitconsulting.test.rockitizer.configuration.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.stream.StreamSupport;
 
 import org.apache.log4j.Logger;
 
@@ -74,7 +76,13 @@ public class FileUtils {
 		});
 
 	}
+	
+	
+	public static File lastFile(final File root) {
+		Iterable<File> listFiles = listFiles(root, true);
 
+		return StreamSupport.stream(listFiles.spliterator(), false).filter(f -> !f.isDirectory()).max(Comparator.comparingLong(f -> f.lastModified())).orElse(null);
+	}
 	
 	
 	public static void copy(File from, File to) throws IOException {
@@ -124,7 +132,7 @@ public class FileUtils {
 			}
 		} else if(f.exists()) {
 		   if(!f.delete()) {
-			   LOGGER.warn("cannot delete " + f.getAbsolutePath());
+			   LOGGER.warn("cannot delete " + f.getAbsolutePath() +" ,  permissions: canRead " + f.canRead() + ", canExecute " + f.canExecute()+ ", canWrite " + f.canWrite() );
 		   }	
 		}
 	}

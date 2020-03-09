@@ -13,8 +13,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import picocli.CommandLine;
-
 import com.google.common.base.Joiner;
 
 /**

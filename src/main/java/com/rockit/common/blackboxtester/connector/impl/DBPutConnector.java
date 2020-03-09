@@ -41,6 +41,8 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 
 	public static final Logger LOGGER = Logger.getLogger(DBPutConnector.class.getName());
 	private static final String DELIMITER = ";";
+	static final String LINE_SEPARATOR = "###"; //to handle additional semicolons, e.g. in methods like TO_CBLOB('') 
+
 
 	private String id;
 	private File file;
@@ -71,6 +73,7 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 	private void runScript() {
 		List<String> commandsList = extractSQLCommandsFromPayload();
 		for (String cmd : commandsList) {
+			cmd = cmd.replaceAll(LINE_SEPARATOR,  " ");
 			LOGGER.debug(cmd);
 
 			try (final Statement statement = connection.createStatement()) {
@@ -94,13 +97,13 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 				if ((trimmedLine.length() < 1) || trimmedLine.startsWith("//") || trimmedLine.startsWith("--")) {
 					continue;
 				}
-				commands.append(line.trim()).append(" ");
+				commands.append(line.trim()).append(LINE_SEPARATOR);
 			}
 		} catch (IOException e) {
 			throw new ConnectorException("Error for reading payload file: " + file.getAbsolutePath(), e);
 		}
 
-		List<String> commandsList = Splitter.on(DELIMITER).trimResults().omitEmptyStrings().splitToList(commands);
+		List<String> commandsList = Splitter.on(DELIMITER+LINE_SEPARATOR).trimResults().omitEmptyStrings().splitToList(commands);
 		return commandsList;
 	}
 

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 /**
 *  Test.Rockitizer - API regression testing framework 
 *   Copyright (C) 2020  rockit.consulting GmbH
@@ -37,7 +38,7 @@ public class DBPutConnectorTest {
 
 	
 	@Test
-	public void test() throws URISyntaxException, IOException {
+	public void testMultiline() throws URISyntaxException, IOException {
 	
 		DBPutConnector dbPutConnector = new DBPutConnector("DBPUT.CLAEN");
 		
@@ -55,4 +56,28 @@ public class DBPutConnectorTest {
 		
 	}
 
+	@Test
+	public void testSemicolon() throws URISyntaxException, IOException {
+	
+		DBPutConnector dbPutConnector = new DBPutConnector("DBPUT.CLAEN");
+		
+		Path src = Paths.get(ClassLoader.getSystemResource("connectors/db/DBPutConnector/multiSemicolonPayloadWithComments.sql").toURI());
+		File multi = new File(src.toString());
+		assertTrue(multi.exists());
+		dbPutConnector.setRequest(multi);
+		Assert.assertEquals(3, dbPutConnector.extractSQLCommandsFromPayload().size());
+		dbPutConnector.extractSQLCommandsFromPayload().forEach( cmd -> {
+			cmd = cmd.replaceAll(DBPutConnector.LINE_SEPARATOR,  " ");
+			Assert.assertTrue(!cmd.contains(DBPutConnector.LINE_SEPARATOR));
+			log.info(cmd);	
+		});
+
+		
+		
+		
+
+		
+	}
+	
+	
 }
