@@ -12,6 +12,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
@@ -25,30 +26,30 @@ import org.apache.log4j.Logger;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class ResourcesHolderAccessor extends RuntimeContext {
 
 	public static final Logger log = Logger.getLogger(ResourcesHolderAccessor.class.getName());
 
 	private ResourcesHolder resourcesHolder;
-	
+
 	private String resourcesFileName = "resources.yaml";
 
 	void initFromYaml() throws IOException {
@@ -58,11 +59,11 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	void initFromFileSystem() throws IOException {
 		resourcesHolder = resourcesHolderFromFileSystemToYaml(null);
 	}
-	
-	
+
 	/**
-	 * Reads yam configuration into the holder object
-	 * CLI relevant: instantiate Resources from yaml
+	 * Reads yam configuration into the holder object CLI relevant: instantiate
+	 * Resources from yaml
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -72,29 +73,30 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 	/**
 	 * CLI relevant: generate Resources from yaml
-	 * @return 
 	 * 
-	 */
-
-	public ResourcesHolder resourcesHolderFromFileSystem()  {
-		return resourcesHolderFromFileSystem(null);
-	}
-	
-	
-	/**
-	 * CLI relevant: generate Resources from yaml
 	 * @return
 	 * 
 	 */
 
-	ResourcesHolder resourcesHolderFromFileSystem(Map <String, String> payloadReplacer)  {
+	public ResourcesHolder resourcesHolderFromFileSystem() {
+		return resourcesHolderFromFileSystem(null);
+	}
+
+	/**
+	 * CLI relevant: generate Resources from yaml
+	 * 
+	 * @return
+	 * 
+	 */
+
+	ResourcesHolder resourcesHolderFromFileSystem(Map<String, String> payloadReplacer) {
 
 		ResourcesHolder resources = new ResourcesHolder();
 
-		if(payloadReplacer!=null) { 
+		if (payloadReplacer != null) {
 			resources.setPayloadReplacer(payloadReplacer);
 		}
-		
+
 		resources.getDbDataSources().add(new DBDataSource());
 		resources.getMqDataSources().add(new MQDataSource());
 		resources.getKeyStores().add(new KeyStore());
@@ -115,7 +117,6 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		return resources;
 	}
 
-	
 	public String getResourcesFileName() {
 		return resourcesFileName;
 	}
@@ -124,7 +125,6 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		this.resourcesFileName = resourcesFileName;
 	}
 
-	
 	/**
 	 * CLI relevant: write resources to yaml
 	 * 
@@ -136,21 +136,20 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 	}
 
-	
 	/**
 	 * CLI relevant: generate Resources from yaml
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
 
-	public ResourcesHolder resourcesHolderFromFileSystemToYaml(Map <String, String> payloadReplacer) throws IOException {
+	public ResourcesHolder resourcesHolderFromFileSystemToYaml(Map<String, String> payloadReplacer) throws IOException {
 
 		ResourcesHolder resources = resourcesHolderFromFileSystem(payloadReplacer);
-		resourcesHolderToYaml (resources);
+		resourcesHolderToYaml(resources);
 		return resources;
 	}
 
-	
 	public Validatable getConnectorById(String id) {
 		Validatable c = (Validatable) resourcesHolder.findResourceByRef(new ConnectorRef(id));
 		if (c == null) {
@@ -180,7 +179,6 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 			throw new ResourceNotFoundException(connector.getDsRefId());
 		}
 
-		
 		if (!ds.isValid()) {
 			throw new ValidationException(ds.validate());
 		}
@@ -188,35 +186,26 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 	}
 
 	public KeyStore getKeyStoreByConnector(HTTPConnector connector) {
-		if(connector.getDsRefId()==null) {
+		if (connector.getDsRefId() == null) {
 			return null;
 		}
-		
+
 		KeyStore ds = resourcesHolder.findKeyStoreById(connector.getDsRefId());
 		if (ds == null) {
 			throw new ResourceNotFoundException(connector.getDsRefId());
 		}
-		
+
 		if (!ds.isValid()) {
 			throw new ValidationException(ds.validate());
 		}
 		return ds;
 	}
-	
-
-
 
 	public String contextAsString() {
-		return "[ filename: " + getResourcesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() +"]";
-		
+		return "[ filename: " + getResourcesFileName() + ", absPath: " + getAbsolutePath() + ", relPath: " + getRelativePath() + "]";
+
 	}
 
-
-
-
-	
-	
-	
 	/**
 	 * Private class for instantiation and addition of respective connectors
 	 *
@@ -282,28 +271,18 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 				break;
 
 			default:
-				throw new IllegalArgumentException("Invalid connector : " + cType + " under " + connFolder.getAbsolutePath());
-
+				throw new InvalidConnectorFormatException("Invalid connector : " + cType + " under " + connFolder.getAbsolutePath());
 			}
 
 		}
 	}
 
-
-
-
-
-
-
 	public ResourcesHolder getResourcesHolder() {
 		return resourcesHolder;
 	}
 
-
-
 	public void setResourcesHolder(ResourcesHolder resourcesHolder) {
 		this.resourcesHolder = resourcesHolder;
 	}
-
 
 }

@@ -2,6 +2,7 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -53,6 +54,7 @@ public class RockitizerCreateTest implements Runnable {
 		
 		try {
 			if (teststep != null && connector != null) {
+				ValidationUtils.validateConnector(connector);
 				createConnector();
 			} else if (teststep != null) {
 				createTesStep();
@@ -64,7 +66,7 @@ public class RockitizerCreateTest implements Runnable {
 				createJunitClass(fPath);
 			}
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Error occured: |@" + e));
 		}
 	}

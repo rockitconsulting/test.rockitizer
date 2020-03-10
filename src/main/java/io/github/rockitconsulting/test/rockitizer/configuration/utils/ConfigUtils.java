@@ -3,7 +3,7 @@ package io.github.rockitconsulting.test.rockitizer.configuration.utils;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.snakeyaml.ConfigurationModelRepresenter;
-import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
+import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,10 +61,8 @@ public class ConfigUtils {
 	}
 
 	public static String connectorTypeFromConnectorId(String connId) {
-		if (!connId.contains(".")) {
-			throw new InvalidConnectorFormatException(connId);
-		}
-		return connId.contains(".") ? connId.split("\\.")[0] : connId;
+		ValidationUtils.validateConnector(connId);
+		return connId.split("\\.")[0];
 	}
 
 	public static void writeModelObjToYaml(Object container, String yamlFileNameWithAbsPath) throws IOException {

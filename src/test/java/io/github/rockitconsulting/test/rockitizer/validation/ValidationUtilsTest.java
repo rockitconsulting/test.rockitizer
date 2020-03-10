@@ -4,6 +4,7 @@ import static io.github.rockitconsulting.test.rockitizer.configuration.Configura
 import static io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder.validationHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
+import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,7 +42,25 @@ public class ValidationUtilsTest {
 	public void before() {
 		ValidationHolder.reset();
 	}
+	
+	@Test(expected=InvalidConnectorFormatException.class)
+	public void validateConnectorNOK_No_Separator() throws IOException {
+		ValidationUtils.validateConnector("WRONG_NO_POINT_SEPARATOR");
+	}
+	
+	@Test(expected=InvalidConnectorFormatException.class)
+	public void validateConnectorNOK_Unknown() throws IOException {
+		ValidationUtils.validateConnector("WRONG.UNKNOWN");
+	}
 
+	public void validateConnectorOK_DBGET() throws IOException {
+		ValidationUtils.validateConnector("DBGET.OK");
+	}
+	
+	public void validateConnectorOK_HTTP() throws IOException {
+		ValidationUtils.validateConnector("HTTP.OK");
+	}
+	
 	@Test
 	public void cleanGitIgnore() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();

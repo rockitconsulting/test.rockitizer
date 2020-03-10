@@ -80,12 +80,12 @@ public class AbstractTestFolderTest {
 		
 		
 		
-		asf =  new AbstractTestFolder("RuntimeMonitoringTest","a001FireTrigger","MQ.RUNTIMEMONITORING.TRIGGER");
+		asf =  new AbstractTestFolder("RuntimeMonitoringTest","a001FireTrigger","MQPUT.RUNTIMEMONITORING.TRIGGER");
 		assertTrue("RuntimeMonitoringTest".equals( asf.getTestName() ));
 		assertTrue("a001FireTrigger".equals( asf.getTestStepName() ));
-		assertTrue("MQ.RUNTIMEMONITORING.TRIGGER".equals( asf.getConnectorName() ));
-		assertTrue("RuntimeMonitoringTest/output/a001FireTrigger/MQ.RUNTIMEMONITORING.TRIGGER/".equals(asf.getOutFolderName().replace("\\", "/")));
-		assertTrue("RuntimeMonitoringTest/a001FireTrigger/MQ.RUNTIMEMONITORING.TRIGGER/".equals(asf.getInFolderName().replace("\\", "/")));
+		assertTrue("MQPUT.RUNTIMEMONITORING.TRIGGER".equals( asf.getConnectorName() ));
+		assertTrue("RuntimeMonitoringTest/output/a001FireTrigger/MQPUT.RUNTIMEMONITORING.TRIGGER/".equals(asf.getOutFolderName().replace("\\", "/")));
+		assertTrue("RuntimeMonitoringTest/a001FireTrigger/MQPUT.RUNTIMEMONITORING.TRIGGER/".equals(asf.getInFolderName().replace("\\", "/")));
 
 		asf =  new AbstractTestFolder("RuntimeMonitoringTest");
 		assertTrue("RuntimeMonitoringTest".equals( asf.getTestName() ));

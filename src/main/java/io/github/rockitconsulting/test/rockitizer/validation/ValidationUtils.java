@@ -14,6 +14,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCas
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
@@ -30,25 +31,32 @@ import java.util.stream.StreamSupport;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class ValidationUtils {
+
+	public static void validateConnector(String connId) {
+		if ((!connId.contains(".")) || !Constants.SUPPORTED_CONNECTORS.contains(connId.split("\\.")[0]) ) {
+			throw new InvalidConnectorFormatException(connId);
+		}
+
+	}
 
 	/**
 	 * ImmutableMap.&lt;String, String&gt;builder(). put(k, v). put(k, v).
@@ -89,7 +97,7 @@ public class ValidationUtils {
 						tc -> tc.getTestSteps().forEach(
 								ts -> ts.getConnectorRefs().forEach(
 										conRef -> {
-											Object conn  = configuration().getRhApi().getResourcesHolder().findResourceByRef(conRef);
+											Object conn = configuration().getRhApi().getResourcesHolder().findResourceByRef(conRef);
 											if (conn == null) {
 
 												validationHolder().add(
@@ -98,57 +106,52 @@ public class ValidationUtils {
 																+ " exists in testcases but not in resources"));
 
 											} else {
-												
+
 												validateDataSourceRefForConnector(conn);
-												
+
 											}
 										})));
 
 	}
 
 	private static void validateDataSourceRefForConnector(Object conn) {
-	
-		if(conn instanceof DBConnector  ) {
+
+		if (conn instanceof DBConnector) {
 			try {
-				configuration().getDBDataSourceByConnector( (DBConnector)conn );
+				configuration().getDBDataSourceByConnector((DBConnector) conn);
 			} catch (ResourceNotFoundException rnfe) {
-				registerValidationErrorDataSourceNotFound(  ((DBConnector)conn).getId(), ((DBConnector)conn).getDsRefId() );
-			}catch (ValidationException ve) { //NOSONAR
-				//handled by another validation  
-			}
-			
-		} else if(conn instanceof MQConnector  ) {
-			try {
-				configuration().getMQDataSourceByConnector( (MQConnector)conn );
-			} catch (ResourceNotFoundException rnfe) {
-				registerValidationErrorDataSourceNotFound(  ((MQConnector)conn).getId(), ((MQConnector)conn).getDsRefId() );
-			}catch (ValidationException ve) { //NOSONAR
-				//handled by another validation  
+				registerValidationErrorDataSourceNotFound(((DBConnector) conn).getId(), ((DBConnector) conn).getDsRefId());
+			} catch (ValidationException ve) { // NOSONAR
+				// handled by another validation
 			}
 
-			
-		} if(conn instanceof HTTPConnector  ) {
+		} else if (conn instanceof MQConnector) {
 			try {
-				configuration().getKeyStoreByConnector( (HTTPConnector)conn );
+				configuration().getMQDataSourceByConnector((MQConnector) conn);
 			} catch (ResourceNotFoundException rnfe) {
-				registerValidationErrorDataSourceNotFound(  ((HTTPConnector)conn).getId(), ((HTTPConnector)conn).getDsRefId() );
-			}catch (ValidationException ve) { //NOSONAR
-				//handled by another validation  
+				registerValidationErrorDataSourceNotFound(((MQConnector) conn).getId(), ((MQConnector) conn).getDsRefId());
+			} catch (ValidationException ve) { // NOSONAR
+				// handled by another validation
 			}
 
-			
 		}
-		
+		if (conn instanceof HTTPConnector) {
+			try {
+				configuration().getKeyStoreByConnector((HTTPConnector) conn);
+			} catch (ResourceNotFoundException rnfe) {
+				registerValidationErrorDataSourceNotFound(((HTTPConnector) conn).getId(), ((HTTPConnector) conn).getDsRefId());
+			} catch (ValidationException ve) { // NOSONAR
+				// handled by another validation
+			}
 
-		
+		}
+
 	}
 
 	private static void registerValidationErrorDataSourceNotFound(String id, String dsRefId) {
-		validationHolder().add(
-				new Context.Builder().withId(id),
-				new Message(Message.LEVEL.ERROR, "Connector " + id
-						+ " references to non-existing datasource " + dsRefId));
-		
+		validationHolder().add(new Context.Builder().withId(id),
+				new Message(Message.LEVEL.ERROR, "Connector " + id + " references to non-existing datasource " + dsRefId));
+
 	}
 
 	/**
@@ -236,7 +239,7 @@ public class ValidationUtils {
 		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getMqDataSources());
 		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getDbDataSources());
 		ValidationUtils.validateResources(configuration().getRhApi().getResourcesHolder().getKeyStores());
-		//TODO add validation of resources
+		// TODO add validation of resources
 
 	}
 
@@ -380,7 +383,7 @@ public class ValidationUtils {
 		TestCasesHolder tch1 = configuration().getTchApi().testCasesHolderFromYaml();
 		TestCasesHolder tch2 = configuration().getTchApi().testCasesHolderFromFileSystem();
 
-		//comparing yaml vs filesystem
+		// comparing yaml vs filesystem
 		validateNotAllowedEmptyStructures(tch1).forEach(c -> {
 			if (c.getConnector() != null) {
 				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "PUT connector must have payloads in " + testcases));
@@ -388,7 +391,7 @@ public class ValidationUtils {
 				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "empty structure in " + testcases));
 			}
 		});
-		//comparing filesystem vs yaml		
+		// comparing filesystem vs yaml
 		validateNotAllowedEmptyStructures(tch2).forEach(c -> {
 			if (c.getConnector() != null) {
 				ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "PUT connector must have payloads in FileSystem"));
