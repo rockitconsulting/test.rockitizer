@@ -82,6 +82,7 @@ public class FileGetConnectorTest {
 	public void testGetFirstByDir() throws URISyntaxException, IOException  {
 
 		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "connectors/file/FileGetConnector/checkGetLast";
+		changeLastModified(path+File.separator +"lastfile.xml");
 		fileGetConnector.setSrcPath(path);
 		fileGetConnector.proceed();
 		assertEquals("my last modified file content", fileGetConnector.getResponse());
@@ -94,12 +95,19 @@ public class FileGetConnectorTest {
 		tesfilePath = fileGetConnector.getSrcPath();
 
 		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "connectors/file/FileGetConnector/checkGetLast";
+		changeLastModified(path+File.separator +"lastfile.xml");
 		fileGetConnector.setSrcPath(path);
 		fileGetConnector.proceed();
 		assertEquals("my last modified file content", fileGetConnector.getResponse());
 	}
 
 	
+	private void changeLastModified(String path) {
+		new File(path).setLastModified(System.currentTimeMillis());
+	}
+
+
+
 	@Test
 	public void testType() {
 		assertTrue(fileGetConnector.getType(), fileGetConnector.getType().equals("FILEGET."));

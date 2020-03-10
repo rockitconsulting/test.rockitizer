@@ -33,4 +33,7 @@ public abstract class AbstractAssertion implements Assertions {
 
 	}
 
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 }

@@ -67,10 +67,17 @@ public class FileUtilsTest {
 	public void testLastFile() throws URISyntaxException{
 
 		String path = ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH + "connectors/file/FileGetConnector/checkGetLast";
+		changeLastModified(path+File.separator +"lastfile.xml");
+		
 		File lastFile = FileUtils.lastFile(new File(path));
 		
 		assertEquals("lastfile.xml", lastFile.getName());
 		LOGGER.info("FileUtilsTest.testLastFile- OK :" + lastFile);	
 	}
+
+	private void changeLastModified(String path) {
+		new File(path).setLastModified(System.currentTimeMillis());
+	}
+
 	
 }

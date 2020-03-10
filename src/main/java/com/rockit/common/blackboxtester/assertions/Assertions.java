@@ -26,5 +26,7 @@ public interface Assertions {
 	public void setRecordPath(String path);
 
 	public void setReplayPath(String path);
+	
+	public String toString();
 
 }
