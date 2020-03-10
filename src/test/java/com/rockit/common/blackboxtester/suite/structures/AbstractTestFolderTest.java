@@ -68,10 +68,6 @@ public class AbstractTestFolderTest {
 	
 	@Test
 	public void parseConstructor() {
-	
-		
-	
-		
 		
 		AbstractTestFolder asf;
 

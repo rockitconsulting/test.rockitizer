@@ -39,4 +39,13 @@ public class ConnectorExceptionTest {
 
 	}
 
+	@Test
+	public void testConnectorExceptionMsgThr() {
+		ConnectorException ce = new ConnectorException( "test", new Throwable("thrTest"));
+		assertEquals("test", ce.getMessage());
+		assertEquals("thrTest", ce.getCause().getMessage());
+
+	}
+	
+	
 }
