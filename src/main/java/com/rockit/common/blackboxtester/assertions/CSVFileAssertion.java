@@ -42,7 +42,7 @@ public class CSVFileAssertion extends AbstractAssertion {
 
 	private List<Integer> ignoreIndexes;
 
-	private String relPath = "";
+	
 
 	@SuppressWarnings("unused")
 	private CSVFileAssertion() {
@@ -153,11 +153,5 @@ public class CSVFileAssertion extends AbstractAssertion {
 
 	}
 
-	public String getRelPath() {
-		return relPath;
-	}
-
-	public void setRelPath(String relPath) {
-		this.relPath = relPath;
-	}
+	
 }

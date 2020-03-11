@@ -71,6 +71,9 @@ public class RockitizerListTestCases implements Runnable {
 			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,yellow  	\\_|@" + ts.getTestStepName()));
 			ts.getConnectorRefs().forEach(cr -> {
 				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,yellow 		\\__|@" + cr.getConRefId()));
+				cr.getPayloads().forEach(pl -> {
+					System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,yellow  	 		\\__|@" + pl.getFileName()));
+				});
 			});
 		});
 	}

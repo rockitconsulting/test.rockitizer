@@ -48,8 +48,6 @@ import com.rockit.common.blackboxtester.assertions.fixedlength.RecordsConfig;
 
 public class FixedLengthFileAssertion extends AbstractAssertion {
 
-	private String relPath = "";
-
 	protected List<String> recorded = new ArrayList<>();
 	protected List<String> replayed = new ArrayList<>();
 
@@ -68,8 +66,8 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 
 	@Override
 	public void proceed() {
-		File recordFolder = new File(recordPath + relPath);
-		File replayFolder = new File(replayPath + relPath);
+		File recordFolder = new File(recordPath + getRelPath());
+		File replayFolder = new File(replayPath + getRelPath());
 
 		for (File recordFile : Files.fileTraverser().depthFirstPreOrder(recordFolder)) {
 			if (recordFile.isFile()) {
@@ -114,12 +112,5 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 		return recordConfig;
 	}
 
-	public String getRelPath() {
-		return relPath;
-	}
-
-	public void setRelPath(String relPath) {
-		this.relPath = relPath;
-	}
 
 }

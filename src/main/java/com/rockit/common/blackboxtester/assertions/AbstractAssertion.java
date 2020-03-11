@@ -22,7 +22,8 @@ package com.rockit.common.blackboxtester.assertions;
 public abstract class AbstractAssertion implements Assertions {
 	protected String recordPath;
 	protected String replayPath;
-
+	protected  String relPath = "";
+	
 	public void setRecordPath(String path) {
 		recordPath = path;
 
@@ -32,8 +33,17 @@ public abstract class AbstractAssertion implements Assertions {
 		replayPath = path;
 
 	}
+	
+	public String getRelPath() {
+		return relPath;
+	}
+
+	public void setRelPath(String relPath) {
+		this.relPath = relPath;
+	}
+	
 
 	public String toString() {
-		return this.getClass().getSimpleName();
+		return this.getClass().getSimpleName()+"(\"" + (relPath.equalsIgnoreCase("")?"\\":relPath) + "\")";
 	}
 }
