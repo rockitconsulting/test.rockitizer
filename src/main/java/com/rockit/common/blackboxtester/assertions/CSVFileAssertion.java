@@ -152,6 +152,14 @@ public class CSVFileAssertion extends AbstractAssertion {
 		return this;
 
 	}
+	
+	public String toString() {
+		return this.getClass().getSimpleName() + "( path:\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\"" +
+				(separator!=null?", separator:\""+separator+"\"":"" ) +
+				(!ignoreIndexes.isEmpty()?", ignoreIndexes:\""+Joiner.on(",").join(ignoreIndexes)+"\"":"" ) +
+				" )";
+	}
+
 
 	
 }

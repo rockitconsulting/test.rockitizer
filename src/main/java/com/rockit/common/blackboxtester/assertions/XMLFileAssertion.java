@@ -17,6 +17,7 @@ import org.xmlunit.diff.Diff;
 import org.xmlunit.diff.ElementSelector;
 import org.xmlunit.util.Predicate;
 
+import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 import com.rockit.common.blackboxtester.exceptions.AssertionException;
 
@@ -166,5 +167,12 @@ public class XMLFileAssertion extends AbstractAssertion {
 
 	}
 
+	public String toString() {
+		return this.getClass().getSimpleName() + "( path:\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\"" +
+				
+				(!tokens.isEmpty()?", ignoreFields:\""+Joiner.on(",").join(tokens)+"\"":"" ) +
+				(!attrs.isEmpty()?", ignoreAttrs:\""+Joiner.on(",").join(attrs)+"\"":"" ) +
+				" )";
+	}
 
 }

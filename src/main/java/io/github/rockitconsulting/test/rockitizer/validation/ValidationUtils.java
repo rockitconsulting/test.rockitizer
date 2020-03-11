@@ -373,7 +373,7 @@ public class ValidationUtils {
 
 	/**
 	 * validation directory structure and tescases make warnings for empty
-	 * testcases/tessteps
+	 * testcases/teststeps
 	 * 
 	 * @throws IOException
 	 */
