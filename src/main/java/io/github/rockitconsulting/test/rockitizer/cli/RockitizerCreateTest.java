@@ -38,13 +38,13 @@ public class RockitizerCreateTest implements Runnable {
 
  
 	
-	@Parameters(index = "0", arity = "1", description = " testCase name ")
+	@Parameters(index = "0", arity = "1", description = "testCase name ")
 	String testcase;
 
 	@Parameters(index = "1", arity = "0..1", description = "testStep name ")
 	String teststep;
 
-	@Parameters(index = "2", arity = "0..1", description = " Connector : HTTP.<ID>, SCPPUT.<ID>, MQGET.<ID>, MQPUT.<ID>, FILEPUT.<ID>, FILEDEL.<ID>, FILEGET.<ID>, DBGET.<ID>, DBPUT.<ID>")
+	@Parameters(index = "2", arity = "0..1", description = "Connector : HTTP.<ID>, SCPPUT.<ID>, MQGET.<ID>, MQPUT.<ID>, FILEPUT.<ID>, FILEDEL.<ID>, FILEGET.<ID>, DBGET.<ID>, DBPUT.<ID>")
 	String connector;
 
 	@Override
