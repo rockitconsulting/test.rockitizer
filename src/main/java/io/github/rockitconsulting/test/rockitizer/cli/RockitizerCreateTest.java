@@ -13,7 +13,16 @@ import picocli.CommandLine.Parameters;
 
 @CommandLine.Command(name = "create-test", sortOptions = false, headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
 parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header ="cli create-test <testcase> [<teststep>] [<connector>]", 
-description = " Creates the test objects in the file system ")
+description = " Creates the test objects in the file system "
+		+ " FILEinFILEOutTest%n" 
+		+ "\\_0BEFORE%n"
+		+ "\\__FILEDEL.IN.FILE2FILE%n"
+		+ "\\__FILEDEL.OUT.FILE2FILE%n"
+		+ "\\_a001FILEPutMessage%n"
+		+ "\\__FILEPUT.IN.FILE2FILE%n"
+		+ "\\_a002FILEGetMessage%n"
+		+ "\\__FILEGET.OUT.FILE2FILE%n"
+		+ "")
 
 /**
 *  Test.Rockitizer - API regression testing framework 
