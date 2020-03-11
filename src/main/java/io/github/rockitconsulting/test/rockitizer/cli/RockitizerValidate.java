@@ -19,10 +19,16 @@ descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
 optionListHeading = "%n@|bold,underline Options:|@%n", 
 header = "cli validate [-gitfix[=<true|false>]] [<env>]", 
-description = " Complete validation for the testsuite:%n"
-		+ "     test file system validated against testcases.yaml;%n"
-		+ "     test file system validated against test Java files;%n"
-		+ "     validation of not allowed empty structures."
+description = " The following will be checked:%n"
+		+ "     - referenced connectors must be present both in testcases.yaml and resources.yaml;%n"
+		+ "     - connector type must be one of the following: MQPUT, MQGET, DBPUT, DBGET, HTTP, FILEDEL, FILEPUT, FILEGET, SCPPUT, SCPGET;%n"
+		+ "     - referenced data sources must be available;%n"		
+		+ "     - not allowed empty folders must not be present or their presence must be ignored;%n"
+		+ "     - test file structure must meet the testcases.yaml configuration;%n"
+		+ "     - connector folders that require payloads must contain payloads;%n"
+		+ "     - test .java file must be present for each test case;%n"
+		+ "     - test case must be present for each test .java file;%n"		
+		+ "     - mandatory parameters must not be null or placeholders."
 		+ "")
 
 /**
