@@ -27,7 +27,7 @@ description = "Runs JUnit test or complete test suite in console, optionally req
 			+ "  - RECORD (executing of master test/suite under src/test/resources/, keeping results under src/test/resources/<testcase>/output);%n"
 			+ "  - REPLAY (copying master test to target, executing it and performing assertions);%n"
 			+ "  - ASSERT (comparing the RECORD and REPLAY outputs). Best practice to use for tuning the assertions in order to get the best coverage.%n",
-footer = "%n%nNotice: For run you can use following options:  CLI, IDE/Standalone Maven Starter, IDE JUnit Starter."
+footer = "%n%nNotice: For run, you can use following options:  CLI, IDE/Standalone Maven Starter, IDE JUnit Starter."
 )
 
 /**
