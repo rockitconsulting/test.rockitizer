@@ -12,9 +12,24 @@ import picocli.CommandLine.Parameters;
 import com.google.common.base.Joiner;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "validate", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", 
-descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
-optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli validate [-gitfix[=<true|false>]] [<env>]", description = " Complete validation for the testsuite.")
+@CommandLine.Command(name = "validate", sortOptions = false, 
+headerHeading = "@|bold,underline Usage:|@%n%n", 
+synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", 
+header = "cli validate [-gitfix[=<true|false>]] [<env>]", 
+description = " The following will be checked:%n"
+		+ "     - referenced connectors must be present both in testcases.yaml and resources.yaml;%n"
+		+ "     - connector type must be one of the following: MQPUT, MQGET, DBPUT, DBGET, HTTP, FILEDEL, FILEPUT, FILEGET, SCPPUT, SCPGET;%n"
+		+ "     - referenced data sources must be available;%n"		
+		+ "     - not allowed empty folders must not be present or their presence must be ignored;%n"
+		+ "     - test file structure must meet the testcases.yaml configuration;%n"
+		+ "     - connector folders that require payloads must contain payloads;%n"
+		+ "     - test .java file must be present for each test case;%n"
+		+ "     - test case must be present for each test .java file;%n"		
+		+ "     - mandatory parameters must not be null or placeholders."
+		+ "")
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -37,10 +52,10 @@ optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli validate [-
 
 public class RockitizerValidate implements Runnable {
 
-	@Option(defaultValue = "false", showDefaultValue=CommandLine.Help.Visibility.ALWAYS, names = { "-gitfix", "--addgitignore" }, arity = "0..1", description = "add .gitignore to all GET connector folders to allow get commit.")
+	@Option(defaultValue = "false", showDefaultValue=CommandLine.Help.Visibility.ALWAYS, names = { "-gitfix", "--addgitignore" }, arity = "0..1", description = "add .gitignore to all GET connector folders to enforce git commit with empty folders.")
 	boolean gitfix=false;
 
-	@Parameters(index = "0", arity = "0..1", description = ": env = dev => validation with environment dependent resources-dev.yaml")
+	@Parameters(index = "0", arity = "0..1", description = ": env = dev => validation with environment-dependent resources-dev.yaml")
 	String env;
 
 	
@@ -53,9 +68,9 @@ public class RockitizerValidate implements Runnable {
 
 		
 		if (gitfix) {
-			System.out.println("adding .gitignore to enforce empty folders commit");
+			System.out.println("adding .gitignore to enforce git commit with empty folders");
 			ValidationUtils.fixGitEmptyFoldersProblem();
-			System.out.println("added .gitignore. re-run validation and commit if valid");
+			System.out.println("added .gitignore. Please re-run validation and commit if valid");
 		}
 
 		ValidationUtils.validateConnectorRefExists();
@@ -70,7 +85,7 @@ public class RockitizerValidate implements Runnable {
 				System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold Result: |@") + CommandLine.Help.Ansi.AUTO.string("@|bold,red NOK |@")+ "Not valid with validation messages:");
 				ValidationHolder.validationHolder().forEach((k, v) -> System.err.println(k + " - " + Joiner.on(";").join(v)));
 			} else {
-				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + " Validation successfull. Please commit the changes if nescessary."));
+				System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + " Validation successfull. Please commit the changes if necessary."));
 
 			}
 

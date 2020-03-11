@@ -9,7 +9,7 @@ import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "sync", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli sync [<env>]", description = "syncronizing test folder structure with resources-<env>.yaml and testcases.yaml")
+@CommandLine.Command(name = "sync", sortOptions = false, headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli sync [<env>]", description = "Syncronizing test folder structure with resources-<env>.yaml and testcases.yaml")
 
 /**
 *  Test.Rockitizer - API regression testing framework 
