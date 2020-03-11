@@ -11,8 +11,12 @@ import java.io.IOException;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "create-test", sortOptions = false, headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
-parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header ="cli create-test <testcase> [<teststep>] [<connector>]", 
+@CommandLine.Command(name = "create-test", sortOptions = false, 
+headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", 
+header ="cli create-test <testcase> [<teststep>] [<connector>]", 
 description = " Creates the test objects in the file system. E.g.:%n%n"
 		+ " FILEinFILEOutTest%n" 
 		+ "       \\_0BEFORE%n"
@@ -21,7 +25,8 @@ description = " Creates the test objects in the file system. E.g.:%n%n"
 		+ "       \\_a001FILEPutMessage%n"
 		+ "              \\__FILEPUT.IN.FILE2FILE%n"
 		+ "       \\_a002FILEGetMessage%n"
-		+ "              \\__FILEGET.OUT.FILE2FILE%n"
+		+ "              \\__FILEGET.OUT.FILE2FILE%n",
+footer = "%nNotice: You are free to use any file manager to create testcases."
 		+ "")
 
 /**
@@ -47,10 +52,10 @@ public class RockitizerCreateTest implements Runnable {
 
  
 	
-	@Parameters(index = "0", arity = "1", description = "TestCase name (For Maven compatibility, best practice is to use \"test\" in testcase names. E.g. \"MyFirstTest\")")
+	@Parameters(index = "0", arity = "1", description = "TestCase name (For Maven compatibility, best practice is to use \"Test\" in testcase names. E.g. \"MyFirstTest\")")
 	String testcase;
 
-	@Parameters(index = "1", arity = "0..1", description = "TestStep name (For visual presentation, best practice is to use a digit in teststep names. E.g. \"0InitialStep\", \"1NextStep\" etc.)")
+	@Parameters(index = "1", arity = "0..1", description = "TestStep name (For name-based sorting, best practice is to use indexing in teststep names. E.g. \"0InitialStep\", \"1NextStep\" etc.)")
 	String teststep;
 
 	@Parameters(index = "2", arity = "0..1", description = "Connector: HTTP.<ID>, SCPPUT.<ID>, MQGET.<ID>, MQPUT.<ID>, FILEPUT.<ID>, FILEDEL.<ID>, FILEGET.<ID>, DBGET.<ID>, DBPUT.<ID>")
