@@ -6,7 +6,7 @@ import picocli.CommandLine.Parameters;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "create-env", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli create-env [<env>]", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
+@CommandLine.Command(name = "create-env", sortOptions = false, headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli create-env [<env>]", description = " Generates environment dependent configuration from test structure under /src/test/resources ")
 /**
  *  Test.Rockitizer - API regression testing framework 
  *   Copyright (C) 2020  rockit.consulting GmbH

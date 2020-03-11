@@ -47,10 +47,10 @@ public class RockitizerCreateTest implements Runnable {
 
  
 	
-	@Parameters(index = "0", arity = "1", description = "TestCase name ")
+	@Parameters(index = "0", arity = "1", description = "TestCase name (For Maven compatibility, best practice is to use \"test\" in testcase names. E.g. \"MyFirstTest\")")
 	String testcase;
 
-	@Parameters(index = "1", arity = "0..1", description = "TestStep name ")
+	@Parameters(index = "1", arity = "0..1", description = "TestStep name (For visual presentation, best practice is to use a digit in teststep names. E.g. \"0InitialStep\", \"1NextStep\" etc.)")
 	String teststep;
 
 	@Parameters(index = "2", arity = "0..1", description = "Connector: HTTP.<ID>, SCPPUT.<ID>, MQGET.<ID>, MQPUT.<ID>, FILEPUT.<ID>, FILEDEL.<ID>, FILEGET.<ID>, DBGET.<ID>, DBPUT.<ID>")
