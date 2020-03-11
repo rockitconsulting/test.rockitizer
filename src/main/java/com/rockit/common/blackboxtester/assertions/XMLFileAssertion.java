@@ -50,8 +50,6 @@ public class XMLFileAssertion extends AbstractAssertion {
 
 	BuilderContext context = new XMLFileAssertion.BuilderContext();
 
-	private String relPath = "";
-
 	@SuppressWarnings("unused")
 	private XMLFileAssertion() {
 	}
@@ -168,12 +166,5 @@ public class XMLFileAssertion extends AbstractAssertion {
 
 	}
 
-	public String getRelPath() {
-		return relPath;
-	}
-
-	public void setRelPath(String relPath) {
-		this.relPath = relPath;
-	}
 
 }

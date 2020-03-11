@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Joiner;
 import com.rockit.common.blackboxtester.exceptions.AssertionException;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
@@ -143,4 +144,9 @@ public class DBAssertion extends AbstractAssertion {
 
 		}
 	}
+	
+	public String toString() {
+		return this.getClass().getSimpleName()+"(\" query:" + sql + ", assertContainsTokens: "+ Joiner.on(",").join(mustContainTokens) + "\")";
+	}
+	
 }
