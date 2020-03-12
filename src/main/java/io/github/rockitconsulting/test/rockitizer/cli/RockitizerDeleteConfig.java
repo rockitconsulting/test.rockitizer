@@ -7,7 +7,15 @@ import java.io.File;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "delete-env", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli delete-env [<env>]", description = "Delete environment")
+@CommandLine.Command(name = "delete-env", 
+sortOptions = false, 
+headerHeading = "@|bold,underline Usage:|@%n%n", 
+synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", 
+header = "cli delete-env [<env>]", 
+description = "Deletes test environment configuration.")
 
 /**
 *  Test.Rockitizer - API regression testing framework 
