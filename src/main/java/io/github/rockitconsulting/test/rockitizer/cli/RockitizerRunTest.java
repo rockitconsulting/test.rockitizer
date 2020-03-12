@@ -5,10 +5,12 @@ import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtil
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.internal.TextListener;
+import org.junit.runner.Description;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -81,7 +83,7 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 			}
 
 			if (testname != null) {
-				addListener(new TextListener(System.out));
+				addListener(new MyTextListener(System.out));
 				
 				if (testname.equalsIgnoreCase("all")) {
 					FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava())).forEach(test -> {
@@ -122,4 +124,17 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 		results.add(result);
 	}
 
+	
+	private class MyTextListener extends TextListener {
+
+		public MyTextListener(PrintStream writer) {
+			super(writer);
+		}
+
+		@Override
+		public void testStarted(Description description) {
+
+		}
+
+	}	
 }
