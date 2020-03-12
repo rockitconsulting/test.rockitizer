@@ -15,7 +15,21 @@ import picocli.CommandLine.Parameters;
 import com.google.common.base.Strings;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
-@CommandLine.Command(name = "list-resources", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-resources [-v[=<yaml|tree>]] [<env>]", description = "listing of resources-<env>.yaml")
+@CommandLine.Command(name = "list-resources", 
+sortOptions = false, 
+headerHeading = "@|bold,underline Benutzung:|@%n%n", 
+synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", 
+header = "cli list-resources [-v[=<yaml|tree>]] [<env>]", 
+description = "Generates listing of resources-<env>.yaml View type by default: tree.%n%n"
+		+ "        E.g. tree view:                           E.g. yaml view:%n"
+		+ "mqConnectors                                     mqConnectors:%n"
+		+ "             @|bold,yellow \\_|@id:MQGET.ERROR                    - id: MQGET.ERROR%n"
+		+ "               type:MQGET                          type: MQGET%n"
+		+ "               queue:MQ.ERROR                      queue: MQ.ERROR%n"
+		+ "               dsRefId:defaultMQ                   dsRefId: defaultMQ%n")
 
 /**
 *  Test.Rockitizer - API regression testing framework 

@@ -11,14 +11,14 @@ import picocli.CommandLine.Parameters;
 
 @CommandLine.Command(name = "delete-test",
 	sortOptions = false,
-	headerHeading = "@|bold,underline Benutzung:|@%n%n",
+	headerHeading = "@|bold,underline Usage:|@%n%n",
 	synopsisHeading = "%n",
 	descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 	parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 	optionListHeading = "%n@|bold,underline Options:|@%n",
 	header = "cli delete-test <testcase> [<teststep>] [<connector>]",
-	description = "Deletes the test objects in the file system " +
-			"along with a log message from the user describing the changes.")
+	description = "Deletes test objects in file system " +
+			"and generates a log message for the user, describing the changes.")
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -41,13 +41,13 @@ import picocli.CommandLine.Parameters;
 
 public class RockitizerDeleteTest implements Runnable {
 
-	@Parameters(index = "0", arity = "1", description = " testCase name ")
+	@Parameters(index = "0", arity = "1", description = "TestCase name ")
 	String testcase;
 
-	@Parameters(index = "1", arity = "0..1", description = "testStep name ")
+	@Parameters(index = "1", arity = "0..1", description = "TestStep name ")
 	String teststep;
 
-	@Parameters(index = "2", arity = "0..1", description = " Connector : HTTP.<ID>, SCPPUT.<ID>, MQGET.<ID>, MQPUT.<ID>, FILEPUT.<ID>, FILEDEL.<ID>, FILEGET.<ID>, DBGET.<ID>, DBPUT.<ID>")
+	@Parameters(index = "2", arity = "0..1", description = "Connector : HTTP.<ID>, SCPPUT.<ID>, MQGET.<ID>, MQPUT.<ID>, FILEPUT.<ID>, FILEDEL.<ID>, FILEGET.<ID>, DBGET.<ID>, DBPUT.<ID>")
 	String connector;
 	
 	@Override
