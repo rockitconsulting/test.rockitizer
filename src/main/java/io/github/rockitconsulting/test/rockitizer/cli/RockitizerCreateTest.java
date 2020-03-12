@@ -24,7 +24,7 @@ description = " Creates the test objects in the file system. E.g.:%n%n"
 		+ "              \\__FILEDEL.OUT.FILE2FILE%n"
 		+ "       \\_a001FILEPutMessage%n"
 		+ "              \\__FILEPUT.IN.FILE2FILE%n"
-		+ "						\\__testinput.xml%n"
+		+ "                      \\__testinput.xml%n"
 		+ "       \\_a002FILEGetMessage%n"
 		+ "              \\__FILEGET.OUT.FILE2FILE%n",
 footer = "%nNotice: You are free to use any file manager to create testcases."
