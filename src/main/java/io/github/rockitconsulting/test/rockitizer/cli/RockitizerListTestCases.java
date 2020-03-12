@@ -10,7 +10,31 @@ import java.io.IOException;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
-@CommandLine.Command(name = "list-testcases", sortOptions = false, headerHeading = "@|bold,underline Benutzung:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli list-testcases [-v[=<yaml|tree>]]", description = "Listing testcases from testcases.yaml")
+@CommandLine.Command(name = "list-testcases", 
+sortOptions = false, 
+headerHeading = "@|bold,underline Usage:|@%n%n", 
+synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", 
+header = "cli list-testcases [-v[=<yaml|tree>]]", 
+description = "Listing testcases from testcases.yaml. View type by default: tree.%n%n"
+		+ "             E.g. tree view:                             E.g. yaml view:%n"
+		+ " FILEinFILEOutTest                               - testCaseName: FILEinFILEOutTest%n"
+		+ "       \\_0BEFORE                                   testSteps:%n"
+		+ "              \\__FILEDEL.IN.FILE2FILE              - testStepName: 0BEFORE%n"
+		+ "              \\__FILEDEL.OUT.FILE2FILE               connectorRefs:%n"
+		+ "       \\_a001FILEPutMessage                          - conRefId: FILEDEL.IN.FILE2FILE%n"
+		+ "              \\__FILEPUT.IN.FILE2FILE                - conRefId: FILEDEL.OUT.FILE2FILE%n"
+		+ "                      \\__testinput.xml             - testStepName: a001FILEPutMessage%n"
+		+ "       \\_a002FILEGetMessage                          connectorRefs: %n"
+		+ "              \\__FILEGET.OUT.FILE2FILE               - conRefId: FILEPUT.IN.FILE2FILE%n"
+		+ "                                                       payloads:%n"
+		+ "                                                       - fileName: testinput.xml%n"
+		+ "                                                   - testStepName: a002FILEGetMessage%n"
+		+ "                                                     connectorRefs:%n"
+		+ "                                                     - conRefId: FILEGET.OUT.FILE2FILE"
+		)
 
 /**
 *  Test.Rockitizer - API regression testing framework 
