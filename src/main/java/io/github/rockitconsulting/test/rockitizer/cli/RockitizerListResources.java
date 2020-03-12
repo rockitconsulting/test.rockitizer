@@ -75,6 +75,7 @@ public class RockitizerListResources extends CommonCLI implements Runnable {
 
 		printPrintableResource(rhyaml.getMqConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow mqConnectors |@"));
 		printPrintableResource(rhyaml.getFileConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow fileConnectors |@"));
+		printPrintableResource(rhyaml.getHttpConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow httpConnectors |@"));
 		printPrintableResource(rhyaml.getDbConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow dbConnectors |@"));
 		printPrintableResource(rhyaml.getScpConnectors(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow scpConnectors |@"));
 		printPrintableResource(rhyaml.getMqDataSources(), CommandLine.Help.Ansi.AUTO.string("@|bold,yellow mqDataSourcres |@"));
