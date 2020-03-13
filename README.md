@@ -3,7 +3,7 @@
 
 # test.rockitizer - Keep Your Integration Tested!
 
-<br>
+
 <!--Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.-->
 
 ## <a name="bigideabehind"></a> Big Idea Behind 
@@ -43,7 +43,7 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
   - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` connectors available and enabled for HTTPS, SOAP, REST, including support for PKI, BasicAuth, WS-Security, etc.
   - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
   - regression testing and continuous integration enabled, including surefire reports -->
-<br>
+
 
 
 ## <a name="corefeatures"></a> Core Features:
@@ -69,15 +69,21 @@ Regression testing and continuous integration enabled, including surefire report
 * Support for multiple DB-DataSources, KeyStores, Queue-Managers
 
 
+
 ## <a name="uniqueadvantages"></a> Unique Advantages
 * Improved productivity for developers. No additional tools like SOAP-UI, DB-Viewers, MQ-Tools needed.
 * Test-Driven Development for Integration landscapes, via developing against desired targets.
+
+
 
 ## <a name="cli"></a> CLI
 ![CLI](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
 Format: ![Alt Text](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
 
+
+
 ## <a name="runningtests"></a> Running Tests
+
 ### <a name="console"></a> Console
 
 ```
@@ -136,13 +142,17 @@ This program is distributed under GPL v3.0 License and comes with ABSOLUTELY NO 
 This is free software, and you are welcome to redistribute it under GPL v3.0 conditions 
 ```
 
+
+
 ## <a name="ide"></a> IDE
 ![IDE](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
 Format: ![Alt Text](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
 
 
+
 ## <a name="jenkins"></a> Jenkins
 For a complete understanding including junit starter and project layout, please refer to QuickStart Guide.
+
 
 
 ## <a name="mainconcepts"></a> Main Concepts
@@ -152,7 +162,6 @@ According to the maven conventions the following folders of  your test.project a
 
 Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
 Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample).
-
 
 ### <a name="declarativetestplan"></a> Concept of Declarative Test Plan
 
@@ -239,6 +248,8 @@ They should be committed in the source repository and will be shared across user
       ]
 ```
 
+
+
 ## <a name="authors"></a> Authors
 
 `test.rockitizer` was created by [`Yefym Dmukh`](https://github.com/yefymdmukh).
@@ -246,10 +257,13 @@ They should be committed in the source repository and will be shared across user
 
 `test.rockitizer` is sponsored by [`rockit.consulting GmbH`](http://www.rockit.consulting/)
 
+
+
 ## <a name="license"></a> License
 GNU General Public License v3.0 or later
 
 See [LICENSE](LICENSE.md) to see the full text.
+
 
 
 ## <a name="publications"></a> Publications
