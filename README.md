@@ -152,7 +152,7 @@ Junit serves as glue and looks for the test plan with the same name starting its
 Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample).
 
 
-### <a name="declarativetestplan"></a> Concept of declarative Test Plan
+### <a name="declarativetestplan"></a> Concept of Declarative Test Plan
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="400"  width="250" align="right"/> 
  	
@@ -168,7 +168,7 @@ For the test plan reference check [docu](docs/USAGE.md#testplan)
 **The declarative test-plan approach reduces the maintanence costs of the test-suite**.  
 
 
-### <a name="testdataseparation"></a> Test data separation from environment configuration
+### <a name="testdataseparation"></a> Test Data Separation from Environment Configuration
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="450"  width="250" align="right"/> 
 
