@@ -6,6 +6,24 @@
 
 Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.
 
+## <a name="bigideabehind"></a> Big Idea Behind 
+
+The modern IT landscape is increasing in integration complexity due to various communication protocols and data formats.  
+
+**test.rockITizer** addresses this problem, introducing an API Testing framework with built in record/replay/assert functionality. 
+
+The main idea for test.rockITizer has been taken from the industry, where the master samples get compared with the produced samples, thus assuring the desired quality
+
+This approach assumes the following major phases: 
+
+1. Recording: definition of the inputs and sample master results  
+
+2. Definition of quality profiles/assertions
+
+3. Regression/Replay Mode: automated comparison between current test-snapshots and recorded master-results.
+
+This way the integration landscape of any complexity is treated as a blackbox, keeping you informed of any suspicious change in the system behavior.
+
 ![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 Furthermore, the framework enables the "test first" approach, thus developing against pre-defined "target" interface until the replay snapshot matches.
@@ -14,7 +32,7 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
 
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
-## <a name="corefeatures"></a> Core features: 
+## <a name="corefeatures"></a> Core Features: 
   - environment dependent configuration for connectors and payloads (once written runs everywhere: Local/DEV/INT)
   - declarative `test-plan` concept, [see details](#declarativetestplan)
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
