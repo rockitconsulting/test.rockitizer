@@ -147,7 +147,8 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 <img alt="CLI" src="/docs/img/ide.JPG?raw=true" align="left"/> 
 
 <br>
-<br>
+
+
 ## <a name="jenkins"></a> Jenkins
 <img alt="CLI" src="/docs/img/jenkins.JPG?raw=true" align="left"/> 
 
