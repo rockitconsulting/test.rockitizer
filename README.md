@@ -149,15 +149,15 @@ According to the maven conventions the following folders of  your test.project a
 - `src/test/java/` - location of the junit test runner
 
 Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
-Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample). 
+Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample).
 
 
 ### <a name="declarativetestplan"></a> Concept of declarative test plan
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="400"  width="250" align="right"/> 
  	
-1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as corresponding junit starter, i.e. `SplitCustomerTest`.
-2. Each **test plan** has one or more test steps (subfolders) with arbitrary names, i.e. `a001putCustomerBatch`,`a002getCustomerBatch`.  Junit starter adds step to execution.  
+1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as the corresponding junit starter, i.e. `SplitCustomerTest`.
+2. Each **test plan** has one or more test steps (subfolders) with arbitrary names, i.e. `a001putCustomerBatch`,`a002getCustomerBatch`.  Junit starter adds a step to execution.  
 3. Each **test step** has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>.<ID>`. The `ID` will be looked up in configuration, i.e. `DBGET.CUSTOMERS`,`MQPUT.CUSTOMERBATCH` 
 4. All **connectors** processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
     - MQGET. - reads all messages in Queue with `<ID>`
@@ -172,13 +172,13 @@ For the test plan reference check [docu](docs/USAGE.md#testplan)
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="450"  width="250" align="right"/> 
 
-The following parts of the test.project supposed to be  environment independent:
+The following parts of the test.project are supposed to be environment independent:
 - junit starter with assertions
 - test-plan with payloads 
 - recorded test output (master record)
 
 
-That's why they shall be committed in the source repository and will be shared across users and environments. **Write test onces and start it anywhere**.  
+They should be committed in the source repository and will be shared across users and environments. **Write test once and start it anywhere**.  
 
 * replay output is also environment neutral but generated during the test execution, thus not checked in.
 
