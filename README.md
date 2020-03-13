@@ -32,7 +32,7 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
 
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
-## <a name="corefeatures"></a> Core Features: 
+<!--## <a name="corefeatures"></a> Core Features:
   - environment dependent configuration for connectors and payloads (once written runs everywhere: Local/DEV/INT)
   - declarative `test-plan` concept, [see details](#declarativetestplan)
   - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
@@ -41,9 +41,28 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
   - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `FILEGET`/`FILEPUT`/`FILEDEL`, `SCPPUT`/`SCPGET` connectors available
   - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` connectors available and enabled for HTTPS, SOAP, REST, including support for PKI, BasicAuth, WS-Security, etc.
   - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
-  - regression testing and continuous integration enabled, including surefire reports
-  
+  - regression testing and continuous integration enabled, including surefire reports -->
 
+## <a name="corefeatures"></a> Core Features:
+Regression testing and continuous integration enabled, including surefire reports
+
+* Powerful CLI interface
+
+* Binding over single jar dependency from maven central
+
+* Record/Replay with post Assertion Modes
+
+* Numerous connectors available: HTTP, MQGET/MQPUT, DBGET/DBPUT, FILEGET/FILEPUT/FILEDEL, SCPPUT/SCPGET 
+
+* Various assertions which enable deep comparison for different types of payloads: XML, CSV, etc. and Resources, e.g. DB
+
+* Environment-dependent configuration for connectors and payloads (once written runs everywhere: Local/DEV/INT)
+
+* Declarative test-plan concept
+
+* Extendable connector/plugin architecture
+
+* Support for multiple DB-DataSources, KeyStores, Queue-Managers
 
 ## <a name="mainconcepts"></a> Main Concepts
 According to the maven conventions the following folders of  your test.project are important:
