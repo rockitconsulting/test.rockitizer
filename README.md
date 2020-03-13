@@ -143,19 +143,6 @@ Format: ![Alt Text](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e6
 For a complete understanding including junit starter and project layout, please refer to QuickStart Guide.
 
 
-## <a name="authors"></a> Authors
-test.rockitizer was created by Yefym Dmukh.
-
-test.rockitizer is sponsored by rockit.consulting GmbH
-
-
-## <a name="license"></a> License
-GNU General Public License v3.0 or later
-
-
-## <a name="publications"></a> Publications
-IBM Integration Community: junit based integration testing.
-
 ## <a name="mainconcepts"></a> Main Concepts
 According to the maven conventions the following folders of  your test.project are important:
 - `src/test/resources/` - location of the test plans
@@ -199,7 +186,7 @@ That's why they shall be committed in the source repository and will be shared a
 ## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
 
-1. [Quick-Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
+[Quick-Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
 
 ##  <a name="reportsample"></a> Report sample
