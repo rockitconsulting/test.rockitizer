@@ -158,12 +158,14 @@ For a complete understanding including junit starter and project layout, please 
 <br>
 
 ## <a name="mainconcepts"></a> Main Concepts
+<div style="text-align: center">
 According to the maven conventions the following folders of  your test.project are important:
 - `src/test/resources/` - location of the test plans
 - `src/test/java/` - location of the junit test runner
 
 Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
 Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample).
+<div>
 
 ### <a name="declarativetestplan"></a> Concept of Declarative Test Plan
 
