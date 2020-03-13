@@ -44,6 +44,8 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
   - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
   - regression testing and continuous integration enabled, including surefire reports -->
 <br>
+
+
 ## <a name="corefeatures"></a> Core Features:
 
 Regression testing and continuous integration enabled, including surefire reports
