@@ -79,7 +79,6 @@ Regression testing and continuous integration enabled, including surefire report
 ## <a name="cli"></a> CLI
 <img alt="CLI" src="/docs/img/CLI.png?raw=true" align="left"/> 
 
-
 <br>
 
 ## <a name="runningtests"></a> Running Tests
@@ -183,8 +182,8 @@ For the test plan reference check [docu](docs/USAGE.md#testplan)
 
 
 ### <a name="testdataseparation"></a> Test Data Separation from Environment Configuration
-<a href="https://ibb.co/QDNwb2r"><img src="https://i.ibb.co/g4TKj5z/connectors.jpg" alt="connectors" border="0"></a>
-<!--<img alt="Concept of test data separation from environment configuration" src="docs/img/test_data_separation.png" width="450"  width="250" align="right"/> --
+
+<img alt="Configuration Management" src="/docs/img/configuration_management.JPG?raw=true" align="left"/> 
 
 The following parts of the test.project are supposed to be environment independent:
 - junit starter with assertions
