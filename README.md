@@ -152,7 +152,7 @@ Junit serves as glue and looks for the test plan with the same name starting its
 Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample).
 
 
-### <a name="declarativetestplan"></a> Concept of declarative test plan
+### <a name="declarativetestplan"></a> Concept of declarative Test Plan
 
 <img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="400"  width="250" align="right"/> 
  	
@@ -189,7 +189,7 @@ They should be committed in the source repository and will be shared across user
 [Quick-Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
 
-##  <a name="reportsample"></a> Report sample
+##  <a name="reportsample"></a> Report Sample
 
 ```
  INFO #############################################################################
