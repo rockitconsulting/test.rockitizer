@@ -79,6 +79,7 @@ Regression testing and continuous integration enabled, including surefire report
 ## <a name="cli"></a> CLI
 <img alt="CLI" src="/docs/img/CLI.png?raw=true" align="left"/> 
 
+
 <br>
 
 ## <a name="runningtests"></a> Running Tests
@@ -149,8 +150,7 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 <br>
 
 ## <a name="jenkins"></a> Jenkins
-
-<a href="https://ibb.co/dLMVn3m"><img src="https://i.ibb.co/nnmYhVP/868427d8-ff83-4303-b22e-af7455f60259.png" alt="868427d8-ff83-4303-b22e-af7455f60259" border="0" width="1000" height="400"></a>
+<img alt="CLI" src="/docs/img/jenkins.JPG?raw=true" align="left"/> 
 
 For a complete understanding including junit starter and project layout, please refer to [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
