@@ -70,7 +70,7 @@ Regression testing and continuous integration enabled, including surefire report
 * Test-Driven Development for Integration landscapes, via developing against desired targets.
 
 ## <a name="cli"></a> CLI
-![GitHub Logo](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
+![CLI](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
 Format: ![Alt Text](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
 
 ## <a name="runningtests"></a> Running Tests
@@ -132,6 +132,9 @@ This program is distributed under GPL v3.0 License and comes with ABSOLUTELY NO 
 This is free software, and you are welcome to redistribute it under GPL v3.0 conditions 
 ```
 
+## <a name="runningtests"></a> IDE
+![IDE](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
+Format: ![Alt Text](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
 
 ## <a name="mainconcepts"></a> Main Concepts
 According to the maven conventions the following folders of  your test.project are important:
