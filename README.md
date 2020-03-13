@@ -65,9 +65,72 @@ Regression testing and continuous integration enabled, including surefire report
 * Support for multiple DB-DataSources, KeyStores, Queue-Managers
 
 
-## <a name="mainconcepts"></a> Unique Advantages
+## <a name="uniqueadvantages"></a> Unique Advantages
 * Improved productivity for developers. No additional tools like SOAP-UI, DB-Viewers, MQ-Tools needed.
 * Test-Driven Development for Integration landscapes, via developing against desired targets.
+
+## <a name="cli"></a> CLI
+![GitHub Logo](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
+Format: ![Alt Text](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
+
+## <a name="runningtests"></a> Running Tests
+### <a name="console"></a> Console
+
+```
+__________               __   .__  __  .__                      
+\______   \ ____   ____ |  | _|__|/  |_|__|_______ ___________  
+ |       _//  _ \_/ ___\|  |/ /  \   __\  \___   // __ \_  __ \ 
+ |    |   (  <_> )  \___|    <|  ||  | |  |/    /\  ___/|  | \/ 
+ |____|_  /\____/ \___  >__|_ \__||__| |__/_____ \\___  >__|    
+        \/            \/     \/                 \/    \/        
+
+ INFO #############################################################################
+ INFO # 		 <JSONwithDatabaseTest>: Configuration
+ INFO #############################################################################
+ INFO TESTNAME: JSONwithDatabaseTest
+ INFO RECORD FOLDER: C:/rockit/projects/github/test.rockitizer.demo/demo.rockitizer/src/test/resources/JSONwithDatabaseTest/
+ INFO REPLAY FOLDER: C:/rockit/projects/github/test.rockitizer.demo/demo.rockitizer/target/replay/JSONwithDatabaseTest/
+ INFO MODE: REPLAY
+ INFO #############################################################################
+ INFO # 		 <JSONwithDatabaseTest>: Executing  [REPLAY]
+ INFO #############################################################################
+ INFO 
+ INFO *****************************************************************************
+ INFO 0BEFORE	 Step Added. Executing... 
+ INFO 0BEFORE	 [Connector:DBPUT.CLAEN] - Writing ...
+ INFO 0BEFORE	 [Connector:MQGET.ERROR] - Reading ...
+ INFO 0BEFORE	 Deleting replay  folder C:/rockit/projects/github/test.rockitizer.demo/demo.rockitizer/target/replay/JSONwithDatabaseTest/
+ INFO 
+ INFO *****************************************************************************
+ INFO a001JSONPutMessage	 Step Added. Executing... 
+ INFO a001JSONPutMessage	 [Connector:HTTP.JADDBOOK] - Writing ...
+ INFO a001JSONPutMessage	 [Connector:HTTP.JADDBOOK] - Reading ...
+ INFO 
+ INFO *****************************************************************************
+ INFO a002DBGETMessage	 Step Added. Executing... 
+ INFO a002DBGETMessage	 [Connector:DBGET.GETBOOKS] - Reading ...
+ INFO #############################################################################
+ INFO # 		 <JSONwithDatabaseTest>: Assertion
+ INFO #############################################################################
+ INFO  Number of assertions processed successfully: 4 [
+	XMLFileAssertion( path:"\a001JSONPutMessage", ignoreFields:"CF-RAY,ETag,Access-Control-Allow-Origin,Connection,Set-Cookie,Date,Expect-CT,X-Powered-By,createdAt,id,ID" ),
+	XMLFileAssertion( path:"\a002DBGETMessage" ),
+	FileAssertion("\"),
+	FileAssertion("\")
+      ]
+
+Time: 1,36
+
+OK (1 test)
+
+Result: OK
+Total runs 1
+
+
+test.rockizer Copyright (C) 2020 rockit.consutling GmbH 
+This program is distributed under GPL v3.0 License and comes with ABSOLUTELY NO WARRANTY 
+This is free software, and you are welcome to redistribute it under GPL v3.0 conditions 
+```
 
 
 ## <a name="mainconcepts"></a> Main Concepts
