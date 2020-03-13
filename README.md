@@ -153,7 +153,7 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 
 <a href="https://ibb.co/dLMVn3m"><img src="https://i.ibb.co/nnmYhVP/868427d8-ff83-4303-b22e-af7455f60259.png" alt="868427d8-ff83-4303-b22e-af7455f60259" border="0" width="1000" height="400"></a>
 
-For a complete understanding including junit starter and project layout, please refer to QuickStart Guide.
+For a complete understanding including junit starter and project layout, please refer to [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
 <br>
 
@@ -200,7 +200,7 @@ They should be committed in the source repository and will be shared across user
 ## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
 
-[Quick-Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
+[Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
 <br>
 
