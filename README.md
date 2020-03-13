@@ -1,7 +1,7 @@
 <!--[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting) -->
 <p align="right"><img src="http://www.rockit.consulting/images/logo-fixed.png" alt="http://www.rockit.consulting" height="70px"></p>
 
-# test.rockitizer - keep your integration tested!
+# test.rockitizer - Keep Your Integration Tested!
 
 <br>
 <!--Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.-->
