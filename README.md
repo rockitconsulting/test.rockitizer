@@ -64,6 +64,12 @@ Regression testing and continuous integration enabled, including surefire report
 
 * Support for multiple DB-DataSources, KeyStores, Queue-Managers
 
+
+## <a name="mainconcepts"></a> Unique Advantages
+* Improved productivity for developers. No additional tools like SOAP-UI, DB-Viewers, MQ-Tools needed.
+* Test-Driven Development for Integration landscapes, via developing against desired targets.
+
+
 ## <a name="mainconcepts"></a> Main Concepts
 According to the maven conventions the following folders of  your test.project are important:
 - `src/test/resources/` - location of the test plans
