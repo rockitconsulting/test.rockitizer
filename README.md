@@ -145,7 +145,7 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 <br>
 
 ## <a name="ide"></a> IDE
-<a href="https://ibb.co/fvZ4qKC"><img src="https://i.ibb.co/Qdhrpq6/6eb6a82f-88e3-4e9d-bed8-64622e600da6.png" alt="6eb6a82f-88e3-4e9d-bed8-64622e600da6" border="0" width="1000" height="400"></a>
+<img alt="CLI" src="/docs/img/ide.JPG?raw=true" align="left"/> 
 
 <br>
 
