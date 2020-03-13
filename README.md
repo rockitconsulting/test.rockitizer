@@ -7,7 +7,6 @@
 <!--Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.-->
 
 ## <a name="bigideabehind"></a> Big Idea Behind 
-<br>
 
 The modern IT landscape is increasing in integration complexity due to various communication protocols and data formats.  
 
@@ -44,8 +43,9 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
   - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` connectors available and enabled for HTTPS, SOAP, REST, including support for PKI, BasicAuth, WS-Security, etc.
   - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
   - regression testing and continuous integration enabled, including surefire reports -->
-
+<br>
 ## <a name="corefeatures"></a> Core Features:
+
 Regression testing and continuous integration enabled, including surefire reports
 
 * Powerful CLI interface
