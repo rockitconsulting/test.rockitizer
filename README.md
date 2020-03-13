@@ -145,12 +145,14 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 <br>
 
 ## <a name="ide"></a> IDE
-![IDE](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
-Format: ![Alt Text](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
+<a href="https://ibb.co/fvZ4qKC"><img src="https://i.ibb.co/Qdhrpq6/6eb6a82f-88e3-4e9d-bed8-64622e600da6.png" alt="6eb6a82f-88e3-4e9d-bed8-64622e600da6" border="0" width="1000" height="400"></a>
 
 <br>
 
 ## <a name="jenkins"></a> Jenkins
+
+<a href="https://ibb.co/dLMVn3m"><img src="https://i.ibb.co/nnmYhVP/868427d8-ff83-4303-b22e-af7455f60259.png" alt="868427d8-ff83-4303-b22e-af7455f60259" border="0" width="1000" height="400"></a>
+
 For a complete understanding including junit starter and project layout, please refer to QuickStart Guide.
 
 <br>
