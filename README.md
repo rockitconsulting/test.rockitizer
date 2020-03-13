@@ -169,7 +169,7 @@ Dependent on mode record/replay it keeps the test outputs in xml format and star
 
 ### <a name="declarativetestplan"></a> Concept of Declarative Test Plan
 
-<img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="400"  width="250" align="right"/> 
+<img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="500"  width="150" align="right"/> 
  	
 1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as the corresponding junit starter, i.e. `SplitCustomerTest`.
 2. Each **test plan** has one or more test steps (subfolders) with arbitrary names, i.e. `a001putCustomerBatch`,`a002getCustomerBatch`.  Junit starter adds a step to execution.  
