@@ -251,7 +251,6 @@ That's why they shall be committed in the source repository and will be shared a
 ```
 
 ## <a name="authors"></a> Authors
-----
 
 `test.rockitizer` was created by [`Yefym Dmukh`](https://github.com/yefymdmukh).
 
@@ -259,13 +258,10 @@ That's why they shall be committed in the source repository and will be shared a
 `test.rockitizer` is sponsored by [`rockit.consulting GmbH`](http://www.rockit.consulting/)
 
 ## <a name="license"></a> License
-----
-
 GNU General Public License v3.0 or later
 
 See [LICENSE](LICENSE.md) to see the full text.
 
 
 ## <a name="publications"></a> Publications
-----
 [IBM Integration Community: junit based integration testing](https://developer.ibm.com/integration/blog/2017/08/29/junit-based-integration-testing-ibm-integration-bus/).
