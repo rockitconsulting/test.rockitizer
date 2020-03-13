@@ -77,8 +77,8 @@ Regression testing and continuous integration enabled, including surefire report
 <br>
 
 ## <a name="cli"></a> CLI
-![CLI](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
-Format: ![Alt Text](blob:https://rockit.atlassian.net/ef1d0ca6-f6c0-4da0-9003-5b4be86d1340#media-blob-url=true&id=65aed6ec-b302-433c-a453-4c71c2d56157&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-093310.png)
+
+<a href="https://ibb.co/Jmgf0qF"><img src="https://i.ibb.co/DzTxsYg/c1dd0cd6-8302-44fa-8ae5-7a3a1be60c96.png" alt="c1dd0cd6-8302-44fa-8ae5-7a3a1be60c96" border="0" width="1000" height="400"></a>
 
 <br>
 
