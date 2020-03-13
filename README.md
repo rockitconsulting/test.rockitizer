@@ -4,7 +4,7 @@
 # test.rockitizer - keep your integration tested!
 
 
-Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.
+<!--Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.-->
 
 ## <a name="bigideabehind"></a> Big Idea Behind 
 
