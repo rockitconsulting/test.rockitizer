@@ -3,10 +3,11 @@
 
 # test.rockitizer - keep your integration tested!
 
-
+<br>
 <!--Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.-->
 
 ## <a name="bigideabehind"></a> Big Idea Behind 
+<p></p>
 
 The modern IT landscape is increasing in integration complexity due to various communication protocols and data formats.  
 
@@ -24,7 +25,8 @@ This approach assumes the following major phases:
 
 This way the integration landscape of any complexity is treated as a blackbox, keeping you informed of any suspicious change in the system behavior.
 
-![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
+
+[Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 Furthermore, the framework enables the "test first" approach, thus developing against pre-defined "target" interface until the replay snapshot matches.
 
@@ -132,9 +134,27 @@ This program is distributed under GPL v3.0 License and comes with ABSOLUTELY NO 
 This is free software, and you are welcome to redistribute it under GPL v3.0 conditions 
 ```
 
-## <a name="runningtests"></a> IDE
+## <a name="ide"></a> IDE
 ![IDE](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
 Format: ![Alt Text](https://rockit.atlassian.net/6eb6a82f-88e3-4e9d-bed8-64622e600da6#media-blob-url=true&id=a056aaf8-3bf3-4b41-b94a-185a9d52abca&collection=contentId-926842891&contextId=926842891&mimeType=image%2Fpng&name=image-20200312-170943.png)
+
+
+## <a name="jenkins"></a> Jenkins
+For a complete understanding including junit starter and project layout, please refer to QuickStart Guide.
+
+
+## <a name="authors"></a> Authors
+test.rockitizer was created by Yefym Dmukh.
+
+test.rockitizer is sponsored by rockit.consulting GmbH
+
+
+## <a name="license"></a> License
+GNU General Public License v3.0 or later
+
+
+## <a name="publications"></a> Publications
+IBM Integration Community: junit based integration testing.
 
 ## <a name="mainconcepts"></a> Main Concepts
 According to the maven conventions the following folders of  your test.project are important:
@@ -230,15 +250,15 @@ That's why they shall be committed in the source repository and will be shared a
       ]
 ```
 
-Authors
+## <a name="authors"></a> Authors
 ----
 
 `test.rockitizer` was created by [`Yefym Dmukh`](https://github.com/yefymdmukh).
 
 
-`test.rockitizer` is sponsored by [`rockit.consulting GmbH`](https://www.rockit.consulting)
+`test.rockitizer` is sponsored by [`rockit.consulting GmbH`](http://www.rockit.consulting/)
 
-License
+## <a name="license"></a> License
 ----
 
 GNU General Public License v3.0 or later
@@ -246,6 +266,6 @@ GNU General Public License v3.0 or later
 See [LICENSE](LICENSE.md) to see the full text.
 
 
-Publications
+## <a name="publications"></a> Publications
 ----
-1. [IBM Integration Community: junit based integration testing](https://developer.ibm.com/integration/blog/2017/08/29/junit-based-integration-testing-ibm-integration-bus/).
+[IBM Integration Community: junit based integration testing](https://developer.ibm.com/integration/blog/2017/08/29/junit-based-integration-testing-ibm-integration-bus/).
