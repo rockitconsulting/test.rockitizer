@@ -25,13 +25,6 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
   - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
   - regression testing and continuous integration enabled, including surefire reports
   
-## Skill level
-  Basic understanding of following Java frameworks: 
-  - Maven - used for test project build/configuration/packaging purposes 
-  - Junit - used as test starter
-  - XMLUnit - used for assertions
-  
-  *To run the sample ESB project you will need the basic IBM Integration Bus know-how for import and deployment.
 
 
 ## <a name="mainconcepts"></a> Main Concepts
@@ -42,7 +35,6 @@ According to the maven conventions the following folders of  your test.project a
 Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
 Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample). 
 
-For the complete understanding including junit starter and project layout, please refer to  [basic execution flow](docs/USAGE.md#basicexecutionflow)
 
 ### <a name="declarativetestplan"></a> Concept of declarative test plan
 
@@ -74,23 +66,11 @@ That's why they shall be committed in the source repository and will be shared a
 
 * replay output is also environment neutral but generated during the test execution, thus not checked in.
 
-All the environment dependent properties belong to the test.project configuration files and basically contain the connector configurations, [see configuration](docs/USAGE.md#configuration).
-
 
 ## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
 
-1. Build the test.rockitizer framework with dependencies, [see framework build instructions](docs/BUILD.md)
-2. Create and configure your maven test project having the test.rockitizer as dependency, [see test project configuration](docs/USAGE.md#configuration)
-3. Write your test scenario using the step/connector/payload convention [see testplan manual](docs/USAGE.md#testplan)
-4. Whrite the JUnit and create the record "master" output [see junit manual](docs/USAGE.md#junit)
-5. Reconfigure the test project to replay mode and execute replay with following asssertion
-
-
-
-## Examples
-[Examples Readme](examples/README.md)
-
+1. [Quick-Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
 
 ##  <a name="reportsample"></a> Report sample
@@ -140,13 +120,6 @@ All the environment dependent properties belong to the test.project configuratio
 	com.rockit.common.blackboxtester.assertions.FileAssertion@1de60b4
       ]
 ```
-
-Known issues
-----
-	Issue: 
-		Base64.class from java 8 package
-	Solution:
-		Java 1.8 recommended. Use the code compatibility option to Java 1.7 for all IIB versions prior 10.0.0.12
 
 Authors
 ----
