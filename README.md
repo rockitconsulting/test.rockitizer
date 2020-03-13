@@ -50,13 +50,13 @@ Regression testing and continuous integration enabled, including surefire report
 
 * Binding over single jar dependency from maven central
 
-* Record/Replay with post Assertion Modes
+* `Record`/`Replay` with post `Assertion` Modes
 
-* Numerous connectors available: HTTP, MQGET/MQPUT, DBGET/DBPUT, FILEGET/FILEPUT/FILEDEL, SCPPUT/SCPGET 
+* Numerous connectors available: `HTTP, MQGET/MQPUT, DBGET/DBPUT, FILEGET/FILEPUT/FILEDEL, SCPPUT/SCPGET`
 
-* Various assertions which enable deep comparison for different types of payloads: XML, CSV, etc. and Resources, e.g. DB
+* Various assertions which enable deep comparison for different types of payloads: `XML, CSV`, etc. and Resources, e.g. DB
 
-* Environment-dependent configuration for connectors and payloads (once written runs everywhere: Local/DEV/INT)
+* Environment-dependent configuration for connectors and payloads (once written runs everywhere: `Local`/`Jenkins`/`INT`)
 
 * Declarative test-plan concept
 
