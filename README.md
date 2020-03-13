@@ -80,6 +80,8 @@ Regression testing and continuous integration enabled, including surefire report
 <img alt="CLI" src="/docs/img/CLI.png?raw=true" align="left"/> 
 
 <br>
+<br>
+
 
 ## <a name="runningtests"></a> Running Tests
 
@@ -147,6 +149,7 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 <img alt="CLI" src="/docs/img/ide.JPG?raw=true" align="left"/> 
 
 <br>
+<br>
 
 
 ## <a name="jenkins"></a> Jenkins
@@ -184,7 +187,7 @@ For the test plan reference check [docu](docs/USAGE.md#testplan)
 
 ### <a name="testdataseparation"></a> Test Data Separation from Environment Configuration
 
-<img alt="Configuration Management" src="/docs/img/configuration_management.JPG?raw=true" align="left"/> 
+<img alt="Configuration Management" src="/docs/img/configuration_management.JPG?raw=true" align="right" width="510"/> 
 
 The following parts of the test.project are supposed to be environment independent:
 - junit starter with assertions
@@ -203,6 +206,11 @@ They should be committed in the source repository and will be shared across user
 
 [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 
 ##  <a name="reportsample"></a> Report Sample
