@@ -157,109 +157,14 @@ For a complete understanding including junit starter and project layout, please 
 
 <br>
 
-## <a name="mainconcepts"></a> Main Concepts
 
-According to the maven conventions the following folders of  your test.project are important:
-- `src/test/resources/` - location of the test plans
-- `src/test/java/` - location of the junit test runner
-
-Junit serves as glue and looks for the test plan with the same name starting its execution from the root folder.
-Dependent on mode record/replay it keeps the test outputs in xml format and starts the preconfigured assertions between the recorded and replayed payloads, writing the test protocol [to the console](#reportsample).
-
-
-### <a name="declarativetestplan"></a> Concept of Declarative Test Plan
-
-<img alt="Concept of test data separation from environment configuration" src="docs/img/test_plan_sample.png" width="500"  width="150" align="right"/> 
- 	
-1. The test plans are folders stored under `src/test/resources/` and must have the same arbitrary name as the corresponding junit starter, i.e. `SplitCustomerTest`.
-2. Each **test plan** has one or more test steps (subfolders) with arbitrary names, i.e. `a001putCustomerBatch`,`a002getCustomerBatch`.  Junit starter adds a step to execution.  
-3. Each **test step** has multiple subfolders (connectors), with the strict naming convention `<ConnectorType>.<ID>`. The `ID` will be looked up in configuration, i.e. `DBGET.CUSTOMERS`,`MQPUT.CUSTOMERBATCH` 
-4. All **connectors** processed automatically based on `<ConnectorType>`: PUT/GET i.e.: 
-    - MQGET. - reads all messages in Queue with `<ID>`
-    - MQPUT. - submits the payloads from connector folder into Queue with `<ID>` 
-
-For the test plan reference check [docu](docs/USAGE.md#testplan)
-
-**The declarative test-plan approach reduces the maintanence costs of the test-suite**.  
-
-
-### <a name="testdataseparation"></a> Test Data Separation from Environment Configuration
-
-<img alt="Configuration Management" src="/docs/img/configuration_management.JPG?raw=true" align="right" width="510"/> 
-
-The following parts of the test.project are supposed to be environment independent:
-- junit starter with assertions
-- test-plan with payloads 
-- recorded test output (master record)
-
-
-They should be committed in the source repository and will be shared across users and environments. **Write test once and start it anywhere**.  
-
-* replay output is also environment neutral but generated during the test execution, thus not checked in.
-
-<br>
 
 ## Getting started
 <img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
 
 [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-##  <a name="reportsample"></a> Report Sample
-
-```
- INFO #############################################################################
- INFO # 		 <SplitCustomerTestOK>: Configuration
- INFO #############################################################################
- INFO TESTNAME: SplitCustomerTestOK
- INFO RECORD FOLDER: C:/rockit/github/test.rockitizer/examples/splitcustomer.rockitizer/src/test/resources/SplitCustomerTestOK/
- INFO REPLAY FOLDER: C:/rockit/github/test.rockitizer/examples/splitcustomer.rockitizer/target/replay/SplitCustomerTestOK/
- INFO MODE: replay
- INFO #############################################################################
- INFO # 		 <SplitCustomerTestOK>: Executing  [replay]
- INFO #############################################################################
- INFO 0BEFORE	 Copying /src/test/resources/0BEFORE to /target/replay/0BEFORE
- INFO 
- INFO *****************************************************************************
- INFO 0BEFORE	 Step Added. Executing... 
- INFO Connecting MQQueueManager IB9QMGR
- INFO 0BEFORE	 Deleting replay  folder C:/rockit/github/test.rockitizer/examples/splitcustomer.rockitizer/src/test/resources/SplitCustomerTestOK/output
- INFO a001putCustomerBatch	 Copying /src/test/resources/a001putCustomerBatch to /target/replay/a001putCustomerBatch
- INFO 
- INFO *****************************************************************************
- INFO a001putCustomerBatch	 Step Added. Executing... 
- INFO a001putCustomerBatch	 [Connector:MQPUT.SPLITCUSTOMER.BATCH.IN] - Writing ...
- INFO Message successfully written to SPLITCUSTOMER.BATCH.IN                          
- INFO a002getCustomerBatch	 Copying /src/test/resources/a002getCustomerBatch to /target/replay/a002getCustomerBatch
- INFO 
- INFO *****************************************************************************
- INFO a002getCustomerBatch	 Step Added. Executing... 
- INFO  Waiting 1000ms for results
- INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 186
- INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
- INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 213
- INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
- INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 188
- INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
- INFO MQConnectorOut [SPLITCUSTOMER.CUSTOMER.OUT] get  message size 247
- INFO a002getCustomerBatch	 [Connector:MQGET.SPLITCUSTOMER.CUSTOMER.OUT] - Reading ...
- INFO #############################################################################
- INFO # 		 <SplitCustomerTestOK>: Assertion
- INFO #############################################################################
- INFO  Number of assertions processed successfully: 3 [
-	com.rockit.common.blackboxtester.assertions.XMLFileAssertion@ae9b55,
-	com.rockit.common.blackboxtester.assertions.FileAssertion@1700915,
-	com.rockit.common.blackboxtester.assertions.FileAssertion@1de60b4
-      ]
-```
-
-<br>
 
 ## <a name="authors"></a> Authors
 
