@@ -79,9 +79,7 @@ Regression testing and continuous integration enabled, including surefire report
 ## <a name="cli"></a> CLI
 <img alt="CLI" src="/docs/img/CLI.png?raw=true" align="left"/> 
 
-<br>
-<br>
-<br>
+ </br> 
 
 ## <a name="runningtests"></a> Running Tests
 
