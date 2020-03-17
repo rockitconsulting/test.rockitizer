@@ -2,7 +2,7 @@
 
 # test.rockitizer - Keep Your Integration Tested!
 
-Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.
+Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior. In addition the framework **boosts** an integration development, making the usage of external protocol/vendor specific tools  obsolete.  
 
 ##  Big Idea Behind 
 
@@ -15,9 +15,7 @@ The main idea for test.rockITizer has been taken from the industry, where the ma
 This approach assumes the following major phases: 
 
 1. Recording: definition of the inputs and sample master results  
-
 2. Definition of quality profiles/assertions
-
 3. Regression/Replay Mode: automated comparison between current test-snapshots and recorded master-results.
 
 This way the integration landscape of any complexity is treated as a blackbox, keeping you informed of any suspicious change in the system behavior.
@@ -36,21 +34,13 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
 Regression testing and continuous integration enabled, including surefire reports
 
 * Powerful CLI interface
-
 * Binding over single jar dependency from maven central
-
 * `Record`/`Replay` with post `Assertion` Modes
-
 * Numerous connectors available: `HTTP, MQGET/MQPUT, DBGET/DBPUT, FILEGET/FILEPUT/FILEDEL, SCPPUT/SCPGET`
-
 * Various assertions which enable deep comparison for different types of payloads: `XML, CSV`, etc. and Resources, e.g. DB
-
 * Environment-dependent configuration for connectors and payloads (once written runs everywhere: `Local`/`Jenkins`/`INT`)
-
 * Declarative test-plan concept
-
 * Extendable connector/plugin architecture
-
 * Support for multiple DB-DataSources, KeyStores, Queue-Managers
 
 
@@ -132,12 +122,27 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 ## Jenkins
 ![Jenkins](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/jenkins.JPG?raw=true)
 
-For a complete understanding including junit starter and project layout, please refer to [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start) 
 
 ## Getting started
-![test rockitizer architecture](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/architecture_with_dependency_small.jpg?raw=true)
+<span>
+<img align="right" src="https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/architecture_with_dependency_small.jpg?raw=true">
+For a complete understanding please refer to Documentation: 
+<ul>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/926842891/Introduction" target="_blank">Introduction</a></li>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start" target="_blank">Quick Start Guide</a></li>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/947716159/Project+layout" target="_blank">Project Layout/Testplan</a></li>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/947191889/Configuration" target="_blank">Confiuration</a></li>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/947224777/JUnit+and+Assertions" target="_blank">Execution Plan</a></li>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/947322990/Command-Line" target="_blank">Command Line Interface</a></li>
+<li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/929824873/FAQ" target="_blank">FAQ</a></li>
+</ul>
+</span>
 
-[Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
+
+
+
+
+
 
 ## Authors
 
