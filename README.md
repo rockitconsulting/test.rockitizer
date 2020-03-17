@@ -135,7 +135,7 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 For a complete understanding including junit starter and project layout, please refer to [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start) 
 
 ## Getting started
-![test rockitizer architecture](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/architecture_with_dependency_small.png?raw=true)
+![test rockitizer architecture](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/architecture_with_dependency_small.jpg?raw=true)
 
 [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
