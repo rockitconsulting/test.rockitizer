@@ -126,7 +126,9 @@ This is free software, and you are welcome to redistribute it under GPL v3.0 con
 ## Getting started
 <span>
 <img align="right" src="https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/architecture_with_dependency_small.jpg?raw=true">
+<br>
 For a complete understanding please refer to Documentation: 
+<br>
 <ul>
 <li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/926842891/Introduction" target="_blank">Introduction</a></li>
 <li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start" target="_blank">Quick Start Guide</a></li>
@@ -137,6 +139,7 @@ For a complete understanding please refer to Documentation:
 <li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/929824873/FAQ" target="_blank">FAQ</a></li>
 </ul>
 </span>
+<br><br><br><br>
 
 
 
