@@ -1,12 +1,10 @@
-<!--[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting) -->
-<p align="right"><img src="http://www.rockit.consulting/images/logo-fixed.png" alt="http://www.rockit.consulting" height="70px"></p>
+[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
 # test.rockitizer - Keep Your Integration Tested!
 
-<br>
-<!--Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.-->
+Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior.
 
-## <a name="bigideabehind"></a> Big Idea Behind 
+##  Big Idea Behind 
 
 The modern IT landscape is increasing in integration complexity due to various communication protocols and data formats.  
 
@@ -33,20 +31,7 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
 
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
-<!--## <a name="corefeatures"></a> Core Features:
-  - environment dependent configuration for connectors and payloads (once written runs everywhere: Local/DEV/INT)
-  - declarative `test-plan` concept, [see details](#declarativetestplan)
-  - separation of `test-plan` and `connector configuration` concept, [see details](#testdataseparation)
-  - extendable connector/plugin architecture
-  - `Record`/`Replay with post Assertion` Modes
-  - `MQGET`/`MQPUT`, `DBGET`/`DBPUT`, `FILEGET`/`FILEPUT`/`FILEDEL`, `SCPPUT`/`SCPGET` connectors available
-  - `HTTP` - `GET` / `PUT` / `POST` / `DELETE` connectors available and enabled for HTTPS, SOAP, REST, including support for PKI, BasicAuth, WS-Security, etc.
-  - `DB`, `File`, `CSV`, `XMLUnit` assertion plugins available, enabling full control by comparing the different types of master-/test-payloads
-  - regression testing and continuous integration enabled, including surefire reports -->
-
-<br>
-
-## <a name="corefeatures"></a> Core Features:
+##  Core Features:
 
 Regression testing and continuous integration enabled, including surefire reports
 
@@ -68,23 +53,23 @@ Regression testing and continuous integration enabled, including surefire report
 
 * Support for multiple DB-DataSources, KeyStores, Queue-Managers
 
-<br>
 
-## <a name="uniqueadvantages"></a> Unique Advantages
+
+## Unique Advantages
 * Improved productivity for developers. No additional tools like SOAP-UI, DB-Viewers, MQ-Tools needed.
 * Test-Driven Development for Integration landscapes, via developing against desired targets.
 
-<br>
 
-## <a name="cli"></a> CLI
-<img alt="CLI" src="/docs/img/CLI.png?raw=true" align="left"/> 
 
- </br> 
+##  CLI
+![CLI](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/CLI.png?raw=true)
 
-## <a name="runningtests"></a> Running Tests
 
-### <a name="console"></a> Console
+##  Running Tests
 
+###  Console
+
+   
 ```
 __________               __   .__  __  .__                      
 \______   \ ____   ____ |  | _|__|/  |_|__|_______ ___________  
@@ -141,46 +126,29 @@ This program is distributed under GPL v3.0 License and comes with ABSOLUTELY NO 
 This is free software, and you are welcome to redistribute it under GPL v3.0 conditions 
 ```
 
-<br>
+##  IDE
+![IDE](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/ide.JPG?raw=true)
 
-## <a name="ide"></a> IDE
-<img alt="CLI" src="/docs/img/ide.JPG?raw=true" align="left"/> 
+## Jenkins
+![Jenkins](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/jenkins.JPG?raw=true)
 
-<br>
-<br>
-<!-- -->
-
-## <a name="jenkins"></a> Jenkins
-<img alt="CLI" src="/docs/img/jenkins.JPG?raw=true" align="left"/> 
-
-For a complete understanding including junit starter and project layout, please refer to [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
-
-<br>
-
-
+For a complete understanding including junit starter and project layout, please refer to [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start) 
 
 ## Getting started
-<img alt="test rockitizer architecture" src="docs/img/architecture_with_dependency_new.png" width="200" height="200" align="right"/>
+![test rockitizer architecture](https://github.com/rockitconsulting/test.rockitizer/blob/master/docs/img/architecture_with_dependency.png?raw=true)
 
 [Quick Start Guide](https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start)
 
-
-
-## <a name="authors"></a> Authors
+## Authors
 
 `test.rockitizer` was created by [`Yefym Dmukh`](https://github.com/yefymdmukh).
 
-
 `test.rockitizer` is sponsored by [`rockit.consulting GmbH`](http://www.rockit.consulting/)
 
-<br>
-
-## <a name="license"></a> License
+## License
 GNU General Public License v3.0 or later
 
 See [LICENSE](LICENSE.md) to see the full text.
 
-<br>
-
-## <a name="publications"></a> Publications
+## Publications
 [IBM Integration Community: junit based integration testing](https://developer.ibm.com/integration/blog/2017/08/29/junit-based-integration-testing-ibm-integration-bus/).
