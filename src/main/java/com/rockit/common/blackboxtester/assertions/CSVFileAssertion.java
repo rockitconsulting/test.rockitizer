@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class CSVFileAssertion extends AbstractAssertion {
 
 	private String separator;
 
-	private List<Integer> ignoreIndexes;
+	private List<Integer> ignoreIndexes = new ArrayList<>();
 
 	
 
