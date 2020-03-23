@@ -2,20 +2,20 @@
 
 # test.rockitizer - Keep Your Integration Tested!
 
-Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior. In addition, the framework **boosts** the integration development process, providing all-in-one test solution, making in most of cases the usage of external protocol/vendor specific tools obsolete.  
+Easy-to-use junit based framework for the testing of complex integration scenarios. Using the declarative test plans and automated comparison between current test-snapshots and recorded master-results, it keeps you informed on any suspicious change of system behavior. In addition, the framework **boosts** the integration development process, providing all-in-one test solution, making the usage of external protocol/vendor specific tools obsolete in most of cases.  
 
 ##  Big Idea Behind 
 
 The modern IT landscape is increasing in integration complexity due to various communication protocols and data formats.  
 
-**test.rockITizer** addresses this problem, introducing an API Testing framework with built in record/replay/assert functionality. 
+**test.rockITizer** addresses this problem, introducing an API Testing framework with built-in record/replay/assert functionality. 
 
-The main idea for test.rockITizer has been taken from the industry, where the master samples get compared with the produced samples, thus assuring the desired quality
+The main idea for test.rockITizer has been taken from the industry, where the master samples get compared with the produced samples, thus assuring the desired quality.
 
 This approach assumes the following major phases: 
 
-1. Recording: definition of the inputs and sample master results  
-2. Definition of quality profiles/assertions
+1. Recording: definition of the inputs and sample master results;  
+2. Definition of quality profiles/assertions;
 3. Regression/Replay Mode: automated comparison between current test-snapshots and recorded master-results.
 
 This way the integration landscape of any complexity is treated as a blackbox, keeping you informed of any suspicious change in the system behavior.
