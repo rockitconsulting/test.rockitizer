@@ -75,7 +75,7 @@ public class JSONFileAssertion extends XMLFileAssertion {
 
 		JSONObject json = new JSONObject(Joiner.on("").join(lines));
 		String xml = XML.toString(json);
-		return xml;
+		return "<root>"+xml+"</root>";
 	}
 
 }
