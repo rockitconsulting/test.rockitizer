@@ -46,6 +46,11 @@ public class CSVFileAssertionTest {
 
 	}
 
+	/**
+	 * Checks availability of positive record and replay folders.
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test
 	public void testRecRepFolders() throws URISyntaxException, IOException {
 
@@ -64,6 +69,11 @@ public class CSVFileAssertionTest {
 
 	}
 
+	/**
+	 * Checks availability of negative record and replay folders.
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test(expected = AssertionError.class)
 	public void testRecRepFoldersNegative() throws URISyntaxException, IOException {
 
@@ -82,6 +92,11 @@ public class CSVFileAssertionTest {
 
 	}
 
+	/**
+	 * Compares two csv files: from positive record and replay paths. 
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test
 	public void testPositive() throws URISyntaxException, IOException {
 		CSVFileAssertion csvAssertion = new CSVFileAssertion(null, null);
@@ -91,6 +106,13 @@ public class CSVFileAssertionTest {
 
 	}
 
+	
+	
+	/**
+	 * Compares two csv files: from negative record and replay paths.
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test(expected = AssertionError.class)
 	public void testNegative() throws URISyntaxException, IOException {
 		CSVFileAssertion csvAssertion = new CSVFileAssertion(null, null);
@@ -101,6 +123,11 @@ public class CSVFileAssertionTest {
 
 	}
 
+	/**
+	 * Tests with removing ignored tokens.
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test
 	public void testTokensRemoveIgnored() throws URISyntaxException, IOException {
 		CSVFileAssertion csvAssertion = new CSVFileAssertion(null, null).setSeparator(";").setIgnoreIndexes(ImmutableList.of(0, 1));
@@ -110,13 +137,16 @@ public class CSVFileAssertionTest {
 		lines.forEach(l -> {
 			System.out.println(l);
 			Assert.assertEquals("ccc;dddd;",l);
-
 		});
-
 	}
 
 	
 	
+	/**
+	 * Tests with tokens ignored NOK
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test(expected = AssertionError.class)
 	public void testCsvAssertWithIgnoreTokensRemoveIgnoredNOK() throws URISyntaxException, IOException {
 		CSVFileAssertion csvAssertion = new CSVFileAssertion(null, null).setSeparator(";").setIgnoreIndexes(ImmutableList.of(0, 1));
@@ -129,6 +159,11 @@ public class CSVFileAssertionTest {
 
 	}
 	
+	/**
+	 * Tests with tokens ignored OK
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	@Test
 	public void testCsvAssertWithIgnoreTokensRemoveIgnoredOK() throws URISyntaxException, IOException {
 		CSVFileAssertion csvAssertion = new CSVFileAssertion(null, null).setSeparator(";").setIgnoreIndexes(ImmutableList.of(0, 3));

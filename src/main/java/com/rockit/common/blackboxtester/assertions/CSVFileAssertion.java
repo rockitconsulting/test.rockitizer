@@ -154,6 +154,11 @@ public class CSVFileAssertion extends AbstractAssertion {
 
 	}
 	
+	/**
+	 * Remove the ignored tokens.
+	 * 
+	 * @param lines
+	 */
 	public String toString() {
 		return this.getClass().getSimpleName() + "( path:\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\"" +
 				(separator!=null&&!separator.isEmpty()?", separator:\""+separator+"\"":"" ) +
