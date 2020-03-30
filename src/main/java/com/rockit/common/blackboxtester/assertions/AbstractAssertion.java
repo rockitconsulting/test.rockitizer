@@ -24,24 +24,42 @@ public abstract class AbstractAssertion implements Assertions {
 	protected String replayPath;
 	protected String relPath = "";
 
+	/**
+	 * Sets record path
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#setRecordPath(java.lang.String)
+	 */
 	public void setRecordPath(String path) {
 		recordPath = path;
-
 	}
 
+	/**
+	 * Sets replay path
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#setReplayPath(java.lang.String)
+	 */
 	public void setReplayPath(String path) {
 		replayPath = path;
-
 	}
 
+	/**
+	 * Returns relative path
+	 * @return
+	 */
 	public String getRelPath() {
 		return relPath;
 	}
 
+	/**
+	 * Assigns relative path as the object attribute.
+	 * @param relPath
+	 */
 	public void setRelPath(String relPath) {
 		this.relPath = relPath;
 	}
 
+	/**
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return this.getClass().getSimpleName() + "(\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\")";
 	}
