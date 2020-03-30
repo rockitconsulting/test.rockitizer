@@ -55,14 +55,28 @@ public class XMLFileAssertion extends AbstractAssertion {
 	private XMLFileAssertion() {
 	}
 
+	/**
+	 * XMLUnit for all payloads on the step level, including all connector subfolders
+	 * 
+	 * @param step folder under testcases
+	 */
 	public XMLFileAssertion(String step) {
 		this.relPath = File.separator + step;
 	}
 
+	/**
+	 * XMLUnit for all payloads on the step/connector level
+     *   
+	 * @param step  -subfolder of testcase
+	 * @param connector - subfolder of step
+	 */
 	public XMLFileAssertion(String step, String connector) {
 		this.relPath = File.separator + step + File.separator + connector;
 	}
 
+	/** 
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#proceed()
+	 */
 	@Override
 	public void proceed() {
 		File recordFolder = new File(recordPath + relPath);
@@ -85,11 +99,22 @@ public class XMLFileAssertion extends AbstractAssertion {
 		}
 	}
 
+	/**
+	 * Ignoring the xml attributes
+	 * 
+	 * @param attrs  - list of strings with xml attributes to ignore
+	 * @return
+	 */
 	public XMLFileAssertion ignoreAttrs(List<String> attrs) {
 		this.attrs = attrs;
 		return this;
 	}
 
+	/**
+	 * Ignoring the xml nodes 
+	 * @param tokens - list xml nodes to ignore 
+	 * @return
+	 */
 	public XMLFileAssertion ignore(List<String> tokens) {
 		this.tokens = tokens;
 		return this;
@@ -107,27 +132,43 @@ public class XMLFileAssertion extends AbstractAssertion {
 		return this;
 	}
 
+	/**
+	 * Ignore whitespaces
+	 * @return
+	 */
 	public XMLFileAssertion ignoreWhitespaces() {
 		context.ignoreWhitespaces = true;
 		return this;
 	}
 
+	/**
+	 * @param selector - @see ElementSelector
+	 * @return
+	 */
 	public XMLFileAssertion withNodeMatcher(ElementSelector selector) {
 		context.selector = selector;
 		return this;
 	}
 
+	/**
+	 * @see DiffBuilder#checkForSimilar()
+	 * @return
+	 */
 	public XMLFileAssertion checkForSimilar() {
 		context.checkForSimilar = true;
 		return this;
 	}
 
+	/**
+	 * @see DiffBuilder#checkForIdentical()
+	 * @return
+	 */
 	public XMLFileAssertion checkForIdentical() {
 		context.checkForIdentical = true;
 		return this;
 	}
 
-	public XMLFileAssertion compare(Builder in1, Builder in2) {
+	protected XMLFileAssertion compare(Builder in1, Builder in2) {
 
 		diffBuilder = DiffBuilder.compare(in1).withTest(in2).withNodeFilter(new Predicate<Node>() {
 			public boolean test(Node node) {
@@ -170,8 +211,8 @@ public class XMLFileAssertion extends AbstractAssertion {
 	public String toString() {
 		return this.getClass().getSimpleName() + "( path:\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\"" +
 				
-				(!tokens.isEmpty()?", ignoreFields:\""+Joiner.on(",").join(tokens)+"\"":"" ) +
-				(!attrs.isEmpty()?", ignoreAttrs:\""+Joiner.on(",").join(attrs)+"\"":"" ) +
+				(null!=tokens && !tokens.isEmpty()?", ignoreFields:\""+Joiner.on(",").join(tokens)+"\"":"" ) +
+				(null!=attrs && attrs.isEmpty()?", ignoreAttrs:\""+Joiner.on(",").join(attrs)+"\"":"" ) +
 				" )";
 	}
 

@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.xmlunit.builder.Input;
@@ -44,6 +45,20 @@ public class XMLFileAssertionTest {
 		xmlFileAssertion = new XMLFileAssertion(null);
 	}
 
+	
+	@Test
+	public void testXMLFileAssertionNull() {
+		Assert.assertNotNull(new XMLFileAssertion(null).ignoreAttrs(null).ignore(null).toString());
+		
+	}
+	
+	@Test
+	public void testXMLFileAssertionNullNull() {
+		Assert.assertNotNull(new XMLFileAssertion(null,null).ignoreAttrs(null).ignore(null).toString());
+		
+	}
+	
+	
 	@Test
 	public void testIgnoreSuccess() {
 		String control = "<root><test>2</test><ignore>cvc</ignore><sim>4</sim></root>";
