@@ -54,16 +54,30 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 	private RecordConfig recordConfig = null;
 	private final DifferenceBuilder db = new DifferenceBuilder(this);
 
+	/**
+	 * Reads record config and assigns value to relative path attribute as a test step and a connector.
+	 * @param step
+	 * @param connector
+	 * @param config
+	 */
 	public FixedLengthFileAssertion(String step, String connector, String config) {
 		recordConfig = RecordsConfig.getInstance().getRecordConfig(config);
 		this.relPath = File.separator + step + File.separator + connector;
 	}
-
+	
+	/**
+	 * Reads record config and assigns value to relative path attribute as a test step.
+	 * @param step
+	 * @param config
+	 */
 	public FixedLengthFileAssertion(String step, String config) {
 		recordConfig = RecordsConfig.getInstance().getRecordConfig(config);
 		this.relPath = File.separator + step;
 	}
 
+	/**
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#proceed()
+	 */
 	@Override
 	public void proceed() {
 		File recordFolder = new File(recordPath + getRelPath());
@@ -82,6 +96,11 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 		db.doAssert();
 	}
 
+	/**
+	 * Writes file contents to a string.
+	 * @param filePath
+	 * @return
+	 */
 	protected static List<String> fileToLineList(String filePath) {
 		File fileToExtract = new File(filePath);
 		List<String> lineList = new ArrayList<>();
@@ -100,14 +119,26 @@ public class FixedLengthFileAssertion extends AbstractAssertion {
 		return lineList;
 	}
 
+	/**
+	 * Returns value of record status.
+	 * @return
+	 */
 	public List<String> getRecorded() {
 		return recorded;
 	}
 
+	/**
+	 * Returns value of replay status.
+	 * @return
+	 */
 	public List<String> getReplayed() {
 		return replayed;
 	}
 
+	/**
+	 * Returns value of recordConfig status.
+	 * @return
+	 */
 	public RecordConfig getRecordConfig() {
 		return recordConfig;
 	}
