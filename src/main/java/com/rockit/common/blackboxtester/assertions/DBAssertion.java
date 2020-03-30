@@ -146,7 +146,11 @@ public class DBAssertion extends AbstractAssertion {
 	}
 	
 	public String toString() {
-		return this.getClass().getSimpleName()+"(\" query:" + sql + ", assertContainsTokens: "+ Joiner.on(",").join(mustContainTokens) + "\")";
+		return this.getClass().getSimpleName() +
+				", datasourceId:\"" + (refDsId != null && !refDsId.isEmpty() ? refDsId : "")  +
+				", sqlQuery:\"" + (sql != null && !sql.isEmpty() ? sql : "")  +
+				(null != mustContainTokens && !mustContainTokens.isEmpty() ? ", assertContainsTokens:\""+Joiner.on(",").useForNull("").join(mustContainTokens)+"\"" : "" )+ 
+						" )";
 	}
 	
 }

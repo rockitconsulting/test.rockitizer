@@ -1,7 +1,9 @@
 package com.rockit.common.blackboxtester.assertions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.IOException;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -10,8 +12,9 @@ import com.google.common.collect.ImmutableList;
 public class DBAssertionTest {
 	public static Logger LOGGER = Logger.getLogger(DBAssertionTest.class.getName());
 	DBAssertion DBAssertion;
+
 	/**
-	 * DB assertion with 2 sample parameter values: sqlQuery, mustContainTokens.  
+	 * DB assertion with 2 sample parameter values: sqlQuery, mustContainTokens.
 	 * 
 	 */
 	@Test
@@ -19,18 +22,31 @@ public class DBAssertionTest {
 		DBAssertion TestDBAssertion = new DBAssertion("SELECT * FROM ROCKIT.BOOKSERVICE;", ImmutableList.of("createdAt", "id"));
 		assertNotNull(TestDBAssertion.toString());
 	}
+
 	/**
-	 * DB assertion with 2 empty parameter values: sqlQuery, mustContainTokens.  
+	 * DB assertion with 2 null parameter values: sqlQuery, mustContainTokens.
 	 * 
 	 */
 	@Test
 	public void testToStringTwoNullParms() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion(null, null);
 		assertNotNull(TestDBAssertion.toString());
-	}	
+	}
 	
 	/**
-	 * DB assertion with 3 sample parameter values: datasourceId, sqlQuery, mustContainTokens. 
+	 * DB assertion with 2 empty parameter values: sqlQuery,
+	 * mustContainTokens.
+	 */
+
+	@Test
+	public void testWithTwoEmptyParms() throws IOException {
+		DBAssertion TestDBAssertion = new DBAssertion("", ImmutableList.of(""));
+		assertNotNull(TestDBAssertion.toString());
+	}		
+
+	/**
+	 * DB assertion with 3 sample parameter values: datasourceId, sqlQuery,
+	 * mustContainTokens.
 	 */
 
 	@Test
@@ -40,12 +56,25 @@ public class DBAssertionTest {
 	}
 
 	/**
-	 * DB assertion with 3 empty parameter values: datasourceId, sqlQuery, mustContainTokens. 
+	 * DB assertion with 3 null parameter values: datasourceId, sqlQuery,
+	 * mustContainTokens.
 	 */
-	
+
 	@Test
-	public void testWithThreeNullParms() throws IOException {
+	public void testWithThreeNullParmsListIsNull() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion(null, null, null);
 		assertNotNull(TestDBAssertion.toString());
-	}		
+	}
+	
+	/**
+	 * DB assertion with 3 empty parameter values: datasourceId, sqlQuery,
+	 * mustContainTokens.
+	 */
+
+	@Test
+	public void testWithThreeEmptyParms() throws IOException {
+		DBAssertion TestDBAssertion = new DBAssertion("", "", ImmutableList.of("", "", ""));
+		assertNotNull(TestDBAssertion.toString());
+	}
+
 }
