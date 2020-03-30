@@ -45,6 +45,10 @@ public class FileAssertion extends AbstractAssertion {
 		setReplayPath(replayPath);
 	}
 
+	/**
+	 * 
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#proceed()
+	 */
 	@Override
 	public void proceed() {
 		File recordFolder = new File(recordPath);
