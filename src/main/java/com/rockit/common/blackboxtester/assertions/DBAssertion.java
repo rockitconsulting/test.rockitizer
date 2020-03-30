@@ -75,7 +75,11 @@ public class DBAssertion extends AbstractAssertion {
 		this.sql = sqlQuery;
 	}
 
+	/** Executes an SQL query with assertion of mustContainTokens. 
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#proceed()
+	 */
 	@Override
+	
 	public void proceed() {
 
 		String result = executeSql();
@@ -90,6 +94,9 @@ public class DBAssertion extends AbstractAssertion {
 		}
 	}
 
+	/** Executes an SQL query, using connection details.
+	 * @return - returns result converted to a string.
+	 */
 	private String executeSql() {
 
 		StringBuilder resultBuilder = new StringBuilder();
@@ -122,6 +129,9 @@ public class DBAssertion extends AbstractAssertion {
 		return resultBuilder.toString();
 	}
 
+	/** Tries to establish connection with a database. 
+	 *  Applies a DB2 or Oracle driver. 
+	 */
 	private void createDatabaseConnection() {
 
 		DBConnector dummy = new DBConnector();
@@ -145,6 +155,10 @@ public class DBAssertion extends AbstractAssertion {
 		}
 	}
 	
+	
+	/** Is used by ResultBuilder's return. Checks values not to be nulls or empty.  
+	 * @see com.rockit.common.blackboxtester.assertions.AbstractAssertion#toString()
+	 */
 	public String toString() {
 		return this.getClass().getSimpleName() +
 				", datasourceId:\"" + (refDsId != null && !refDsId.isEmpty() ? refDsId : "")  +

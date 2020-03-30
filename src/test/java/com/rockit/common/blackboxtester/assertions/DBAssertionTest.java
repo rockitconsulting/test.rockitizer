@@ -15,7 +15,7 @@ public class DBAssertionTest {
 
 	/**
 	 * DB assertion with 2 sample parameter values: sqlQuery, mustContainTokens.
-	 * 
+	 * @throws IOException
 	 */
 	@Test
 	public void testToStringTwoParms() throws IOException {
@@ -25,8 +25,9 @@ public class DBAssertionTest {
 
 	/**
 	 * DB assertion with 2 null parameter values: sqlQuery, mustContainTokens.
-	 * 
+	 * @throws IOException
 	 */
+
 	@Test
 	public void testToStringTwoNullParms() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion(null, null);
@@ -36,6 +37,7 @@ public class DBAssertionTest {
 	/**
 	 * DB assertion with 2 empty parameter values: sqlQuery,
 	 * mustContainTokens.
+	 * @throws IOException
 	 */
 
 	@Test
@@ -47,6 +49,7 @@ public class DBAssertionTest {
 	/**
 	 * DB assertion with 3 sample parameter values: datasourceId, sqlQuery,
 	 * mustContainTokens.
+	 * @throws IOException
 	 */
 
 	@Test
@@ -58,6 +61,7 @@ public class DBAssertionTest {
 	/**
 	 * DB assertion with 3 null parameter values: datasourceId, sqlQuery,
 	 * mustContainTokens.
+	 * @throws IOException
 	 */
 
 	@Test
@@ -69,6 +73,7 @@ public class DBAssertionTest {
 	/**
 	 * DB assertion with 3 empty parameter values: datasourceId, sqlQuery,
 	 * mustContainTokens.
+	 * @throws IOException
 	 */
 
 	@Test
@@ -76,5 +81,5 @@ public class DBAssertionTest {
 		DBAssertion TestDBAssertion = new DBAssertion("", "", ImmutableList.of("", "", ""));
 		assertNotNull(TestDBAssertion.toString());
 	}
-
+	
 }

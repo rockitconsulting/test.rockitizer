@@ -156,8 +156,8 @@ public class CSVFileAssertion extends AbstractAssertion {
 	
 	public String toString() {
 		return this.getClass().getSimpleName() + "( path:\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\"" +
-				(separator!=null?", separator:\""+separator+"\"":"" ) +
-				(!ignoreIndexes.isEmpty()?", ignoreIndexes:\""+Joiner.on(",").join(ignoreIndexes)+"\"":"" ) +
+				(separator!=null&&!separator.isEmpty()?", separator:\""+separator+"\"":"" ) +
+				(null != ignoreIndexes && !ignoreIndexes.isEmpty()?", ignoreIndexes:\""+Joiner.on(",").join(ignoreIndexes)+"\"":"" ) +
 				" )";
 	}
 
