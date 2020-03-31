@@ -57,6 +57,10 @@ public class DifferenceBuilder {
 
     }
 
+    /**
+     * Reads record and replay and writes them into strings.
+     * @param fileName
+     */
     public void build(String fileName) {
         //    Assert.assertTrue("In File: " + fileName + " count of replayed messages " + fa.getReplayed().size() + " is not the expected count of " + fa.getRecorded().size(), fa.getReplayed().size() == fa.getRecorded().size());
         this.fileName = fileName;
@@ -71,6 +75,13 @@ public class DifferenceBuilder {
         }
     }
 
+    /**
+     * Parses test record items
+     * @param lineToParse
+     * @param rc
+     * @param isRecorded
+     * @return
+     */
     private List<String> parse(String lineToParse, RecordConfig rc, boolean isRecorded) {
         List<String> result = new ArrayList<String>();
         for (int i = 0; i < rc.getTokenCount(); i++) {
@@ -93,6 +104,13 @@ public class DifferenceBuilder {
         return result;
     }
 
+    /**
+     * Builds error reports
+     * @param expected
+     * @param actual
+     * @param linePos
+     * @param tokenPosition
+     */
     private void add(String expected, String actual, int linePos, int tokenPosition) {
         StringBuilder sb = new StringBuilder("[Error in file: ").append(this.fileName).append(" at line: ");
         sb.append(linePos)
@@ -106,6 +124,12 @@ public class DifferenceBuilder {
         actualDifferences.add(sb.toString());
     }
 
+    
+    
+    /**
+     * Gives proper formatting to the presentation of differences.
+     * @return
+     */
     private String formatDifferences() {
         StringBuilder sb = new StringBuilder("");
         if (actualDifferences.size() > 0) {
