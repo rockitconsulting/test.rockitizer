@@ -33,18 +33,36 @@ import com.rockit.common.blackboxtester.exceptions.AssertionException;
  *
  */
 
+/**
+ * @author admin
+ *
+ */
 public class JSONFileAssertion extends XMLFileAssertion {
 
 	public static final Logger LOGGER = Logger.getLogger(JSONFileAssertion.class.getName());
 
+		
+	/**
+	 * Calls XMLFileAssertion with one parameter: step
+	 * @param step
+	 */
 	public JSONFileAssertion(String step) {
 		super(step);
 	}
-
+	
+	/**
+	 * Calls XMLFileAssertion with two parameters: step and connector
+	 * @param step
+	 * @param connector
+	 */
 	public JSONFileAssertion(String step, String connector) {
 		super(step, connector);
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see com.rockit.common.blackboxtester.assertions.XMLFileAssertion#proceed()
+	 */
 	@Override
 	public void proceed() {
 		File recordFolder = new File(recordPath + getRelPath());
@@ -70,6 +88,12 @@ public class JSONFileAssertion extends XMLFileAssertion {
 		}
 	}
 
+	/**
+	 * Converts a JSON record file to an XML file.
+	 * @param recordFile
+	 * @return
+	 * @throws IOException
+	 */
 	String jsonToXMLFile(File recordFile) throws IOException {
 		List<String> lines = Files.readLines(recordFile, Charset.defaultCharset());
 

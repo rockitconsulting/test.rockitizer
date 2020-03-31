@@ -41,7 +41,7 @@ public class DBAssertionTest {
 	 */
 
 	@Test
-	public void testWithTwoEmptyParms() throws IOException {
+	public void testToStringWithTwoEmptyParms() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion("", ImmutableList.of(""));
 		assertNotNull(TestDBAssertion.toString());
 	}		
@@ -53,7 +53,7 @@ public class DBAssertionTest {
 	 */
 
 	@Test
-	public void testWithThreeParms() throws IOException {
+	public void testToStringWithThreeParms() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion("defaultDB", "SELECT * FROM ROCKIT.BOOKSERVICE;", ImmutableList.of("createdAt", "id"));
 		assertNotNull(TestDBAssertion.toString());
 	}
@@ -65,7 +65,7 @@ public class DBAssertionTest {
 	 */
 
 	@Test
-	public void testWithThreeNullParmsListIsNull() throws IOException {
+	public void testToStringWithThreeNullParmsListIsNull() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion(null, null, null);
 		assertNotNull(TestDBAssertion.toString());
 	}
@@ -77,9 +77,9 @@ public class DBAssertionTest {
 	 */
 
 	@Test
-	public void testWithThreeEmptyParms() throws IOException {
+	public void testToStringWithThreeEmptyParms() throws IOException {
 		DBAssertion TestDBAssertion = new DBAssertion("", "", ImmutableList.of("", "", ""));
 		assertNotNull(TestDBAssertion.toString());
 	}
-	
+
 }
