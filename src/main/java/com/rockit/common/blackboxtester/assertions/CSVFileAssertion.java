@@ -44,7 +44,12 @@ public class CSVFileAssertion extends AbstractAssertion {
 	private List<Integer> ignoreIndexes = new ArrayList<>();
 
 	
+	
+	
 
+	/**
+	 * CSV assertion
+	 */
 	@SuppressWarnings("unused")
 	private CSVFileAssertion() {
 	}
@@ -70,6 +75,12 @@ public class CSVFileAssertion extends AbstractAssertion {
 		this.relPath = File.separator + step + File.separator + connector;
 	}
 
+	
+	
+	/** 
+	 * Executes test logic.
+	 * @see com.rockit.common.blackboxtester.assertions.Assertions#proceed()
+	 */
 	@Override
 	public void proceed() {
 		File recordFolder = new File(recordPath + getRelPath());
@@ -93,6 +104,13 @@ public class CSVFileAssertion extends AbstractAssertion {
 		}
 	}
 
+	
+	
+	/**
+	 * Asserts absolute paths of two files.
+	 * @param f1
+	 * @param f2
+	 */
 	void csvAssert(File f1, File f2) {
 
 		assertTrue(f1.getAbsolutePath() + " not exists", f1.exists());
@@ -143,11 +161,23 @@ public class CSVFileAssertion extends AbstractAssertion {
 		return rs;
 	}
 
+	/**
+	 * Assigns separator value.
+	 * @param separator
+	 * @return
+	 */
 	public CSVFileAssertion setSeparator(String separator) {
 		this.separator = separator;
 		return this;
 	}
 
+	
+	
+	/**
+	 * Assigns ignored indexes value.
+	 * @param ignoreIndexes
+	 * @return
+	 */
 	public CSVFileAssertion setIgnoreIndexes(List<Integer> ignoreIndexes) {
 		this.ignoreIndexes = ignoreIndexes;
 		return this;
