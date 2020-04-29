@@ -106,9 +106,18 @@ dependencies {
 
 archivesBaseName='test.rockitizer'
 group = 'io.github.rockitconsulting'
-version = project.hasProperty('projVersion') ? project.projVersion :'1.0.5.2-SNAPSHOT'
+version = project.hasProperty('projVersion') ? project.projVersion :'1.0.5.3-SNAPSHOT'
 System.out.println("---->" + version)
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
+
+task createFatJar(type: Jar) {
+    manifest {
+        //attributes 'Main-Class': 'com.baeldung.fatjar.Application'
+    }
+    baseName = 'test.rockitizer-fatJar'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 

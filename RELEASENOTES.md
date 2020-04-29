@@ -1,3 +1,8 @@
+# 1.0.5.3 - Snapshot
+    - createFatJar Task 
+    - JUnit coverage
+    - javadocs
+    - Fix for handling of json arrays by HTTPConnector
 # 1.0.4 Release
 	- cli starter auto generation added
 	- cli developed
