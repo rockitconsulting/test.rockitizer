@@ -27,11 +27,6 @@ mqConnectors:
       dsRefId: defaultMQ
       queue: 'MQ.OUT.MQ2MQ'
       type: MQGET
-    - id: MQGET.OUT.MQ2RFH2
-      dsRefId: defaultMQ
-      queue: 'MQ.OUT.MQ2RFH2'
-      type: MQGET
-      
 dbConnectors:
     - id: DBPUT.CLAEN
       type: DBPUT

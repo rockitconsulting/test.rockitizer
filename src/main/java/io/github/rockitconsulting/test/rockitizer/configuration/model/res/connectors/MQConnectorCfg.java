@@ -38,13 +38,6 @@ public class MQConnectorCfg extends BaseConnector {
 
 	private String queue = "@defaultQueue@";
 	private String dsRefId = "defaultMQ";
-//	private int expiry = -1;
-//	private int msgType = 8; 
-//	private int codedCharSetId = 1208;
-//	private String msgFormat = "MQSTR ";
-	
-	private String[] rfh2Header = new String[] {};
-	
 	private Types type;
 
 	
@@ -79,14 +72,7 @@ public class MQConnectorCfg extends BaseConnector {
 	public void setQueue(String queue) {
 		this.queue = queue;
 	}
-	
-	public String[] getRfh2Header() {
-		return rfh2Header;
-	}
 
-	public void setRfh2Header(String[] rfh2Header) {
-		this.rfh2Header = rfh2Header;
-	}
 	
 	@Override
 	public String toString() {
