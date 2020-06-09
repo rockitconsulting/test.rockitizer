@@ -1,0 +1,18 @@
+<mqPayload>
+	<header>
+		<codedCharSetId>1208</codedCharSetId>
+		<correlId></correlId>
+		<expiry>-1</expiry>
+		<msgFormat>MQSTR</msgFormat>
+		<msgId>AMQ QM1 ??^!?!</msgId>
+		<msgType>8</msgType>
+		<replyToQ>DLQ</replyToQ>
+		<replyToQMgr>QM1</replyToQMgr>
+	</header>
+	<body>
+		<Input>
+			<Node1>content 1</Node1>
+			<Node2>content 2</Node2>
+		</Input>
+	</body>
+</mqPayload>

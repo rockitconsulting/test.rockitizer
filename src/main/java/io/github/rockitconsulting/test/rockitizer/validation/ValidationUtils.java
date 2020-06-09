@@ -4,11 +4,11 @@ import static io.github.rockitconsulting.test.rockitizer.configuration.Configura
 import static io.github.rockitconsulting.test.rockitizer.validation.ValidationHolder.validationHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
@@ -116,30 +116,30 @@ public class ValidationUtils {
 
 	private static void validateDataSourceRefForConnector(Object conn) {
 
-		if (conn instanceof DBConnector) {
+		if (conn instanceof DBConnectorCfg) {
 			try {
-				configuration().getDBDataSourceByConnector((DBConnector) conn);
+				configuration().getDBDataSourceByConnector((DBConnectorCfg) conn);
 			} catch (ResourceNotFoundException rnfe) {
-				registerValidationErrorDataSourceNotFound(((DBConnector) conn).getId(), ((DBConnector) conn).getDsRefId());
+				registerValidationErrorDataSourceNotFound(((DBConnectorCfg) conn).getId(), ((DBConnectorCfg) conn).getDsRefId());
 			} catch (ValidationException ve) { // NOSONAR
 				// handled by another validation
 			}
 
-		} else if (conn instanceof MQConnector) {
+		} else if (conn instanceof MQConnectorCfg) {
 			try {
-				configuration().getMQDataSourceByConnector((MQConnector) conn);
+				configuration().getMQDataSourceByConnector((MQConnectorCfg) conn);
 			} catch (ResourceNotFoundException rnfe) {
-				registerValidationErrorDataSourceNotFound(((MQConnector) conn).getId(), ((MQConnector) conn).getDsRefId());
+				registerValidationErrorDataSourceNotFound(((MQConnectorCfg) conn).getId(), ((MQConnectorCfg) conn).getDsRefId());
 			} catch (ValidationException ve) { // NOSONAR
 				// handled by another validation
 			}
 
 		}
-		if (conn instanceof HTTPConnector) {
+		if (conn instanceof HTTPConnectorCfg) {
 			try {
-				configuration().getKeyStoreByConnector((HTTPConnector) conn);
+				configuration().getKeyStoreByConnector((HTTPConnectorCfg) conn);
 			} catch (ResourceNotFoundException rnfe) {
-				registerValidationErrorDataSourceNotFound(((HTTPConnector) conn).getId(), ((HTTPConnector) conn).getDsRefId());
+				registerValidationErrorDataSourceNotFound(((HTTPConnectorCfg) conn).getId(), ((HTTPConnectorCfg) conn).getDsRefId());
 			} catch (ValidationException ve) { // NOSONAR
 				// handled by another validation
 			}
@@ -258,7 +258,7 @@ public class ValidationUtils {
 		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
 
 		rhfs.getDbConnectors().forEach(c -> {
-			DBConnector match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			DBConnectorCfg match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			if (match == null) {
 				messages.add("sync to yaml: " + c.toString());
 				rhyaml.addDbConnector(c);
@@ -266,7 +266,7 @@ public class ValidationUtils {
 		});
 
 		rhfs.getMqConnectors().forEach(c -> {
-			MQConnector match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			MQConnectorCfg match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			if (match == null) {
 				messages.add("sync to yaml: " + c.toString());
 				rhyaml.addMqConnector(c);
@@ -274,7 +274,7 @@ public class ValidationUtils {
 		});
 
 		rhfs.getFileConnectors().forEach(c -> {
-			FileConnector match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			FileConnectorCfg match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			if (match == null) {
 				messages.add("sync to yaml: " + c.toString());
 				rhyaml.addFileConnector(c);
@@ -282,7 +282,7 @@ public class ValidationUtils {
 		});
 
 		rhfs.getHttpConnectors().forEach(c -> {
-			HTTPConnector match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			HTTPConnectorCfg match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			if (match == null) {
 				messages.add("sync to yaml: " + c.toString());
 				rhyaml.addHttpConnector(c);
@@ -290,7 +290,7 @@ public class ValidationUtils {
 		});
 
 		rhfs.getScpConnectors().forEach(c -> {
-			SCPConnector match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			SCPConnectorCfg match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
 			if (match == null) {
 				messages.add("sync to yaml: " + c.toString());
 				rhyaml.addScpConnector(c);

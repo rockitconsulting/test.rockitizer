@@ -30,23 +30,20 @@ import com.google.common.collect.ImmutableMap;
 *
 */
 
-public class SCPConnector extends BaseConnector {
+public class FileConnectorCfg extends BaseConnector {
 
 	public enum Types {
-		SCPPUT
+		FILEDEL, FILEPUT, FILEGET
 	}
 
-	private String host = "@host@";
-	private String path = "@path@";
-	private String user = "@usr@";
-	private String parol = "@pwd";//NOSONAR
 	private Types type;
+	private String path = "@path@";
 
-	public SCPConnector() {
+	public FileConnectorCfg() {
 		super();
 	}
 
-	public SCPConnector(File location) {
+	public FileConnectorCfg(File location) {
 		super(location);
 	}
 
@@ -66,30 +63,6 @@ public class SCPConnector extends BaseConnector {
 		this.path = path;
 	}
 
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return parol;
-	}
-
-	public void setPassword(String password) {
-		this.parol = password;
-	}
-
 	@Override
 	public String toString() {
 		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(path) ? "" : "path=" + path) + "}";
@@ -97,16 +70,12 @@ public class SCPConnector extends BaseConnector {
 
 	@Override
 	public Map<Context, List<Message>> validate() {
-		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap()
-
-		);
+		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap());
 	}
 
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
-		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("host", host).put("path", path)
-				.put("user", user).put("password", parol).build();
-
+		return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "path", path);
 	}
 
 }

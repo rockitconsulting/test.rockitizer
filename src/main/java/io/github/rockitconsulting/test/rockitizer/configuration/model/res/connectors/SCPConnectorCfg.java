@@ -30,23 +30,23 @@ import com.google.common.collect.ImmutableMap;
 *
 */
 
-public class DBConnector extends BaseConnector {
+public class SCPConnectorCfg extends BaseConnector {
 
 	public enum Types {
-		DBGET, DBPUT
+		SCPPUT
 	}
 
-	private String query = null;
-
+	private String host = "@host@";
+	private String path = "@path@";
+	private String user = "@usr@";
+	private String parol = "@pwd";//NOSONAR
 	private Types type;
 
-	String dsRefId = "defaultDB";
-
-	public DBConnector() {
+	public SCPConnectorCfg() {
 		super();
 	}
 
-	public DBConnector(File location) {
+	public SCPConnectorCfg(File location) {
 		super(location);
 	}
 
@@ -56,49 +56,57 @@ public class DBConnector extends BaseConnector {
 
 	public void setType(Types type) {
 		this.type = type;
-		if (Types.DBGET == type && query == null) {
-			query = "@query@";
-		}
-
 	}
 
-	public String getQuery() {
-		return query;
+	public String getPath() {
+		return path;
 	}
 
-	public void setQuery(String query) {
-		this.query = query;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
-	public String getDsRefId() {
-		return dsRefId;
+	public String getHost() {
+		return host;
 	}
 
-	public void setDsRefId(String dsRefId) {
-		this.dsRefId = dsRefId;
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return parol;
+	}
+
+	public void setPassword(String password) {
+		this.parol = password;
 	}
 
 	@Override
 	public String toString() {
-		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(query) ? "" : "query=" + query + ", ")
-				+ (Strings.isNullOrEmpty(dsRefId) ? "" : "dsRefId=" + dsRefId + ", ") + "}";
+		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(path) ? "" : "path=" + path) + "}";
 	}
 
 	@Override
 	public Map<Context, List<Message>> validate() {
+		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap()
 
-		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap());
-
+		);
 	}
 
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
-		if (type == Types.DBGET) {
-			return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "query", query == null ? "@query@" : query, "dsRefId", dsRefId);
-		} else {
-			return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "dsRefId", dsRefId);
+		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("host", host).put("path", path)
+				.put("user", user).put("password", parol).build();
 
-		}
 	}
 
 }

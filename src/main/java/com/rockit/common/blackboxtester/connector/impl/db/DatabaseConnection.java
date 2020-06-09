@@ -1,7 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl.db;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 
 import java.sql.Connection;
@@ -41,7 +41,7 @@ public class DatabaseConnection {
 	
 	
 	public DatabaseConnection(String id) {
-		DBConnector dbConCfg = (DBConnector) configuration().getConnectorById(id);
+		DBConnectorCfg dbConCfg = (DBConnectorCfg) configuration().getConnectorById(id);
 		DBDataSource ds = configuration().getDBDataSourceByConnector(dbConCfg);
 		
 		this.dbUrl = ds.getUrl();

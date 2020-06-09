@@ -1,7 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -47,7 +47,7 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 
 	public DBGetConnector(String id) {
 		super(id);
-		DBConnector dbConCfg = (DBConnector) configuration().getConnectorById(id);
+		DBConnectorCfg dbConCfg = (DBConnectorCfg) configuration().getConnectorById(id);
 		this.id = id;
 		this.sqlQuery = dbConCfg.getQuery();
 

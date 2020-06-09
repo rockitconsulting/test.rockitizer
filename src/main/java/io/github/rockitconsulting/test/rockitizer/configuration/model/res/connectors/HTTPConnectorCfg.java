@@ -30,7 +30,7 @@ import com.google.common.collect.ImmutableMap;
 *
 */
 
-public class HTTPConnector extends BaseConnector {
+public class HTTPConnectorCfg extends BaseConnector {
 
 	public enum Types {
 		HTTP
@@ -50,11 +50,11 @@ public class HTTPConnector extends BaseConnector {
 
 	private String dsRefId;
 
-	public HTTPConnector() {
+	public HTTPConnectorCfg() {
 		super();
 	}
 
-	public HTTPConnector(File location) {
+	public HTTPConnectorCfg(File location) {
 		super(location);
 	}
 

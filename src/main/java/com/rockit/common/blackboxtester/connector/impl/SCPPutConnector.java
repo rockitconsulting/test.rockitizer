@@ -1,7 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,7 +58,7 @@ public class SCPPutConnector implements WriteConnector {
 	 */
 	public SCPPutConnector(String id) {
 		this.id = id;
-		SCPConnector cfg = (SCPConnector) configuration().getConnectorById(id);
+		SCPConnectorCfg cfg = (SCPConnectorCfg) configuration().getConnectorById(id);
 		this.host = cfg.getHost();
 		this.user = cfg.getUser();
 		this.password = cfg.getPassword();

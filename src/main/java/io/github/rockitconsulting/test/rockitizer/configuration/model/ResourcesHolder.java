@@ -1,10 +1,10 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
@@ -39,11 +39,11 @@ import java.util.Map;
 public class ResourcesHolder  {
 	
 	private Map<String, String> payloadReplacer = new HashMap<>();
-	private List<DBConnector>   dbConnectors 	= new ArrayList<>();
-	private List<HTTPConnector> httpConnectors 	= new ArrayList<>();
-	private List<FileConnector> fileConnectors 	= new ArrayList<>();
-	private List<MQConnector>   mqConnectors 	= new ArrayList<>();
-	private List<SCPConnector>  scpConnectors	= new ArrayList<>();
+	private List<DBConnectorCfg>   dbConnectors 	= new ArrayList<>();
+	private List<HTTPConnectorCfg> httpConnectors 	= new ArrayList<>();
+	private List<FileConnectorCfg> fileConnectors 	= new ArrayList<>();
+	private List<MQConnectorCfg>   mqConnectors 	= new ArrayList<>();
+	private List<SCPConnectorCfg>  scpConnectors	= new ArrayList<>();
 	
 	private List<MQDataSource> 	mqDataSources =  new ArrayList<>();
 	private List<DBDataSource> 	dbDataSources =  new ArrayList<>();
@@ -77,52 +77,52 @@ public class ResourcesHolder  {
 	}
 
 
-	public List<DBConnector> getDbConnectors() {
+	public List<DBConnectorCfg> getDbConnectors() {
 		return dbConnectors;
 	}
 
 
-	public void setDbConnectors(List<DBConnector> dbConnectors) {
+	public void setDbConnectors(List<DBConnectorCfg> dbConnectors) {
 		this.dbConnectors = dbConnectors;
 	}
 
 
-	public List<HTTPConnector> getHttpConnectors() {
+	public List<HTTPConnectorCfg> getHttpConnectors() {
 		return httpConnectors;
 	}
 
 
-	public void setHttpConnectors(List<HTTPConnector> httpConnectors) {
+	public void setHttpConnectors(List<HTTPConnectorCfg> httpConnectors) {
 		this.httpConnectors = httpConnectors;
 	}
 
 
-	public List<FileConnector> getFileConnectors() {
+	public List<FileConnectorCfg> getFileConnectors() {
 		return fileConnectors;
 	}
 
 
-	public void setFileConnectors(List<FileConnector> fileConnectors) {
+	public void setFileConnectors(List<FileConnectorCfg> fileConnectors) {
 		this.fileConnectors = fileConnectors;
 	}
 
 
-	public List<MQConnector> getMqConnectors() {
+	public List<MQConnectorCfg> getMqConnectors() {
 		return mqConnectors;
 	}
 
 
-	public void setMqConnectors(List<MQConnector> mqConnectors) {
+	public void setMqConnectors(List<MQConnectorCfg> mqConnectors) {
 		this.mqConnectors = mqConnectors;
 	}
 
 
-	public List<SCPConnector> getScpConnectors() {
+	public List<SCPConnectorCfg> getScpConnectors() {
 		return scpConnectors;
 	}
 
 
-	public void setScpConnectors(List<SCPConnector> scpConnectors) {
+	public void setScpConnectors(List<SCPConnectorCfg> scpConnectors) {
 		this.scpConnectors = scpConnectors;
 	}
 
@@ -131,9 +131,9 @@ public class ResourcesHolder  {
 	 * Because of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addtion custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param httpConnector configuration for @see {@link HTTPConnector#HTTPConnector(java.io.File)}
+	 * @param httpConnector configuration for @see {@link HTTPConnectorCfg#HTTPConnector(java.io.File)}
 	 */
-	public void addHttpConnector(HTTPConnector httpConnector) {
+	public void addHttpConnector(HTTPConnectorCfg httpConnector) {
 		if (!getHttpConnectors().stream().anyMatch(c -> c.getId().equals(httpConnector.getId()))) {
 			getHttpConnectors().add(httpConnector);
 		}
@@ -143,9 +143,9 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param fileConnector configuration for @see {@link FileConnector#FileConnector(java.io.File)}
+	 * @param fileConnector configuration for @see {@link FileConnectorCfg#FileConnector(java.io.File)}
 	 */
-	public void addFileConnector(FileConnector fileConnector) {
+	public void addFileConnector(FileConnectorCfg fileConnector) {
 		if (!getFileConnectors().stream().anyMatch(c -> c.getId().equals(fileConnector.getId()))) {
 			getFileConnectors().add(fileConnector);
 		}
@@ -156,9 +156,9 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param mqConnector configuration for @see {@link MQConnector#MQConnector(java.io.File)}
+	 * @param mqConnector configuration for @see {@link MQConnectorCfg#MQConnector(java.io.File)}
 	 */
-	public void addMqConnector(MQConnector mqConnector) {
+	public void addMqConnector(MQConnectorCfg mqConnector) {
 		if (!getMqConnectors().stream().anyMatch(c -> c.getId().equals(mqConnector.getId()))) {
 			getMqConnectors().add(mqConnector);
 		}
@@ -169,9 +169,9 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param dbConnector configuration for @see {@link DBConnector#DBConnector(java.io.File)}
+	 * @param dbConnector configuration for @see {@link DBConnectorCfg#DBConnector(java.io.File)}
 	 */
-	public void addDbConnector(DBConnector dbConnector) {
+	public void addDbConnector(DBConnectorCfg dbConnector) {
 		if (!getDbConnectors().stream().anyMatch(c -> c.getId().equals(dbConnector.getId()))) {
 			getDbConnectors().add(dbConnector);
 		}
@@ -182,9 +182,9 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param scpConnector configuration for @see {@link SCPConnector#SCPConnector(java.io.File)}
+	 * @param scpConnector configuration for @see {@link SCPConnectorCfg#SCPConnector(java.io.File)}
 	 */
-	public void addScpConnector(SCPConnector scpConnector) {
+	public void addScpConnector(SCPConnectorCfg scpConnector) {
 		if (!getScpConnectors().stream().anyMatch(c -> c.getId().equals(scpConnector.getId()))) {
 			getScpConnectors().add(scpConnector);
 		}

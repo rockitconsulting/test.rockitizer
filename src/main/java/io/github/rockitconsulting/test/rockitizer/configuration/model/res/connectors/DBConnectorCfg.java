@@ -30,20 +30,23 @@ import com.google.common.collect.ImmutableMap;
 *
 */
 
-public class FileConnector extends BaseConnector {
+public class DBConnectorCfg extends BaseConnector {
 
 	public enum Types {
-		FILEDEL, FILEPUT, FILEGET
+		DBGET, DBPUT
 	}
 
-	private Types type;
-	private String path = "@path@";
+	private String query = null;
 
-	public FileConnector() {
+	private Types type;
+
+	String dsRefId = "defaultDB";
+
+	public DBConnectorCfg() {
 		super();
 	}
 
-	public FileConnector(File location) {
+	public DBConnectorCfg(File location) {
 		super(location);
 	}
 
@@ -53,29 +56,49 @@ public class FileConnector extends BaseConnector {
 
 	public void setType(Types type) {
 		this.type = type;
+		if (Types.DBGET == type && query == null) {
+			query = "@query@";
+		}
+
 	}
 
-	public String getPath() {
-		return path;
+	public String getQuery() {
+		return query;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
+	public String getDsRefId() {
+		return dsRefId;
+	}
+
+	public void setDsRefId(String dsRefId) {
+		this.dsRefId = dsRefId;
 	}
 
 	@Override
 	public String toString() {
-		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(path) ? "" : "path=" + path) + "}";
+		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(query) ? "" : "query=" + query + ", ")
+				+ (Strings.isNullOrEmpty(dsRefId) ? "" : "dsRefId=" + dsRefId + ", ") + "}";
 	}
 
 	@Override
 	public Map<Context, List<Message>> validate() {
+
 		return ValidationUtils.checkFieldsValid(getContext(), getFieldsAsOrderedMap());
+
 	}
 
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
-		return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "path", path);
+		if (type == Types.DBGET) {
+			return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "query", query == null ? "@query@" : query, "dsRefId", dsRefId);
+		} else {
+			return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString(), "dsRefId", dsRefId);
+
+		}
 	}
 
 }

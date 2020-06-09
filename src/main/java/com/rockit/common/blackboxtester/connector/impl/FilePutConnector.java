@@ -1,7 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
@@ -42,7 +42,7 @@ public class FilePutConnector implements WriteConnector {
 	 */
 	public FilePutConnector(String id) {
 		this.id = id;
-		FileConnector cfg = (FileConnector) configuration().getConnectorById(id);
+		FileConnectorCfg cfg = (FileConnectorCfg) configuration().getConnectorById(id);
 		this.destPath = cfg.getPath();
 	}
 

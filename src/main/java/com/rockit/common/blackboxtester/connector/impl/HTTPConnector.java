@@ -1,6 +1,7 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 
 import java.io.File;
@@ -65,8 +66,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	private File file;
 
 	public HTTPConnector(String id) {
-		io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector cfg = (io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector) configuration()
-				.getConnectorById(id);
+		HTTPConnectorCfg cfg = (HTTPConnectorCfg) configuration().getConnectorById(id);
 
 		this.id = id;
 		this.urlStr = cfg.getUrl();

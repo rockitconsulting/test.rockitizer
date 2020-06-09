@@ -2,7 +2,7 @@ package com.rockit.common.blackboxtester.assertions;
 
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import static org.junit.Assert.assertTrue;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 
 import java.sql.Connection;
@@ -134,7 +134,7 @@ public class DBAssertion extends AbstractAssertion {
 	 */
 	private void createDatabaseConnection() {
 
-		DBConnector dummy = new DBConnector();
+		DBConnectorCfg dummy = new DBConnectorCfg();
 		dummy.setDsRefId(refDsId);
 
 		DBDataSource ds = configuration().getDBDataSourceByConnector(dummy);

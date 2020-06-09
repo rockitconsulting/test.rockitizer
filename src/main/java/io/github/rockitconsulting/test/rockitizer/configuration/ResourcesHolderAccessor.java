@@ -1,11 +1,11 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
@@ -161,7 +161,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		return c;
 	}
 
-	public DBDataSource getDBDataSourceByConnector(DBConnector connector) {
+	public DBDataSource getDBDataSourceByConnector(DBConnectorCfg connector) {
 		DBDataSource ds = resourcesHolder.findDBDataSourceById(connector.getDsRefId());
 		if (ds == null) {
 			throw new ResourceNotFoundException(connector.getDsRefId());
@@ -173,7 +173,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		return ds;
 	}
 
-	public MQDataSource getMQDataSourceByConnector(MQConnector connector) {
+	public MQDataSource getMQDataSourceByConnector(MQConnectorCfg connector) {
 		MQDataSource ds = resourcesHolder.findMQDataSourceById(connector.getDsRefId());
 		if (ds == null) {
 			throw new ResourceNotFoundException(connector.getDsRefId());
@@ -185,7 +185,7 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		return ds;
 	}
 
-	public KeyStore getKeyStoreByConnector(HTTPConnector connector) {
+	public KeyStore getKeyStoreByConnector(HTTPConnectorCfg connector) {
 		if (connector.getDsRefId() == null) {
 			return null;
 		}
@@ -218,55 +218,55 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 			switch (cType) {
 			case "HTTP":
-				HTTPConnector httpConnector = new HTTPConnector(connFolder);
+				HTTPConnectorCfg httpConnector = new HTTPConnectorCfg(connFolder);
 				resources.addHttpConnector(httpConnector);
 				break;
 
 			case "FILEDEL":
-				FileConnector fileDelConnector = new FileConnector(connFolder);
-				fileDelConnector.setType(FileConnector.Types.FILEDEL);
+				FileConnectorCfg fileDelConnector = new FileConnectorCfg(connFolder);
+				fileDelConnector.setType(FileConnectorCfg.Types.FILEDEL);
 				resources.addFileConnector(fileDelConnector);
 				break;
 
 			case "FILEPUT":
-				FileConnector filePutConnector = new FileConnector(connFolder);
-				filePutConnector.setType(FileConnector.Types.FILEPUT);
+				FileConnectorCfg filePutConnector = new FileConnectorCfg(connFolder);
+				filePutConnector.setType(FileConnectorCfg.Types.FILEPUT);
 				resources.addFileConnector(filePutConnector);
 				break;
 
 			case "FILEGET":
-				FileConnector fileGetConnector = new FileConnector(connFolder);
-				fileGetConnector.setType(FileConnector.Types.FILEGET);
+				FileConnectorCfg fileGetConnector = new FileConnectorCfg(connFolder);
+				fileGetConnector.setType(FileConnectorCfg.Types.FILEGET);
 				resources.addFileConnector(fileGetConnector);
 				break;
 
 			case "MQGET":
-				MQConnector mqGetConnector = new MQConnector(connFolder);
-				mqGetConnector.setType(MQConnector.Types.MQGET);
+				MQConnectorCfg mqGetConnector = new MQConnectorCfg(connFolder);
+				mqGetConnector.setType(MQConnectorCfg.Types.MQGET);
 				resources.addMqConnector(mqGetConnector);
 				break;
 
 			case "MQPUT":
-				MQConnector mqPutConnector = new MQConnector(connFolder);
-				mqPutConnector.setType(MQConnector.Types.MQPUT);
+				MQConnectorCfg mqPutConnector = new MQConnectorCfg(connFolder);
+				mqPutConnector.setType(MQConnectorCfg.Types.MQPUT);
 				resources.addMqConnector(mqPutConnector);
 				break;
 
 			case "DBPUT":
-				DBConnector dbPutConnector = new DBConnector(connFolder);
-				dbPutConnector.setType(DBConnector.Types.DBPUT);
+				DBConnectorCfg dbPutConnector = new DBConnectorCfg(connFolder);
+				dbPutConnector.setType(DBConnectorCfg.Types.DBPUT);
 				resources.addDbConnector(dbPutConnector);
 				break;
 
 			case "DBGET":
-				DBConnector dbGetConnector = new DBConnector(connFolder);
-				dbGetConnector.setType(DBConnector.Types.DBGET);
+				DBConnectorCfg dbGetConnector = new DBConnectorCfg(connFolder);
+				dbGetConnector.setType(DBConnectorCfg.Types.DBGET);
 				resources.addDbConnector(dbGetConnector);
 				break;
 
 			case "SCPPUT":
-				SCPConnector scpConnector = new SCPConnector(connFolder);
-				scpConnector.setType(SCPConnector.Types.SCPPUT);
+				SCPConnectorCfg scpConnector = new SCPConnectorCfg(connFolder);
+				scpConnector.setType(SCPConnectorCfg.Types.SCPPUT);
 				resources.addScpConnector(scpConnector);
 				break;
 

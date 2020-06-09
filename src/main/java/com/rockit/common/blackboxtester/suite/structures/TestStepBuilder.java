@@ -1,13 +1,13 @@
 package com.rockit.common.blackboxtester.suite.structures;
 
-import static com.rockit.common.blackboxtester.suite.configuration.SettingsHolder.cache;
+
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.rockit.common.blackboxtester.connector.settings.Settings;
+
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 
@@ -71,10 +71,7 @@ public class TestStepBuilder extends AbstractTestFolder {
 		return new File(getBasePath()).toURI().relativize(new File(path).toURI()).getPath();
 	}
 
-	public TestStepBuilder addSettings(final String connectorName, final Settings settings) {
-		cache().put(connectorName, settings);
-		return this;
-	}
+	
 
 	public TestStepBuilder sleep(final int ms) {
 		if(this.isAssertMode()) {

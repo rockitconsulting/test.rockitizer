@@ -1,8 +1,8 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnector;
-import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnector;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
@@ -218,16 +218,16 @@ public class Configuration {
 		return getRhApi().getConnectorById(id);
 	}
 
-	public DBDataSource getDBDataSourceByConnector(DBConnector cfg) {
+	public DBDataSource getDBDataSourceByConnector(DBConnectorCfg cfg) {
 		return getRhApi().getDBDataSourceByConnector(cfg);
 	}
 
-	public MQDataSource getMQDataSourceByConnector(MQConnector cfg) {
+	public MQDataSource getMQDataSourceByConnector(MQConnectorCfg cfg) {
 		return getRhApi().getMQDataSourceByConnector(cfg);
 
 	}
 
-	public KeyStore getKeyStoreByConnector(HTTPConnector cfg) {
+	public KeyStore getKeyStoreByConnector(HTTPConnectorCfg cfg) {
 		return getRhApi().getKeyStoreByConnector(cfg);
 
 	}
