@@ -131,7 +131,7 @@ public class ResourcesHolder  {
 	 * Because of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addtion custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param httpConnector configuration for @see {@link HTTPConnectorCfg#HTTPConnector(java.io.File)}
+	 * @param httpConnector configuration for @see {@link HTTPConnectorCfg#HTTPConnectorCfg(java.io.File)}
 	 */
 	public void addHttpConnector(HTTPConnectorCfg httpConnector) {
 		if (!getHttpConnectors().stream().anyMatch(c -> c.getId().equals(httpConnector.getId()))) {
@@ -143,7 +143,7 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param fileConnector configuration for @see {@link FileConnectorCfg#FileConnector(java.io.File)}
+	 * @param fileConnector configuration for @see {@link FileConnectorCfg#FileConnectorCfg(java.io.File)}
 	 */
 	public void addFileConnector(FileConnectorCfg fileConnector) {
 		if (!getFileConnectors().stream().anyMatch(c -> c.getId().equals(fileConnector.getId()))) {
@@ -156,7 +156,7 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param mqConnector configuration for @see {@link MQConnectorCfg#MQConnector(java.io.File)}
+	 * @param mqConnector configuration for @see {@link MQConnectorCfg#MQConnectorCfg(java.io.File)}
 	 */
 	public void addMqConnector(MQConnectorCfg mqConnector) {
 		if (!getMqConnectors().stream().anyMatch(c -> c.getId().equals(mqConnector.getId()))) {
@@ -169,7 +169,7 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param dbConnector configuration for @see {@link DBConnectorCfg#DBConnector(java.io.File)}
+	 * @param dbConnector configuration for @see {@link DBConnectorCfg#DBConnectorCfg(java.io.File)}
 	 */
 	public void addDbConnector(DBConnectorCfg dbConnector) {
 		if (!getDbConnectors().stream().anyMatch(c -> c.getId().equals(dbConnector.getId()))) {
@@ -182,7 +182,7 @@ public class ResourcesHolder  {
 	 * Becasue of snakeyaml limitation only List (no Set) usage is suitable, therefore specific add method to control uniqueness. 
 	 * In addition custom searchById function, instead of dependency on equals and hashcode
 	 * 
-	 * @param scpConnector configuration for @see {@link SCPConnectorCfg#SCPConnector(java.io.File)}
+	 * @param scpConnector configuration for @see {@link SCPConnectorCfg#SCPConnectorCfg(java.io.File)}
 	 */
 	public void addScpConnector(SCPConnectorCfg scpConnector) {
 		if (!getScpConnectors().stream().anyMatch(c -> c.getId().equals(scpConnector.getId()))) {
