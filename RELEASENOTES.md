@@ -1,4 +1,4 @@
-# 1.0.5.3 - Snapshot
+# 1.0.5.3 - Release
 
 Url: https://mvnrepository.com/artifact/io.github.rockitconsulting/test.rockitizer/1.0.5.3
 
