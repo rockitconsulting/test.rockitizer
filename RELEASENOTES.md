@@ -1,3 +1,6 @@
+# 1.0.5.3 - Snapshot 
+	- warning in TestProtocol by fallback to vanilla payload format in MQPut
+
 # 1.0.5.3 - Release
 
 Url: https://mvnrepository.com/artifact/io.github.rockitconsulting/test.rockitizer/1.0.5.3
