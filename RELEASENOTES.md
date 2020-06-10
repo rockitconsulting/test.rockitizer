@@ -1,15 +1,14 @@
 # 1.0.5.3 - Snapshot
-
 Url: https://mvnrepository.com/artifact/io.github.rockitconsulting/test.rockitizer/1.0.5.3
-
 Changes: 
     - Handling MQ Headers (MQMD, RFH2 USR, etc.) over MqPayload wrapper. 
-         - MQGet stores payload in XML Format including header. 
-	 - MQPut supports MqPayload format too, but has backward compatibility for vanila payloads
+	         - MQGet stores payload in XML Format including header. 
+		 - MQPut supports MqPayload format too, but has backward compatibility for vanila payloads
     - createFatJar Task 
     - JUnit coverage
     - javadocs
     - Fix for handling of json arrays by HTTPConnector
+
 # 1.0.4 Release
 	- cli starter auto generation added
 	- cli developed
