@@ -1,4 +1,4 @@
-# 1.0.5.3 - Snapshot 
+# 1.0.5.4 - Snapshot 
 	- warning in TestProtocol by fallback to vanilla payload format in MQPut
 
 # 1.0.5.3 - Release
