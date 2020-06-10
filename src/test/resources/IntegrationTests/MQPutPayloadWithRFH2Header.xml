@@ -41,6 +41,7 @@
 					<TechnicalServiceIdentification dt="string">SWIFT.MSGSNF
 					</TechnicalServiceIdentification>
 					<inboundQueue dt="string">ESMIG</inboundQueue>
+					<pustekuchen>süß</pustekuchen>
 				</usr>
 			</rfh2Header>
 		</rfh2Headers>

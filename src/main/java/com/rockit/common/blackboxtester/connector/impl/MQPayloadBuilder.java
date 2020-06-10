@@ -114,7 +114,7 @@ public class MQPayloadBuilder {
 
 		} catch (JAXBException | SAXException | XPathExpressionException | IOException | ParserConfigurationException e) {
 			p = null;
-			LOGGER.debug("no mqPayload envelope found, continue processing legacy message " + e.getMessage());
+			LOGGER.warn("no mqPayload envelope found, continue processing legacy message " + e.getMessage());
 		}
 		return p;
 	}
