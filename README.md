@@ -131,7 +131,7 @@ For a complete understanding please refer to Documentation:
 <br>
 <ul>
 
-<li><a href="https://www.youtube.com/watch?v=ym4kXiUUByo" target="_blank">Boosting productivity and quality of integration development with test.rockITizer</a></li>
+<li><a href="https://youtu.be/M9UwuL-QKzU" target="_blank">Video: Boosting productivity and quality with test.rockITizer</a></li>
 <li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/926842891/Introduction" target="_blank">Introduction</a></li>
 <li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/941228053/Quick+Start" target="_blank">Quick Start Guide</a></li>
 <li><a href="https://rockit.atlassian.net/wiki/spaces/TR/pages/947716159/Project+layout" target="_blank">Project Layout/Testplan</a></li>
