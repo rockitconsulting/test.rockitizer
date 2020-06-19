@@ -30,7 +30,7 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
 *Originally developed for ESB, especially for IBM Message Broker/IBM Integration Bus (used in examples), but can be used for any integration platform.* 
 
 
-### Youtube Video: <a href="https://youtu.be/M9UwuL-QKzU" target="_blank">Video: Boosting productivity and quality with test.rockITizer</a>
+### Youtube Video: <a href="https://youtu.be/M9UwuL-QKzU" target="_blank">Boosting productivity and quality with test.rockITizer</a>
 
 [<img src="https://img.youtube.com/vi/M9UwuL-QKzU/maxresdefault.jpg" width="100%">](https://youtu.be/M9UwuL-QKzU)
 
