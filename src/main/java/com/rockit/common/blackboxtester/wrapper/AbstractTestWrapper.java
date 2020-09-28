@@ -59,7 +59,7 @@ public abstract class AbstractTestWrapper {
 	@After
 	public void Assertions() {
 		if (!testBuilder.isReplayMode() && !testBuilder.isAssertMode()) { 
-			TestProtocol.write("Assertions are only possible in replay mode. Set suite.mode in config.properties");
+			TestProtocol.write("You are running in 'record' mode. Assertions are only possible in 'replay' or 'assert' modes. Kindly use cli run or set the 'mode' parameter for JUnit directly.");
 			return;
 		}
 
