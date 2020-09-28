@@ -1,4 +1,5 @@
 # 1.0.5.4 - Snapshot 
+	- hint for setting the parameter 'mode' over cli or directly in JUnit to enable assertions
 	- warning in TestProtocol by fallback to vanilla payload format in MQPut
 
 # 1.0.5.3 - Release
