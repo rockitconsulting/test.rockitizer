@@ -32,7 +32,7 @@ Test.RockITizer covers with its connectors the majority of protocols in integrat
 
 ### Youtube Video: <a href="https://youtu.be/M9UwuL-QKzU" target="_blank">Boosting productivity and quality with test.rockITizer</a>
 
-[<img src="https://img.youtube.com/vi/SMTk9EoYofs/hqdefault.jpg" width="100%">](https://youtu.be/M9UwuL-QKzU)
+[<img src="https://img.youtube.com/vi/M9UwuL-QKzU/maxresdefault.jpg" width="100%">](https://youtu.be/M9UwuL-QKzU)
 
 <br><br>
 
