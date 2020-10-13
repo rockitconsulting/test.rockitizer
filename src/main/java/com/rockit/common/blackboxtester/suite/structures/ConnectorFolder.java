@@ -37,7 +37,7 @@ import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 public class ConnectorFolder extends AbstractTestFolder {
 
-	public ConnectorFolder(String testName, String testStepName, String connectorName) {
+	protected ConnectorFolder(String testName, String testStepName, String connectorName) {
 		super(testName, testStepName, connectorName);
 	}
 

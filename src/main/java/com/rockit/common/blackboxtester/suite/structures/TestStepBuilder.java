@@ -33,7 +33,7 @@ import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 public class TestStepBuilder extends AbstractTestFolder {
 	private Iterable<ConnectorFolder> connectorFolders;
 
-	public TestStepBuilder(final String testName, String testStepName) {
+	protected TestStepBuilder(final String testName, String testStepName) {
 		super(testName, testStepName);
 		TestProtocol.writeStep(testStepName);
 	}
