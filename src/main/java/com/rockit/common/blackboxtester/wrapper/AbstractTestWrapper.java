@@ -37,7 +37,7 @@ public abstract class AbstractTestWrapper {
 	public static final Logger LOGGER = Logger.getLogger(AbstractTestWrapper.class.getName());
 
 	@Before
-	public void cleanRecordFolderAndConnectors() throws IOException {
+	public void preProcess() throws IOException {
 
 		TestProtocol.writeHeading(testBuilder.getTestName(), "Configuration");
 		TestProtocol.write(testBuilder);
@@ -57,14 +57,20 @@ public abstract class AbstractTestWrapper {
 	}
 
 	@After
-	public void Assertions() {
-		if (!testBuilder.isReplayMode() && !testBuilder.isAssertMode()) { 
-			TestProtocol.write("You are running in 'record' mode. Assertions are only possible in 'replay' or 'assert' modes. Kindly use cli run or set the 'mode' parameter for JUnit directly.");
-			return;
+	public void postProcess() {
+
+		if (!testBuilder.isAssertMode()) {
+			testBuilder.addStep(Constants.AFTER_FOLDER).execute();
 		}
 
-		TestProtocol.writeHeading(testBuilder.getTestName(), "Assertion");
-		testBuilder.proceedAssertions();
+		
+		if (testBuilder.isRecordMode()) { 
+			TestProtocol.write("You are running in 'record' mode. Assertions are only possible in 'replay' or 'assert' modes. Kindly use cli run or set the 'mode' parameter for JUnit directly.");
+			return;
+		} else {
+			TestProtocol.writeHeading(testBuilder.getTestName(), "Assertion");
+			testBuilder.proceedAssertions();
+		}
 	}
 
 	public TestBuilder newTestBuilderFor(Class<? extends AbstractTestWrapper> clazz) {

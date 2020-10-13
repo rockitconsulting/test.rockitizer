@@ -1,4 +1,5 @@
 # 1.0.5.4 - Snapshot 
+	- 99AFTER folder support for post processing added (analoge to 0BEFORE preprocessing)
 	- hint for setting the parameter 'mode' over cli or directly in JUnit to enable assertions
 	- warning in TestProtocol by fallback to vanilla payload format in MQPut
 

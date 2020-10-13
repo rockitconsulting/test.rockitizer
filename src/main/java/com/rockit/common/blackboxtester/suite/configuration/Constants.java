@@ -28,6 +28,7 @@ public final class Constants {
 	public static final int SCP_PORT = 22;
 	public static final int SCP_FILE_MODE = 0777;
 	public static final String BEFORE_FOLDER = "0BEFORE";
+	public static final String AFTER_FOLDER = "99AFTER";;
 	public static final String CLI_COMMAND = "cli";
 	public static final String OUTPUT_FOLDER = "output";
 	public static final String DEFAULT_SLEEP_MS = "20000";
@@ -87,6 +88,7 @@ public final class Constants {
 	// public static final String FILE_PATH_KEY = ".PATH";
 
 	public static final List<String> SUPPORTED_CONNECTORS = ImmutableList.of("MQGET","MQPUT","SCPPUT","FILEPUT","FILEGET","FILEDEL","HTTP","DBGET","DBPUT");
+
 	
 	public static enum Connectors {
 		MQGET("MQGET."), MQPUT("MQPUT."), SCPPUT("SCPPUT."), SCPGET("SCPGET."), FILEPUT("FILEPUT."), FILEGET("FILEGET."), FILEDEL("FILEDEL."), DBPUT("DBPUT."), DBGET(
