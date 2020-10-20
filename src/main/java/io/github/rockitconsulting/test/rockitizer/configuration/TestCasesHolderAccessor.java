@@ -83,7 +83,7 @@ public class TestCasesHolderAccessor extends RuntimeContext {
 				FileUtils.listFolders(tsFolder).forEach(connFolder -> {
 					ConnectorRef connectorRef = new ConnectorRef(connFolder);
 					FileUtils.listFiles(connFolder).forEach(payload -> {
-						if (!payload.getName().equals(Constants.GITIGNORE)) {
+						if (!payload.getName().equals(Constants.GITIGNORE) && !payload.getName().equals(Constants.DESCRIPTION_TXT)) {
 							connectorRef.getPayloads().add(new Payload(payload));
 						}
 					});

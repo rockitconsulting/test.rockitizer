@@ -1,8 +1,12 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.tc;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -27,6 +31,8 @@ public class TestCase  {
 	
 	private String testCaseName;
 	
+	private String testCaseDescription;
+	
 	List<TestStep> testSteps = new ArrayList<>();
 	
 	public TestCase() {}
@@ -34,6 +40,7 @@ public class TestCase  {
 	
 	public TestCase (File location) {
 		this.testCaseName = location.getName();
+		this.testCaseDescription = FileUtils.readFile( new File(location.getAbsolutePath()+"/"+ Constants.DESCRIPTION_TXT) );
 	}
 	
 	public String getTestCaseName() {
@@ -54,10 +61,13 @@ public class TestCase  {
 	}
 
 
-	@Override
-	public String toString() {
-		return System.lineSeparator() + " 	TestCase [testCaseName=" + testCaseName + ", " + System.lineSeparator() + " 		testSteps="
-				+ testSteps + "]";
+	public String getTestCaseDescription() {
+		return testCaseDescription;
+	}
+
+
+	public void setTestCaseDescription(String testCaseDescription) {
+		this.testCaseDescription = testCaseDescription;
 	}
 
 
@@ -65,7 +75,9 @@ public class TestCase  {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((testCaseDescription == null) ? 0 : testCaseDescription.hashCode());
 		result = prime * result + ((testCaseName == null) ? 0 : testCaseName.hashCode());
+		result = prime * result + ((testSteps == null) ? 0 : testSteps.hashCode());
 		return result;
 	}
 
@@ -79,13 +91,32 @@ public class TestCase  {
 		if (getClass() != obj.getClass())
 			return false;
 		TestCase other = (TestCase) obj;
+		if (testCaseDescription == null) {
+			if (other.testCaseDescription != null)
+				return false;
+		} else if (!testCaseDescription.equals(other.testCaseDescription))
+			return false;
 		if (testCaseName == null) {
 			if (other.testCaseName != null)
 				return false;
 		} else if (!testCaseName.equals(other.testCaseName))
 			return false;
+		if (testSteps == null) {
+			if (other.testSteps != null)
+				return false;
+		} else if (!testSteps.equals(other.testSteps))
+			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "TestCase [testCaseName=" + testCaseName + ", testCaseDescription=" + testCaseDescription + ", testSteps=" + testSteps + "]";
+	}
+
+
+
 
 
 }

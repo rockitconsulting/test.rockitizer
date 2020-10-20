@@ -71,10 +71,10 @@ public class TestBuilder extends AbstractTestFolder {
 
 	public void deleteOutputFolder() throws IOException {
 		if (!isReplayMode()) {
-			TestProtocol.write(getTestStepName() + "\t Deleting record output folder " + getRecordOutputFolder());
+			TestProtocol.write("        Deleting record output folder " + getRecordOutputFolder());
 			FileUtils.deleteDirectory(new File(getRecordOutputFolder()));
 		} else {
-			TestProtocol.write(getTestStepName() + "\t Deleting replay  folder " + getReplayFolder());
+			TestProtocol.write("        Deleting replay  folder " + getReplayFolder());
 			FileUtils.deleteDirectory(new File(getReplayFolder()));
 		}
 	}

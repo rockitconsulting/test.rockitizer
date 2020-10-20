@@ -3,14 +3,22 @@
 #########################################################################################################################
 testCases:
 - testCaseName: FILEinFILEOutTest
+  testCaseDescription: "My testcase description. My testcase description.My testcase\
+    \ description.My testcase description.My testcase description.My testcase description.My\
+    \ testcase description.\r\nMy testcase description.My testcase description.My\
+    \ testcase description.My testcase description.My testcase description.My testcase\
+    \ description."
   testSteps:
-  - testStepName: 0BEFORE
+  - testStepName: 000BEFORE
+    testStepDescription: Preparation step. Before step execution. All file connectors
+      will be cleaned.
     connectorRefs:
     - conRefId: FILEDEL.IN.FILE2FILE
     - conRefId: FILEDEL.OUT.FILE2FILE
   - testStepName: a001FILEPutMessage
     connectorRefs:
     - conRefId: FILEPUT.IN.FILE2FILE
+      conRefDescription: Writing the testinput.xml file
       payloads:
       - fileName: testinput.xml
   - testStepName: a002FILEGetMessage
@@ -18,7 +26,7 @@ testCases:
     - conRefId: FILEGET.OUT.FILE2FILE
 - testCaseName: FILEinMQOutTest
   testSteps:
-  - testStepName: 0BEFORE
+  - testStepName: 000BEFORE
     connectorRefs:
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.OUT.FILE2MQ
@@ -35,7 +43,7 @@ testCases:
     - conRefId: MQGET.OUT.FILE2MQ
 - testCaseName: JSONwithDatabaseTest
   testSteps:
-  - testStepName: 0BEFORE
+  - testStepName: 000BEFORE
     connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:
@@ -51,7 +59,7 @@ testCases:
     - conRefId: DBGET.GETBOOKS
 - testCaseName: MQinDBOutTest
   testSteps:
-  - testStepName: 0BEFORE
+  - testStepName: 000BEFORE
     connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:
@@ -71,7 +79,7 @@ testCases:
     - conRefId: MQGET.ERROR
 - testCaseName: MQinMQoutTest
   testSteps:
-  - testStepName: 0BEFORE
+  - testStepName: 000BEFORE
     connectorRefs:
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.IN.MQ2MQ
@@ -89,7 +97,7 @@ testCases:
     - conRefId: MQGET.OUT.MQ2MQ
 - testCaseName: WSwithDatabaseTest
   testSteps:
-  - testStepName: 0BEFORE
+  - testStepName: 000BEFORE
     connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:

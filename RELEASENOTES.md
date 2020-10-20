@@ -1,7 +1,13 @@
-# 1.0.5.4 - Snapshot 
-	- 99AFTER folder support for post processing added (analoge to 0BEFORE preprocessing)
+# 1.0.5.4 - Release 
+	- Pretty-Print for Test Report
+	- Added support for description files (description.txt) for TestCase, TestStep and Connector
+	- 999AFTER folder support for post processing added (analog to 000BEFORE preprocessing)
 	- hint for setting the parameter 'mode' over cli or directly in JUnit to enable assertions
 	- warning in TestProtocol by fallback to vanilla payload format in MQPut
+
+## Migration needed from version prior to 1.0.5.3  
+ - 0BEFORE replaced by 000BEFORE
+	
 
 # 1.0.5.3 - Release
 
@@ -10,8 +16,8 @@ Url: https://mvnrepository.com/artifact/io.github.rockitconsulting/test.rockitiz
 Changes:
 
     - Handling MQ Headers (MQMD, RFH2 USR, etc.) over MqPayload wrapper. 
-	         - MQGet stores payload in XML Format including header. 
-		 - MQPut supports MqPayload format too, but has backward compatibility for vanila payloads
+	- MQGet stores payload in XML Format including header. 
+	- MQPut supports MqPayload format too, but has backward compatibility for vanila payloads
     - createFatJar Task 
     - JUnit coverage
     - javadocs

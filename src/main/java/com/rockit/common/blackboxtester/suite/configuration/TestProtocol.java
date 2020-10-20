@@ -41,14 +41,15 @@ public class TestProtocol {
 
 	public static void writeHeading(String testName, String heading) {
 		LOGGER.info(TestProtocol.getHashSeperator());
-		LOGGER.info( "# \t\t <"+testName+">: " + heading);
+		LOGGER.info( "# <"+testName+">: " + heading);
 		LOGGER.info(TestProtocol.getHashSeperator());
 	}
 
 	public static void writeStep(String stepName) {
 		LOGGER.info("");
 		LOGGER.info(TestProtocol.getStepSeparator());
-		LOGGER.info( stepName + "\t Step Added. Executing... ");
+		LOGGER.info("ADDSTEP:" +  stepName + "\t- Executing..." );
+		
 	}
 	
 

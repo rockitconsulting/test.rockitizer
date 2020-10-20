@@ -35,7 +35,7 @@ public class TestStepBuilder extends AbstractTestFolder {
 
 	protected TestStepBuilder(final String testName, String testStepName) {
 		super(testName, testStepName);
-		TestProtocol.writeStep(testStepName);
+		TestProtocol.writeStep(testStepName +  this.printDescription());
 	}
 
 	public TestStepBuilder execute() {
@@ -79,7 +79,7 @@ public class TestStepBuilder extends AbstractTestFolder {
 		}
 		
 		
-		TestProtocol.write(" Waiting " + ms + "ms" + " for results");
+		TestProtocol.write("        Waiting " + ms + "ms" + " for results...");
 		try {
 			Thread.sleep(ms);
 		} catch (final InterruptedException e) {

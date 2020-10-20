@@ -109,7 +109,20 @@ public class FileUtils {
 		return Joiner.on(System.lineSeparator()).join(Files.readLines(new File(path), Charsets.UTF_8));
 
 	}
-	
+
+	public static String readFile(File f) {
+		if (!f.exists()) {
+			return null;
+		}
+		
+		try {
+			return FileUtils.readFile(f.getAbsolutePath());
+		} catch (IOException ioex) {
+			LOGGER.warn ( "cannot load description", ioex);
+			return null;
+		}
+	}
+
 	public static byte[] getContents(File file)  {
 		byte[] content;
 		try {

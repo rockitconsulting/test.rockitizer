@@ -27,8 +27,9 @@ public final class Constants {
 
 	public static final int SCP_PORT = 22;
 	public static final int SCP_FILE_MODE = 0777;
-	public static final String BEFORE_FOLDER = "0BEFORE";
-	public static final String AFTER_FOLDER = "99AFTER";;
+	public static final String BEFORE_FOLDER = "000BEFORE";
+	public static final String AFTER_FOLDER = "999AFTER";
+	public static final String DESCRIPTION_TXT = "description.txt";
 	public static final String CLI_COMMAND = "cli";
 	public static final String OUTPUT_FOLDER = "output";
 	public static final String DEFAULT_SLEEP_MS = "20000";

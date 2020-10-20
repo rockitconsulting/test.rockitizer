@@ -3,6 +3,7 @@ package com.rockit.common.blackboxtester.suite.structures;
 import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.Configuration;
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 import java.io.File;
 
@@ -140,6 +141,15 @@ public class AbstractTestFolder {
 
 	public void setTestStepName(String testStepName) {
 		this.testStepName = testStepName;
+	}
+	
+	
+	public String printDescription() {
+		return (this.getDescrptionText()!=null?"," + "DESC: ["+ this.getDescrptionText()+ "]":"");
+	}
+	
+	private String getDescrptionText() {
+		return FileUtils.readFile( new File(getRecordRootPath()+ "/" + inFolderName+ "/" + Constants.DESCRIPTION_TXT) );
 	}
 
 }

@@ -42,7 +42,7 @@ public abstract class AbstractTestWrapper {
 		TestProtocol.writeHeading(testBuilder.getTestName(), "Configuration");
 		TestProtocol.write(testBuilder);
 
-		TestProtocol.writeHeading(testBuilder.getTestName(), "Executing  [" + configuration().getRunMode() + "]");
+		TestProtocol.writeHeading(testBuilder.getTestName(), "Executing  [" + configuration().getRunMode() + " for Env: " + ( configuration().getEnvironment()!=null?configuration().getEnvironment():"default" )  +  "]" + testBuilder.printDescription() );
 
 		if (!testBuilder.isRecordFolderExists()) {
 			TestProtocol.writeError("Record folder doesn't exist: " + testBuilder.getRecordFolder());

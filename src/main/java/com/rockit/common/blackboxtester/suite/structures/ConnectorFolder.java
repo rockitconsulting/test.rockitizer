@@ -13,6 +13,7 @@ import com.rockit.common.blackboxtester.connector.Connector;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
 
@@ -70,7 +71,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 	}
 
 	private void handleReadConnector(Connector connector) {
-		TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
+		TestProtocol.write("        [Connector:" + connector.getId() + "] " + this.printDescription() + " - Reading ...");
 		connector.proceed();
 		if (connector instanceof ReadConnector) {
 			saveResponse(connector, "0.txt");
@@ -79,12 +80,14 @@ public class ConnectorFolder extends AbstractTestFolder {
 
 	private void handlePayloads(Connector connector) {
 		for (File input : FileUtils.listFiles(getInFolder(), true)) {
+			if(input.getName().equalsIgnoreCase(Constants.DESCRIPTION_TXT)) { continue; }
+			
 			((WriteConnector) connector).setRequest(input);
-			TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Writing ...");
+			TestProtocol.write("        [Connector:" + connector.getId() + "] " + this.printDescription() + "- Writing ...");
 			connector.proceed();
 
 			if (connector instanceof ReadConnector) {
-				TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
+				TestProtocol.write("        [Connector:" + connector.getId() + "] "+ this.printDescription() + " - Reading ...");
 				saveResponse( connector, input.getName() );
 			}
 		}
@@ -93,7 +96,7 @@ public class ConnectorFolder extends AbstractTestFolder {
 	private void handleMQGetConnector(Connector connector) {
 		int idx = 0;
 		do {
-			TestProtocol.write(getTestStepName() + "\t [Connector:" + connector.getId() + "] - Reading ...");
+			TestProtocol.write("        [Connector:" + connector.getId() + "] " + this.printDescription() + " - Reading ...");
 			connector.proceed();
 			String response = ((ReadConnector) connector).getResponse();
 

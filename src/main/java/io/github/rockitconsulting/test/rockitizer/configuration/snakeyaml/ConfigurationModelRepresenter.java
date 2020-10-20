@@ -108,7 +108,7 @@ public class ConfigurationModelRepresenter extends Representer {
     List<String> propertyOrder = Arrays.asList(
     		new String[]{
     				"mqConnectors","dbConnectors","httpConnectors","fileConnectors","scpConnectors","mqDataSources","dbDataSources","keyStores","payloadReplacer",  // Resources top-level
-    				"testCases","testSteps","testCaseName","testStepName","connectorRefs","conRefId","payloads","fileName", // testcases top-level
+    				"testCases","testSteps","testCaseName","testCaseDescription","testStepName","testStepDescription","connectorRefs","conRefId","conRefDescription","payloads","fileName", // testcases top-level
     				"id","type","queue","query", "url","method","path","contentType", "userAgent","timeout", //  connectors
     				"qmgr","channel","host","port","user","password","dsRefId" //  ds
     		});

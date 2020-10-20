@@ -1,8 +1,12 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.model.tc;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -29,12 +33,15 @@ public class TestStep  {
 	
 	List<ConnectorRef> connectorRefs = new ArrayList<>();
 
+	private String testStepDescription;
 
 	public TestStep() {
 	}
 	
 	public TestStep (File location) {
 		this.testStepName = location.getName();
+		this.testStepDescription = FileUtils.readFile( new File(location.getAbsolutePath()+"/"+ Constants.DESCRIPTION_TXT) );
+
 	}
 	
 	public String getTestStepName() {
@@ -53,10 +60,20 @@ public class TestStep  {
 		this.connectorRefs = connectorRefs;
 	}
 
+	public String getTestStepDescription() {
+		return testStepDescription;
+	}
+
+	public void setTestStepDescription(String testStepDescription) {
+		this.testStepDescription = testStepDescription;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((connectorRefs == null) ? 0 : connectorRefs.hashCode());
+		result = prime * result + ((testStepDescription == null) ? 0 : testStepDescription.hashCode());
 		result = prime * result + ((testStepName == null) ? 0 : testStepName.hashCode());
 		return result;
 	}
@@ -70,6 +87,16 @@ public class TestStep  {
 		if (getClass() != obj.getClass())
 			return false;
 		TestStep other = (TestStep) obj;
+		if (connectorRefs == null) {
+			if (other.connectorRefs != null)
+				return false;
+		} else if (!connectorRefs.equals(other.connectorRefs))
+			return false;
+		if (testStepDescription == null) {
+			if (other.testStepDescription != null)
+				return false;
+		} else if (!testStepDescription.equals(other.testStepDescription))
+			return false;
 		if (testStepName == null) {
 			if (other.testStepName != null)
 				return false;
@@ -77,6 +104,13 @@ public class TestStep  {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "TestStep [testStepName=" + testStepName + ", connectorRefs=" + connectorRefs + ", testStepDescription=" + testStepDescription + "]";
+	}
+
+
 	
 
 	/*

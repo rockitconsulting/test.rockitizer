@@ -50,10 +50,10 @@ public class AbstractTestFolderTest {
 	
 	@Test
 	public void parseStepbuilder() {
-		String p2 ="RuntimeMonitoringTest/0BEFORE/";
-		String p2output = "RuntimeMonitoringTest/output/0BEFORE/";
+		String p2 ="RuntimeMonitoringTest/000BEFORE/";
+		String p2output = "RuntimeMonitoringTest/output/000BEFORE/";
 		
-		AbstractTestFolder asf =  new AbstractTestFolder("RuntimeMonitoringTest","0BEFORE");
+		AbstractTestFolder asf =  new AbstractTestFolder("RuntimeMonitoringTest","000BEFORE");
 		
 		assertTrue(asf.getInFolderName(),p2.equals( asf.getInFolderName() ));
 		LOGGER.info( asf.getOutFolderName() + " = "+ p2output );
@@ -72,7 +72,7 @@ public class AbstractTestFolderTest {
 		AbstractTestFolder asf;
 
 		
-		asf =  new AbstractTestFolder("RuntimeMonitoringTest","0BEFORE","MQPUT.OUTPUT.TEST");
+		asf =  new AbstractTestFolder("RuntimeMonitoringTest",Constants.BEFORE_FOLDER,"MQPUT.OUTPUT.TEST");
 		assertTrue("RuntimeMonitoringTest".equals( asf.getTestName() ));
 		assertTrue(Constants.BEFORE_FOLDER.equals( asf.getTestStepName() ));
 		assertTrue("MQPUT.OUTPUT.TEST".equals( asf.getConnectorName() ));
