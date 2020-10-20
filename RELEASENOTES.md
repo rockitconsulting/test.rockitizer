@@ -7,6 +7,7 @@
 
 ## Migration needed from version prior to 1.0.5.3  
  - 0BEFORE replaced by 000BEFORE
+ - https headers handling has been changed. Instead of dedicated properties contentType/userType direct under httpConnector, the headers structure with key,value pair has been introduced. 
 	
 
 # 1.0.5.3 - Release
