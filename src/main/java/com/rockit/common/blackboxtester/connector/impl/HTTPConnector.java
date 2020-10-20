@@ -99,6 +99,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	 */
 	@Override
 	public void proceed() {
+		String result = null;
 		HttpURLConnection urlConnection = null;
 		try {
 
@@ -132,7 +133,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			}
 
 			InputStream is = urlConnection.getInputStream();
-			String result = IOUtils.toString(is);
+			result = IOUtils.toString(is);
 
 			if (urlConnection.getRequestProperty("Content-Type")!=null && urlConnection.getRequestProperty("Content-Type").equalsIgnoreCase(CONTENT_TYPE_XML)) {
 				setReponse(result);
@@ -154,7 +155,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			throw new ConnectorException("can not open connection: " + url, e);
 
 		} catch (JSONException je) {
-			throw new ConnectorException("JSON deserialization Exception", je);
+			throw new ConnectorException("JSON deserialization Exception. Following result cannot be parsed: " + result , je);
 
 		} finally {
 			try {
