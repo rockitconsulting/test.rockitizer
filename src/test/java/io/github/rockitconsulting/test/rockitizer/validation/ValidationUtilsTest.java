@@ -142,7 +142,7 @@ public class ValidationUtilsTest {
 		ValidationUtils.validateSyncJavaAndTestCases();
 
 		ValidationHolder.validationHolder().logValidationErrors();
-		Assert.assertTrue(ValidationHolder.validationHolder().size() == 23);
+		Assert.assertTrue("Error number awaited 23 but was " + ValidationHolder.validationHolder().size(), ValidationHolder.validationHolder().size() == 23);
 
 	}
 

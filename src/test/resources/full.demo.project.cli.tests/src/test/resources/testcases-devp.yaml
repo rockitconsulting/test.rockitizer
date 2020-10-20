@@ -7,7 +7,7 @@ testCases:
   - connectorRefs:
     - conRefId: FILEDEL.IN.FILE2FILE
     - conRefId: FILEDEL.OUT.FILE2FILE
-    testStepName: 0BEFORE
+    testStepName: 000BEFORE
   - connectorRefs:
     - conRefId: FILEPUT.IN.FILE2FILE
       payloads:
@@ -21,7 +21,7 @@ testCases:
   - connectorRefs:
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.OUT.FILE2MQ
-    testStepName: 0BEFORE
+    testStepName: 000BEFORE
   - connectorRefs:
     - conRefId: FILEPUT.IN.FILE2MQ
       payloads:
@@ -40,7 +40,7 @@ testCases:
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
-    testStepName: 0BEFORE
+    testStepName: 000BEFORE
   - connectorRefs:
     - conRefId: HTTP.JADDBOOK
       payloads:
@@ -57,7 +57,7 @@ testCases:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.IN.MQ2DB
-    testStepName: 0BEFORE
+    testStepName: 000BEFORE
   - connectorRefs:
     - conRefId: MQPUT.IN.MQ2DB
       payloads:
@@ -75,7 +75,7 @@ testCases:
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.IN.MQ2MQ
     - conRefId: MQGET.OUT.MQ2MQ
-    testStepName: 0BEFORE
+    testStepName: 000BEFORE
   - connectorRefs:
     - conRefId: MQPUT.IN.MQ2MQ
       payloads:
@@ -94,7 +94,7 @@ testCases:
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
-    testStepName: 0BEFORE
+    testStepName: 000BEFORE
   - connectorRefs:
     - conRefId: HTTP.ADDBOOK
       payloads:
