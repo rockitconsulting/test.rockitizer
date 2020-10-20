@@ -43,15 +43,11 @@ httpConnectors:
   type: HTTP
   url: '@https://default@'
   method: '@POST|GET|PUT@'
-  contentType: '@application/xml@'
-  userAgent: '@GENERATED!!!! Mozilla/5.0@'
   timeout: '@500000@'
 - id: HTTP.ADDBOOK
   type: HTTP
   url: '@https://default@'
   method: '@POST|GET|PUT@'
-  contentType: '@application/xml@'
-  userAgent: '@GENERATED!!!! Mozilla/5.0@'
   timeout: '@500000@'
 fileConnectors:
 - id: FILEDEL.IN.FILE2FILE

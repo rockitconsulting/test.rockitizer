@@ -8,6 +8,7 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
 import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
+import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
 
 import org.apache.log4j.Logger;
@@ -100,7 +101,7 @@ public class ConfigurationTest {
 		Assert.assertNull(ds);
 	}
 
-	@Test(expected = ValidationException.class)
+	@Test(expected = ResourceNotFoundException.class)
 	public void testHTTPConfigNoContentType() {
 		HTTPConnectorCfg cfg = (HTTPConnectorCfg) configuration().getConnectorById("HTTP.CONFIGTEST.NO.CONTENTTYPE");
 		KeyStore ds = configuration().getKeyStoreByConnector(cfg);

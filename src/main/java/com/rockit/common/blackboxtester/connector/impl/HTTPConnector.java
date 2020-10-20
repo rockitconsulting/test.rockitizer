@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,8 +60,10 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	public static final Logger LOGGER = Logger.getLogger(HTTPConnector.class.getName());
 
 	private StringBuilder resultBuilder;
-	private String id, urlStr, method, contentType, userAgent, trustStore;
+	private String id, urlStr, method,trustStore;
 
+	private Map<String,String> headers = new HashMap<>();
+	
 	private Integer connectTimeOut;
 	private URL url;
 	private File file;
@@ -71,9 +74,8 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		this.id = id;
 		this.urlStr = cfg.getUrl();
 		this.method = cfg.getMethod();
-		this.contentType = cfg.getContentType();
-		this.userAgent = cfg.getUserAgent();
 		this.connectTimeOut = Integer.valueOf(cfg.getTimeout());
+		this.headers = cfg.getHeaders();
 
 		KeyStore ks = configuration().getKeyStoreByConnector(cfg);
 		if (ks != null) {
@@ -113,16 +115,17 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 				urlConnection = (HttpURLConnection) url.openConnection();
 			}
 
-			urlConnection.setRequestProperty("User-Agent", this.userAgent);
+			for (Map.Entry<String, String> entry : headers.entrySet()) {
+			   urlConnection.addRequestProperty(entry.getKey(), entry.getValue());
+			}			
+			
 			urlConnection.setRequestMethod(this.method);
-			urlConnection.setRequestProperty("Content-Type", this.contentType);
 			if (!this.method.equalsIgnoreCase("GET")) {
 				urlConnection.setDoOutput(true);
 			}
 			if (this.connectTimeOut > 0) {
 				urlConnection.setConnectTimeout(this.connectTimeOut);
 			}
-
 			enhanceBasicAuthentication(urlConnection);
 			if (urlConnection.getDoOutput()) {
 				enhancePayload(urlConnection);
@@ -131,7 +134,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			InputStream is = urlConnection.getInputStream();
 			String result = IOUtils.toString(is);
 
-			if (this.contentType.equalsIgnoreCase(CONTENT_TYPE_XML)) {
+			if (urlConnection.getRequestProperty("Content-Type")!=null && urlConnection.getRequestProperty("Content-Type").equalsIgnoreCase(CONTENT_TYPE_XML)) {
 				setReponse(result);
 			} else {
 

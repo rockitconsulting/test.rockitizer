@@ -75,8 +75,6 @@ testCases:
       method: '@POST|GET|PUT@'
       timeout: '@500000@'
       dsRefId: defaultKS
-      userAgent: '@GENERATED!!!! Mozilla/5.0@'
-      contentType: '@application/xml | | |@'
       payloads:
       - fileName: testinput.json
   - testStepName: a002DBGetError

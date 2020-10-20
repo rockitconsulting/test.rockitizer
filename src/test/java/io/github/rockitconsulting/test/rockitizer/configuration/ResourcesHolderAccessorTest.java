@@ -76,6 +76,20 @@ public class ResourcesHolderAccessorTest {
 	}
 
 	@Test
+	public void generateResourcesWithHttpHeaders() throws IOException {
+		rhCLI.setResourcesFileName("resources-generated-with-http-headers-01.yaml");
+		ResourcesHolder rh1 = rhCLI.resourcesHolderFromFileSystemToYaml(null);
+		
+		rh1.getHttpConnectors().get(0).getHeaders().put("key1", "value1");
+		rh1.getHttpConnectors().get(0).getHeaders().put("key2", "value2");
+		rhCLI.resourcesHolderToYaml(rh1);
+		Assert.assertNotNull(rh1);
+		Assert.assertTrue(new File(rhCLI.getFullPath() + rhCLI.getResourcesFileName()).exists());
+
+	}
+	
+	
+	@Test
 	public void generateResourcesWithPlaceholders() throws IOException {
 
 		Map<String, String> replacements = new HashMap<>();

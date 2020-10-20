@@ -44,6 +44,9 @@ httpConnectors:
   url: '@https://default@'
   method: '@POST|GET|PUT@'
   timeout: '@500000@'
+  headers:
+    key1: value1
+    key2: value2
 - id: HTTP.ADDBOOK
   type: HTTP
   url: '@https://default@'
@@ -82,6 +85,3 @@ keyStores:
 - id: defaultKS
   type: TrustStore
   path: '@c:\temp\myks.jks@'
-payloadReplacer:
-  KEY2: VALUE2
-  KEY1: VALUE1

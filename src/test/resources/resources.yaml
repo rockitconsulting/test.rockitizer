@@ -41,15 +41,17 @@ httpConnectors:
       type: HTTP
       method: 'POST'
       timeout: 500000
-      contentType: 'application/xml'
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
+      headers:
+        contentType: 'application/xml'
+        userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
     - id: HTTP.JADDBOOK
       url: 'http://SCHARRDEV01:7080/JSONBookService'
       type: HTTP
       method: 'POST'
       timeout: 500000
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
-      contentType: 'application/json'
+      headers:
+        userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
+        contentType: 'application/json'
 fileConnectors:
     - id: FILEGET.FileGetConnectorTest
       type: FILEGET 

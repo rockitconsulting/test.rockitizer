@@ -5,6 +5,7 @@ import io.github.rockitconsulting.test.rockitizer.validation.model.Context;
 import io.github.rockitconsulting.test.rockitizer.validation.model.Message;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +41,9 @@ public class HTTPConnectorCfg extends BaseConnector {
 
 	private String method = "@POST|GET|PUT@";
 
-	private String contentType = "@application/xml@";
-
-	private String userAgent = "@GENERATED!!!! Mozilla/5.0@";
-
 	private String timeout = "@500000@";
+	
+	private Map<String,String> headers =  new HashMap<>();
 
 	private Types type = Types.HTTP;
 
@@ -74,22 +73,6 @@ public class HTTPConnectorCfg extends BaseConnector {
 		this.method = method;
 	}
 
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	public String getUserAgent() {
-		return userAgent;
-	}
-
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
-
 	public String getTimeout() {
 		return timeout;
 	}
@@ -117,7 +100,7 @@ public class HTTPConnectorCfg extends BaseConnector {
 	@Override
 	public String toString() {
 		return type + ":{" + (Strings.isNullOrEmpty(getId()) ? "" : "id=" + getId() + ", ") + (Strings.isNullOrEmpty(url) ? "" : "url=" + url + ", ")
-				+ (Strings.isNullOrEmpty(method) ? "" : "method=" + method + ", ") + (Strings.isNullOrEmpty(userAgent) ? "" : "userAgent=" + userAgent + ", ")
+				+ (Strings.isNullOrEmpty(method) ? "" : "method=" + method + ", ") 
 				+ (Strings.isNullOrEmpty(String.valueOf(timeout)) ? "" : "timeout=" + timeout + ", ")
 				+ (Strings.isNullOrEmpty(dsRefId) ? "" : "dsRefId=" + dsRefId + ", ") + "}";
 	}
@@ -130,8 +113,16 @@ public class HTTPConnectorCfg extends BaseConnector {
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
 		return ImmutableMap.<String, String> builder().put("id", getId()).put("type", getType().toString()).put("url", url)
-				.put("method", method).put("contentType", contentType).put("userAgent", userAgent).put("timeout", timeout).put("dsRefId", dsRefId==null?"":dsRefId).build();
+				.put("method", method).put("timeout", timeout).put("dsRefId", dsRefId==null?"":dsRefId).build();
 
+	}
+
+	public Map<String, String> getHeaders() {
+		return headers;
+	}
+
+	public void setHeaders(Map<String, String> headers) {
+		this.headers = headers;
 	}
 
 }
