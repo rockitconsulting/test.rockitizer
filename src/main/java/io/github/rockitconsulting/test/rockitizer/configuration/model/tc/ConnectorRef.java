@@ -86,12 +86,15 @@ public class ConnectorRef {
 	}
 
 	@Override
+	public String toString() {
+		return "ConnectorRef [conRefId=" + conRefId + ", conRefDescription=" + conRefDescription + ", payloads=" + payloads + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((conRefDescription == null) ? 0 : conRefDescription.hashCode());
 		result = prime * result + ((conRefId == null) ? 0 : conRefId.hashCode());
-		result = prime * result + ((payloads == null) ? 0 : payloads.hashCode());
 		return result;
 	}
 
@@ -104,27 +107,12 @@ public class ConnectorRef {
 		if (getClass() != obj.getClass())
 			return false;
 		ConnectorRef other = (ConnectorRef) obj;
-		if (conRefDescription == null) {
-			if (other.conRefDescription != null)
-				return false;
-		} else if (!conRefDescription.equals(other.conRefDescription))
-			return false;
 		if (conRefId == null) {
 			if (other.conRefId != null)
 				return false;
 		} else if (!conRefId.equals(other.conRefId))
 			return false;
-		if (payloads == null) {
-			if (other.payloads != null)
-				return false;
-		} else if (!payloads.equals(other.payloads))
-			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ConnectorRef [conRefId=" + conRefId + ", conRefDescription=" + conRefDescription + ", payloads=" + payloads + "]";
 	}
 
 

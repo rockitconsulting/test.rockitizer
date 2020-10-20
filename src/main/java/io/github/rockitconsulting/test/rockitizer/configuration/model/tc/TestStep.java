@@ -68,12 +68,17 @@ public class TestStep  {
 		this.testStepDescription = testStepDescription;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "TestStep [testStepName=" + testStepName + ", connectorRefs=" + connectorRefs + ", testStepDescription=" + testStepDescription + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((connectorRefs == null) ? 0 : connectorRefs.hashCode());
-		result = prime * result + ((testStepDescription == null) ? 0 : testStepDescription.hashCode());
 		result = prime * result + ((testStepName == null) ? 0 : testStepName.hashCode());
 		return result;
 	}
@@ -87,27 +92,12 @@ public class TestStep  {
 		if (getClass() != obj.getClass())
 			return false;
 		TestStep other = (TestStep) obj;
-		if (connectorRefs == null) {
-			if (other.connectorRefs != null)
-				return false;
-		} else if (!connectorRefs.equals(other.connectorRefs))
-			return false;
-		if (testStepDescription == null) {
-			if (other.testStepDescription != null)
-				return false;
-		} else if (!testStepDescription.equals(other.testStepDescription))
-			return false;
 		if (testStepName == null) {
 			if (other.testStepName != null)
 				return false;
 		} else if (!testStepName.equals(other.testStepName))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "TestStep [testStepName=" + testStepName + ", connectorRefs=" + connectorRefs + ", testStepDescription=" + testStepDescription + "]";
 	}
 
 
