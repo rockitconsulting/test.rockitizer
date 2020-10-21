@@ -8,7 +8,19 @@
 ## Migration needed from version prior to 1.0.5.3  
  - 0BEFORE replaced by 000BEFORE
  - https headers handling has been changed. Instead of dedicated properties contentType/userType direct under httpConnector, the headers structure with key,value pair has been introduced. 
-	
+ - In order to use CLI, the pom.xml of each project that utilizes test.rockITizer should be changed so that the configuration for the "appassembler-maven-plugin" will not generate any repository:
+ 	
+ 	(under the block <groupId>org.codehaus.mojo</groupId>
+		   <artifactId>appassembler-maven-plugin</artifactId>
+		   )
+				
+ 		change "<repositoryLayout>flat<repositoryLayout>" to "<repositoryLayout>default</repositoryLayout>"
+ 		enter new property "<generateRepository>false</generateRepository>"
+ 	
+ - Following the previous step, in order to use CLI, a new "REPO" variable should be defined in both set-env.bat and set-env.sh scripts. The "REPO" variable should contain the path to the local Maven directory 
+ 	e.g. 
+ 		set REPO=%userprofile%\.m2\repository (for set-env.bat)
+ 		set REPO=$HOME/.m2/repository (for set-env.sh)
 
 # 1.0.5.3 - Release
 
