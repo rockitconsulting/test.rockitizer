@@ -132,30 +132,37 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 				enhancePayload(urlConnection);
 			}
 
-			InputStream is = urlConnection.getInputStream();
+			InputStream is;
+			try {
+				 is = urlConnection.getInputStream();
+			} catch (IOException e) {
+				 is = urlConnection.getErrorStream();
+			}
+			
 			result = IOUtils.toString(is);
 
 			if (urlConnection.getRequestProperty("Content-Type")!=null && urlConnection.getRequestProperty("Content-Type").equalsIgnoreCase(CONTENT_TYPE_XML)) {
 				setReponse(result);
 			} else {
 
-				JSONObject response = new JSONObject();
+				if(!isJSONStringValid(result))throw new ConnectorException("Invalid JSON: " + result) ;
 
 				// Header & Body
 				Map<String, List<String>> map = urlConnection.getHeaderFields();
 				ResponseHeader newResonseHeader = new ResponseHeader(map);
 				JSONObject responseHeader = newResonseHeader.getResponsHeader();
-				response.put("response", new JSONObject().put("header", responseHeader).put("body", getJsonArrayBody(result)));
 
-				setReponse(XML.toString(response));
-
+				String responseString = buildJSONResponseString(responseHeader.toString().replace("null","Code"), result);
+				if(!isJSONStringValid(responseString))throw new ConnectorException("Invalid JSON: " + responseString) ;
+				setReponse(responseString);
+			
 			}
 
 		} catch (IOException e) {
 			throw new ConnectorException("can not open connection: " + url, e);
 
 		} catch (JSONException je) {
-			throw new ConnectorException("JSON deserialization Exception. Following result cannot be parsed: " + result , je);
+			throw new ConnectorException("JSON deserialization Exception.", je);
 
 		} finally {
 			try {
@@ -167,7 +174,33 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		}
 
 	}
-
+	public boolean isJSONStringValid(String result) {
+	    try {
+	        new JSONObject(result);
+	    } catch (JSONException je) {
+	        try {
+	            new JSONArray(result);
+	        } catch (JSONException jex) {
+	        	LOGGER.warn("Invalid JSON: " + result);
+	        	return false;
+	        }
+	    }
+	    return true;
+	}
+	
+	public String buildJSONResponseString(String responseHeader, String responseBody) {
+		StringBuilder responseString = new StringBuilder();
+		responseString.append("{\"response\":{");
+		responseString.append("\"header\":");
+		responseString.append(responseHeader);
+		responseString.append(",\"body\":");
+		responseString.append(responseBody);
+		responseString.append("}}");
+		
+		return responseString.toString();
+	}
+	
+	@SuppressWarnings("unused")
 	private JSONArray getJsonArrayBody(String result) throws IOException {
 
 		JSONObject jsonObject = null;

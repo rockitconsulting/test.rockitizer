@@ -1,0 +1,37 @@
+{
+	"random": 52,
+	"random float": 98.302,
+	"bool": false,
+	"date": "1992-07-07",
+	"regEx": "hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo to you",
+	"enum": "json",
+	"firstname": "Kassey",
+	"lastname": "Solitta",
+	"city": "Boa Vista",
+	"country": "Reunion",
+	"countryCode": "NA",
+	"email uses current data": "Kassey.Solitta@gmail.com",
+	"email from expression": "Kassey.Solitta@yopmail.com",
+	"array": [
+		"Tonia",
+		"Aryn",
+		"Ashlee",
+		"Shaylyn",
+		"Kimberley"
+	],
+	"error",
+	"array of objects": [
+		{
+			"index": 0,
+			"index start at 5": 5
+		},
+		{
+			"index": 1,
+			"index start at 5": 6
+		},
+		{
+			"index": 2,
+			"index start at 5": 7
+		}
+	]
+}
