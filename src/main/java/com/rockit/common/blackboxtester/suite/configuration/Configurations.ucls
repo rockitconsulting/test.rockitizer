@@ -1,73 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.rockit.common.blackboxtester.suite.configuration.ConfigurationHolder" 
-    project="test.rockitizer" 
-    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/ConfigurationHolder.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="344" y="105"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="com.rockit.common.blackboxtester.suite.configuration.ConnectorFactory" 
+  <class id="1" language="java" name="com.rockit.common.blackboxtester.suite.configuration.ConnectorFactory" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/ConnectorFactory.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="845" y="103"/>    
+    <position height="103" width="236" x="331" y="37"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors" 
+  <enumeration id="2" language="java" name="com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/Constants.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="872" y="564"/>    
+    <position height="283" width="127" x="41" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="4" language="java" name="com.rockit.common.blackboxtester.suite.configuration.Constants" 
+  <class id="3" language="java" name="com.rockit.common.blackboxtester.suite.configuration.Constants" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/Constants.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="590" y="419"/>    
+    <position height="463" width="250" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.rockit.common.blackboxtester.suite.configuration.SettingsHolder" 
+  <class id="4" language="java" name="com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer" 
     project="test.rockitizer" 
-    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/SettingsHolder.java" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/PayloadReplacer.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="256" y="517"/>    
+    <position height="121" width="120" x="836" y="37"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="6">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <nesting id="7">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
+  <class id="5" language="java" name="com.rockit.common.blackboxtester.suite.configuration.TestProtocol" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/suite/configuration/TestProtocol.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="265" width="189" x="607" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <nesting id="6">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
   </nesting>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

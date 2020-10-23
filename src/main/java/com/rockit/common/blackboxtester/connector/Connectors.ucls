@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
   <interface id="1" language="java" name="com.rockit.common.blackboxtester.connector.Connector" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/Connector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="984" y="56"/>    
+    <position height="157" width="172" x="552" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -16,7 +16,7 @@
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/ReadConnector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="806" y="47"/>    
+    <position height="85" width="143" x="1477" y="1043"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -27,7 +27,7 @@
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/WriteConnector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1183" y="47"/>    
+    <position height="85" width="140" x="682" y="1043"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -38,175 +38,243 @@
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/DBGetConnector.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="252" y="193"/>    
+    <position height="247" width="153" x="1477" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.rockit.common.blackboxtester.connector.impl.HTTPGetConnector" 
-    project="test.rockitizer" 
-    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/HTTPGetConnector.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="455" y="359"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="6" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQAccessor.QueueOption" 
+  <enumeration id="5" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQAccessor.QueueOption" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/MQAccessor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="796" y="1051"/>    
+    <position height="121" width="190" x="1670" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="7" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQAccessor" 
+  <class id="6" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQAccessor" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/MQAccessor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1160" y="1011"/>    
+    <position height="463" width="239" x="1670" y="37"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQPutConnector" 
+  <class id="7" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQPutConnector" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/MQPutConnector.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1474" y="414"/>    
+    <position height="175" width="143" x="1294" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQGetConnector" 
+  <class id="8" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQGetConnector" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/MQGetConnector.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="496" y="712"/>    
+    <position height="193" width="145" x="2217" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQManager" 
-    project="test.rockitizer" 
-    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/MQManager.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="524" y="1000"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="com.rockit.common.blackboxtester.connector.impl.SCPPutConnector" 
+  <class id="9" language="java" name="com.rockit.common.blackboxtester.connector.impl.SCPPutConnector" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/SCPPutConnector.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1207" y="517"/>    
+    <position height="337" width="186" x="1068" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.rockit.common.blackboxtester.connector.impl.DBPutConnector" 
+  <class id="10" language="java" name="com.rockit.common.blackboxtester.connector.impl.DBPutConnector" 
     project="test.rockitizer" 
     file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/DBPutConnector.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1021" y="527"/>    
+    <position height="283" width="264" x="764" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.rockit.common.blackboxtester.connector.impl.HTTPConnector_old" 
+  <class id="11" language="java" name="com.rockit.common.blackboxtester.connector.impl.MQPayloadBuilder" 
     project="test.rockitizer" 
-    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/HTTPConnector_old.java" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/MQPayloadBuilder.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="838" y="401"/>    
+    <position height="193" width="277" x="1900" y="540"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="14">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="15">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="16">    
+  <class id="12" language="java" name="com.rockit.common.blackboxtester.connector.impl.HTTPConnector" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/HTTPConnector.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="463" width="288" x="41" y="540"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.rockit.common.blackboxtester.connector.impl.FilePutConnector" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/FilePutConnector.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="247" width="143" x="369" y="540"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.rockit.common.blackboxtester.connector.impl.FileDelConnector" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/FileDelConnector.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="175" width="143" x="552" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.rockit.common.blackboxtester.connector.impl.FileGetConnector" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/FileGetConnector.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="247" width="145" x="2402" y="540"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.rockit.common.blackboxtester.connector.impl.http.ResponseHeader" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/http/ResponseHeader.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="103" width="238" x="41" y="1043"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.rockit.common.blackboxtester.connector.impl.db.DatabaseConnection" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/com/rockit/common/blackboxtester/connector/impl/db/DatabaseConnection.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="175" width="188" x="1121" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="18">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <generalization id="17">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="19">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
+  <realization id="19">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
   <realization id="20">    
-    <end type="SOURCE" refId="9"/>    
+    <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
   <generalization id="21">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
   <realization id="22">    
-    <end type="SOURCE" refId="8"/>    
+    <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <association id="23">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="24" name="qOption">        
+  <generalization id="23">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <realization id="24">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="26">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="27">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="28" name="qOption">        
         <position height="0" width="0" x="19" y="-57"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="1">        
+      <multiplicity id="29" minimum="0" maximum="1">        
         <position height="0" width="0" x="19" y="-57"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="26">    
-    <end type="SOURCE" refId="7"/>    
+  <dependency id="30">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="6"/>  
-  </nesting>  
-  <realization id="27">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <realization id="32">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="1"/>  
   </realization>  
-  <realization id="28">    
+  <generalization id="33">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="34">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <nesting id="36">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <realization id="37">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <realization id="29">    
-    <end type="SOURCE" refId="11"/>    
+  <realization id="38">    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="39">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

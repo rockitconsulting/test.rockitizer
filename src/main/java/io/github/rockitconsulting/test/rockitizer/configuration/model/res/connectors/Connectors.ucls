@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <enumeration id="1" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg.Types" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/SCPConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="322" x="2136" y="837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="2" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnectorCfg.Types" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/FileConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="322" x="688" y="837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="3" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/MQConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="322" x="1050" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="4" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.BaseConnector.Types" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/BaseConnector.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="322" x="41" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="5" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.FileConnectorCfg" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/FileConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="322" x="688" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="6" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg.Types" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/DBConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="322" x="1412" y="837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="7" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg.Types" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/HTTPConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="322" x="1774" y="837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="8" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/HTTPConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="322" x="1774" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="9" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg.Types" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/MQConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="322" x="1050" y="837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="10" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/SCPConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="322" x="2136" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.BaseConnector" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/BaseConnector.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="322" x="1050" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/configuration/model/res/connectors/DBConnectorCfg.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="322" x="1412" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="io.github.rockitconsulting.test.rockitizer.validation.Validatable" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/validation/Validatable.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="245" x="403" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <nesting id="14">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <nesting id="16">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <nesting id="17">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <nesting id="18">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <association id="19">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="20" name="type"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="22">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <association id="23">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="24" name="type"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="26">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="27">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <realization id="28">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <nesting id="30">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="32">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="33" name="type"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="36" name="type"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="39" name="type"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

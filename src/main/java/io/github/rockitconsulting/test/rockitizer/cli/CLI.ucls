@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerCLI" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerCLI.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="184" x="1912" y="302"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerCreateConfig" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerCreateConfig.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="184" x="265" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerCreateTest" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerCreateTest.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="184" x="937" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerListTestCases" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerListTestCases.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="184" x="489" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerListResources" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerListResources.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="278" x="1594" y="302"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerDeleteTest" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerDeleteTest.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="184" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="7" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerListTestCases.ViewType" project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerListTestCases.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="184" x="489" y="302"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="8" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerValidate" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerValidate.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="184" x="713" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerRunTest.MyTextListener" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerRunTest.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="184" x="1161" y="302"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerSync" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerSync.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="184" x="1679" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerDeleteConfig" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerDeleteConfig.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="184" x="1455" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="12" language="java" 
+    name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerListResources.ViewType" project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerListResources.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="184" x="1594" y="495"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="13" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.RockitizerRunTest" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/RockitizerRunTest.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="254" x="1161" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="io.github.rockitconsulting.test.rockitizer.cli.CommonCLI" 
+    project="test.rockitizer" 
+    file="/test.rockitizer/src/main/java/io/github/rockitconsulting/test/rockitizer/cli/CommonCLI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="193" x="1903" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <nesting id="15">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <association id="16">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="17" name="view"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="20" name="view"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <nesting id="24">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <nesting id="25">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
