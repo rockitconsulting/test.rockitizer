@@ -13,23 +13,23 @@ import com.rockit.common.blackboxtester.exceptions.GenericException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
-*  Test.Rockitizer - API regression testing framework 
-*   Copyright (C) 2020  rockit.consulting GmbH
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see http://www.gnu.org/licenses/.
-*
-*/
+ * Test.Rockitizer - API regression testing framework Copyright (C) 2020
+ * rockit.consulting GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see http://www.gnu.org/licenses/.
+ *
+ */
 
 public class AbstractTestFolder {
 	public static final Logger LOGGER = Logger.getLogger(ConnectorFolder.class.getName());
@@ -107,16 +107,17 @@ public class AbstractTestFolder {
 	}
 
 	public boolean isReplayMode() {
-		 return configuration().getRunMode()==Configuration.RunModeTypes.REPLAY;
-	}
-	public boolean isAssertMode() {
-		 return configuration().getRunMode()==Configuration.RunModeTypes.ASSERT;
-	}
-	public boolean isRecordMode() {
-		 return configuration().getRunMode()==Configuration.RunModeTypes.RECORD;
+		return configuration().getRunMode() == Configuration.RunModeTypes.REPLAY;
 	}
 
-	
+	public boolean isAssertMode() {
+		return configuration().getRunMode() == Configuration.RunModeTypes.ASSERT;
+	}
+
+	public boolean isRecordMode() {
+		return configuration().getRunMode() == Configuration.RunModeTypes.RECORD;
+	}
+
 	public String getRecordRootPath() {
 		return ConfigUtils.getAbsolutePathToRoot() + Constants.RECORD_PATH;
 	}
@@ -142,14 +143,23 @@ public class AbstractTestFolder {
 	public void setTestStepName(String testStepName) {
 		this.testStepName = testStepName;
 	}
-	
-	
+
 	public String printDescription() {
-		return (this.getDescrptionText()!=null?"," + "DESC: ["+ this.getDescrptionText()+ "]":"");
+		return (this.getDescrptionText() != null ? "\n" + getLeftShiftLength() + "DESC: [" + this.getDescrptionText() + "]" : "");
 	}
-	
+
+	private String getLeftShiftLength() {
+		if (connectorName != null) {
+			return "                ";
+		} else if (testStepName != null) {
+			return "        ";
+		} else {
+			return "          ";
+		}
+	}
+
 	private String getDescrptionText() {
-		return FileUtils.readFile( new File(getRecordRootPath()+ "/" + inFolderName+ "/" + Constants.DESCRIPTION_TXT) );
+		return FileUtils.readFile(new File(getRecordRootPath() + "/" + inFolderName + "/" + Constants.DESCRIPTION_TXT));
 	}
 
 }
