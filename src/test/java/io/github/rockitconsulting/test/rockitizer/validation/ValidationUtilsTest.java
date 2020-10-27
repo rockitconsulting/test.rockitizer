@@ -69,7 +69,7 @@ public class ValidationUtilsTest {
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s1 = validationHolder().size();
 		validationHolder().logValidationErrors();
-		Assert.assertEquals(20, s1);
+		Assert.assertEquals(24, s1);
 
 	}
 
@@ -79,10 +79,10 @@ public class ValidationUtilsTest {
 		ValidationUtils.cleanGitIgnore();
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s1 = ValidationHolder.validationHolder().size();
-		Assert.assertEquals(s1, 20);
+		Assert.assertEquals(s1, 24);
 		ValidationUtils.fixGitEmptyFoldersProblem();
 		int s2 = ValidationHolder.validationHolder().size();
-		Assert.assertEquals(s2, 20);
+		Assert.assertEquals(s2, 24);
 		Assert.assertTrue("size stays the same, messages  should be added while context exists" + s1 + "==" + s2, s1 == s2);
 		ValidationHolder.validationHolder().forEach((k, v) -> log.info("Validation erros: " + k + " - " + Joiner.on(";").join(v)));
 
@@ -128,7 +128,7 @@ public class ValidationUtilsTest {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
 		ValidationUtils.validateTestCasesAndFileSystemInSync();
 		ValidationHolder.validationHolder().logValidationErrors();
-		Assert.assertTrue(ValidationHolder.validationHolder().size() == 12);
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 18);
 
 	}
 
@@ -142,7 +142,7 @@ public class ValidationUtilsTest {
 		ValidationUtils.validateSyncJavaAndTestCases();
 
 		ValidationHolder.validationHolder().logValidationErrors();
-		Assert.assertTrue("Error number awaited 23 but was " + ValidationHolder.validationHolder().size(), ValidationHolder.validationHolder().size() == 23);
+		Assert.assertTrue("Error number awaited 23 but was " + ValidationHolder.validationHolder().size(), ValidationHolder.validationHolder().size() == 29);
 
 	}
 
@@ -155,7 +155,7 @@ public class ValidationUtilsTest {
 
 	}
 
-	@Test
+	@Test //HERE
 	public void validateNotAllowedEmptyStructuresOK() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		ValidationUtils.validateNotAllowedEmptyStructures();

@@ -15,6 +15,12 @@ testCases:
     connectorRefs:
     - conRefId: FILEDEL.IN.FILE2FILE
     - conRefId: FILEDEL.OUT.FILE2FILE
+  - testStepName: 999AFTER
+    testStepDescription: Preparation step. Before step execution. All file connectors
+      will be cleaned.
+    connectorRefs:
+    - conRefId: FILEDEL.IN.FILE2FILE
+    - conRefId: FILEDEL.OUT.FILE2FILE
   - testStepName: a001FILEPutMessage
     connectorRefs:
     - conRefId: FILEPUT.IN.FILE2FILE
@@ -27,6 +33,10 @@ testCases:
 - testCaseName: FILEinMQOutTest
   testSteps:
   - testStepName: 000BEFORE
+    connectorRefs:
+    - conRefId: MQGET.ERROR
+    - conRefId: MQGET.OUT.FILE2MQ
+  - testStepName: 999AFTER
     connectorRefs:
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.OUT.FILE2MQ
@@ -44,6 +54,7 @@ testCases:
 - testCaseName: JSONwithDatabaseTest
   testSteps:
   - testStepName: 000BEFORE
+  - testStepName: 999AFTER
     connectorRefs:
     - conRefId: DBPUT.CLAEN
       payloads:
@@ -66,6 +77,7 @@ testCases:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.IN.MQ2DB
+  - testStepName: 999AFTER
   - testStepName: a001MQPutMessage
     connectorRefs:
     - conRefId: MQPUT.IN.MQ2DB
@@ -84,6 +96,7 @@ testCases:
     - conRefId: MQGET.ERROR
     - conRefId: MQGET.IN.MQ2MQ
     - conRefId: MQGET.OUT.MQ2MQ
+  - testStepName: 999AFTER
   - testStepName: a001MQPutMessage
     connectorRefs:
     - conRefId: MQPUT.IN.MQ2MQ
@@ -103,6 +116,7 @@ testCases:
       payloads:
       - fileName: cleanBookStore.sql
     - conRefId: MQGET.ERROR
+  - testStepName: 999AFTER
   - testStepName: a001WSPutMessage
     connectorRefs:
     - conRefId: HTTP.ADDBOOK

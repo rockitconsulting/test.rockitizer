@@ -1,0 +1,1 @@
+Preparation step. Before step execution. All file connectors will be cleaned.
