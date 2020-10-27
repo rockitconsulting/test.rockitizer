@@ -65,5 +65,11 @@ public class RockitizerRunTestTest  extends CommonCLITest {
 		Assert.assertEquals(new CommandLine(new RockitizerRunTest()).execute("FileUtilsTest"), 0);
 	}
 	
+	@Test
+	public void testSkipTests() {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
+		Assert.assertEquals(0, new CommandLine(new RockitizerRunTest()).execute("all", "-s FileUtilsTest"));
+
+	}
 	
 }

@@ -16,14 +16,18 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 import picocli.CommandLine;
+import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 @CommandLine.Command(name = "run", sortOptions = false, 
-headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", 
-descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
-optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli run <testName | all> [<record | replay>] [<env>]", 
+headerHeading = "@|bold,underline Usage:|@%n%n", 
+synopsisHeading = "%n", 
+descriptionHeading = "%n@|bold,underline Description:|@%n%n", 
+parameterListHeading = "%n@|bold,underline Parameters:|@%n", 
+optionListHeading = "%n@|bold,underline Options:|@%n", 
+header = "cli run <testName | all> [<record | replay>] [<env>] [--skipTests[=<testname>]]", 
 description = "Runs JUnit test or complete test suite in console, optionally requiring mode and environment.%n"
 			+ "Supported modes are:%n"
 			+ "  - RECORD (executing of master test/suite under src/test/resources/, keeping results under src/test/resources/<testcase>/output);%n"
@@ -63,6 +67,8 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 	RunModeTypes mode;
 	@Parameters(index = "2", arity = "0..1", description = ": e.g. env = dev")
 	String env;
+	@Option(names = {"-s", "--skipTests"}, arity = "0..*", description = ": e.g. --skipTests MyJUnitTest1 MyJUnitTest2", interactive = false)
+	List<String> skipTests = new ArrayList<>();
 
 	/*
 	 * (non-Javadoc)
@@ -72,12 +78,14 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 	@Override
 	public void run() {
 		List<Result> results = new ArrayList<>();
+		List<String> skippedTests = new ArrayList<>();
 
 		try {
 
 			if (mode != null) {
 				System.setProperty(Constants.MODE_KEY, mode.name());
 			}
+
 			if (env != null) {
 				System.setProperty(Constants.ENV_KEY, env);
 			}
@@ -88,8 +96,12 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 				if (testname.equalsIgnoreCase("all")) {
 					FileUtils.listFiles(new File(ConfigUtils.getAbsolutePathToJava())).forEach(test -> {
 						try {
-
-							results.add(run(Class.forName(test.getName().replace(".java", ""))));
+							if(!skipTests.stream().anyMatch(test.getName().replace(".java", "")::equals)){
+								results.add(run(Class.forName(test.getName().replace(".java", ""))));
+							}else{
+								System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold Skipping Test |@" + test.getName().replace(".java", "")));
+								skippedTests.add(test.getName().replace(".java", ""));
+							}
 							System.out.println();
 						} catch (Exception e) {
 							registerJunitError(results, e);
@@ -111,10 +123,15 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 
 		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold Result: |@") + (sumErrors > 0 ? CommandLine.Help.Ansi.AUTO.string("@|bold,red NOK|@") : CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@")));
 		System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold Total runs |@" + sumRuns));
+
 		if (sumErrors > 0) {
 			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Total errors |@" + sumErrors));
 		}
 
+		if (!skippedTests.isEmpty()) {
+			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold, Total Tests skipped |@" + skippedTests.size() + " " + skippedTests.toString()));
+		}
+		
 	}
 
 	private void registerJunitError(List<Result> results, Throwable thr) {
@@ -124,7 +141,6 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 		results.add(result);
 	}
 
-	
 	private class MyTextListener extends TextListener {
 
 		public MyTextListener(PrintStream writer) {
@@ -135,6 +151,6 @@ public class RockitizerRunTest extends JUnitCore implements Runnable {
 		public void testStarted(Description description) {
 
 		}
+	}
 
-	}	
 }
