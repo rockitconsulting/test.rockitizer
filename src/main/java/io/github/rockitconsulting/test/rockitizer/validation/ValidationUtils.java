@@ -457,12 +457,12 @@ public class ValidationUtils {
 
 				tc1.getTestSteps().forEach(ts1 -> {
 					// TestStep is empty -> not allowed
-						if (ts1.getConnectorRefs().isEmpty()) {
+					if (ts1.getConnectorRefs().isEmpty() && !ts1.getTestStepName().equals(Constants.BEFORE_FOLDER) && !ts1.getTestStepName().equals(Constants.AFTER_FOLDER)) {
 							errorContext.add(new Context.Builder().withTestStep(tc1.getTestCaseName(), ts1.getTestStepName()));
 							return;
 						}
 
-						// Empty Payloads for GET connectors -> not allowed
+						// Empty Payloads for PUT connectors -> not allowed
 						ts1.getConnectorRefs().forEach(c -> {
 							if (!isConnectorPayloadsValid(c)) {
 								errorContext.add(new Context.Builder().withConnector(tc1.getTestCaseName(), ts1.getTestStepName(), c.getConRefId()));
