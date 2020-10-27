@@ -155,7 +155,7 @@ public class ValidationUtilsTest {
 
 	}
 
-	@Test //HERE
+	@Test
 	public void validateNotAllowedEmptyStructuresOK() throws IOException {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
 		ValidationUtils.validateNotAllowedEmptyStructures();
