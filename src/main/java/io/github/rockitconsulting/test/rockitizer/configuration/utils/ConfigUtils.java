@@ -1,5 +1,6 @@
 package io.github.rockitconsulting.test.rockitizer.configuration.utils;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.model.EnvironmentsHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.ResourcesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.TestCasesHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.snakeyaml.ConfigurationModelRepresenter;
@@ -112,4 +113,18 @@ public class ConfigUtils {
 
 	}
 
+	public static EnvironmentsHolder envrironmentsHolderFromYaml(String path) throws IOException {
+
+		Constructor constructor = new Constructor(EnvironmentsHolder.class);
+		TypeDescription customTypeDescription = new TypeDescription(EnvironmentsHolder.class);
+		constructor.addTypeDescription(customTypeDescription);
+
+		InputStream inputStream = new FileInputStream(path);
+
+		Yaml yaml = new Yaml(constructor);
+		return yaml.load(inputStream);
+
+	}
+	
+	
 }
