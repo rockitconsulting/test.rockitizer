@@ -99,12 +99,13 @@ dependencies {
 	compile 'org.apache.commons:commons-text:1.8'     
 	compile 'info.picocli:picocli:4.2.0'
 	compile 'org.fusesource.jansi:jansi:1.18'
+	compile 'org.apache.commons:commons-configuration2:2.7'
 
 }
 
 archivesBaseName='test.rockitizer'
 group = 'io.github.rockitconsulting'
-version = project.hasProperty('projVersion') ? project.projVersion :'1.0.5.5-SNAPSHOT'
+version = project.hasProperty('projVersion') ? project.projVersion :'1.0.5.6-SNAPSHOT'
 System.out.println("---->" + version)
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'

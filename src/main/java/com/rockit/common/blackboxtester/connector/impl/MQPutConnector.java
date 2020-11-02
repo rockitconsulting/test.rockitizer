@@ -1,11 +1,14 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
+import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
+
 import java.io.File;
 
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
+
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
 
 /**
@@ -46,7 +49,7 @@ public class MQPutConnector extends MQAccessor implements WriteConnector {
 
 	@Override
 	public void setRequest(File file) {
-		this.message = FileUtils.getContents(PayloadReplacer.interpolate(file));
+		this.message = FileUtils.getContents(PayloadReplacer.interpolate(file, configuration().getPayloadReplacements()));
 
 	}
 

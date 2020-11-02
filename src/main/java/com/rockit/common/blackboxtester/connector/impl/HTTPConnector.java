@@ -270,7 +270,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 
 	@Override
 	public void setRequest(final File requestFile) {
-		file = PayloadReplacer.interpolate(requestFile);
+		file = PayloadReplacer.interpolate(requestFile, configuration().getPayloadReplacements());
 	}
 
 	@Override

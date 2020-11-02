@@ -130,7 +130,7 @@ public class SCPPutConnector implements WriteConnector {
 
 	@Override
 	public void setRequest(File requestFile) {
-		contentFile = PayloadReplacer.interpolate(requestFile);
+		contentFile = PayloadReplacer.interpolate(requestFile, configuration().getPayloadReplacements());
 	}
 
 	@Override

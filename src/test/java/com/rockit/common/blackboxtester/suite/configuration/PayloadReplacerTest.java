@@ -79,7 +79,7 @@ public class PayloadReplacerTest {
 		log.info("content:  " + content);
 
 		assertFalse("DATEPLACEHOLDER not yet replaced (maybe already replaced by prevous test, need status quo rollback to init )" , content.contains(configuration().getPayloadReplacements().get("DATEPLACEHOLDER")));
-		File interpolate = PayloadReplacer.interpolate(srcFile);
+		File interpolate = PayloadReplacer.interpolate(srcFile, configuration().getPayloadReplacements());
 		String replace = new String(Files.readAllBytes(interpolate.toPath()));
 		assertTrue("DATEPLACEHOLDER replaced ",replace.contains(configuration().getPayloadReplacements().get("DATEPLACEHOLDER")));
 

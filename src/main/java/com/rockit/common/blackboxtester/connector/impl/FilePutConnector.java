@@ -75,7 +75,7 @@ public class FilePutConnector implements WriteConnector {
 
 	@Override
 	public void setRequest(File requestFile) {
-		contentFile = PayloadReplacer.interpolate(requestFile);
+		contentFile = PayloadReplacer.interpolate(requestFile, configuration().getPayloadReplacements());
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package com.rockit.common.blackboxtester.suite.configuration;
 
-import static io.github.rockitconsulting.test.rockitizer.configuration.Configuration.configuration;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +7,8 @@ import java.nio.file.Files;
 
 
 
+
+import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
 import org.apache.log4j.Logger;
@@ -38,11 +38,11 @@ public class PayloadReplacer {
 	
 	public static final String TEMP = System.getProperty("java.io.tmpdir") ;
 	
-	public static File interpolate(File file)  {
+	public static File interpolate(File file, Map<String, String> placeholders)  {
 		File tmpFile = null;
 		try {
 			String content = new String(Files.readAllBytes(file.toPath()));
-			String replace =StringSubstitutor.replace(content, configuration().getPayloadReplacements());
+			String replace =StringSubstitutor.replace(content, placeholders);
 			tmpFile = new File(TEMP + File.separator + System.nanoTime() + File.separator + file.getName());
 			tmpFile.getParentFile().mkdirs();
 			LOGGER.debug("interpolate " + file.toPath() + " to temp " + tmpFile.toPath());
