@@ -7,9 +7,12 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connec
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.exceptions.InvalidConnectorFormatException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ResourceNotFoundException;
 import io.github.rockitconsulting.test.rockitizer.exceptions.ValidationException;
+
+import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -65,11 +68,61 @@ public class ConfigurationTest {
 		configuration().reinit();
 		Assert.assertEquals(configuration().getEnvironment(), "devp");
 		Assert.assertEquals(configuration().getRunMode(), Configuration.RunModeTypes.RECORD);
-		Assert.assertEquals(configuration().getRhApi().getResourcesFileName() + " equals resources-devp.yaml", configuration().getRhApi()
-				.getResourcesFileName(), "resources-devp.yaml");
+		Assert.assertEquals(configuration().getRhApi().getResourcesFileName() + " equals ConfigurationTest-resources.yaml",  "ConfigurationTest-resources.yaml", configuration().getRhApi()
+				.getResourcesFileName());
+		
+		//by providing environment the interpolation in tmp processed
+		Assert.assertTrue(configuration().getRhApi().getEnvResourcesFile()!=null);
+		
 		System.clearProperty(Constants.MODE_KEY);
 		System.clearProperty(Constants.ENV_KEY);
 
+	}
+
+	@Test
+	public void testSetEnvironmentAndMakeReplacements() {
+		System.setProperty(Constants.MODE_KEY, "record");
+		System.setProperty(Constants.ENV_KEY, "ConfigurationTest");
+		configuration().reinit();
+		
+		Assert.assertEquals(configuration().getEnvironment(), "ConfigurationTest");
+		Assert.assertEquals(configuration().getRunMode(), Configuration.RunModeTypes.RECORD);
+		
+		Assert.assertTrue(configuration().getRhApi().getEnvResourcesFile()!=null);
+		Assert.assertTrue(Paths.get(configuration().getRhApi().getFullPath() + configuration().getRhApi().getResourcesFileName()).toFile().exists());
+		
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().findMQDataSourceById("defaultMQ").getPort().equals("1515"));
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().findKeyStoreById("notDefaultKS").getPath().equalsIgnoreCase("c:\\temp\\ConfigurationTest.jks"));
+		 //getHttpConnectors().stream().filter(httpConRef -> "HTTP.ADDBOOK".equals(httpConRef.getId())).findFirst().get().getTimeout().equals("100000")
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().findResourceByRef(new ConnectorRef("HTTP.ADDBOOK"))!=null);
+		
+		HTTPConnectorCfg httpCfg = (HTTPConnectorCfg)configuration().getRhApi().getResourcesHolder().findResourceByRef(new ConnectorRef("HTTP.ADDBOOK")); 
+		
+		Assert.assertTrue( httpCfg.getDsRefId()!=null   );
+		Assert.assertTrue( httpCfg.getUrl()!=null   );
+
+		System.clearProperty(Constants.MODE_KEY);
+		System.clearProperty(Constants.ENV_KEY);
+	}
+	
+	@Test
+	public void testSetEnvironmentAndMakeReplacementsWhenEnvPropsNotExist() {
+		System.setProperty(Constants.MODE_KEY, "record");
+		System.setProperty(Constants.ENV_KEY, "devp2");
+		configuration().reinit();
+		
+		Assert.assertEquals(configuration().getEnvironment(), "devp2");
+		Assert.assertEquals(configuration().getRunMode(), Configuration.RunModeTypes.RECORD);
+		
+		Assert.assertTrue(configuration().getRhApi().getEnvResourcesFile()!=null);
+		Assert.assertTrue(Paths.get(configuration().getRhApi().getFullPath() + configuration().getRhApi().getResourcesFileName()).toFile().exists());
+		
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().findMQDataSourceById("defaultMQ").getPort().equals("1414"));
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().findKeyStoreById("notDefaultKS").getPath().equalsIgnoreCase("c:\\temp\\jks.jks"));
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getHttpConnectors().stream().filter(httpConRef -> "HTTP.ADDBOOK".equals(httpConRef.getId())).findFirst().get().getTimeout().equals("500000"));
+
+		System.clearProperty(Constants.MODE_KEY);
+		System.clearProperty(Constants.ENV_KEY);
 	}
 
 	@Test
@@ -81,6 +134,7 @@ public class ConfigurationTest {
 
 	@Test
 	public void testMQConfigWithMQDataSourceOK() {
+		configuration().reinit();
 		MQConnectorCfg cfg = (MQConnectorCfg) configuration().getConnectorById("MQGET.OUT.MQ2MQ");
 		MQDataSource ds = configuration().getMQDataSourceByConnector(cfg);
 		Assert.assertNotNull(ds);
@@ -88,7 +142,6 @@ public class ConfigurationTest {
 
 	@Test
 	public void testHTTPConfigWithKeyStoreOK() {
-
 		HTTPConnectorCfg cfg = (HTTPConnectorCfg) configuration().getConnectorById("HTTP.CONFIGTEST.WITH.KEYSTORE");
 		KeyStore ds = configuration().getKeyStoreByConnector(cfg);
 		Assert.assertNotNull(ds);
@@ -117,5 +170,4 @@ public class ConfigurationTest {
 	public void testConfigNOK() {
 		configuration().getConnectorById("NOT.FOUND");
 	}
-
 }

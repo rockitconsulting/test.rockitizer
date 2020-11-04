@@ -5,7 +5,6 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.Environmen
 import io.github.rockitconsulting.test.rockitizer.configuration.utils.ConfigUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -69,22 +68,22 @@ public class EnvironmentsHolderAccessorTest {
 
 	}
 
-	@Test(expected = FileNotFoundException.class)
+	@Test
 	public void noEnvExists() throws IOException {
 		ehCLI.setEnvsFileName("notexists.yaml");
 		EnvironmentsHolder envsHolderFromYaml = ehCLI.envsHolderFromYaml();
-		Assert.assertTrue(envsHolderFromYaml.getEnvs().size() == 3);
+		Assert.assertTrue(envsHolderFromYaml == null);
 
 	}
 
 	@Test
-	public void getConfigByEnv() throws IOException {
+	public void getConfigByEnvWithInheritanceFromDefault() throws IOException {
 		this.generateResources();
 		EnvironmentsHolder envsHolderFromYaml = ehCLI.envsHolderFromYaml();
 		Assert.assertTrue(envsHolderFromYaml.getEnvs().size() == 3);
 		Assert.assertTrue(envsHolderFromYaml.getEnvs().get(0).getName().equalsIgnoreCase("myenv1"));
 
-		Map<String, String> props = envsHolderFromYaml.getEnvByName("myEnv3");
+		Map<String, String> props = envsHolderFromYaml.getProps("myEnv3");
 
 		Assert.assertTrue(props.size() == 3);
 		Assert.assertTrue(props.containsKey("k1"));
@@ -100,8 +99,45 @@ public class EnvironmentsHolderAccessorTest {
 	public void checkEnvByNameExists() throws IOException {
 		this.generateResources();
 		EnvironmentsHolder envsHolderFromYaml = ehCLI.envsHolderFromYaml();
-		Assert.assertTrue(envsHolderFromYaml.checkExistsEnvByName("myenv1"));
-		Assert.assertFalse(envsHolderFromYaml.checkExistsEnvByName("Iamnotexistingenv"));
+		Assert.assertTrue(envsHolderFromYaml.getEnvs().get(0).getName().equalsIgnoreCase("myenv1"));
+	}
+
+	@Test
+	public void getConfigByEnvEqNull() throws IOException {
+		ehCLI.setAbsolutePath(rootPath);
+		ehCLI.setRelativePath(relPath);
+		ehCLI.setEnvsFileName("envs-generated.yaml");
+
+		EnvironmentsHolder envsHolderFromYaml = ehCLI.envsHolderFromYaml();
+		Map<String, String> props = envsHolderFromYaml.getProps(null);
+
+		Assert.assertTrue(envsHolderFromYaml.getEnvs().size() == 3);
+		Assert.assertTrue(props.size() == 3);
+		Assert.assertTrue(props.containsKey("k1"));
+		Assert.assertTrue(props.containsKey("k2"));
+		Assert.assertTrue(props.containsKey("k3"));
+		Assert.assertTrue(props.get("k1").equalsIgnoreCase("v1"));
+		Assert.assertTrue(props.get("k2").equalsIgnoreCase("v2"));
+		Assert.assertTrue(props.get("k3").equalsIgnoreCase("v3"));
+	}
+
+	@Test
+	public void getConfigByNotExistingEnv() throws IOException {
+		ehCLI.setAbsolutePath(rootPath);
+		ehCLI.setRelativePath(relPath);
+		ehCLI.setEnvsFileName("envs-generated.yaml");
+
+		EnvironmentsHolder envsHolderFromYaml = ehCLI.envsHolderFromYaml();
+		Map<String, String> props = envsHolderFromYaml.getProps("notExistingEnv");
+
+		Assert.assertTrue(envsHolderFromYaml.getEnvs().size() == 3);
+		Assert.assertTrue(props.size() == 3);
+		Assert.assertTrue(props.containsKey("k1"));
+		Assert.assertTrue(props.containsKey("k2"));
+		Assert.assertTrue(props.containsKey("k3"));
+		Assert.assertTrue(props.get("k1").equalsIgnoreCase("v1"));
+		Assert.assertTrue(props.get("k2").equalsIgnoreCase("v2"));
+		Assert.assertTrue(props.get("k3").equalsIgnoreCase("v3"));
 	}
 
 }

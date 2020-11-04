@@ -3,11 +3,6 @@ package com.rockit.common.blackboxtester.suite.configuration;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-
-
-
-
-
 import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
@@ -38,25 +33,29 @@ public class PayloadReplacer {
 	
 	public static final String TEMP = System.getProperty("java.io.tmpdir") ;
 	
-	public static File interpolate(File file, Map<String, String> placeholders)  {
-		File tmpFile = null;
+	public static File interpolate(File src, Map<String, String> placeholders)  {
+		File target = new File(TEMP + File.separator + System.nanoTime() + File.separator + src.getName());
+		target.getParentFile().mkdirs();
+		return interpolate(src, placeholders, target);
+	}
+
+
+	
+	public static File interpolate(File src, Map<String, String> placeholders, File target)  {
+		
 		try {
-			String content = new String(Files.readAllBytes(file.toPath()));
+			String content = new String(Files.readAllBytes(src.toPath()));
 			String replace =StringSubstitutor.replace(content, placeholders);
-			tmpFile = new File(TEMP + File.separator + System.nanoTime() + File.separator + file.getName());
-			tmpFile.getParentFile().mkdirs();
-			LOGGER.debug("interpolate " + file.toPath() + " to temp " + tmpFile.toPath());
-			Files.write(tmpFile.toPath(), replace.getBytes());
+			LOGGER.debug("interpolate " + src.toPath() + " to  " + target.toPath());
+			Files.write(target.toPath(), replace.getBytes());
 			
 
 		} catch (IOException e) {
-			LOGGER.error( file  +  " interpolation error ", e);
-			
+			LOGGER.error( src  +  " interpolation error ", e);
 		}
-		return tmpFile;
+		return target;
 		
 	}
-
 	
 	
 

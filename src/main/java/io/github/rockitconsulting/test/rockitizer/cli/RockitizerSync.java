@@ -3,13 +3,20 @@ package io.github.rockitconsulting.test.rockitizer.cli;
 import java.io.IOException;
 import java.util.List;
 
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 import picocli.CommandLine;
-import picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "sync", sortOptions = false, headerHeading = "@|bold,underline Usage:|@%n%n", synopsisHeading = "%n", descriptionHeading = "%n@|bold,underline Description:|@%n%n", parameterListHeading = "%n@|bold,underline Parameters:|@%n", optionListHeading = "%n@|bold,underline Options:|@%n", header = "cli sync [<env>]", description = "Syncronizing test folder structure with resources-<env>.yaml and testcases.yaml")
+@CommandLine.Command(
+		name = "sync",
+		sortOptions = false,
+		headerHeading = "@|bold,underline Usage:|@%n%n",
+		synopsisHeading = "%n",
+		descriptionHeading = "%n@|bold,underline Description:|@%n%n",
+		parameterListHeading = "%n@|bold,underline Parameters:|@%n",
+		optionListHeading = "%n@|bold,underline Options:|@%n",
+		header = "cli sync",
+		description = "Syncronizing test folder structure with resources-<env>.yaml and testcases.yaml"
+		)
 
 /**
 *  Test.Rockitizer - API regression testing framework 
@@ -32,25 +39,26 @@ import picocli.CommandLine.Parameters;
 
 public class RockitizerSync implements Runnable {
 
-	@Parameters(index = "0", arity = "0..1", description = ": env = dev => sync filesystem with environment dependent resources-dev.yaml")
-	String env;
+	//@Parameters(index = "0", arity = "0..1", description = ": env = dev => sync filesystem with environment dependent resources-dev.yaml")
+	//String env;
 
 	@Override
 	public void run() {
-
+		/*
 		if (env != null) {
 			System.setProperty(Constants.ENV_KEY, env);
 		}
-
+		*/
 		try {
 			List<String> messages = ValidationUtils.syncConfig();
 			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + "testcases.yaml has been sucessfully generated from filesystem "));
 
 			if (messages.isEmpty()) {
-				System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " was up-to-date, no additions.");
-
+				//System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " was up-to-date, no additions.");
+				System.out.println("resources.yaml resources.yaml was up-to-date, no additions.");
 			} else {
-				System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " updated with following configuration:");
+				//System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " updated with following configuration:");
+				System.out.println("resources.yaml updated with following configuration:");
 				messages.forEach(m -> System.out.println(m));
 			}
 		} catch (IOException e) {

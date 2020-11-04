@@ -1,0 +1,18 @@
+httpConnectors:
+    - id: HTTP.JADDBOOK
+      url: 'http://scharrdev01:7080/JSONBookService'
+      type: HTTP
+      method: 'POST'
+      timeout: ${httpConnectors.HTTP.JADDBOOK.timeout}
+      headers:
+       userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
+       contentType: 'application/json'
+mqDataSources:
+- id: defaultMQ
+  qmgr: QM1
+  type: MQ
+  port: 1414
+  host: ${mqDataSources.defaultMQ.host}
+  channel: 'SYSTEM.BKR.CONFIG'
+  user: 'admin'
+  password: 'admin'

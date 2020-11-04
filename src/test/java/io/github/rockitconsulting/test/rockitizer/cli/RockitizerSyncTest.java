@@ -44,7 +44,7 @@ public class RockitizerSyncTest extends CommonCLITest {
 
 	}
 
-	@Test
+	//@Test
 	public void testSyncWithParams() {
 		System.setProperty(Constants.ENV_KEY, "devp");
 		TestObjectFactory.resetConfigurationToContextDemoPrj();

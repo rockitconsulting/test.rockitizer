@@ -34,10 +34,7 @@ public class EnvironmentsHolderAccessor extends RuntimeContext {
 
 	private EnvironmentsHolder envsHolder;
 
-	void initFromYaml() throws IOException {
-		envsHolder = envsHolderFromYaml();
-	}
-
+	
 	
 	/**
 	 * Reads yam configuration into the holder object CLI relevant: instantiate
@@ -73,10 +70,20 @@ public class EnvironmentsHolderAccessor extends RuntimeContext {
 
 
 	public EnvironmentsHolder getEnvsHolder() {
+		if(envsHolder==null) {
+			try {
+				envsHolder=envsHolderFromYaml();
+			} catch (IOException e) {
+				envsHolder=null;
+			}
+		}
 		return envsHolder;
 	}
 
 
+	
+	
+	
 	public void setEnvsHolder(EnvironmentsHolder envsHolder) {
 		this.envsHolder = envsHolder;
 	}

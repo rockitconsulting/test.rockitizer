@@ -56,7 +56,6 @@ public class RockitizerListResourcesTest  extends CommonCLITest {
 	@Test
 	public void testTree() {
 		System.setProperty(Constants.ENV_KEY, "devp");
-		TestObjectFactory.resetConfigurationToContextDemoPrj(); 
 		Assert.assertEquals( new CommandLine(new RockitizerListResources()).execute("devp", "-v","tree" ), 0);
 
 	}

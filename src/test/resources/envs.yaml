@@ -1,0 +1,25 @@
+#########################################################################################################################
+############### This file has been generated. Kindly consider to replace the @@ placeholders with your values ###########
+#########################################################################################################################
+envs:
+- name: default
+  props:
+   httpConnectors.HTTP.ADDBOOK.timeout: 500000
+   mqDataSources.defaultMQ.port: 1414
+   keyStores.path: 'c:\temp\jks.jks'
+- name: devp
+  props:
+   httpConnectors.HTTP.ADDBOOK.timeout: 500000
+- name: devp2
+- name: alex
+- name: alex1
+- name: ConfigurationTest
+  props:
+   httpConnectors.HTTP.ADDBOOK.timeout: 100000
+   mqDataSources.defaultMQ.port: 1515
+   keyStores.path: 'c:\temp\ConfigurationTest.jks'
+- name: ValidationUtilsTest-with-undefined-placeholders
+- name: ValidationUtilsTest-with-defined-placeholders
+  props:
+   httpConnectors.HTTP.JADDBOOK.timeout: 400000
+   mqDataSources.defaultMQ.port: 1414

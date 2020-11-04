@@ -64,7 +64,7 @@ httpConnectors:
       url: 'http://scharrdev01:7800/BookService'
       type: HTTP
       method: 'POST'
-      timeout: ${httpConnectors.HTTP.ADDBOOK.timeout}
+      timeout: 500000
       dsRefId: defaultKS
       headers:
        userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
@@ -105,7 +105,7 @@ mqDataSources:
 - id: defaultMQ
   qmgr: QM1
   type: MQ
-  port: ${mqDataSources.defaultMQ.port}
+  port: 1414
   host: localhost
   channel: 'SYSTEM.BKR.CONFIG'
   user: 'admin'
@@ -118,5 +118,5 @@ dbDataSources:
   password: 'admin'
 keyStores:
 - id: notDefaultKS
-  path: ${keyStores.path}
+  path: 'c:\temp\jks.jks'
   

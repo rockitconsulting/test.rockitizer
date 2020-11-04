@@ -8,31 +8,15 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import com.rockit.common.blackboxtester.exceptions.FatalConfigurationException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
+import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
-/**
- * Test.Rockitizer - API regression testing framework Copyright (C) 2020
- * rockit.consulting GmbH
- *
- * This program is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program. If not, see http://www.gnu.org/licenses/.
- *
- */
 
 public class Configuration {
 
@@ -64,18 +48,9 @@ public class Configuration {
 		rhApi = rhcli;
 		tchApi = tchcli;
 		try {
-			// TestProtocol.write( TestProtocol.getHashSeperator() );
-
+		
 			handleInitialization();
-
-			// TestProtocol.write("initializing of configuration for the context: "
-			// + System.lineSeparator() + "\t -testcases : " +
-			// tchApi.contextAsString()
-			// + System.lineSeparator() + "\t -resources : " +
-			// rhApi.contextAsString());
-
-			// TestProtocol.write( TestProtocol.getHashSeperator() );
-
+		
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
 			throw new FatalConfigurationException("configuration initialization exception", thr);
@@ -94,6 +69,8 @@ public class Configuration {
 		} else {
 			// TestProtocol.writeWarn(" running in CLI configuration generation mode"
 			// );
+			// TODO this part of code is only cli relevant. evaluate either we
+			// need to create the empty env.yaml with the cli
 			rhApi.initFromFileSystem();
 			tchApi.initFromFileSystem();
 		}
@@ -101,7 +78,6 @@ public class Configuration {
 
 	private void initAndLogRunModeFromSystemProperty() {
 		if (System.getProperty(Constants.MODE_KEY) != null) {
-
 			if (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("replay")) {
 				setRunMode(RunModeTypes.REPLAY);
 			} else if (System.getProperty(Constants.MODE_KEY).equalsIgnoreCase("assert")) {
@@ -109,14 +85,7 @@ public class Configuration {
 			} else {
 				setRunMode(RunModeTypes.RECORD);
 			}
-			// TestProtocol.write("initializing mode from command line: " +
-			// System.getProperty(Constants.MODE_KEY));
-
-		} else {
-			// TestProtocol.writeWarn("running in default " + runMode +
-			// " mode, to override use the cmd: -D" + Constants.MODE_KEY +
-			// "=record ");
-		}
+		}		
 	}
 
 	private void initEnvironmentFromSystemProperty() {
@@ -126,14 +95,10 @@ public class Configuration {
 
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
-			// TestProtocol.write("initializing environment from command line: "
-			// + System.getProperty(Constants.ENV_KEY));
-
+			
 		} else {
 			setEnvironment(null);
-			// TestProtocol.writeWarn("running with no environment, to override use the cmd: -D"
-			// + Constants.ENV_KEY + "=<Env>");
-
+		
 		}
 	}
 
@@ -162,12 +127,7 @@ public class Configuration {
 		try {
 
 			handleInitialization();
-
-			// TestProtocol.writeWarn("re-initializing of configuration for the context: "
-			// + System.lineSeparator() + "\t -testcases : " +
-			// tchApi.contextAsString()
-			// + System.lineSeparator() + "\t -resources : " +
-			// rhApi.contextAsString());
+	
 
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
@@ -194,7 +154,7 @@ public class Configuration {
 	}
 
 	public String getFullPath() {
-		return getRhApi().getFullPath();
+		return getTchApi().getFullPath();
 	}
 
 	public String getEnvironment() {
@@ -209,9 +169,26 @@ public class Configuration {
 	 */
 	private void setEnvironment(String environment) {
 		this.environment = environment;
-		if (environment != null) {
-			rhApi.setResourcesFileName("resources-" + environment + ".yaml");
+		handleEnvironmentVariables(environment);
+	}
+
+	void handleEnvironmentVariables(String environment) {
+		EnvironmentsHolderAccessor ehaApi = new EnvironmentsHolderAccessor();
+		if (ehaApi.getEnvsHolder() != null) {
+			Map<String, String> props = ehaApi.getEnvsHolder().getProps(environment);
+			if (props != null) {
+				interpolate(props);
+			}
+
+		} else {
+			TestProtocol.writeWarn("env.yaml for environment variables not found. Fallback to using of default resources.yaml");
+
 		}
+	}
+
+	private void interpolate(Map<String, String> props) {
+		File resultResourcesEnv = PayloadReplacer.interpolate(new File(rhApi.getFullPath() + rhApi.getResourcesFileName()), props);
+		rhApi.setEnvResourcesFile(resultResourcesEnv);
 	}
 
 	public Validatable getConnectorById(String id) {

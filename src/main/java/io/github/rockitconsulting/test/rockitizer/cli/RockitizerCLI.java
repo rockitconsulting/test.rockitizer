@@ -22,8 +22,6 @@ subcommands = {
 		RockitizerListResources.class,
 		RockitizerCreateTest.class,
 		RockitizerDeleteTest.class,
-		RockitizerCreateConfig.class,
-		RockitizerDeleteConfig.class,
 		RockitizerSync.class,
 		RockitizerValidate.class,
 		CommandLine.HelpCommand.class

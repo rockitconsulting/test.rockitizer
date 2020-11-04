@@ -50,6 +50,8 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 	private ResourcesHolder resourcesHolder;
 
+	private File envResourcesFile;
+	
 	private String resourcesFileName = "resources.yaml";
 
 	void initFromYaml() throws IOException {
@@ -60,15 +62,31 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 		resourcesHolder = resourcesHolderFromFileSystemToYaml(null);
 	}
 
+
 	/**
 	 * Reads yam configuration into the holder object CLI relevant: instantiate
 	 * Resources from yaml
 	 * 
 	 * @return
 	 * @throws IOException
-	 */
+	 */	
+	public ResourcesHolder resourcesHolderFromYaml(boolean forceOriginal) throws IOException {
+		if(forceOriginal || !isEnvEnabled()) {
+			return ConfigUtils.resourcesHolderFromYaml(getFullPath() + getResourcesFileName());
+		} else {
+			return ConfigUtils.resourcesHolderFromYaml(envResourcesFile.getAbsolutePath());
+		} 
+	}
+
+	private boolean isEnvEnabled() {
+		return envResourcesFile!=null;
+	}
+	
+	
+
 	public ResourcesHolder resourcesHolderFromYaml() throws IOException {
-		return ConfigUtils.resourcesHolderFromYaml(getFullPath() + getResourcesFileName());
+		return resourcesHolderFromYaml(false);
+		
 	}
 
 	/**
@@ -283,6 +301,15 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 
 	public void setResourcesHolder(ResourcesHolder resourcesHolder) {
 		this.resourcesHolder = resourcesHolder;
+	}
+
+
+	File getEnvResourcesFile() {
+		return envResourcesFile;
+	}
+
+	public void setEnvResourcesFile(File envResourcesFile) {
+		this.envResourcesFile = envResourcesFile;
 	}
 
 }

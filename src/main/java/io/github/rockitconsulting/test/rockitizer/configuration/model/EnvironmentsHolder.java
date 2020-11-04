@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
+
 
 public class EnvironmentsHolder {
 
@@ -22,13 +24,39 @@ public class EnvironmentsHolder {
 	}
 	
 	
+	public  Map<String,String> getProps (String pEnvName) 	{
+		
+		if(pEnvName==null && isValid()){
+			TestProtocol.writeWarn("env.yaml exists, but environment param not provided. Replacing placeholders in resources.yaml with first environment: " + getEnvs().get(0).getName());
+			return getFirstEnvironment();
+		} else if(checkExistsEnvByName(pEnvName)) {
+			TestProtocol.write("env.yaml exists,  environment " + pEnvName + " found. Replacing placeholders in resources.yaml");
+			return getPropsByEnvName(pEnvName);
+		} else if(isValid()){
+			TestProtocol.writeWarn("env.yaml exists, but environment " + pEnvName + " not found. Replacing placeholders  in resources.yaml with first environment: " + getEnvs().get(0).getName());
+			return getFirstEnvironment();
+		} else {
+			TestProtocol.writeWarn("env.yaml for environment variables exists, but not valid replacements found. Fallback to using of default resources.yaml");
+			return null;
+		}
+	}
+
+	private Map<String, String> getFirstEnvironment() {
+		return getEnvs().get(0).getProps();
+	}
+
+	private boolean isValid() {
+		return !getEnvs().isEmpty() && getFirstEnvironment()!=null;
+	}
+
+	
 	/**
 	 * First environment is always used as default. The other environments in list override the  values of the first (default) environment if specified
 	 * 
 	 * @param pEnvName target Environment 
 	 * @return
 	 */
-	public Map<String,String> getEnvByName(String pEnvName) {
+	private Map<String,String> getPropsByEnvName(String pEnvName) {
 		Map<String,String> props = new HashMap<>();
 		this.getEnvs().forEach( env -> {
 			if(props.isEmpty() || env.getName().equalsIgnoreCase(pEnvName)) {
@@ -39,7 +67,7 @@ public class EnvironmentsHolder {
 	}
 	
 	
-	public boolean checkExistsEnvByName(String pEnvName) {
+	private boolean checkExistsEnvByName(String pEnvName) {
 		return   (getEnvs().stream().filter(e -> e.getName().equalsIgnoreCase(pEnvName)).findFirst().orElse(null)) !=null?true:false ;
 		
 	}

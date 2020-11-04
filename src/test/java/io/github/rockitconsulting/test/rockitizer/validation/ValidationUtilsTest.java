@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
+import com.rockit.common.blackboxtester.suite.configuration.Constants;
 
 /**
  * Test.Rockitizer - API regression testing framework Copyright (C) 2020
@@ -188,8 +189,36 @@ public class ValidationUtilsTest {
 		Assert.assertTrue(syncConfig.size() == 2);
 		syncConfig.forEach(m -> System.out.println(m));
 
-		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbConnectors().size() == 2);
+		// re-init
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-sync-res");
+		Assert.assertTrue(configuration().getRhApi().resourcesHolderFromYaml().getDbConnectors().size() == 2);
 
+	}
+
+	
+	@Test
+	public void validateResourcePlaceholdersWithDefinedPlaceholdersInEnvsYaml() {
+		System.setProperty(Constants.ENV_KEY, this.getClass().getSimpleName() + "-with-defined-placeholders");
+
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-with-defined-placeholders");
+		ValidationUtils.validateResources();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
+
+		System.clearProperty(Constants.ENV_KEY);
+	}
+
+	@Test
+	public void validateResourcePlaceholdersWithUndefinedPlaceholdersInEnvsYaml() {
+		System.setProperty(Constants.ENV_KEY, this.getClass().getSimpleName() + "-with-undefined-placeholders");
+		
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-with-undefined-placeholders");
+		ValidationUtils.validateResources();
+		ValidationHolder.validationHolder().logValidationErrors();
+		System.out.println(ValidationHolder.validationHolder().size());
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 2);
+		
+		System.clearProperty(Constants.ENV_KEY);
 	}
 
 }

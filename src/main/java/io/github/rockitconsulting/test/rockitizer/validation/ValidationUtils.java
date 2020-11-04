@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.StreamSupport;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
@@ -254,7 +255,7 @@ public class ValidationUtils {
 
 		List<String> messages = new ArrayList<>();
 
-		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml(true);
 		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
 
 		rhfs.getDbConnectors().forEach(c -> {
@@ -300,8 +301,6 @@ public class ValidationUtils {
 		configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
 
 		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
-		configuration().reinit();
-
 		return messages;
 
 	}
@@ -495,12 +494,17 @@ public class ValidationUtils {
 
 	}
 
-	private static void checkValid(String paramName, String paramValue, List<Message> messages) {
+	private static void checkValid(String paramName, String paramValue, List<Message> messages){
+		Pattern placeholderPattern = Pattern.compile("^\\$\\{.*\\}");
+
 		if (paramValue == null) {
 			messages.add(new Message(Message.LEVEL.ERROR, " mandatory param [" + paramName + "] cannot be 'null'"));
 		} else if (paramValue.startsWith("@") && paramValue.endsWith("@")) {
 			messages.add(new Message(Message.LEVEL.ERROR, " mandatory param [" + paramName + "] with value '" + paramValue
 					+ "' must exist and cannot contain @placeholders@"));
+		} else if (placeholderPattern.matcher(paramValue).matches()) {
+			messages.add(new Message(Message.LEVEL.ERROR, " param [" + paramName + "] with value '" + paramValue
+					+ "' cannot contain ${placeholders}. Please define the value for the placeholder in the envs.yaml file under the corresponding environment"));
 		}
 	}
 
