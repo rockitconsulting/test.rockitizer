@@ -2,8 +2,6 @@ package com.rockit.common.blackboxtester.connector.impl;
 
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
 
-import java.net.UnknownHostException;
-
 import org.junit.Test;
 
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;

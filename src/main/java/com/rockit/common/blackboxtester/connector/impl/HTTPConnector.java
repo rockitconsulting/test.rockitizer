@@ -86,8 +86,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	}
 	
 	public HTTPConnector(String id) {
-		HTTPConnectorCfg cfg = (HTTPConnectorCfg) configuration().getConnectorById(id);
-		new HTTPConnector(cfg);
+		this((HTTPConnectorCfg) configuration().getConnectorById(id));
 	}
 
 	static {
