@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.HashMap;
@@ -68,10 +69,10 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	private URL url;
 	private File file;
 
-	public HTTPConnector(String id) {
-		HTTPConnectorCfg cfg = (HTTPConnectorCfg) configuration().getConnectorById(id);
-
-		this.id = id;
+	
+	
+	HTTPConnector(HTTPConnectorCfg cfg) {
+		this.id = cfg.getId();
 		this.urlStr = cfg.getUrl();
 		this.method = cfg.getMethod();
 		this.connectTimeOut = Integer.valueOf(cfg.getTimeout());
@@ -81,6 +82,12 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		if (ks != null) {
 			this.trustStore = ks.getPath();
 		}
+		
+	}
+	
+	public HTTPConnector(String id) {
+		HTTPConnectorCfg cfg = (HTTPConnectorCfg) configuration().getConnectorById(id);
+		new HTTPConnector(cfg);
 	}
 
 	static {
@@ -135,6 +142,9 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			InputStream is;
 			try {
 				 is = urlConnection.getInputStream();
+			}catch (UnknownHostException uhe) {
+				throw new ConnectorException(uhe);
+				
 			} catch (IOException e) {
 				 is = urlConnection.getErrorStream();
 			}
