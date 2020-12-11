@@ -80,7 +80,8 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 
 			try (final Statement statement = connection.createStatement()) {
 				statement.execute(cmd);
-				connection.commit();
+				if (!connection.getAutoCommit())
+					connection.commit();
 			} catch (SQLException e) {
 				throw new ConnectorException("Error for cmd: " + cmd, e);
 			}
