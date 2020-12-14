@@ -1,86 +1,75 @@
+#########################################################################################################################
+############### This file has been generated. Kindly consider to replace the @@ placeholders with your values ###########
+#########################################################################################################################
 mqConnectors:
-    - id: MQGET.ERROR
-      queue: 'MQ.ERROR'
-      type: MQGET
-      dsRefId: defaultMQ
-    - id: MQGET.OUT.FILE2MQ
-      type: MQGET
-      dsRefId: defaultMQ
-      queue: 'MQ.OUT.FILE2MQ'
-    - id: MQGET.IN.MQ2DB
-      type: MQGET
-      dsRefId: defaultMQ
-      queue: 'MQ.IN.MQ2DB'
-    - id: MQPUT.IN.MQ2MQ
-      type: MQPUT
-      dsRefId: defaultMQ
-      queue: 'MQ.IN.MQ2MQ'
-    - id: MQPUT.IN.MQ2DB
-      type: MQPUT
-      dsRefId: defaultMQ
-      queue: 'MQ.IN.MQ2DB'
-    - id: MQGET.IN.MQ2MQ
-      dsRefId: defaultMQ
-      queue: 'MQ.IN.MQ2MQ'
-      type: MQGET
-    - id: MQGET.OUT.MQ2MQ
-      dsRefId: defaultMQ
-      queue: 'MQ.OUT.MQ2MQ'
-      type: MQGET
-dbConnectors:
-    - id: DBPUT.CLAEN
-      type: DBPUT
-      dsRefId: defaultDB
-    - id: DBGET.GETBOOKS
-      type: DBGET
-      query: 'SELECT BOOK\\, AUTHOR FROM ROCKIT.BOOKSERVICE'
-      dsRefId: defaultDB
+- id: MQGET.ERROR
+  type: MQGET
+  queue: MQ.ERROR
+  dsRefId: defaultMQ
+- id: MQGET.OUT.FILE2MQ
+  type: MQGET
+  queue: MQ.OUT.FILE2MQ
+  dsRefId: defaultMQ
+- id: MQGET.IN.MQ2DB
+  type: MQGET
+  queue: MQ.IN.MQ2DB
+  dsRefId: defaultMQ
+- id: MQPUT.IN.MQ2MQ
+  type: MQPUT
+  queue: MQ.IN.MQ2MQ
+  dsRefId: defaultMQ
+- id: MQPUT.IN.MQ2DB
+  type: MQPUT
+  queue: MQ.IN.MQ2DB
+  dsRefId: defaultMQ
+- id: MQGET.IN.MQ2MQ
+  type: MQGET
+  queue: MQ.IN.MQ2MQ
+  dsRefId: defaultMQ
+- id: MQGET.OUT.MQ2MQ
+  type: MQGET
+  queue: MQ.OUT.MQ2MQ
+  dsRefId: defaultMQ
 httpConnectors:
-    - id: HTTP.ADDBOOK
-      url: 'http://scharrdev01:7800/BookService'
-      type: HTTP
-      method: 'POST'
-      timeout: 500000
-      dsRefId: defaultKS
-      headers:
-       contentType: 'application/xml'
-       userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
-    - id: HTTP.JADDBOOK
-      url: 'http://scharrdev01:7080/JSONBookService'
-      type: HTTP
-      method: 'POST'
-      timeout: 500000
-      headers:
-       userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0'
-       contentType: 'application/json'
+- id: HTTP.ADDBOOK
+  type: HTTP
+  url: http://scharrdev01:7800/BookService
+  method: POST
+  timeout: '500000'
+  dsRefId: defaultKS
+  headers:
+    contentType: application/xml
+    userAgent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+- id: HTTP.JADDBOOK
+  type: HTTP
+  url: http://scharrdev01:7080/JSONBookService
+  method: POST
+  timeout: '500000'
+  headers:
+    userAgent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0
+    contentType: application/json
 fileConnectors:
-    - id: FILEDEL.IN.FILE2FILE
-      type: FILEDEL
-      path: 'C:/temp/FILE2FILE_IN'
-    - id: FILEDEL.OUT.FILE2FILE
-      type: FILEDEL
-      path: 'C:/temp/FILE2FILE_OUT'
-    - id: FILEPUT.IN.FILE2MQ
-      type: FILEPUT
-      path: 'C:/temp/FILE2MQ_IN'
-    - id: FILEPUT.IN.FILE2FILE
-      type: FILEPUT
-      path: 'C:/temp/FILE2FILE_IN'
-    - id: FILEGET.OUT.FILE2FILE
-      type: FILEGET
-      path: 'C:/temp/FILE2FILE_OUT'
+- id: FILEDEL.IN.FILE2FILE
+  type: FILEDEL
+  path: C:/temp/FILE2FILE_IN
+- id: FILEDEL.OUT.FILE2FILE
+  type: FILEDEL
+  path: C:/temp/FILE2FILE_OUT
+- id: FILEPUT.IN.FILE2MQ
+  type: FILEPUT
+  path: C:/temp/FILE2MQ_IN
+- id: FILEPUT.IN.FILE2FILE
+  type: FILEPUT
+  path: C:/temp/FILE2FILE_IN
+- id: FILEGET.OUT.FILE2FILE
+  type: FILEGET
+  path: C:/temp/FILE2FILE_OUT
 mqDataSources:
 - id: defaultMQ
-  qmgr: QM1
   type: MQ
-  port: 1414
+  qmgr: QM1
+  channel: SYSTEM.BKR.CONFIG
   host: localhost
-  channel: 'SYSTEM.BKR.CONFIG'
-  user: 'admin'
-  password: 'admin'
-dbDataSources:
-- id: defaultDB
-  url: '@jdbc:db2://localhost:50000/ROCKIT@'
-  type: DB
-  user: 'admin'
-  password: 'admin'
+  port: '1414'
+  user: admin
+  password: admin

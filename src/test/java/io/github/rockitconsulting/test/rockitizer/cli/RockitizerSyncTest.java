@@ -5,8 +5,6 @@ import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactor
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.rockit.common.blackboxtester.suite.configuration.Constants;
-
 import picocli.CommandLine;
 
 /**
@@ -43,13 +41,12 @@ public class RockitizerSyncTest extends CommonCLITest {
 		Assert.assertEquals(new CommandLine(new RockitizerSync()).execute(), 0);
 
 	}
-
-	//@Test
-	public void testSyncWithParams() {
-		System.setProperty(Constants.ENV_KEY, "devp");
+	
+	@Test
+	public void testSyncWithOptions() {
 		TestObjectFactory.resetConfigurationToContextDemoPrj();
-		Assert.assertEquals(new CommandLine(new RockitizerSync()).execute("devp"), 0);
-
+		Assert.assertEquals(new CommandLine(new RockitizerSync()).execute("-f=true"), 0);
+		Assert.assertEquals(new CommandLine(new RockitizerSync()).execute("--forceClean=false"), 0);
 	}
 
 }

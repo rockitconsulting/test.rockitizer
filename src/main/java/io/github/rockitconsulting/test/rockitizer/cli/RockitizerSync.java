@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.github.rockitconsulting.test.rockitizer.validation.ValidationUtils;
 import picocli.CommandLine;
+import picocli.CommandLine.Option;
 
 @CommandLine.Command(
 		name = "sync",
@@ -14,8 +15,8 @@ import picocli.CommandLine;
 		descriptionHeading = "%n@|bold,underline Description:|@%n%n",
 		parameterListHeading = "%n@|bold,underline Parameters:|@%n",
 		optionListHeading = "%n@|bold,underline Options:|@%n",
-		header = "cli sync",
-		description = "Syncronizing test folder structure with resources-<env>.yaml and testcases.yaml"
+		header = "cli sync [-f[=<true|false>]]",
+		description = "Syncronizing test folder structure with resources.yaml and testcases.yaml"
 		)
 
 /**
@@ -39,32 +40,27 @@ import picocli.CommandLine;
 
 public class RockitizerSync implements Runnable {
 
-	//@Parameters(index = "0", arity = "0..1", description = ": env = dev => sync filesystem with environment dependent resources-dev.yaml")
-	//String env;
-
+	@Option(defaultValue = "false", showDefaultValue=CommandLine.Help.Visibility.ALWAYS, names = {"-f", "--forceClean"}, arity = "0..1", description = "removal of unused datasources from resources.yaml")
+	boolean forceClean;
+	
 	@Override
 	public void run() {
-		/*
-		if (env != null) {
-			System.setProperty(Constants.ENV_KEY, env);
-		}
-		*/
 		try {
 			List<String> messages = ValidationUtils.syncConfig();
+			
+			if (forceClean)
+				messages.addAll(ValidationUtils.cleanConfig());
+
 			System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green Successfully: |@" + "testcases.yaml has been sucessfully generated from filesystem "));
 
 			if (messages.isEmpty()) {
-				//System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " was up-to-date, no additions.");
 				System.out.println("resources.yaml resources.yaml was up-to-date, no additions.");
 			} else {
-				//System.out.println(((env != null) ? "resources-" + env + ".yaml" : "resources.yaml") + " updated with following configuration:");
 				System.out.println("resources.yaml updated with following configuration:");
 				messages.forEach(m -> System.out.println(m));
 			}
 		} catch (IOException e) {
 			System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red Sync failed: |@" + e));
 		}
-
 	}
-
 }

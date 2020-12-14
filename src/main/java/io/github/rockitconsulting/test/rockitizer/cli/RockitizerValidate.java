@@ -80,6 +80,8 @@ public class RockitizerValidate implements Runnable {
 			ValidationUtils.validateTestCasesAndFileSystemInSync();
 			ValidationUtils.validateNotAllowedEmptyStructures();
 			ValidationUtils.validateSyncJavaAndTestCases();
+			ValidationUtils.validateResourcesAndFileSystemInSync();
+			ValidationUtils.validateReferencedDataSources();
 
 			if (ValidationHolder.validationHolder().size() > 0) {
 				System.err.println(CommandLine.Help.Ansi.AUTO.string("@|bold Result: |@") + CommandLine.Help.Ansi.AUTO.string("@|bold,red NOK |@")+ "Not valid with validation messages:");

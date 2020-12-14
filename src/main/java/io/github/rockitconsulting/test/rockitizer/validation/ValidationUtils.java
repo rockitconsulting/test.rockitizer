@@ -9,6 +9,9 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connec
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.SCPConnectorCfg;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
+import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.ConnectorRef;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestCase;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.tc.TestStep;
@@ -27,6 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
@@ -251,58 +255,129 @@ public class ValidationUtils {
 	 * 
 	 * @throws IOException
 	 */
-	public static List<String> syncConfig() throws IOException {
-
+	public static List<String> syncConfig() throws IOException{
 		List<String> messages = new ArrayList<>();
 
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml(true);
 		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
-
-		rhfs.getDbConnectors().forEach(c -> {
-			DBConnectorCfg match = rhyaml.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) {
-				messages.add("sync to yaml: " + c.toString());
-				rhyaml.addDbConnector(c);
-			}
-		});
-
-		rhfs.getMqConnectors().forEach(c -> {
-			MQConnectorCfg match = rhyaml.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) {
-				messages.add("sync to yaml: " + c.toString());
-				rhyaml.addMqConnector(c);
-			}
-		});
-
-		rhfs.getFileConnectors().forEach(c -> {
-			FileConnectorCfg match = rhyaml.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) {
-				messages.add("sync to yaml: " + c.toString());
-				rhyaml.addFileConnector(c);
-			}
-		});
-
-		rhfs.getHttpConnectors().forEach(c -> {
-			HTTPConnectorCfg match = rhyaml.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) {
-				messages.add("sync to yaml: " + c.toString());
-				rhyaml.addHttpConnector(c);
-			}
-		});
-
-		rhfs.getScpConnectors().forEach(c -> {
-			SCPConnectorCfg match = rhyaml.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) {
-				messages.add("sync to yaml: " + c.toString());
-				rhyaml.addScpConnector(c);
-			}
+		
+		// add connectors that exist in filesystem but not in yaml
+		 getDiffConnectors(rhfs, rhyaml).forEach(c -> {
+			 if (c instanceof DBConnectorCfg) rhyaml.addDbConnector((DBConnectorCfg) c);
+			 else if(c instanceof FileConnectorCfg) rhyaml.addFileConnector((FileConnectorCfg) c);
+			 else if(c instanceof HTTPConnectorCfg) rhyaml.addHttpConnector((HTTPConnectorCfg) c);
+			 else if(c instanceof MQConnectorCfg) rhyaml.addMqConnector((MQConnectorCfg) c);
+			 else if(c instanceof SCPConnectorCfg) rhyaml.addScpConnector((SCPConnectorCfg) c);
+			 messages.add("sync to yaml: added " + c);
+		 });
+		 
+		// remove connectors that exist in yaml but not in filesystem
+		getDiffConnectors(rhyaml, rhfs).forEach(c -> {
+			if (c instanceof DBConnectorCfg) rhyaml.getDbConnectors().remove(c);
+			else if (c instanceof FileConnectorCfg) rhyaml.getFileConnectors().remove(c);
+			else if (c instanceof HTTPConnectorCfg) rhyaml.getHttpConnectors().remove(c);
+			else if (c instanceof MQConnectorCfg) rhyaml.getMqConnectors().remove(c);
+			else if (c instanceof SCPConnectorCfg) rhyaml.getScpConnectors().remove(c);
+			messages.add("sync to yaml: removed " + c);
 		});
 
 		configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
-
 		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
 		return messages;
+	}
 
+	/**
+	 * Remove unused resources
+	 * @return
+	 * @throws IOException
+	 */
+	public static List<String> cleanConfig() throws IOException {
+		List<String> messages = new ArrayList<>();
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml(true);
+		
+		// remove datasources that are not referenced by any connector in yaml
+		getDerelictDataSources(rhyaml).forEach(c -> {
+			if (c instanceof DBDataSource) rhyaml.getDbDataSources().remove(c);
+			else if (c instanceof KeyStore) rhyaml.getKeyStores().remove(c);
+			else if (c instanceof MQDataSource) rhyaml.getMqDataSources().remove(c);
+			messages.add("sync to yaml: removed " + c);
+		});
+		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
+		return messages;
+	}
+	
+	private static List<Validatable> getDiffConnectors(ResourcesHolder rh1, ResourcesHolder rh2) {
+		List<Validatable> connectors = new ArrayList<>();
+		
+		rh1.getDbConnectors().forEach(c -> {
+			DBConnectorCfg match = rh2.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) connectors.add(c);
+		});
+		rh1.getMqConnectors().forEach(c -> {
+			MQConnectorCfg match = rh2.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) connectors.add(c);
+		});
+		rh1.getFileConnectors().forEach(c -> {
+			FileConnectorCfg match = rh2.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) connectors.add(c);
+		});
+		rh1.getHttpConnectors().forEach(c -> {
+			HTTPConnectorCfg match = rh2.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) connectors.add(c);
+		});
+		rh1.getScpConnectors().forEach(c -> {
+			SCPConnectorCfg match = rh2.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
+			if (match == null) connectors.add(c);
+		});
+		return connectors;
+	}
+
+	private static List<Validatable> getDerelictDataSources(ResourcesHolder rh) {
+		List<Validatable> dataSources = new ArrayList<>();
+		
+		rh.getDbDataSources().forEach(dds -> {
+			DBConnectorCfg match = rh.getDbConnectors().stream().filter(c -> c.getDsRefId().equals(dds.getId())).findAny().orElse(null);
+			if (match == null) dataSources.add(dds);
+		});
+		rh.getKeyStores().forEach(kss -> {
+			HTTPConnectorCfg match = rh.getHttpConnectors().stream().filter(c -> c.getDsRefId() != null && c.getDsRefId().equals(kss.getId())).findAny().orElse(null);
+			if (match == null) dataSources.add(kss);
+		});
+		rh.getMqDataSources().forEach(mqs -> {
+			MQConnectorCfg match = rh.getMqConnectors().stream().filter(c -> c.getDsRefId().equals(mqs.getId())).findAny().orElse(null);
+			if (match == null) dataSources.add(mqs);
+		});
+		return dataSources;
+	}
+
+	/**
+	 * Mirror validation of filesystem and resources sync
+	 * 
+	 * @throws IOException
+	 */
+	public static void validateResourcesAndFileSystemInSync() throws IOException {
+		String resources = configuration().getRhApi().getResourcesFileName();
+		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		
+		getDiffConnectors(rhyaml, rhfs).stream()
+	    .map(c -> c.getContext())
+	    .collect(Collectors.toList()).forEach(
+				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "Connector exists in " + resources + ", but not found in FileSystem")));
+	}
+
+	/**
+	 * Check if there are any datasources that are not referenced by a connector in the resources
+	 * @throws IOException 
+	 * 
+	 */
+	public static void validateReferencedDataSources() throws IOException {
+		String resources = configuration().getRhApi().getResourcesFileName();
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+
+		getDerelictDataSources(rhyaml).forEach(ds -> {
+			validationHolder().add(ds.getContext(), new Message(Message.LEVEL.WARN, "DataSource exists in " + resources + ", but not referenced by any connector"));
+		});
 	}
 
 	/**

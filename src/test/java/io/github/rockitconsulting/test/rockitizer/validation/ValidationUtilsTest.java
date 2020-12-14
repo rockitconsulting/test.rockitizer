@@ -141,9 +141,11 @@ public class ValidationUtilsTest {
 		ValidationUtils.validateTestCasesAndFileSystemInSync();
 		ValidationUtils.validateNotAllowedEmptyStructures();
 		ValidationUtils.validateSyncJavaAndTestCases();
+		ValidationUtils.validateResourcesAndFileSystemInSync();
+		ValidationUtils.validateReferencedDataSources();
 
 		ValidationHolder.validationHolder().logValidationErrors();
-		Assert.assertTrue("Error number awaited 23 but was " + ValidationHolder.validationHolder().size(), ValidationHolder.validationHolder().size() == 29);
+		Assert.assertTrue("Error number awaited 23 but was " + ValidationHolder.validationHolder().size(), ValidationHolder.validationHolder().size() == 30);
 
 	}
 
@@ -154,6 +156,22 @@ public class ValidationUtilsTest {
 		ValidationHolder.validationHolder().logValidationErrors();
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
 
+	}
+	
+	@Test
+	public void validateResourcesInSyncWithFileSystem() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		ValidationUtils.validateResourcesAndFileSystemInSync();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
+	}
+
+	@Test
+	public void validateReferencedDataSources() throws IOException {
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		ValidationUtils.validateReferencedDataSources();
+		ValidationHolder.validationHolder().logValidationErrors();
+		Assert.assertTrue(ValidationHolder.validationHolder().size() == 0);
 	}
 
 	@Test
@@ -195,7 +213,28 @@ public class ValidationUtilsTest {
 
 	}
 
-	
+	@Test
+	public void testCleanConfig() throws IOException {
+
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
+		rhyaml.getDbConnectors().clear();
+		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbDataSources().size() == 0);
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getMqDataSources().size() == 1);
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getKeyStores().size() == 0);
+		List<String> cleanConfig = ValidationUtils.cleanConfig();
+		System.out.println(cleanConfig.size());
+		Assert.assertTrue(cleanConfig.size() == 0);
+		cleanConfig.forEach(m -> System.out.println(m));
+
+		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-NotSyncWithFS");
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getDbDataSources().size() == 0);
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getMqDataSources().size() == 1);
+		Assert.assertTrue(configuration().getRhApi().getResourcesHolder().getKeyStores().size() == 0);
+	}
+
 	@Test
 	public void validateResourcePlaceholdersWithDefinedPlaceholdersInEnvsYaml() {
 		System.setProperty(Constants.ENV_KEY, this.getClass().getSimpleName() + "-with-defined-placeholders");
@@ -215,7 +254,6 @@ public class ValidationUtilsTest {
 		TestObjectFactory.resetConfigurationToContextDemoPrj(this.getClass().getSimpleName() + "-with-undefined-placeholders");
 		ValidationUtils.validateResources();
 		ValidationHolder.validationHolder().logValidationErrors();
-		System.out.println(ValidationHolder.validationHolder().size());
 		Assert.assertTrue(ValidationHolder.validationHolder().size() == 2);
 		
 		System.clearProperty(Constants.ENV_KEY);
