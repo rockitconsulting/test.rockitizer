@@ -1,3 +1,19 @@
+# 1.0.5.10 - Release 
+	- Remove unused Connectors/Datasources from resources.yaml
+	- Explicitly commit SQL query if AutoCommit is "false"
+	
+# 1.0.5.9 - Release 
+	- Corrected doubled instantiation of HTTPConnector
+	
+# 1.0.5.8 - Release 
+	- Feature: Skip Test
+	- No validation error by empty "000BEFORE" and "999AFTER" folders 
+	- New environment handling
+	
+# 1.0.5.5 - Release 
+	- Update HTTPConnector.java 
+	- HTTPConnector changes: IOException Handling for URL Connection/setResponse XML ---> JSON String (only for JSON Reponses)
+	
 # 1.0.5.4 - Release 
 	- Pretty-Print for Test Report
 	- Added support for description files (description.txt) for TestCase, TestStep and Connector
