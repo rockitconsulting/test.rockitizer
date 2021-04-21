@@ -1,6 +1,8 @@
 # 1.0.5.10 - Release 
 	- Remove unused Connectors/Datasources from resources.yaml
 	- Explicitly commit SQL query if AutoCommit is "false"
+	- Throw Exception when trying to use a non-existed environment from envs.yaml
+	- Display manually added TestCases when executing 'cli sync' command
 	
 # 1.0.5.9 - Release 
 	- Corrected doubled instantiation of HTTPConnector
