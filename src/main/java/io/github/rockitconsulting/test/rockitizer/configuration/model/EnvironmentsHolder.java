@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
-
 public class EnvironmentsHolder {
 
 	private List<Environment> envs = new ArrayList<>();
@@ -22,21 +21,22 @@ public class EnvironmentsHolder {
 	public void setEnvs(List<Environment> envs) {
 		this.envs = envs;
 	}
-	
-	
-	public  Map<String,String> getProps (String pEnvName) 	{
-		
-		if(pEnvName==null && isValid()){
-			TestProtocol.writeWarn("env.yaml exists, but environment param not provided. Replacing placeholders in resources.yaml with first environment: " + getEnvs().get(0).getName());
+
+	public boolean isValid() {
+		return getEnvs() != null && !getEnvs().isEmpty() && getFirstEnvironment() != null;
+	}
+
+	public Map<String, String> getProps(String pEnvName) {
+
+		if (pEnvName == null) {
+			TestProtocol.writeWarn("env.yaml exists, but environment param not provided. Replacing placeholders in resources.yaml with first environment: "
+					+ getEnvs().get(0).getName() + System.lineSeparator());
 			return getFirstEnvironment();
-		} else if(checkExistsEnvByName(pEnvName)) {
-			TestProtocol.write("env.yaml exists,  environment " + pEnvName + " found. Replacing placeholders in resources.yaml");
+		} else if (checkExistsEnvByName(pEnvName)) {
+			TestProtocol.write("env.yaml exists,  environment '" + pEnvName + "' found. Replacing placeholders in resources.yaml" + System.lineSeparator());
 			return getPropsByEnvName(pEnvName);
-		} else if(isValid()){
-			TestProtocol.writeWarn("env.yaml exists, but environment " + pEnvName + " not found. Replacing placeholders  in resources.yaml with first environment: " + getEnvs().get(0).getName());
-			return getFirstEnvironment();
 		} else {
-			TestProtocol.writeWarn("env.yaml for environment variables exists, but not valid replacements found. Fallback to using of default resources.yaml");
+			TestProtocol.writeError("env.yaml exists, but environment '" + pEnvName + "' not found." + System.lineSeparator());
 			return null;
 		}
 	}
@@ -45,31 +45,27 @@ public class EnvironmentsHolder {
 		return getEnvs().get(0).getProps();
 	}
 
-	private boolean isValid() {
-		return !getEnvs().isEmpty() && getFirstEnvironment()!=null;
-	}
-
-	
 	/**
-	 * First environment is always used as default. The other environments in list override the  values of the first (default) environment if specified
+	 * First environment is always used as default. The other environments in
+	 * list override the values of the first (default) environment if specified
 	 * 
-	 * @param pEnvName target Environment 
+	 * @param pEnvName
+	 *            target Environment
 	 * @return
 	 */
-	private Map<String,String> getPropsByEnvName(String pEnvName) {
-		Map<String,String> props = new HashMap<>();
-		this.getEnvs().forEach( env -> {
-			if(props.isEmpty() || env.getName().equalsIgnoreCase(pEnvName)) {
-				props.putAll( env.getProps() );
-			}			
+	private Map<String, String> getPropsByEnvName(String pEnvName) {
+		Map<String, String> props = new HashMap<>();
+		this.getEnvs().forEach(env -> {
+			if (props.isEmpty() || env.getName().equalsIgnoreCase(pEnvName)) {
+				props.putAll(env.getProps());
+			}
 		});
 		return props;
 	}
-	
-	
+
 	private boolean checkExistsEnvByName(String pEnvName) {
-		return   (getEnvs().stream().filter(e -> e.getName().equalsIgnoreCase(pEnvName)).findFirst().orElse(null)) !=null?true:false ;
-		
+		return (getEnvs().stream().filter(e -> e.getName().equalsIgnoreCase(pEnvName)).findFirst().orElse(null)) != null ? true : false;
+
 	}
 
 }

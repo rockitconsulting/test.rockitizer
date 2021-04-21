@@ -1,11 +1,13 @@
 package io.github.rockitconsulting.test.rockitizer.configuration;
 
+import io.github.rockitconsulting.test.rockitizer.configuration.model.EnvironmentsHolder;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.DBConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.HTTPConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.connectors.MQConnectorCfg;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.DBDataSource;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.KeyStore;
 import io.github.rockitconsulting.test.rockitizer.configuration.model.res.datasources.MQDataSource;
+import io.github.rockitconsulting.test.rockitizer.exceptions.UnknownEnvironmentException;
 import io.github.rockitconsulting.test.rockitizer.validation.Validatable;
 
 import java.io.File;
@@ -17,13 +19,13 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 import com.rockit.common.blackboxtester.suite.configuration.TestProtocol;
 
-
 public class Configuration {
 
 	public enum RunModeTypes {
 		REPLAY, RECORD, ASSERT
 	}
 
+	private static EnvironmentsHolderAccessor ehaApi;
 	private static ResourcesHolderAccessor rhApi;
 	private static TestCasesHolderAccessor tchApi;
 
@@ -48,9 +50,9 @@ public class Configuration {
 		rhApi = rhcli;
 		tchApi = tchcli;
 		try {
-		
+
 			handleInitialization();
-		
+
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
 			throw new FatalConfigurationException("configuration initialization exception", thr);
@@ -85,7 +87,7 @@ public class Configuration {
 			} else {
 				setRunMode(RunModeTypes.RECORD);
 			}
-		}		
+		}
 	}
 
 	private void initEnvironmentFromSystemProperty() {
@@ -95,10 +97,10 @@ public class Configuration {
 
 		if (System.getProperty(Constants.ENV_KEY) != null) {
 			setEnvironment(System.getProperty(Constants.ENV_KEY));
-			
+
 		} else {
 			setEnvironment(null);
-		
+
 		}
 	}
 
@@ -127,7 +129,6 @@ public class Configuration {
 		try {
 
 			handleInitialization();
-	
 
 		} catch (Throwable thr) {
 			TestProtocol.writeError("configuration initialization exception", thr);
@@ -166,23 +167,29 @@ public class Configuration {
 	 * initialisation
 	 * 
 	 * @param environment
+	 * @throws Exception 
 	 */
 	private void setEnvironment(String environment) {
 		this.environment = environment;
-		handleEnvironmentVariables(environment);
+		ehaApi = new EnvironmentsHolderAccessor();
+		EnvironmentsHolder eh = ehaApi.getEnvsHolder();
+		if (eh != null) {
+			if (eh.isValid()) {
+				handleEnvironmentVariables(environment);
+			} else {
+				TestProtocol.writeWarn("env.yaml file for environment variables exists, but not valid replacements found. Please proof validity of env.yaml. Fallback to using default resources.yaml." + System.lineSeparator());
+			}
+		} else {
+			TestProtocol.writeWarn("env.yaml file for environment variables not found. Fallback to using default resources.yaml" + System.lineSeparator());
+		}
 	}
 
 	void handleEnvironmentVariables(String environment) {
-		EnvironmentsHolderAccessor ehaApi = new EnvironmentsHolderAccessor();
-		if (ehaApi.getEnvsHolder() != null) {
-			Map<String, String> props = ehaApi.getEnvsHolder().getProps(environment);
-			if (props != null) {
-				interpolate(props);
-			}
-
+		Map<String, String> props = ehaApi.getEnvsHolder().getProps(environment);
+		if (props != null) {
+			interpolate(props);
 		} else {
-			TestProtocol.writeWarn("env.yaml for environment variables not found. Fallback to using of default resources.yaml");
-
+			throw new UnknownEnvironmentException(environment);
 		}
 	}
 

@@ -131,13 +131,7 @@ public class EnvironmentsHolderAccessorTest {
 		Map<String, String> props = envsHolderFromYaml.getProps("notExistingEnv");
 
 		Assert.assertTrue(envsHolderFromYaml.getEnvs().size() == 3);
-		Assert.assertTrue(props.size() == 3);
-		Assert.assertTrue(props.containsKey("k1"));
-		Assert.assertTrue(props.containsKey("k2"));
-		Assert.assertTrue(props.containsKey("k3"));
-		Assert.assertTrue(props.get("k1").equalsIgnoreCase("v1"));
-		Assert.assertTrue(props.get("k2").equalsIgnoreCase("v2"));
-		Assert.assertTrue(props.get("k3").equalsIgnoreCase("v3"));
+		Assert.assertTrue(props == null);
 	}
 
 }
