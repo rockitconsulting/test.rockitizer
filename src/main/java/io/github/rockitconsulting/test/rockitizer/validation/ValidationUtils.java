@@ -57,7 +57,7 @@ import com.rockit.common.blackboxtester.suite.configuration.Constants;
 public class ValidationUtils {
 
 	public static void validateConnector(String connId) {
-		if ((!connId.contains(".")) || !Constants.SUPPORTED_CONNECTORS.contains(connId.split("\\.")[0]) ) {
+		if ((!connId.contains(".")) || !Constants.SUPPORTED_CONNECTORS.contains(connId.split("\\.")[0])) {
 			throw new InvalidConnectorFormatException(connId);
 		}
 
@@ -255,30 +255,47 @@ public class ValidationUtils {
 	 * 
 	 * @throws IOException
 	 */
-	public static List<String> syncConfig() throws IOException{
+	public static List<String> syncConfig() throws IOException {
 		List<String> messages = new ArrayList<>();
 
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml(true);
 		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
-		
+
 		// add connectors that exist in filesystem but not in yaml
-		 getDiffConnectors(rhfs, rhyaml).forEach(c -> {
-			 if (c instanceof DBConnectorCfg) rhyaml.addDbConnector((DBConnectorCfg) c);
-			 else if(c instanceof FileConnectorCfg) rhyaml.addFileConnector((FileConnectorCfg) c);
-			 else if(c instanceof HTTPConnectorCfg) rhyaml.addHttpConnector((HTTPConnectorCfg) c);
-			 else if(c instanceof MQConnectorCfg) rhyaml.addMqConnector((MQConnectorCfg) c);
-			 else if(c instanceof SCPConnectorCfg) rhyaml.addScpConnector((SCPConnectorCfg) c);
-			 messages.add("sync to yaml: added " + c);
-		 });
-		 
+		getDiffConnectors(rhfs, rhyaml).forEach(c -> {
+			if (c instanceof DBConnectorCfg)
+				rhyaml.addDbConnector((DBConnectorCfg) c);
+			else if (c instanceof FileConnectorCfg)
+				rhyaml.addFileConnector((FileConnectorCfg) c);
+			else if (c instanceof HTTPConnectorCfg)
+				rhyaml.addHttpConnector((HTTPConnectorCfg) c);
+			else if (c instanceof MQConnectorCfg)
+				rhyaml.addMqConnector((MQConnectorCfg) c);
+			else if (c instanceof SCPConnectorCfg)
+				rhyaml.addScpConnector((SCPConnectorCfg) c);
+			messages.add("sync to yaml: added Connector " + c);
+		});
+
 		// remove connectors that exist in yaml but not in filesystem
 		getDiffConnectors(rhyaml, rhfs).forEach(c -> {
-			if (c instanceof DBConnectorCfg) rhyaml.getDbConnectors().remove(c);
-			else if (c instanceof FileConnectorCfg) rhyaml.getFileConnectors().remove(c);
-			else if (c instanceof HTTPConnectorCfg) rhyaml.getHttpConnectors().remove(c);
-			else if (c instanceof MQConnectorCfg) rhyaml.getMqConnectors().remove(c);
-			else if (c instanceof SCPConnectorCfg) rhyaml.getScpConnectors().remove(c);
-			messages.add("sync to yaml: removed " + c);
+			if (c instanceof DBConnectorCfg)
+				rhyaml.getDbConnectors().remove(c);
+			else if (c instanceof FileConnectorCfg)
+				rhyaml.getFileConnectors().remove(c);
+			else if (c instanceof HTTPConnectorCfg)
+				rhyaml.getHttpConnectors().remove(c);
+			else if (c instanceof MQConnectorCfg)
+				rhyaml.getMqConnectors().remove(c);
+			else if (c instanceof SCPConnectorCfg)
+				rhyaml.getScpConnectors().remove(c);
+			messages.add("sync to yaml: removed Connector " + c);
+		});
+
+		TestCasesHolder thyaml = configuration().getTchApi().testCasesHolderFromYaml();
+		TestCasesHolder thfs = configuration().getTchApi().testCasesHolderFromFileSystem();
+		
+		getDiffTestCases(thfs, thyaml).forEach(tc -> {
+			messages.add("sync to yaml: added TestCase" + tc.getTestCaseName() + " with TestSteps " + tc.getTestSteps() + System.lineSeparator());
 		});
 
 		configuration().getTchApi().testCasesHolderFromFileSystemToYaml();
@@ -286,66 +303,90 @@ public class ValidationUtils {
 		return messages;
 	}
 
+	private static List<TestCase> getDiffTestCases(TestCasesHolder th1, TestCasesHolder th2) {
+		List<TestCase> testcases = new ArrayList<>();
+		th1.getTestCases().forEach(tc1 -> {
+			TestCase match = th2.getTestCases().stream().filter(tc2 -> tc2.getTestCaseName().equals(tc1.getTestCaseName())).findAny().orElse(null);
+			if (match == null)
+				testcases.add(tc1);
+		});
+		return testcases;
+	}
+
 	/**
 	 * Remove unused resources
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
 	public static List<String> cleanConfig() throws IOException {
 		List<String> messages = new ArrayList<>();
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml(true);
-		
+
 		// remove datasources that are not referenced by any connector in yaml
 		getDerelictDataSources(rhyaml).forEach(c -> {
-			if (c instanceof DBDataSource) rhyaml.getDbDataSources().remove(c);
-			else if (c instanceof KeyStore) rhyaml.getKeyStores().remove(c);
-			else if (c instanceof MQDataSource) rhyaml.getMqDataSources().remove(c);
+			if (c instanceof DBDataSource)
+				rhyaml.getDbDataSources().remove(c);
+			else if (c instanceof KeyStore)
+				rhyaml.getKeyStores().remove(c);
+			else if (c instanceof MQDataSource)
+				rhyaml.getMqDataSources().remove(c);
 			messages.add("sync to yaml: removed " + c);
 		});
 		configuration().getRhApi().resourcesHolderToYaml(rhyaml);
 		return messages;
 	}
-	
+
 	private static List<Validatable> getDiffConnectors(ResourcesHolder rh1, ResourcesHolder rh2) {
 		List<Validatable> connectors = new ArrayList<>();
-		
+
 		rh1.getDbConnectors().forEach(c -> {
 			DBConnectorCfg match = rh2.getDbConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) connectors.add(c);
+			if (match == null)
+				connectors.add(c);
 		});
 		rh1.getMqConnectors().forEach(c -> {
 			MQConnectorCfg match = rh2.getMqConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) connectors.add(c);
+			if (match == null)
+				connectors.add(c);
 		});
 		rh1.getFileConnectors().forEach(c -> {
 			FileConnectorCfg match = rh2.getFileConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) connectors.add(c);
+			if (match == null)
+				connectors.add(c);
 		});
 		rh1.getHttpConnectors().forEach(c -> {
 			HTTPConnectorCfg match = rh2.getHttpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) connectors.add(c);
+			if (match == null)
+				connectors.add(c);
 		});
 		rh1.getScpConnectors().forEach(c -> {
 			SCPConnectorCfg match = rh2.getScpConnectors().stream().filter(yc -> yc.getId().equals(c.getId())).findAny().orElse(null);
-			if (match == null) connectors.add(c);
+			if (match == null)
+				connectors.add(c);
 		});
 		return connectors;
 	}
 
 	private static List<Validatable> getDerelictDataSources(ResourcesHolder rh) {
 		List<Validatable> dataSources = new ArrayList<>();
-		
+
 		rh.getDbDataSources().forEach(dds -> {
 			DBConnectorCfg match = rh.getDbConnectors().stream().filter(c -> c.getDsRefId().equals(dds.getId())).findAny().orElse(null);
-			if (match == null) dataSources.add(dds);
+			if (match == null)
+				dataSources.add(dds);
 		});
-		rh.getKeyStores().forEach(kss -> {
-			HTTPConnectorCfg match = rh.getHttpConnectors().stream().filter(c -> c.getDsRefId() != null && c.getDsRefId().equals(kss.getId())).findAny().orElse(null);
-			if (match == null) dataSources.add(kss);
-		});
+		rh.getKeyStores().forEach(
+				kss -> {
+					HTTPConnectorCfg match = rh.getHttpConnectors().stream().filter(c -> c.getDsRefId() != null && c.getDsRefId().equals(kss.getId()))
+							.findAny().orElse(null);
+					if (match == null)
+						dataSources.add(kss);
+				});
 		rh.getMqDataSources().forEach(mqs -> {
 			MQConnectorCfg match = rh.getMqConnectors().stream().filter(c -> c.getDsRefId().equals(mqs.getId())).findAny().orElse(null);
-			if (match == null) dataSources.add(mqs);
+			if (match == null)
+				dataSources.add(mqs);
 		});
 		return dataSources;
 	}
@@ -359,25 +400,32 @@ public class ValidationUtils {
 		String resources = configuration().getRhApi().getResourcesFileName();
 		ResourcesHolder rhfs = configuration().getRhApi().resourcesHolderFromFileSystem();
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
-		
-		getDiffConnectors(rhyaml, rhfs).stream()
-	    .map(c -> c.getContext())
-	    .collect(Collectors.toList()).forEach(
-				c -> ValidationHolder.validationHolder().add(c, new Message(Message.LEVEL.WARN, "Connector exists in " + resources + ", but not found in FileSystem")));
+
+		getDiffConnectors(rhyaml, rhfs)
+				.stream()
+				.map(c -> c.getContext())
+				.collect(Collectors.toList())
+				.forEach(
+						c -> ValidationHolder.validationHolder().add(c,
+								new Message(Message.LEVEL.WARN, "Connector exists in " + resources + ", but not found in FileSystem")));
 	}
 
 	/**
-	 * Check if there are any datasources that are not referenced by a connector in the resources
-	 * @throws IOException 
+	 * Check if there are any datasources that are not referenced by a connector
+	 * in the resources
+	 * 
+	 * @throws IOException
 	 * 
 	 */
 	public static void validateReferencedDataSources() throws IOException {
 		String resources = configuration().getRhApi().getResourcesFileName();
 		ResourcesHolder rhyaml = configuration().getRhApi().resourcesHolderFromYaml();
 
-		getDerelictDataSources(rhyaml).forEach(ds -> {
-			validationHolder().add(ds.getContext(), new Message(Message.LEVEL.WARN, "DataSource exists in " + resources + ", but not referenced by any connector"));
-		});
+		getDerelictDataSources(rhyaml).forEach(
+				ds -> {
+					validationHolder().add(ds.getContext(),
+							new Message(Message.LEVEL.WARN, "DataSource exists in " + resources + ", but not referenced by any connector"));
+				});
 	}
 
 	/**
@@ -531,7 +579,8 @@ public class ValidationUtils {
 
 				tc1.getTestSteps().forEach(ts1 -> {
 					// TestStep is empty -> not allowed
-					if (ts1.getConnectorRefs().isEmpty() && !ts1.getTestStepName().equals(Constants.BEFORE_FOLDER) && !ts1.getTestStepName().equals(Constants.AFTER_FOLDER)) {
+						if (ts1.getConnectorRefs().isEmpty() && !ts1.getTestStepName().equals(Constants.BEFORE_FOLDER)
+								&& !ts1.getTestStepName().equals(Constants.AFTER_FOLDER)) {
 							errorContext.add(new Context.Builder().withTestStep(tc1.getTestCaseName(), ts1.getTestStepName()));
 							return;
 						}
@@ -569,7 +618,7 @@ public class ValidationUtils {
 
 	}
 
-	private static void checkValid(String paramName, String paramValue, List<Message> messages){
+	private static void checkValid(String paramName, String paramValue, List<Message> messages) {
 		Pattern placeholderPattern = Pattern.compile("^\\$\\{.*\\}");
 
 		if (paramValue == null) {
