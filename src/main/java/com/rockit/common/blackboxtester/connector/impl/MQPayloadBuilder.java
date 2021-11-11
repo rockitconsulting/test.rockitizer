@@ -130,9 +130,9 @@ public class MQPayloadBuilder {
 		}
 		mqPayload.getHeader().setCodedCharSetId(msg.characterSet);
 		mqPayload.getHeader().setMsgType(msg.messageType);
-		mqPayload.getHeader().setCorrelId(new String(msg.correlationId, StandardCharsets.UTF_8).trim());
+		mqPayload.getHeader().setCorrelId( StringEscapeUtils.escapeXml10( new String(msg.correlationId, StandardCharsets.UTF_8).trim()  ) ); //unescape to prevent xml malforming
 		mqPayload.getHeader().setMsgFormat(msg.format.trim());
-		mqPayload.getHeader().setMsgId(new String(msg.messageId, StandardCharsets.UTF_8).trim());
+		mqPayload.getHeader().setMsgId(StringEscapeUtils.escapeXml10( new String(msg.messageId, StandardCharsets.UTF_8).trim() ) ); //unescape to prevent xml malforming 
 		mqPayload.getHeader().setReplyToQ(msg.replyToQueueName.trim());
 		mqPayload.getHeader().setReplyToQMgr(msg.replyToQueueManagerName.trim());
 		mqPayload.setBody(msg.readStringOfByteLength(msg.getDataLength()).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "").trim());
