@@ -91,16 +91,17 @@ dependencies {
     compile 'junit:junit:4.12'
     compile 'log4j:log4j:1.2.17'
     compile 'org.apache.httpcomponents:httpclient:4.5'
-	compile 'org.xmlunit:xmlunit-core:2.1.0'  
+    compile 'org.xmlunit:xmlunit-core:2.1.0'  
     compile 'com.google.guava:guava:27.0-jre'
-  	compile 'com.jcraft:jsch:0.1.54'
+    compile 'com.jcraft:jsch:0.1.54'
     compile 'commons-io:commons-io:2.4'	
     compile 'org.json:json:20160810' //for newer version the null key for responseCode by HTTPConnector#urlConnection.getHeaderFields() makes problems //TODO migration + junit       
-	compile 'org.apache.commons:commons-text:1.8'     
-	compile 'info.picocli:picocli:4.2.0'
-	compile 'org.fusesource.jansi:jansi:1.18'
-	compile 'org.apache.commons:commons-configuration2:2.7'
-
+    compile 'org.apache.commons:commons-text:1.8'     
+    compile 'info.picocli:picocli:4.2.0'
+    compile 'org.fusesource.jansi:jansi:1.18'
+    compile 'org.apache.commons:commons-configuration2:2.7'
+    compile 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+    compile 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
 }
 
 archivesBaseName='test.rockitizer'
