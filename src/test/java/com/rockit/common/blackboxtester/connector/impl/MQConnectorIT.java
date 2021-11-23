@@ -33,7 +33,7 @@ import org.junit.Test;
 
 public class MQConnectorIT {
     MQPutConnector mqPut = new MQPutConnector("MQPUT.IN.MQ2MQ");
-    MQGetConnector mqGet = new MQGetConnector("MQGET.OUT.MQ2MQ");
+    MQGetConnector mqGet = new MQGetConnector("MQGET.IN.MQ2MQ.A");
 
 
     @Before
