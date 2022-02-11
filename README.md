@@ -1,4 +1,4 @@
-[![N|Solid](http://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
+[![N|Solid](https://www.rockit.consulting/images/logo-fixed.png)](http://www.rockit.consulting)
 
 # test.rockitizer - Keep Your Integration Tested!
 
@@ -21,7 +21,7 @@ This approach assumes the following major phases:
 This way the integration landscape of any complexity is treated as a blackbox, keeping you informed of any suspicious change in the system behavior.
 
 
-![Lifecycle test.rockitizer](http://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
+![Lifecycle test.rockitizer](https://www.rockit.consulting/images/github/test_rockitizer_lifecycle.PNG "Lifecycle test.rockitizer;IBM Integration Bus; Integration testing; Test framework;test.rockitizer")
 
 Furthermore, the framework enables the "test first" approach, thus developing against pre-defined "target" interface until the replay snapshot matches.
 
