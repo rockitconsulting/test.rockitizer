@@ -150,11 +150,13 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 			
 			result = IOUtils.toString(is);
 
-			if (urlConnection.getRequestProperty("Content-Type")!=null && urlConnection.getRequestProperty("Content-Type").equalsIgnoreCase(CONTENT_TYPE_XML)) {
+			String contentType = urlConnection.getRequestProperty("Content-Type");
+
+			if (contentType!=null && (contentType.contains(CONTENT_TYPE_APP_XML) ||  contentType.contains(CONTENT_TYPE_TEXT_XML))){
 				setReponse(result);
 			} else {
 
-				if(!isJSONStringValid(result))throw new ConnectorException("Invalid JSON: " + result) ;
+				if(!isJSONStringValid(result))throw new ConnectorException("Invalid json response: " + result) ;
 
 				// Header & Body
 				Map<String, List<String>> map = urlConnection.getHeaderFields();
@@ -162,7 +164,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 				JSONObject responseHeader = newResonseHeader.getResponsHeader();
 
 				String responseString = buildJSONResponseString(responseHeader.toString().replace("null","Code"), result);
-				if(!isJSONStringValid(responseString))throw new ConnectorException("Invalid JSON: " + responseString) ;
+				if(!isJSONStringValid(responseString))throw new ConnectorException("Invalid json response body: " + responseString) ;
 				setReponse(responseString);
 			
 			}
@@ -190,7 +192,7 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	        try {
 	            new JSONArray(result);
 	        } catch (JSONException jex) {
-	        	LOGGER.warn("Invalid JSON: " + result);
+	        	LOGGER.warn("json parser error for content: " + result);
 	        	return false;
 	        }
 	    }

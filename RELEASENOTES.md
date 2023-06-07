@@ -1,3 +1,6 @@
+# 1.0.5.11 - Release 
+	- bugfix in HTTP Connector: Wrong respone Content-Type detection.
+	
 # 1.0.5.10 - Release 
 	- Remove unused Connectors/Datasources from resources.yaml
 	- Explicitly commit SQL query if AutoCommit is "false"
