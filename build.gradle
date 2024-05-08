@@ -58,7 +58,7 @@ jacocoTestCoverageVerification {
 
 test {
       description = 'Run all SmallTests'
-      jvmArgs '-XX:MaxPermSize=256m'
+//      jvmArgs '-XX:MaxPermSize=256m'  ## old jvm only, newer -  jvmArgs '-XX:MaxMetaspaceSize=256m'
       minHeapSize = "512m" 
       maxHeapSize = "512m"
       include "**/*Test.class"
