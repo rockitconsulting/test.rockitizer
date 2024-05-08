@@ -32,7 +32,7 @@ jobs:
       - name: Set permissions
         run: sudo chmod 777 /tmp
       - name: Build with Gradle Wrapper
-        run: ./gradlew build --debug
+        run: ./gradlew build --info
       - name: Upload Test Reports
         uses: actions/upload-artifact@v3
         if: always()  # Ensures that reports are uploaded even if the build fails
