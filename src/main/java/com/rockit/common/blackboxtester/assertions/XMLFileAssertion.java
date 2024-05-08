@@ -44,7 +44,8 @@ public class XMLFileAssertion extends AbstractAssertion {
 
 	public static final Logger LOGGER = Logger.getLogger(XMLFileAssertion.class.getName());
 
-	private List<String> tokens = new ArrayList<>();
+	private List<String> includeTokens = new ArrayList<>();
+	private List<String> ignoreTokens = new ArrayList<>();
 	private List<String> attrs = new ArrayList<>();
 
 	private DiffBuilder diffBuilder;
@@ -116,10 +117,20 @@ public class XMLFileAssertion extends AbstractAssertion {
 	 * @return
 	 */
 	public XMLFileAssertion ignore(List<String> tokens) {
-		this.tokens = tokens;
+		this.ignoreTokens = tokens;
 		return this;
 	}
 
+	/**
+	 * Whitelisting the xml nodes 
+	 * @param tokens - list xml nodes to include 
+	 * @return
+	 */
+
+    public XMLFileAssertion include(List<String> includeTokens) {
+        this.includeTokens = includeTokens;
+        return this;
+    }
 	/**
 	 * Important!!! only test visibility from the same package called
 	 * automatically by proceed()
@@ -172,9 +183,15 @@ public class XMLFileAssertion extends AbstractAssertion {
 
 		diffBuilder = DiffBuilder.compare(in1).withTest(in2).withNodeFilter(new Predicate<Node>() {
 			public boolean test(Node node) {
-				LOGGER.trace("current node " + node.getNodeName() + " result " + String.valueOf(!tokens.contains(node.getNodeName())));
+                // If whitelist is not empty, use it to determine which nodes to include
+                if (!includeTokens.isEmpty()) {
+                	LOGGER.trace("current node " + node.getNodeName() + " result " + String.valueOf(ignoreTokens.contains(node.getNodeName())));
+                	return includeTokens.contains(node.getNodeName());
+                }
+                // Otherwise, use the existing tokens list to determine which nodes to ignore
+				LOGGER.trace("current node " + node.getNodeName() + " result " + String.valueOf(!ignoreTokens.contains(node.getNodeName())));
 
-				return !tokens.contains(node.getNodeName());
+				return !ignoreTokens.contains(node.getNodeName());
 			}
 		}).withAttributeFilter(new Predicate<Attr>() {
 			public boolean test(Attr a) {
@@ -211,7 +228,7 @@ public class XMLFileAssertion extends AbstractAssertion {
 	public String toString() {
 		return this.getClass().getSimpleName() + "( path:\"" + (relPath.equalsIgnoreCase("") ? "\\" : relPath) + "\"" +
 				
-				(null!=tokens && !tokens.isEmpty()?", ignoreFields:\""+Joiner.on(",").join(tokens)+"\"":"" ) +
+				(null!=ignoreTokens && !ignoreTokens.isEmpty()?", ignoreFields:\""+Joiner.on(",").join(ignoreTokens)+"\"":"" ) +
 				(null!=attrs && attrs.isEmpty()?", ignoreAttrs:\""+Joiner.on(",").join(attrs)+"\"":"" ) +
 				" )";
 	}

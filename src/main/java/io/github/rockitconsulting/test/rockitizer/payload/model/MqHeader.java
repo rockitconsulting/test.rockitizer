@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 
+
+@XmlType(propOrder= {"codedCharSetId","correlId", "msgId", "userId", "groupId", "expiry", "msgType", "msgFormat", "replyToQMgr", "replyToQ", "messageSequenceNumber", "messageFlags", "rfh2Header"})
 public class MqHeader {
 
 	private String correlId = new String(new byte[24]);
@@ -25,10 +28,19 @@ public class MqHeader {
 
 	private List<String> rfh2Header;
 
+	private String userId = "";
+
+	private String groupId = "";
+
+	private int messageSequenceNumber;
+
+	private int messageFlags;
+
 	public int getExpiry() {
 		return expiry;
 	}
 
+	@XmlElement
 	public void setExpiry(int expiry) {
 		this.expiry = expiry;
 	}
@@ -63,7 +75,8 @@ public class MqHeader {
 	public String getReplyToQMgr() {
 		return replyToQMgr;
 	}
-
+	
+	@XmlElement
 	public void setReplyToQMgr(String replyToQMgr) {
 		this.replyToQMgr = replyToQMgr;
 	}
@@ -95,6 +108,31 @@ public class MqHeader {
 		this.msgId = msgId;
 	}
 
+	@XmlElement
+	public void setUserId(String userId) {
+		this.userId = userId;
+		
+	}
+
+	@XmlElement
+	public void setGroupId(String groupId) {
+		this.groupId=groupId;
+		
+	}
+
+	@XmlElement
+	public void setMessageSequenceNumber(int messageSequenceNumber) {
+		this.messageSequenceNumber = messageSequenceNumber;
+		
+	}
+	
+	@XmlElement
+	public void setMessageFlags(int messageFlags) {
+		this.messageFlags = messageFlags;
+		
+	}
+
+	
 	public List<String> getRfh2Header() {
 		return rfh2Header;
 	}
@@ -103,6 +141,24 @@ public class MqHeader {
 	@XmlElement(name = "rfh2Header")
 	public void setRfh2Header(List<String> rfh2Header) {
 		this.rfh2Header = rfh2Header;
+	}
+
+
+	public int getMessageSequenceNumber() {
+		return messageSequenceNumber;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public int getMessageFlags() {
+		return messageFlags;
 	}
 
 }

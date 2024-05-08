@@ -6,30 +6,37 @@ import io.github.rockitconsulting.test.rockitizer.configuration.model.res.dataso
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
-import com.google.common.io.Files;
+import com.rockit.common.blackboxtester.connector.ConnectorResponse;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.WriteConnector;
 import com.rockit.common.blackboxtester.connector.impl.http.ResponseHeader;
@@ -58,19 +65,17 @@ import com.rockit.common.blackboxtester.suite.configuration.PayloadReplacer;
 
 public class HTTPConnector implements ReadConnector, WriteConnector {
 
-	public static final Logger LOGGER = Logger.getLogger(HTTPConnector.class.getName());
+	public static final Logger LOGGER = Logger.getLogger(HTTPConnector.class
+			.getName());
 
-	private StringBuilder resultBuilder;
-	private String id, urlStr, method,trustStore;
+	private ConnectorResponse response;
+	private String id, urlStr, method, trustStore;
 
-	private Map<String,String> headers = new HashMap<>();
-	
+	private Map<String, String> headers = new HashMap<>();
+
 	private Integer connectTimeOut;
-	private URL url;
 	private File file;
 
-	
-	
 	HTTPConnector(HTTPConnectorCfg cfg) {
 		this.id = cfg.getId();
 		this.urlStr = cfg.getUrl();
@@ -82,9 +87,9 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		if (ks != null) {
 			this.trustStore = ks.getPath();
 		}
-		
+
 	}
-	
+
 	public HTTPConnector(String id) {
 		this((HTTPConnectorCfg) configuration().getConnectorById(id));
 	}
@@ -98,108 +103,102 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		});
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.rockit.common.blackboxtester.connector.Connector#proceed()
-	 */
 	@Override
 	public void proceed() {
-		String result = null;
-		HttpURLConnection urlConnection = null;
+		CloseableHttpClient httpClient = HttpClients.createDefault();
 		try {
 
-			this.url = new URL(urlStr);
+			HttpRequestBase requestMethod = createRequestMethod(this.method,
+					this.urlStr);
 
-			if (this.trustStore != null) {
-				System.setProperty("javax.net.ssl.trustStore", this.trustStore);
-			}
-			System.setProperty("javax.net.ssl.trustStoreType", "jks");
+			// Manually add the Authorization header for Basic Authentication
+			enhanceBasicAuthentication(requestMethod);
 
-			if (urlStr.startsWith("https://")) {
-				urlConnection = (HttpsURLConnection) url.openConnection();
-			} else {
-				urlConnection = (HttpURLConnection) url.openConnection();
-			}
-
+			// Set other headers...
 			for (Map.Entry<String, String> entry : headers.entrySet()) {
-			   urlConnection.addRequestProperty(entry.getKey(), entry.getValue());
-			}			
-			
-			urlConnection.setRequestMethod(this.method);
-			if (!this.method.equalsIgnoreCase("GET")) {
-				urlConnection.setDoOutput(true);
-			}
-			if (this.connectTimeOut > 0) {
-				urlConnection.setConnectTimeout(this.connectTimeOut);
-			}
-			enhanceBasicAuthentication(urlConnection);
-			if (urlConnection.getDoOutput()) {
-				enhancePayload(urlConnection);
+				requestMethod.addHeader(entry.getKey(), entry.getValue());
 			}
 
-			InputStream is;
-			try {
-				 is = urlConnection.getInputStream();
-			}catch (UnknownHostException uhe) {
-				throw new ConnectorException(uhe);
-				
-			} catch (IOException e) {
-				 is = urlConnection.getErrorStream();
+			// Handling for PATCH and POST requests with body, and other
+			// Special handling for PATCH and POST requests with a body
+			if ((this.file != null)
+					&& (Arrays.asList("POST", "PATCH", "PUT").contains(this.method.toUpperCase()))) {
+				String content = new String(java.nio.file.Files.readAllBytes(this.file.toPath()),
+						java.nio.charset.StandardCharsets.UTF_8);
+				StringEntity entity;
+				if (this.file.getName().endsWith(".js")	|| this.file.getName().endsWith(".json")) {
+					entity = new StringEntity(content,	ContentType.APPLICATION_JSON);
+				} else if (this.file.getName().endsWith(".xml")) {
+					entity = new StringEntity(content,	ContentType.APPLICATION_XML);
+				} else {
+					entity = new StringEntity(content, ContentType.DEFAULT_TEXT);
+				}
+				if (requestMethod instanceof HttpEntityEnclosingRequestBase) {
+					((HttpEntityEnclosingRequestBase) requestMethod).setEntity(entity);
+				}
 			}
-			
-			result = IOUtils.toString(is);
+			HttpResponse response = httpClient.execute(requestMethod);
+			String result = EntityUtils.toString(response.getEntity());
 
-			String contentType = urlConnection.getRequestProperty("Content-Type");
-
-			if (contentType!=null && (contentType.contains(CONTENT_TYPE_APP_XML) ||  contentType.contains(CONTENT_TYPE_TEXT_XML))){
-				setReponse(result);
+			if ( response.getFirstHeader("Content-Type") != null && response.getFirstHeader("Content-Type").getValue().equalsIgnoreCase(CONTENT_TYPE_XML)) {
+				setReponse( new ConnectorResponse("response",  result) );
 			} else {
+				if (!isJSONStringValid(result))  throw new ConnectorException("Invalid JSON: " + result);
 
-				if(!isJSONStringValid(result))throw new ConnectorException("Invalid json response: " + result) ;
+				ResponseHeader newResonseHeader = new ResponseHeader( response.getAllHeaders() );
+				JSONObject responseHeader = newResonseHeader.getResponseHeader();
 
-				// Header & Body
-				Map<String, List<String>> map = urlConnection.getHeaderFields();
-				ResponseHeader newResonseHeader = new ResponseHeader(map);
-				JSONObject responseHeader = newResonseHeader.getResponsHeader();
-
-				String responseString = buildJSONResponseString(responseHeader.toString().replace("null","Code"), result);
-				if(!isJSONStringValid(responseString))throw new ConnectorException("Invalid json response body: " + responseString) ;
-				setReponse(responseString);
-			
+				String responseString = buildPrettyPrintedJSON(responseHeader.toString().replace("null", "Code"), result);
+				if (!isJSONStringValid(responseString)) throw new ConnectorException("Invalid JSON: " 	+ responseString);
+				setReponse( new ConnectorResponse("response",  responseString) );
 			}
 
 		} catch (IOException e) {
-			throw new ConnectorException("can not open connection: " + url, e);
-
-		} catch (JSONException je) {
-			throw new ConnectorException("JSON deserialization Exception.", je);
-
+			LOGGER.error("HTTP request execution error", e);
+			throw new RuntimeException(e);
 		} finally {
 			try {
-				if (urlConnection != null) {
-					urlConnection.disconnect();
-				}
-			} catch (Exception e) {// NOSONAR
+				httpClient.close();
+			} catch (IOException e) {
+				LOGGER.error("Error closing HttpClient", e);
+				// Handle closing error
 			}
 		}
+	}
 
+	private HttpRequestBase createRequestMethod(String method, String url) {
+		switch (method.toUpperCase()) {
+		case "GET":
+			return new HttpGet(url);
+		case "POST":
+			return new HttpPost(url);
+		case "PUT":
+			return new HttpPut(url);
+		case "DELETE":
+			return new HttpDelete(url);
+		case "PATCH":
+			return new HttpPatch(url);
+		default:
+			throw new IllegalArgumentException("Unsupported HTTP method: "
+					+ method);
+		}
 	}
+
 	public boolean isJSONStringValid(String result) {
-	    try {
-	        new JSONObject(result);
-	    } catch (JSONException je) {
-	        try {
-	            new JSONArray(result);
-	        } catch (JSONException jex) {
-	        	LOGGER.warn("json parser error for content: " + result);
-	        	return false;
-	        }
-	    }
-	    return true;
+		try {
+			new JSONObject(result);
+		} catch (JSONException je) {
+			try {
+				new JSONArray(result);
+			} catch (JSONException jex) {
+				LOGGER.warn("Invalid JSON: " + result);
+				return false;
+			}
+		}
+		return true;
 	}
-	
-	public String buildJSONResponseString(String responseHeader, String responseBody) {
+
+	public String buildPrettyPrintedJSON(String responseHeader,	String responseBody) {
 		StringBuilder responseString = new StringBuilder();
 		responseString.append("{\"response\":{");
 		responseString.append("\"header\":");
@@ -207,10 +206,11 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		responseString.append(",\"body\":");
 		responseString.append(responseBody);
 		responseString.append("}}");
-		
-		return responseString.toString();
+
+		JSONObject jsonObject = new JSONObject(responseString.toString().replaceAll("\"","\\\""));
+		return jsonObject.toString(4);
 	}
-	
+
 	@SuppressWarnings("unused")
 	private JSONArray getJsonArrayBody(String result) throws IOException {
 
@@ -240,22 +240,20 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 		}
 	}
 
-	private void enhancePayload(HttpURLConnection urlConnection) throws UnsupportedEncodingException, IOException {
-		if (this.file != null) {
-			OutputStreamWriter writer = new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8");
-			writer.write(Files.asCharSource(this.file, Charset.defaultCharset()).read());
-			writer.close();
-		}
-	}
+	private void enhanceBasicAuthentication(HttpRequestBase requestMethod)
+			throws MalformedURLException {
+		URL url = new URL(urlStr);
 
-	private void enhanceBasicAuthentication(HttpURLConnection urlConnection) {
-
-		if (url.getUserInfo() != null && url.getUserInfo().split(":").length == 2) {
-			LOGGER.debug("Basic authentication usr/pwd >   " + url.getUserInfo());
+		if (url.getUserInfo() != null
+				&& url.getUserInfo().split(":").length == 2) {
+			LOGGER.debug("Basic authentication usr/pwd >   "
+					+ url.getUserInfo());
 			String name = url.getUserInfo().split(":")[0];
 			String password = url.getUserInfo().split(":")[1];
-			byte[] authEncBytes = Base64.getEncoder().encode((name + ":" + password).getBytes());
-			urlConnection.setRequestProperty("Authorization", "Basic " + new String(authEncBytes));// NOSONAR
+			byte[] authEncBytes = Base64.getEncoder().encode(
+					(name + ":" + password).getBytes());
+			requestMethod.setHeader("Authorization", "Basic "
+					+ new String(authEncBytes));// NOSONAR
 		}
 	}
 
@@ -270,33 +268,24 @@ public class HTTPConnector implements ReadConnector, WriteConnector {
 	}
 
 	@Override
-	public String getResponse() {
-		return resultBuilder.toString();
+	public ConnectorResponse getResponse() {
+		return this.response;
 	}
 
 	@Override
-	public void setReponse(String response) {
-		this.resultBuilder = new StringBuilder(response);
+	public void setReponse(ConnectorResponse response) {
+		this.response = response;
 	}
 
 	@Override
 	public void setRequest(final File requestFile) {
-		file = PayloadReplacer.interpolate(requestFile, configuration().getPayloadReplacements());
+		file = PayloadReplacer.interpolate(requestFile, configuration()
+				.getPayloadReplacements());
 	}
 
 	@Override
 	public void setRequest(final String request) {
 
 	}
-	//
-	// public void setUrlStr(String urlStr) {
-	// this.urlStr = urlStr;
-	// }
-	// public void setMethod(String method) {
-	// this.method = method;
-	// }
-	// public void setContentType(String contentType) {
-	// this.contentType = contentType;
-	// }
 
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 
 import com.google.common.io.Files;
+import com.rockit.common.blackboxtester.connector.ConnectorResponse;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants.Connectors;
@@ -35,7 +36,7 @@ public class FileGetConnector implements ReadConnector {
 
 	private String id;
 	private String srcPath;
-	private String response;
+	private ConnectorResponse response;
 
 	/**
 	 * @param id  - FILEPut and key (connectorFolder)
@@ -56,7 +57,9 @@ public class FileGetConnector implements ReadConnector {
 			if(f.isDirectory()) {
 				f = FileUtils.lastFile(f);
 			}
-			response = Files.asCharSource(f, Charset.defaultCharset()).read();
+			
+			
+			this.response = new ConnectorResponse(f.getName(), Files.asCharSource(f, Charset.defaultCharset()).read() ) ;
 			
 		} catch (Exception e) {
 			throw new ConnectorException("[Connector:"+getId()+"] \t Connector error: " + getType() , e);
@@ -88,13 +91,13 @@ public class FileGetConnector implements ReadConnector {
 
 
 	@Override
-	public String getResponse() {
+	public ConnectorResponse getResponse() {
 		return response;
 	}
 
 
 	@Override
-	public void setReponse(String response) {
+	public void setReponse(ConnectorResponse response) {
 		throw new ConnectorException("[Connector:" + getId() + "] \t Set method is not allowed");
 	}
 

@@ -88,7 +88,7 @@ public final class Constants {
 	// public static final String MQOUT_KEY = "MQGET.";
 	// public static final String FILE_PATH_KEY = ".PATH";
 
-	public static final List<String> SUPPORTED_CONNECTORS = ImmutableList.of("MQGET","MQPUT","SCPPUT","FILEPUT","FILEGET","FILEDEL","HTTP","DBGET","DBPUT");
+	public static final List<String> SUPPORTED_CONNECTORS = ImmutableList.of("MQGET","MQPUT","SCPPUT","SCPGET","FILEPUT","FILEGET","FILEDEL","HTTP","DBGET","DBPUT");
 
 	
 	public static enum Connectors {

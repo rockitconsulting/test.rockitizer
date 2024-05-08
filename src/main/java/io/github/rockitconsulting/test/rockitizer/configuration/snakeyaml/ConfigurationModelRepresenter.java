@@ -110,7 +110,7 @@ public class ConfigurationModelRepresenter extends Representer {
     				"mqConnectors","dbConnectors","httpConnectors","fileConnectors","scpConnectors","mqDataSources","dbDataSources","keyStores","payloadReplacer",  // Resources top-level
     				"testCases","testSteps","testCaseName","testCaseDescription","testStepName","testStepDescription","connectorRefs","conRefId","conRefDescription","payloads","fileName", // testcases top-level
     				"name","props", // envs top-level
-    				"id","type","queue","query", "url","method","path","timeout","headers", //  connectors
+    				"id","type","queue","correlationId","messageId","groupId","query", "url","method","path","timeout","headers", //  connectors
     				"qmgr","channel","host","port","user","password","dsRefId" //  ds
     		});
     

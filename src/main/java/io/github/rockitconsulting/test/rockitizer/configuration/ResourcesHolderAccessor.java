@@ -283,13 +283,19 @@ public class ResourcesHolderAccessor extends RuntimeContext {
 				break;
 
 			case "SCPPUT":
-				SCPConnectorCfg scpConnector = new SCPConnectorCfg(connFolder);
-				scpConnector.setType(SCPConnectorCfg.Types.SCPPUT);
-				resources.addScpConnector(scpConnector);
+				SCPConnectorCfg scpPutConnector = new SCPConnectorCfg(connFolder);
+				scpPutConnector.setType(SCPConnectorCfg.Types.SCPPUT);
+				resources.addScpConnector(scpPutConnector);
+				break;
+
+			case "SCPGET":
+				SCPConnectorCfg scpGetConnector = new SCPConnectorCfg(connFolder);
+				scpGetConnector.setType(SCPConnectorCfg.Types.SCPGET);
+				resources.addScpConnector(scpGetConnector);
 				break;
 
 			default:
-				throw new InvalidConnectorFormatException("Invalid connector : " + cType + " under " + connFolder.getAbsolutePath());
+				throw new InvalidConnectorFormatException("Invalid or Unknown connector: " + cType + " under folder: " + connFolder.getAbsolutePath());
 			}
 
 		}

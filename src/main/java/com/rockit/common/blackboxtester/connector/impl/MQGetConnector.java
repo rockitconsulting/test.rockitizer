@@ -1,5 +1,6 @@
 package com.rockit.common.blackboxtester.connector.impl;
 
+import com.rockit.common.blackboxtester.connector.ConnectorResponse;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
 import com.rockit.common.blackboxtester.suite.configuration.Constants;
@@ -39,18 +40,26 @@ public class MQGetConnector extends MQAccessor implements ReadConnector {
 		message = get();
 
 		if (null != message) {
-			LOGGER.debug("MQConnectorOut [" + this.getQName() + "] get  message size " + ((String) message).length());
+			LOGGER.debug("MQConnectorOut [" + this.getMqConnConfig().getQueue() + "] get  message size " + ((String) message).length());
 		}
 
 	}
 
 	@Override
-	public String getResponse() {
-		return (String) message;
+	public ConnectorResponse getResponse() {
+		ConnectorResponse response = null;
+		String message =  (String) this.message;
+		if(message != null) {
+			response =  new ConnectorResponse("message",  (String) message );
+		}
+		
+		return response;
+		
+		
 	}
 
 	@Override
-	public void setReponse(String response) {
+	public void setReponse(ConnectorResponse response) {
 		throw new ConnectorException("[Connector:" + getId() + "] \t Set method is not allowed");
 	}
 

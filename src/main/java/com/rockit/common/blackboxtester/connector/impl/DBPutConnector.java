@@ -96,11 +96,11 @@ public class DBPutConnector extends DatabaseConnection implements WriteConnector
 		try {
 			lines = Files.readAllLines(Paths.get(file.getAbsolutePath()), Charset.defaultCharset());
 			for (String line : lines) {
-				final String trimmedLine = line.trim();
+				final String trimmedLine = line.split("--")[0].trim();
 				if ((trimmedLine.length() < 1) || trimmedLine.startsWith("//") || trimmedLine.startsWith("--")) {
 					continue;
 				}
-				commands.append(line.trim()).append(LINE_SEPARATOR);
+				commands.append(trimmedLine).append(LINE_SEPARATOR);
 			}
 		} catch (IOException e) {
 			throw new ConnectorException("Error for reading payload file: " + file.getAbsolutePath(), e);

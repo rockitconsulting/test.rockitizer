@@ -38,6 +38,10 @@ public class MQConnectorCfg extends BaseConnector {
 
 	private String queue = "@defaultQueue@";
 	private String dsRefId = "defaultMQ";
+	private String correlationId = null;
+	private String messageId = null;
+	private String groupId = null;
+
 	private Types type;
 
 	
@@ -49,6 +53,18 @@ public class MQConnectorCfg extends BaseConnector {
 		super(location);
 	}
 
+	public MQConnectorCfg(String queue, Types type) {
+		setQueue(queue);
+		setType(type);
+	}
+
+	public MQConnectorCfg(String queue, String correlationId, Types type) {
+		setQueue(queue);
+		setCorrelationId(correlationId);
+		setType(type);
+	}
+
+	
 	public Types getType() {
 		return type;
 	}
@@ -73,6 +89,14 @@ public class MQConnectorCfg extends BaseConnector {
 		this.queue = queue;
 	}
 
+	public String getCorrelationId() {
+		return correlationId;
+	}
+
+	public void setCorrelationId(String correlationId) {
+		this.correlationId = correlationId;
+	}
+
 	
 	@Override
 	public String toString() {
@@ -88,6 +112,29 @@ public class MQConnectorCfg extends BaseConnector {
 	@Override
 	public Map<String, String> getFieldsAsOrderedMap() {
 		return (Map<String, String>) ImmutableMap.of("id", getId(), "type", getType().toString() , "queue", queue, "dsRefId", dsRefId);
+	}
+
+	public String getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
+	}
+
+	public String getGroupId() {
+		return groupId;
+
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public  boolean isGroupedMode() {
+		
+		return (null != getGroupId() && getGroupId().length() > 0);//  && !getGroupId().equals("000000000000000000000000000000000000000000000000"));
+		
 	}
 
 }

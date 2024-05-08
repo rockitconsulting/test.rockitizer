@@ -16,6 +16,7 @@ import com.rockit.common.blackboxtester.connector.impl.FilePutConnector;
 import com.rockit.common.blackboxtester.connector.impl.HTTPConnector;
 import com.rockit.common.blackboxtester.connector.impl.MQGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.MQPutConnector;
+import com.rockit.common.blackboxtester.connector.impl.SCPGetConnector;
 import com.rockit.common.blackboxtester.connector.impl.SCPPutConnector;
 import com.rockit.common.blackboxtester.exceptions.GenericException;
 
@@ -72,6 +73,9 @@ public class ConnectorFactory {
 	
 			case "SCPPUT":
 				return  ImmutableList.of( (Connector) new SCPPutConnector(name) ) ;
+
+			case "SCPGET":
+				return  ImmutableList.of( (Connector) new SCPGetConnector(name) ) ;
 				
 			case "FILEGET":
 				return  ImmutableList.of( (Connector) new FileGetConnector(name) ) ;

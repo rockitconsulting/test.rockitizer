@@ -264,7 +264,12 @@ public class ResourcesHolder  {
 		case "SCPPUT":
 			result = getScpConnectors().stream().filter( c -> c.getId().equals(conRef.getConRefId())).findAny().orElse(null);
 			break;
+		
+		case "SCPGET":
+			result = getScpConnectors().stream().filter( c -> c.getId().equals(conRef.getConRefId())).findAny().orElse(null);
+			break;
 
+			
 		default:
 			throw new UnknownConnectorException(conRef.getConRefId());
 

@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBContext;
@@ -24,6 +25,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.log4j.Logger;
+import org.bouncycastle.util.encoders.Hex;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -52,9 +54,15 @@ public class MQPayloadBuilder {
 		if (p != null) {
 			mQMsg.characterSet = p.getHeader().getCodedCharSetId();
 			mQMsg.messageType = p.getHeader().getMsgType();
-			mQMsg.correlationId = p.getHeader().getCorrelId().getBytes();
+			mQMsg.messageId = Hex.decode(p.getHeader().getMsgId().getBytes());
+			mQMsg.correlationId = Hex.decode(p.getHeader().getCorrelId().getBytes()); 
+			mQMsg.groupId = Hex.decode(p.getHeader().getGroupId().getBytes());
+			mQMsg.userId = p.getHeader().getUserId();
 			mQMsg.expiry = p.getHeader().getExpiry();
-			mQMsg.messageId = p.getHeader().getMsgId().getBytes();
+			mQMsg.messageFlags = p.getHeader().getMessageFlags();
+			if(Hex.decode(p.getHeader().getGroupId().getBytes()).length>0) {
+				mQMsg.messageSequenceNumber = p.getHeader().getMessageSequenceNumber();
+			}
 			mQMsg.replyToQueueName = p.getHeader().getReplyToQ().trim();
 			mQMsg.replyToQueueManagerName = p.getHeader().getReplyToQMgr().trim();
 
@@ -73,8 +81,12 @@ public class MQPayloadBuilder {
 			mQMsg.messageType = 8;
 			mQMsg.expiry = -1;
 		}
+		String codepage = getcodePage(mQMsg);
 
-		mQMsg.write(p != null ? p.getBody().getBytes() : msg.getBytes());
+		
+		mQMsg.write( p != null ? ( 
+				p.getBody64enc()!=null? Base64.getDecoder().decode(p.getBody64enc() ) :  p.getBody().getBytes(codepage) 
+						) : msg.getBytes());
 
 		return mQMsg;
 	}
@@ -119,6 +131,8 @@ public class MQPayloadBuilder {
 		return p;
 	}
 
+
+	
 	public static MqPayload newPayload(MQMessage msg) throws MQDataException, IOException {
 		MqPayload mqPayload = new MqPayload();
 		if (msg.format.contains("MQHRF2")) {
@@ -130,14 +144,35 @@ public class MQPayloadBuilder {
 		}
 		mqPayload.getHeader().setCodedCharSetId(msg.characterSet);
 		mqPayload.getHeader().setMsgType(msg.messageType);
-		mqPayload.getHeader().setCorrelId( StringEscapeUtils.escapeXml10( new String(msg.correlationId, StandardCharsets.UTF_8).trim()  ) ); //unescape to prevent xml malforming
-		mqPayload.getHeader().setMsgFormat(msg.format.trim());
-		mqPayload.getHeader().setMsgId(StringEscapeUtils.escapeXml10( new String(msg.messageId, StandardCharsets.UTF_8).trim() ) ); //unescape to prevent xml malforming 
+		mqPayload.getHeader().setMsgFormat(msg.format.trim());		
+		mqPayload.getHeader().setCorrelId( new String(Hex.encode(msg.correlationId)) ); 
+		mqPayload.getHeader().setMsgId(new String(Hex.encode(msg.messageId))); 
+		mqPayload.getHeader().setUserId(msg.userId);
+		mqPayload.getHeader().setGroupId(new String(Hex.encode(msg.groupId)));
+		mqPayload.getHeader().setMessageSequenceNumber(msg.messageSequenceNumber);
+		mqPayload.getHeader().setMessageFlags(msg.messageFlags);
 		mqPayload.getHeader().setReplyToQ(msg.replyToQueueName.trim());
 		mqPayload.getHeader().setReplyToQMgr(msg.replyToQueueManagerName.trim());
-		mqPayload.setBody(msg.readStringOfByteLength(msg.getDataLength()).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "").trim());
-
+		
+		byte data[] = new byte[msg.getDataLength()];
+		msg.readFully(data);
+  	    
+		String codepage = getcodePage(msg);
+		mqPayload.setBody(new String (data, codepage ).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "").trim());
+		mqPayload.setBody64enc( Base64.getEncoder().encodeToString(data).trim() );
+		
+		
 		return mqPayload;
+	}
+
+	private static String getcodePage(MQMessage msg) {
+		String codepage;
+		if(msg.characterSet == 1208) {
+  	    	codepage = StandardCharsets.UTF_8.toString();
+  	    } else {
+  	    	codepage = String.valueOf(msg.characterSet);
+  	    }
+		return codepage;
 	}
 
 	private static final Pattern CLEAN_INVALID_CHARS = Pattern.compile("[^\\u0009\\u000A\\u000D\\u0020-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFF]+");

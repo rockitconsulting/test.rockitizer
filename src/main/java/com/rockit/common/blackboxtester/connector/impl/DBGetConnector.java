@@ -11,6 +11,7 @@ import java.sql.Statement;
 import org.apache.log4j.Logger;
 
 import com.google.common.base.Strings;
+import com.rockit.common.blackboxtester.connector.ConnectorResponse;
 import com.rockit.common.blackboxtester.connector.ReadConnector;
 import com.rockit.common.blackboxtester.connector.impl.db.DatabaseConnection;
 import com.rockit.common.blackboxtester.exceptions.ConnectorException;
@@ -42,7 +43,7 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 	 * Connector/Folder name/id
 	 */
 	private String id;
-	private StringBuilder resultBuilder;
+	private ConnectorResponse response;
 	private String sqlQuery;
 
 	public DBGetConnector(String id) {
@@ -84,8 +85,8 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 	}
 
 	@Override
-	public String getResponse() {
-		return this.resultBuilder.toString();
+	public ConnectorResponse getResponse() {
+		return response;
 	}
 
 	@Override
@@ -96,12 +97,12 @@ public class DBGetConnector extends DatabaseConnection implements ReadConnector 
 	@Override
 	public void proceed() {
 		createDatabaseConnection();
-		setReponse(executeSql());
+		setReponse(new ConnectorResponse("sqlresult",  executeSql() ) );
 	}
 
 	@Override
-	public void setReponse(final String response) {
-		this.resultBuilder = new StringBuilder(response);
+	public void setReponse(final ConnectorResponse response) {
+		this.response = response;
 
 	}
 }

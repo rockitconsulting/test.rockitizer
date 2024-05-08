@@ -1,5 +1,7 @@
 package com.rockit.common.blackboxtester.connector;
 
+
+
 /**
 *  Test.Rockitizer - API regression testing framework 
 *   Copyright (C) 2020  rockit.consulting GmbH
@@ -21,7 +23,9 @@ package com.rockit.common.blackboxtester.connector;
 
 public interface ReadConnector extends Connector {
 
-	String getResponse();
+	ConnectorResponse getResponse();
 
-	void setReponse(String response);
+	void setReponse(ConnectorResponse response);
+	
+
 }

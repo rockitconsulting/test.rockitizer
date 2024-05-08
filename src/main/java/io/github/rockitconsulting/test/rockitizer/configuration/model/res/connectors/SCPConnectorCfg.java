@@ -33,7 +33,7 @@ import com.google.common.collect.ImmutableMap;
 public class SCPConnectorCfg extends BaseConnector {
 
 	public enum Types {
-		SCPPUT
+		SCPPUT,SCPGET
 	}
 
 	private String host = "@host@";
