@@ -1,4 +1,33 @@
 mqConnectors:
+    - id: MQPUT.P0A00299.msgId
+      type: MQPUT
+      queue: P0A00299
+      messageId: E7E7E640E7E7D940E7E84040404040400000009900000000
+      dsRefId: bbkMQ
+    - id: MQGET.P0A00299.msgId
+      type: MQGET
+      queue: P0A00299
+      messageId: E7E7E640E7E7D940E7E84040404040400000009900000000
+      dsRefId: bbkMQ
+    - id: MQPUT.P0A042XX.grpId
+      type: MQPUT
+      queue: P0A042XX
+      groupId: E7E7E640E7E7D940E7E84040404040400000009900000000
+      dsRefId: bbkMQ
+    - id: MQGET.P0A042XX.grpId
+      type: MQGET
+      queue: P0A042XX
+      groupId: E7E7E640E7E7D940E7E84040404040400000009900000000
+      dsRefId: bbkMQ
+    - id: MQGET.P0A042XX.nxtGrpId
+      type: MQGET
+      queue: P0A042XX
+      groupId: 000000000000000000000000000000000000000000000000
+      dsRefId: bbkMQ
+    - id: MQGET.P0A042XX.CLEANUP
+      type: MQGET
+      queue: P0A042XX
+      dsRefId: bbkMQ
     - id: MQGET.ERROR
       queue: 'MQ.ERROR'
       type: MQGET
@@ -100,6 +129,14 @@ mqDataSources:
   channel: 'SYSTEM.BKR.CONFIG'
   user: 'admin'
   password: 'admin'
+- id: bbkMQ
+  qmgr: WMT2
+  type: MQ
+  port: 1418
+  host: 'm504t1a1.in.bundesbank.de'
+  channel: 'WMT2.CL.ARAPI.ACS'
+  user: 'FT504ACS'
+  password: 'STR1ESRE'
 dbDataSources:
 - id: defaultDB
   url: 'jdbc:db2://localhost:50000/ROCKIT'

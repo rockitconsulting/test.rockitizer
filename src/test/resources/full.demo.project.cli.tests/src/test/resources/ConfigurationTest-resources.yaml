@@ -11,10 +11,16 @@ mqConnectors:
       type: MQGET
       dsRefId: defaultMQ
       queue: 'MQ.IN.MQ2DB'
+    - id: MQGET.IN.MQ2MQ.WITH.CORRID
+      type: MQGET
+      correlationId: 'E7E7E640E7E7D940E7E84040404040400000000540404040'
+      dsRefId: defaultMQ
+      queue: 'MQ.IN.MQ2MQ'
     - id: MQPUT.IN.MQ2MQ
       type: MQPUT
       dsRefId: defaultMQ
       queue: 'MQ.IN.MQ2MQ'
+      
     - id: MQPUT.IN.MQ2DB
       type: MQPUT
       dsRefId: defaultMQ
