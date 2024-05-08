@@ -53,11 +53,24 @@ public class ValidationUtilsTest {
 	public void validateConnectorNOK_Unknown() throws IOException {
 		ValidationUtils.validateConnector("WRONG.UNKNOWN");
 	}
-
+	
+	@Test
 	public void validateConnectorOK_DBGET() throws IOException {
 		ValidationUtils.validateConnector("DBGET.OK");
 	}
 	
+	@Test
+	public void validateConnectorDoubleDotOK_DBGET() throws IOException {
+		ValidationUtils.validateConnector("DBGET.MY.OK");
+	}
+
+	@Test
+	public void validateConnectorSCPGET_OK() throws IOException {
+		ValidationUtils.validateConnector("SCPGET.FILEACTIVE");
+	}
+
+	
+	@Test
 	public void validateConnectorOK_HTTP() throws IOException {
 		ValidationUtils.validateConnector("HTTP.OK");
 	}

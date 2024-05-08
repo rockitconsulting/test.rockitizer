@@ -38,10 +38,10 @@ public class MQPutConnectorIT {
     @Before
     public void before() {
 		assertEquals("MQPUT.", mqPut.getType());
-		assertEquals("SYSTEM.BKR.CONFIG", mqPut.channelname);
-		assertEquals("localhost", mqPut.hostname);
-		assertEquals("QM1", mqPut.qManager);
-		assertEquals(1414, mqPut.port);
+		assertEquals("SYSTEM.BKR.CONFIG", mqPut.getMqDataSource().getChannel());
+		assertEquals("localhost", mqPut.getMqDataSource().getHost());
+		assertEquals("QM1", mqPut.getMqDataSource().getQmgr());
+		assertEquals(1414, Integer.valueOf(mqPut.getMqDataSource().getPort()).intValue());
 		//assertEquals(0, MQAccessor.cache.size());
 		assertEquals("localhost", mqPut.getMqEnv().get("hostname"));
 		assertEquals("admin", mqPut.getMqEnv().get("password"));

@@ -29,7 +29,7 @@ public class InvalidConnectorFormatExceptionTest {
 	public void testInvalidConnectorFormatExceptionString() {
 		
 		InvalidConnectorFormatException ce = new InvalidConnectorFormatException( "test");
-		assertEquals("Invalid connector format: test. Following naming convention for the folders shall be followed:  HTTP.<id>, FILEDEL.<id>, FILEPUT.<id>, FILEGET.<id>, MQGET.<id>, MQPUT.<id>, DBPUT.<id>, DBGET.<id>, SCPPUT.<id> ", ce.getMessage());
+		assertEquals("Invalid connector format: test. Following naming convention for the folders shall be followed:  HTTP.<id>, FILEDEL.<id>, FILEPUT.<id>, FILEGET.<id>, MQGET.<id>, MQPUT.<id>, DBPUT.<id>, DBGET.<id>, SCPPUT.<id>, SCPGET.<id> ", ce.getMessage());
 		
 	}
 

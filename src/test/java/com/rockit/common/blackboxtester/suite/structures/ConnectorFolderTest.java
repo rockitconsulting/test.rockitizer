@@ -20,8 +20,16 @@ public class ConnectorFolderTest {
 	public void testExecuteEmpty() {
 		ConnectorFolder cf = new ConnectorFolder("AbstractTestWrapperTest", "MyTestStep", "MQPUT.TEST1");
 		cf.execute();
-		
-
 	}
+
+	@Test
+	public void testSplitFilename() {
+		String filename = "response.json";
+		
+		Assert.assertEquals(filename.split("\\.")[0], "response");
+		Assert.assertEquals(filename.split("\\.")[1], "json");
+	}
+	
+
 
 }

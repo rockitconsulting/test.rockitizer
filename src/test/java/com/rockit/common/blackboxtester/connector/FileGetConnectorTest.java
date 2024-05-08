@@ -74,7 +74,7 @@ public class FileGetConnectorTest {
 		fileGetConnector.setSrcPath(SRC.toString());
 		fileGetConnector.proceed();
 
-		assertTrue(remote, remote.equals(fileGetConnector.getResponse()));
+		assertTrue(remote, remote.equals(fileGetConnector.getResponse().getPayload()));
 
 	}
 	
@@ -85,7 +85,7 @@ public class FileGetConnectorTest {
 		changeLastModified(path+File.separator +"lastfile.xml");
 		fileGetConnector.setSrcPath(path);
 		fileGetConnector.proceed();
-		assertEquals("my last modified file content", fileGetConnector.getResponse());
+		assertEquals("my last modified file content", fileGetConnector.getResponse().getPayload());
 	}
 	
 	@Test
@@ -98,7 +98,7 @@ public class FileGetConnectorTest {
 		changeLastModified(path+File.separator +"lastfile.xml");
 		fileGetConnector.setSrcPath(path);
 		fileGetConnector.proceed();
-		assertEquals("my last modified file content", fileGetConnector.getResponse());
+		assertEquals("my last modified file content", fileGetConnector.getResponse().getPayload());
 	}
 
 	

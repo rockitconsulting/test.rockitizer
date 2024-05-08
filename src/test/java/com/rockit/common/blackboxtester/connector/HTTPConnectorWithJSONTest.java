@@ -10,11 +10,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.http.Header;
+import org.apache.http.message.BasicHeader;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -46,7 +45,7 @@ public class HTTPConnectorWithJSONTest {
 
 	public static final Logger LOGGER = Logger.getLogger(HTTPConnectorWithJSONTest.class.getName());
 
-	Map<String, List<String>> headerMap;
+	Header[] headers;
 	HTTPConnector httpConnector;
 
 	@Before
@@ -54,12 +53,18 @@ public class HTTPConnectorWithJSONTest {
 		TestObjectFactory.resetConfigurationToDefault();
 		httpConnector = new HTTPConnector("HTTP.JADDBOOK");
 
-		headerMap = new HashMap<String, List<String>>();
-		headerMap.put("null", Arrays.asList("HTTP/1.1 200 OK"));
-		headerMap.put("Server", Arrays.asList("Apache-Coyote/1.1"));
-		headerMap.put("Content-Length", Arrays.asList("5047"));
-		headerMap.put("Date", Arrays.asList("Thu, 22 Oct 2020 11:05:45 GMT"));
-		headerMap.put("Content-Type", Arrays.asList("application/json"));
+
+		headers = new Header[] {
+	                new BasicHeader("Content-Type", "application/json"),
+	                new BasicHeader("Set-Cookie", "sessionId=abc123"),
+	                new BasicHeader("Set-Cookie", "lang=en-US"),
+	  
+	                new BasicHeader("null", ("HTTP/1.1 200 OK")),
+	                new BasicHeader("Server", ("Apache-Coyote/1.1")),
+	                new BasicHeader("Content-Length", ("5047")),
+	                new BasicHeader("Date",  ("Thu, 22 Oct 2020 11:05:45 GMT")),
+	                new BasicHeader("Content-Type", ("application/json"))
+         };
 	}
 
 	@Test
@@ -113,13 +118,13 @@ public class HTTPConnectorWithJSONTest {
 
 		String result = FileUtils.readFileToString(payloadFile);
 
-		ResponseHeader newResonseHeader = new ResponseHeader(headerMap);
-		JSONObject responseHeader = newResonseHeader.getResponsHeader();
+		ResponseHeader newResonseHeader = new ResponseHeader(headers);
+		JSONObject responseHeader = newResonseHeader.getResponseHeader();
 
-		String responseString = httpConnector.buildJSONResponseString(responseHeader.toString(), result);
-
-		assertTrue(responseString.contains(responseHeader.toString()));
-		assertTrue(responseString.contains(result));
+		String responseString = httpConnector.buildPrettyPrintedJSON(responseHeader.toString(), result);
+		System.out.println(responseString);
+		assertTrue(responseString.contains("HTTP/1.1 200 OK"));
+		assertTrue(responseString.contains("acceptTimestamp"));
 
 	}
 }

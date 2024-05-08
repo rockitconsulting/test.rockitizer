@@ -30,12 +30,12 @@ public class MQGetConnectorTest {
 		MQGetConnector mqc = new MQGetConnector("MQGET.ERROR");
 		assertEquals("MQGET.", mqc.getType());
 		assertEquals("MQGET.ERROR", mqc.getId());
-		assertEquals("MQ.ERROR", mqc.getQName());
-		assertEquals("SYSTEM.BKR.CONFIG", mqc.channelname);
-		assertEquals("localhost", mqc.hostname);
-		assertEquals("QM1", mqc.qManager);
-		assertEquals(1414, mqc.port);
-		assertEquals(0, MQAccessor.cache.size());
+		assertEquals("MQ.ERROR", mqc.getMqConnConfig().getQueue());
+		assertEquals("SYSTEM.BKR.CONFIG", mqc.getMqDataSource().getChannel());
+		assertEquals("localhost", mqc.getMqDataSource().getHost());
+		assertEquals("QM1", mqc.getMqDataSource().getQmgr());
+		assertEquals(1414, Integer.valueOf(mqc.getMqDataSource().getPort()).intValue());
+		assertEquals(0, MQAccessor.cacheQmgr.size());
 		assertEquals("localhost", mqc.getMqEnv().get("hostname"));
 		assertEquals("admin", mqc.getMqEnv().get("password"));
 		assertEquals(1414, mqc.getMqEnv().get("port"));
@@ -47,7 +47,7 @@ public class MQGetConnectorTest {
 			System.out.println(k + ": " + v);
 		});
 
-		System.out.println(mqc.getQName());
+		System.out.println(mqc.getMqConnConfig().getQueue());
 	}
 
 }

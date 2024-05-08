@@ -139,6 +139,18 @@ public class ConfigurationTest {
 		MQDataSource ds = configuration().getMQDataSourceByConnector(cfg);
 		Assert.assertNotNull(ds);
 	}
+	
+	@Test
+	public void testMQGetConfigWithCorrelationIdMQDataSourceOK() {
+		configuration().reinit();
+		MQConnectorCfg cfg = (MQConnectorCfg) configuration().getConnectorById("MQGET.IN.MQ2MQ.WITH.CORRID");
+		MQDataSource ds = configuration().getMQDataSourceByConnector(cfg);
+		Assert.assertNotNull(ds);
+		Assert.assertNotNull(cfg.getCorrelationId());
+	}
+	
+	
+	
 
 	@Test
 	public void testHTTPConfigWithKeyStoreOK() {

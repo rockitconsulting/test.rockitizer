@@ -32,18 +32,17 @@ import org.junit.Test;
 */
 
 public class MQGetConnectorIT {
-    MQPutConnector mqPut = new MQPutConnector("MQPUT.IN.MQ2MQ");
+	MQPutConnector mqPut = new MQPutConnector("MQPUT.IN.MQ2MQ");
     MQGetConnector mqGet = new MQGetConnector("MQGET.OUT.MQ2MQ");
 
 
     @Before
     public void before() {
 		assertEquals("MQPUT.", mqPut.getType());
-		assertEquals("SYSTEM.BKR.CONFIG", mqPut.channelname);
-		assertEquals("localhost", mqPut.hostname);
-		assertEquals("QM1", mqPut.qManager);
-		assertEquals(1414, mqPut.port);
-		//assertEquals(0, MQAccessor.cache.size());
+		assertEquals("SYSTEM.BKR.CONFIG", mqPut.getMqDataSource().getChannel());
+		assertEquals("localhost", mqPut.getMqDataSource().getHost());
+		assertEquals("QM1", mqPut.getMqDataSource().getQmgr());
+		assertEquals(1414, Integer.valueOf(mqPut.getMqDataSource().getPort()).intValue());
 		assertEquals("localhost", mqPut.getMqEnv().get("hostname"));
 		assertEquals("admin", mqPut.getMqEnv().get("password"));
 		assertEquals(1414, mqPut.getMqEnv().get("port"));
@@ -87,7 +86,7 @@ public class MQGetConnectorIT {
 		Thread.sleep(2000);
 		mqGet.proceed();
 		assertEquals( new String(Files.readAllBytes( src )).replace("\r", "").replace("\n", "").replaceAll(">\\s+<", "><"), 
-				mqGet.getResponse().replace("\r", "").replace("\n", "").replaceAll(">\\s+<", "><") 
+				mqGet.getResponse().getPayload().replace("\r", "").replace("\n", "").replaceAll(">\\s+<", "><") 
 		);
 	}
 	
@@ -102,7 +101,7 @@ public class MQGetConnectorIT {
 		Thread.sleep(2000);
 		mqGet.proceed();
 		
-		String msg = mqGet.getResponse().replace("\r", "").replace("\n", "").replaceAll(">\\s+<", "><");
+		String msg = mqGet.getResponse().getPayload().replace("\r", "").replace("\n", "").replaceAll(">\\s+<", "><");
 		
 		String res = msg.substring(msg.indexOf("<body>")+6, msg.length()-19);
 		

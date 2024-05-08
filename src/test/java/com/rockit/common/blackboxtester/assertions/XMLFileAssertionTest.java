@@ -70,6 +70,18 @@ public class XMLFileAssertionTest {
 
 	}
 
+	@Test
+	public void testIncludeSuccess() {
+		String control = "<root><test>2</test><ignore>cvc</ignore><sim>4</sim></root>";
+		String test = "<root><test>4bxbcxcbx</test><ignore>cvkkkkc</ignore><sim>4</sim></root>";
+
+		xmlFileAssertion.include(ImmutableList.of("sim"))
+				.compare(Input.fromString(control), Input.fromString(test)).checkForSimilar()
+				.withNodeMatcher(ElementSelectors.byNameAndText).build();
+
+	}
+	
+	
 	@Test(expected = AssertionError.class)
 	public void testIgnoreException() {
 		String control = "<root><test>2</test><ignore>cvc</ignore><sim>4</sim></root>";
