@@ -3,7 +3,8 @@ package com.rockit.common.blackboxtester.connector;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import io.github.rockitconsulting.test.rockitizer.configuration.TestObjectFactory;
-import io.github.rockitconsulting.test.rockitizer.configuration.utils.FileUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class FileDelConnectorTest {
 		String copyFolder=System.getProperty("java.io.tmpdir")+File.separator;
 		File to = new File(copyFolder);
 		assertTrue(to.exists());
-		FileUtils.copy(from, to);
+		FileUtils.copyDirectory(from, to, TrueFileFilter.INSTANCE, false);
 		
 		File delete =new File(System.getProperty("java.io.tmpdir")+File.separator+"TestFileConnectors");
 		
