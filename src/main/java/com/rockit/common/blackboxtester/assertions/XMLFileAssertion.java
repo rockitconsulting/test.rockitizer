@@ -123,7 +123,7 @@ public class XMLFileAssertion extends AbstractAssertion {
 
 	/**
 	 * Whitelisting the xml nodes 
-	 * @param tokens - list xml nodes to include 
+	 * @param includeTokens - list xml nodes to include 
 	 * @return
 	 */
 
