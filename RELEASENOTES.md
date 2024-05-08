@@ -1,11 +1,11 @@
 # 1.0.6.0 - Release 
-	- Vulnerable dependencies replaced with the latest version 
-        - Upgrade log4j to log4j2
- 	- typesafe json,xml,txt Payload files for mq, http, files connectors with pretty-print formatting
-        - MQ Connector support for Selections by correlationId, messageId
-	- MQ Connector support for message groups
-        - HTTP Connector Support for PATCH, PUT, DELETE Methods added
-        - Additional assertion FileContainsString for mixed Payloads added
+         - Vulnerable dependencies replaced with the latest version 
+         - Upgrade log4j to log4j2
+         - typesafe json,xml,txt Payload files for mq, http, files connectors with pretty-print formatting
+         - MQ Connector support for Selections by correlationId, messageId
+         - MQ Connector support for message groups
+         - HTTP Connector Support for PATCH, PUT, DELETE Methods added
+         - Additional assertion FileContainsString for mixed Payloads added
 
 # 1.0.5.11 - Release 
 	- bugfix in HTTP Connector: Wrong respone Content-Type detection.
