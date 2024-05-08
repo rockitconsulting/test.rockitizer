@@ -23,12 +23,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin' # or another distribution that suits your needs
-      - name: Update Gradle Wrapper
-        run: ./gradlew wrapper --gradle-version=7.4.2 
-
       - name: Set executable permissions for Gradle Wrapper
         run: chmod +x ./gradlew
-        
+      - name: Update Gradle Wrapper
+        run: ./gradlew wrapper --gradle-version=7.4.2 
       - name: Build with Gradle
         run: ./gradlew build --info
 
