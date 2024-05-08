@@ -32,6 +32,13 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build --info
+      - name: Publish Test Report
+        uses: dorny/test-reporter@v1
+        if: always() # This ensures the report is generated even if the test step fails
+        with:
+          name: 'JUnit Test Results'
+          path: '**/TEST-*.xml'
+          reporter: 'github-check'  # Creates a check run with test results
 
 
   dependency-submission:
