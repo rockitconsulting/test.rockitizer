@@ -100,7 +100,7 @@ dependencies {
     implementation 'org.apache.commons:commons-text:1.11.0'     
     implementation 'info.picocli:picocli:4.2.0'
     implementation 'org.fusesource.jansi:jansi:1.18'
-    implementation 'org.apache.commons:commons-configuration2:2.7'
+    implementation 'org.apache.commons:commons-configuration2:2.10.1'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
     implementation 'org.hamcrest:hamcrest-core:2.2'
